@@ -1,0 +1,29 @@
+name: Code Checks
+
+on:
+  push:
+    branches:
+      - main
+ 
+jobs:
+  build:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+ 
+    steps:
+ 
+    - uses: actions/checkout@v2
+ 
+    - name: Set up Python 3.10.4
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.10.4
+ 
+    - name: Set up dependencies
+      run: |
+        python3 -m pip install -U pip
+        pip install -r tests/requirements.txt
+ 
+    - name: Run the tests
+      run: |
+        pytest -v
