@@ -34,7 +34,7 @@ from avro import config
 from avro.utils import validate
 
 # Import third-party modules.
-from typing import Any, Dict, Tuple
+from typing import Any, List, Dict
 
 
 # Constants.
@@ -44,7 +44,7 @@ RULE_PATTERNS: list = [p for p in PATTERNS if 'rules' in p]
 
 
 # The primary parse function for the library.
-def parse(*texts: str) -> str | Tuple[str]:
+def parse(*texts: str) -> str | List[str]:
     '''
     ### Parses input text, matches and replaces using avrodict.
 
@@ -117,11 +117,11 @@ def parse(*texts: str) -> str | Tuple[str]:
 
         return ''.join(output)
 
+    output = []
     for text in texts: # Applies to non-keyword arguments.
-        output = []
         output.append(subparse(text))
-        
-        return tuple(output)
+    
+    return output[0] if len(output) == 1 else output
 
 def match_patterns(fixed_text: str, cur: int=0, rule: bool=False) -> Dict[str, Any]:
     '''

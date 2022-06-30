@@ -29,6 +29,9 @@ SOFTWARE.
 '''
 
 
+# Import local modules.
+from typing import Tuple
+
 # Import third-party modules.
 import click
 import pyperclip3
@@ -45,15 +48,22 @@ def cli():
 
 # The main command function (parse, in this case).
 @cli.command()
-@click.option('-t', '--text', required=True, type=str, help='Text you want to parse.')
+@click.option('-t', '--text', required=True, multiple=True, type=str, help='Text you want to parse.')
 @click.option('--copy', help='Copies the result to clipboard.', is_flag=True)
-def parse(text: str, copy: bool):
+def parse(text: str | Tuple[str], copy: bool):
     '''
     Parses input text into Bangla, matches and replaces using avrodict.
     '''
 
-    parsed_text = avro.parse(text)
-    click.echo(f'\n{parsed_text}\n')
+    def subparse_click(text: str):
+        parsed_text = avro.parse(text)
+        click.echo(f'{parsed_text}\n', nl=True)
+        return parsed_text
 
+    parsed = []
+    click.echo()
+    for t in tuple(text):
+        parsed.append(subparse_click(t))
+            
     if copy:
-        pyperclip3.copy(parsed_text)
+        pyperclip3.copy('\n\n'.join(parsed))
