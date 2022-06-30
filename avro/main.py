@@ -30,11 +30,11 @@ SOFTWARE.
 
 
 # Import local modules.
-from avro.utils import validate
 from avro import config
+from avro.utils import validate
 
 # Import third-party modules.
-from typing import Any, Dict
+from typing import Any, Dict, Tuple
 
 
 # Constants.
@@ -44,7 +44,7 @@ RULE_PATTERNS: list = [p for p in PATTERNS if 'rules' in p]
 
 
 # The primary parse function for the library.
-def parse(text: str) -> str:
+def parse(*texts: str) -> str | Tuple[str]:
     '''
     ### Parses input text, matches and replaces using avrodict.
 
@@ -53,67 +53,75 @@ def parse(text: str) -> str:
     Usage:
     ```python
     import avro
-    print(avro.parse('ami banglay gan gai'))
+
+    parsed = avro.parse('ami banglay gan gai')
+    print(parsed)
     ```
     '''
 
-    # Sanitize text case to meet phonetic comparison standards.
-    fixed_text = validate.fix_string_case(text)
+    def subparse(text: str) -> str:
+        # Sanitize text case to meet phonetic comparison standards.
+        fixed_text = validate.fix_string_case(text)
 
-    # Prepare output list.
-    output = []
+        # Prepare output list.
+        output = []
 
-    # Cursor end point.
-    cur_end = 0
+        # Cursor end point.
+        cur_end = 0
 
-    # Iterate through input text.
-    for cur, i in enumerate(fixed_text):
-        try:
-            i.encode('utf-8')
-        except UnicodeDecodeError:
-            uni_pass = False
-        else:
-            uni_pass = True
-
-        match = {
-            "matched": False
-        }
-
-        if not uni_pass:
-            cur_end = cur + 1
-            output.append(i)
-
-        elif cur >= cur_end and uni_pass:
-            match = match_patterns(fixed_text, cur, rule=False)
-
-            if match['matched']:
-                output.append(match['replaced'])
-                cur_end = cur + len(match['found'])
-
+        # Iterate through input text.
+        for cur, i in enumerate(fixed_text):
+            try:
+                i.encode('utf-8')
+            except UnicodeDecodeError:
+                uni_pass = False
             else:
-                match = match_patterns(fixed_text, cur, rule=True)
+                uni_pass = True
 
-                if match['matched']:
-                    cur_end =  cur + len(match['found'])
-                    replaced = process_rules(
-                        rules=match['rules'],
-                        fixed_text=fixed_text,
-                        cur=cur, 
-                        cur_end=cur_end
-                    )
+            match = {
+                "matched": False
+            }
 
-                    if replaced is not None:
-                        output.append(replaced)
-
-                    else:
-                        output.append(match['replaced'])
-
-            if not match['matched']:
+            if not uni_pass:
                 cur_end = cur + 1
                 output.append(i)
 
-    return ''.join(output)
+            elif cur >= cur_end and uni_pass:
+                match = match_patterns(fixed_text, cur, rule=False)
 
+                if match['matched']:
+                    output.append(match['replaced'])
+                    cur_end = cur + len(match['found'])
+
+                else:
+                    match = match_patterns(fixed_text, cur, rule=True)
+
+                    if match['matched']:
+                        cur_end =  cur + len(match['found'])
+                        replaced = process_rules(
+                            rules=match['rules'],
+                            fixed_text=fixed_text,
+                            cur=cur, 
+                            cur_end=cur_end
+                        )
+
+                        if replaced is not None:
+                            output.append(replaced)
+
+                        else:
+                            output.append(match['replaced'])
+
+                if not match['matched']:
+                    cur_end = cur + 1
+                    output.append(i)
+
+        return ''.join(output)
+
+    for text in texts: # Applies to non-keyword arguments.
+        output = []
+        output.append(subparse(text))
+        
+        return tuple(output)
 
 def match_patterns(fixed_text: str, cur: int=0, rule: bool=False) -> Dict[str, Any]:
     '''
