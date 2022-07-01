@@ -35,10 +35,15 @@ from typing import Tuple
 # Import third-party modules.
 import click
 import pyperclip3
+from rich.console import Console
+from rich.table import Table
 
 # Import local modules.
 import avro
 
+# Initializing Rich
+console = Console()
+table = Table(show_edge=False, box=None)
 
 # Setting up the default group for Click.
 @click.group()
@@ -57,7 +62,12 @@ def parse(text: str | Tuple[str], copy: bool):
 
     def subparse_click(text: str):
         parsed_text = avro.parse(text)
-        click.echo(f'{parsed_text}\n', nl=True)
+        table.add_column("Raw", style="cyan", no_wrap=True, justify="center")
+        table.add_column("Bengali", style="magenta", justify="center")
+
+        table.add_row(f'{text}', f'{parsed_text}')
+        console.print("\n")
+        console.print(table, justify="center")
         return parsed_text
 
     parsed = []

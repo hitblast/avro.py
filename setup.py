@@ -42,7 +42,8 @@ setup(
     license='MIT',
     install_requires=[
         'click',
-        'pyperclip3'
+        'pyperclip3',
+        "rich"
     ],
     python_requires=">=3.10.0",
     keywords=[
