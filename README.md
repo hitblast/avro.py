@@ -64,8 +64,11 @@ avro --help # Minified, both of them are an option if either of them don't work.
 
 # Parse a text.
 avro parse --text "ami banglay gan gai."
-avro parse -t "eije dekh waTar." # Minified --text flag.
+avro parse -t "eije dekh waTar." # Minified --text option.
 avro parse -t --view-table "obonIl" # Shows input and output in a table.
+
+# Parse multiple texts.
+avro parse -t "amar swopnera" -t "Dana mele ure cole" -t "obarito nIle."
 ```
 
 <br>

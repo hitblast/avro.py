@@ -60,7 +60,7 @@ def parse(text: str | Tuple[str], view_table: bool) -> None:
     Parses input text into Bangla, matches and replaces using avrodict.
     '''
 
-    # Form a Table() instance for the --table flag.
+    # Form a Table() instance for the --view-table flag.
     table = Table()
     table.add_column("Raw", style="cyan", no_wrap=True, justify="center")
     table.add_column("Bengali", style="magenta", justify="center")
