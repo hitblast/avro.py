@@ -77,7 +77,6 @@ def parse(text: str | Tuple[str], view_table: bool) -> None:
     for t in tuple(text):
         parsed.append(subparse_click(t))
 
-
     # Post-processing and modifying the clipboard.
     pyperclip3.copy('\n\n'.join(parsed))
 
