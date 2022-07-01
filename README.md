@@ -83,18 +83,19 @@ avro parse -t "ami amar amike cirodin ei banglay khu^je pai."
 
 The coding style for this project embraces readability and consistency over traditional styling methods. The unit tests are done using the [pytest](https://pypi.python.org/pypi/pytest) package and the CLI is made using [Click](https://pypi.python.org/pypi/click).
 
-If you want to set up your coding environment, using `tests/requirements.txt` instead of the root `requirements.txt` packaging text is mandatory. You can do so by using the following command:
+If you want to set up your coding environment for this project, then ou can do so by running the following command in your terminal:
 
 ```bash
 pip install -r tests/requirements.txt
 ```
 
-In order to run the testing Python scripts included inside the `tests` directory, use:
+This will install all the required packages to test/develop over avro.py, and to make things simpler, you can run the command mentioned below to test the project:
 
 ```bash
 python3 -m pytest --verbose
 
 # The results should appear onwards.
+# The --verbose / -v flag is used to show all the test results in detail.
 ```
 
 <br>
