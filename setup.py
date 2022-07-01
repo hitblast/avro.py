@@ -43,7 +43,7 @@ setup(
     install_requires=[
         'click',
         'pyperclip3',
-        "rich"
+        'rich'
     ],
     python_requires=">=3.10.0",
     keywords=[

@@ -13,7 +13,7 @@ A modern Pythonic implementation of the popular Bengali phonetic-typing software
 
 **avro.py**, whilst being a Python package, provides a text parser that converts Bangla text written in Roman script to its phonetic equivalent of Bangla. It implements the **Avro Phonetic Dictionary Search Library** by [Mehdi Hasan Khan](https://github.com/mugli).
 
-This library is based on the syntax of Python 3.10. That being said, the latest tested / supported version of Python with this project is **Python 3.10.4**. However, the original project [pyAvroPhonetic](https://github.com/kaustavdm/pyAvroPhonetic) is based on Python 2 and can only work on versions up to **Python 2.7**. It is noteworthy that Python 2 has officially been deprecated by the original maintainers and its usage is being discouraged overall.
+This library is based on the syntax of Python 3.10. That being said, the latest tested / supported version of Python with this project is **Python 3.10.5**. However, the original project [pyAvroPhonetic](https://github.com/kaustavdm/pyAvroPhonetic) is based on Python 2 and can only work on versions up to **Python 2.7**. It is noteworthy that Python 2 has officially been deprecated by the original maintainers and its usage is being discouraged overall.
 
 <br>
 

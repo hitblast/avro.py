@@ -41,7 +41,8 @@ from rich.table import Table
 # Import local modules.
 import avro
 
-# Initializing Rich
+
+# Initializing Rich.
 console = Console()
 table = Table(show_edge=False, box=None)
 
@@ -55,18 +56,19 @@ def cli():
 @cli.command()
 @click.option('-t', '--text', required=True, multiple=True, type=str, help='Text you want to parse.')
 @click.option('--copy', help='Copies the result to clipboard.', is_flag=True)
-def parse(text: str | Tuple[str], copy: bool):
+def parse(text: str | Tuple[str], copy: bool) -> None:
     '''
     Parses input text into Bangla, matches and replaces using avrodict.
     '''
 
     def subparse_click(text: str):
         parsed_text = avro.parse(text)
+
         table.add_column("Raw", style="cyan", no_wrap=True, justify="center")
         table.add_column("Bengali", style="magenta", justify="center")
-
         table.add_row(f'{text}', f'{parsed_text}')
-        console.print("\n")
+
+        console.line()
         console.print(table, justify="center")
         return parsed_text
 
