@@ -44,7 +44,6 @@ import avro
 
 # Initializing Rich.
 console = Console()
-table = Table(show_edge=False, box=None)
 
 # Setting up the default group for Click.
 @click.group()
@@ -55,27 +54,36 @@ def cli():
 # The main command function (parse, in this case).
 @cli.command()
 @click.option('-t', '--text', required=True, multiple=True, type=str, help='Text you want to parse.')
-@click.option('--copy', help='Copies the result to clipboard.', is_flag=True)
-def parse(text: str | Tuple[str], copy: bool) -> None:
+@click.option('--view-table', help='Shows the results in the form of a table.', is_flag=True)
+def parse(text: str | Tuple[str], view_table: bool) -> None:
     '''
     Parses input text into Bangla, matches and replaces using avrodict.
     '''
 
+    # Form a Table() instance for the --table flag.
+    table = Table()
+    table.add_column("Raw", style="cyan", no_wrap=True, justify="center")
+    table.add_column("Bengali", style="magenta", justify="center")
+
+    # Define a new function for pre-processing the texts given by the user.
     def subparse_click(text: str):
         parsed_text = avro.parse(text)
-
-        table.add_column("Raw", style="cyan", no_wrap=True, justify="center")
-        table.add_column("Bengali", style="magenta", justify="center")
-        table.add_row(f'{text}', f'{parsed_text}')
-
-        console.line()
-        console.print(table, justify="center")
+        table.add_row(f'{text}\n', f'{parsed_text}')
+        
         return parsed_text
 
+    # Processing.
     parsed = []
-    click.echo()
     for t in tuple(text):
         parsed.append(subparse_click(t))
-            
-    if copy:
-        pyperclip3.copy('\n\n'.join(parsed))
+
+
+    # Post-processing and modifying the clipboard.
+    pyperclip3.copy('\n\n'.join(parsed))
+
+    if view_table:
+        console.line()
+        console.print(table, justify="center")
+        console.line()
+    else:
+        click.echo('\n'.join(parsed))
