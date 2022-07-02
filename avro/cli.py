@@ -54,8 +54,7 @@ def cli():
 # The main command function (parse, in this case).
 @cli.command()
 @click.option('-t', '--text', required=True, multiple=True, type=str, help='Text you want to parse.')
-@click.option('--view-table', help='Shows the results in the form of a table.', is_flag=True)
-def parse(text: str | Tuple[str], view_table: bool) -> None:
+def parse(text: str | Tuple[str]) -> None:
     '''
     Parses input text into Bangla, matches and replaces using avrodict.
     '''
@@ -63,7 +62,7 @@ def parse(text: str | Tuple[str], view_table: bool) -> None:
     # Form a Table() instance for the --view-table flag.
     table = Table()
     table.add_column("Raw", style="cyan", no_wrap=True, justify="center")
-    table.add_column("Bengali", style="magenta", justify="center")
+    table.add_column("Bengali (copied to clipboard)", style="magenta", justify="center")
 
     # Define a new function for pre-processing the texts given by the user.
     def subparse_click(text: str):
@@ -80,9 +79,6 @@ def parse(text: str | Tuple[str], view_table: bool) -> None:
     # Post-processing and modifying the clipboard.
     pyperclip3.copy('\n\n'.join(parsed))
 
-    if view_table:
-        console.line()
-        console.print(table, justify="center")
-        console.line()
-    else:
-        click.echo('\n'.join(parsed))
+    console.line()
+    console.print(table, justify="center")
+    console.line()
