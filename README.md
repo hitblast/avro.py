@@ -59,8 +59,8 @@ print(parsed_text)
 Alternatively, you can use the built-in command line tool for parsing texts without writing code!
 ```bash
 # Get help regarding the CLI inside your terminal.
-python -m avro --help 
-avro --help # Minified, both of them are an option if either of them don't work.
+python3 -m avro --help 
+avro --help # Minified, both of them can work depending on your environment.
 
 # Parse a text.
 avro parse --text "ami banglay gan gai."
