@@ -34,7 +34,7 @@ from typing import Tuple
 
 # Import third-party modules.
 import click
-import pyperclip3
+import pyclip
 from rich.console import Console
 from rich.table import Table
 
@@ -77,7 +77,7 @@ def parse(text: str | Tuple[str]) -> None:
         parsed.append(subparse_click(t))
 
     # Post-processing and modifying the clipboard.
-    pyperclip3.copy('\n\n'.join(parsed))
+    pyclip.copy('\n\n'.join(parsed))
 
     console.line()
     console.print(table, justify="center")

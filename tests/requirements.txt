@@ -1,4 +1,4 @@
 click
 rich
-pyperclip3
+pyclip
 pytest
