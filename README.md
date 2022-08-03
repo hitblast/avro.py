@@ -85,7 +85,7 @@ avro parse -t "amar swopnera" -t "Dana mele ure cole" -t "obarito nIle."
 
 The coding style for this project embraces readability and consistency over traditional styling methods. To start off, [flake8](https://flake8.pycqa.org/en/latest/) has been used as the primary linting tool. The unit tests are done using the [pytest](https://pypi.python.org/pypi/pytest) framework. The command line tool, on the other hand, is made using [Click](https://pypi.python.org/pypi/click) and the [Rich](https://github.com/Textualize/rich) framework. Coupled with the CLI, [PyClip](https://pypi.python.org/pypi/pyclip) has been used to implement clipboard functionality into the library.
 
-If you want to set up your coding environment for this project, then ou can do so by running the following command in your terminal:
+If you want to set up your coding environment for this project, then you can do so by running the following command in your terminal:
 
 ```bash
 pip install -r tests/requirements.txt
