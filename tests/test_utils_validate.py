@@ -60,7 +60,7 @@ def test_is_consonant() -> None:
         assert validate.is_consonant(i)
 
     for i in vowels + numbers:
-        assert validate.is_consonant(i)
+        assert not validate.is_consonant(i)
 
 
 def test_is_number() -> None:
@@ -72,7 +72,7 @@ def test_is_number() -> None:
         assert validate.is_number(i)
 
     for i in vowels + consonants:
-        assert validate.is_number(i)
+        assert not validate.is_number(i)
 
 
 def test_is_vowel() -> None:
@@ -84,7 +84,7 @@ def test_is_vowel() -> None:
         assert validate.is_vowel(i)
 
     for i in consonants + numbers:
-        assert validate.is_vowel(i)
+        assert not validate.is_vowel(i)
 
 
 def test_is_punctuation() -> None:
@@ -97,9 +97,9 @@ def test_is_punctuation() -> None:
 
     for i in '`~!@#$%^&*()-_=+\\|[{}]\'",<.>/?':
         assert validate.is_punctuation(i)
-        assert validate.is_vowel(i)
-        assert validate.is_consonant(i)
-        assert validate.is_number(i)
+        assert not validate.is_vowel(i)
+        assert not validate.is_consonant(i)
+        assert not validate.is_number(i)
 
 
 def test_fix_string_case() -> None:
@@ -124,9 +124,9 @@ def test_is_exact() -> None:
     '''
 
     assert validate.is_exact('abcd', 'abcdefgh', 0, 4, False)
-    assert validate.is_exact('abcd', 'abcdefgh', 0, 4, True)
-    assert validate.is_exact('bcd', 'abcdefgh', 0, 4, False)
+    assert not validate.is_exact('abcd', 'abcdefgh', 0, 4, True)
+    assert not validate.is_exact('bcd', 'abcdefgh', 0, 4, False)
     assert validate.is_exact('bcd', 'abcdefgh', 0, 4, True)
 
-    assert validate.is_exact('a', 'a', 1, 2, False)
+    assert not validate.is_exact('a', 'a', 1, 2, False)
     assert validate.is_exact('a', 'a', 1, 2, True)
