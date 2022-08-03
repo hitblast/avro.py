@@ -45,6 +45,7 @@ import avro
 # Initializing Rich.
 console = Console()
 
+
 # Setting up the default group for Click.
 @click.group()
 def cli():
@@ -68,7 +69,7 @@ def parse(text: str | Tuple[str]) -> None:
     def subparse_click(text: str):
         parsed_text = avro.parse(text)
         table.add_row(f'{text}\n', f'{parsed_text}')
-        
+
         return parsed_text
 
     # Processing.

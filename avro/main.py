@@ -29,12 +29,12 @@ SOFTWARE.
 '''
 
 
+# Import third-party modules.
+from typing import Any, List, Dict
+
 # Import local modules.
 from avro import config
 from avro.utils import validate
-
-# Import third-party modules.
-from typing import Any, List, Dict
 
 
 # Constants.
@@ -48,7 +48,8 @@ def parse(*texts: str) -> str | List[str]:
     '''
     ### Parses input text, matches and replaces using avrodict.
 
-    If a valid replacement is found, then it returns the replaced string. If no replacement is found, then it instead returns the input text.
+    If a valid replacement is found, then it returns the replaced string.
+    If no replacement is found, then it instead returns the input text.
 
     Usage:
     ```python
@@ -97,11 +98,11 @@ def parse(*texts: str) -> str | List[str]:
                     match = match_patterns(fixed_text, cur, rule=True)
 
                     if match['matched']:
-                        cur_end =  cur + len(match['found'])
+                        cur_end = cur + len(match['found'])
                         replaced = process_rules(
                             rules=match['rules'],
                             fixed_text=fixed_text,
-                            cur=cur, 
+                            cur=cur,
                             cur_end=cur_end
                         )
 
@@ -118,10 +119,11 @@ def parse(*texts: str) -> str | List[str]:
         return ''.join(output)
 
     output = []
-    for text in texts: # Applies to non-keyword arguments.
+    for text in texts:  # Applies to non-keyword arguments.
         output.append(subparse(text))
-    
+
     return output[0] if len(output) == 1 else output
+
 
 def match_patterns(fixed_text: str, cur: int=0, rule: bool=False) -> Dict[str, Any]:
     '''
@@ -140,13 +142,13 @@ def match_patterns(fixed_text: str, cur: int=0, rule: bool=False) -> Dict[str, A
     if len(pattern) > 0:
         if not rule:
             return {
-                "matched": True, 
+                "matched": True,
                 "found": pattern[0]['find'],
                 "replaced": pattern[0]['replace']
             }
         else:
             return {
-                "matched": True, 
+                "matched": True,
                 "found": pattern[0]['find'],
                 "replaced": pattern[0]['replace'],
                 "rules": pattern[0]['rules']
@@ -154,13 +156,13 @@ def match_patterns(fixed_text: str, cur: int=0, rule: bool=False) -> Dict[str, A
     else:
         if not rule:
             return {
-                "matched": False, 
+                "matched": False,
                 "found": None,
                 "replaced": fixed_text[cur]
             }
         else:
             return {
-                "matched": False, 
+                "matched": False,
                 "found": None,
                 "replaced": fixed_text[cur],
                 "rules": None
@@ -173,7 +175,9 @@ def exact_find_in_pattern(fixed_text: str, cur: int=0, patterns: Any=PATTERNS) -
     '''
 
     return [
-        x for x in patterns if (cur + len(x['find']) <= len(fixed_text)) and x['find'] == fixed_text[cur:(cur + len(x['find']))]
+        x for x in patterns if (
+            cur + len(x['find']) <= len(fixed_text)
+        ) and x['find'] == fixed_text[cur:(cur + len(x['find']))]
     ]
 
 
@@ -208,13 +212,13 @@ def process_match(match: Any, fixed_text: str, cur: int, cur_end: int) -> bool:
     '''
     ### Processes a single match in rules.
     '''
-    
+
     # Initial/default value for replace.
     replace = True
 
     # Set check cursor depending on match['type']
     chk = (cur - 1 if match['type'] == 'prefix' else cur_end)
-        
+
     # Set scope based on whether scope is negative.
     if match['scope'].startswith('!'):
         scope = match['scope'][1:]
@@ -228,13 +232,13 @@ def process_match(match: Any, fixed_text: str, cur: int, cur_end: int) -> bool:
         if (
             not (
                 (
-                    chk < 0 
+                    chk < 0
                     and match['type'] == 'prefix'
-                ) 
+                )
                 or (
-                    chk >= len(fixed_text) 
+                    chk >= len(fixed_text)
                     and match['type'] == 'suffix'
-                ) 
+                )
                 or validate.is_punctuation(fixed_text[chk])
             ) ^ negative
         ):
@@ -245,29 +249,29 @@ def process_match(match: Any, fixed_text: str, cur: int, cur_end: int) -> bool:
             not (
                 (
                     (
-                        chk >= 0 
+                        chk >= 0
                         and match['type'] == 'prefix'
-                    ) 
+                    )
                     or (
-                        chk < len(fixed_text) 
+                        chk < len(fixed_text)
                         and match['type'] == 'suffix'
                     )
                 )
                 and validate.is_vowel(fixed_text[chk])
             ) ^ negative
         ):
-            replace =  False
+            replace = False
 
     elif scope == 'consonant':
         if (
             not (
                 (
                     (
-                        chk >= 0 
+                        chk >= 0
                         and match['type'] == 'prefix'
-                    ) 
+                    )
                     or (
-                        chk < len(fixed_text) 
+                        chk < len(fixed_text)
                         and match['type'] == 'suffix'
                     )
                 )
@@ -286,9 +290,9 @@ def process_match(match: Any, fixed_text: str, cur: int, cur_end: int) -> bool:
 
         if not validate.is_exact(
             match['value'],
-            fixed_text, 
+            fixed_text,
             exact_start,
-            exact_end, 
+            exact_end,
             negative
         ):
             replace = False
