@@ -26,19 +26,19 @@ setup(
     url='https://github.com/hitblast/avro.py',
     packages=find_packages(
         exclude=[
-            '*.tests', 
-            '*.tests.*', 
-            'tests.*', 
+            '*.tests',
+            '*.tests.*',
+            'tests.*',
             'tests'
         ]
     ),
-    package_data = {
+    package_data={
         'avro': [
-            '*.md', 
+            '*.md',
             'resources/*.json'
         ]
     },
-    include_package_data = True,
+    include_package_data=True,
     license='MIT',
     install_requires=[
         'click',
@@ -47,10 +47,10 @@ setup(
     ],
     python_requires=">=3.10.0",
     keywords=[
-        'python', 
-        'avro', 
-        'avro phonetic', 
-        'bangla', 
+        'python',
+        'avro',
+        'avro phonetic',
+        'bangla',
         'bangla phonetics'
     ],
     classifiers=[
