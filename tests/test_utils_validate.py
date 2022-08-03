@@ -57,22 +57,22 @@ def test_is_consonant() -> None:
     '''
 
     for i in consonants + consonants.upper():
-        assert validate.is_consonant(i) == True
+        assert validate.is_consonant(i)
 
     for i in vowels + numbers:
-        assert validate.is_consonant(i) == False
+        assert validate.is_consonant(i)
 
 
 def test_is_number() -> None:
     '''
     ### Test that numbers are correctly identified.
     '''
-    
+
     for i in numbers:
-        assert validate.is_number(i) == True
+        assert validate.is_number(i)
 
     for i in vowels + consonants:
-        assert validate.is_number(i) == False
+        assert validate.is_number(i)
 
 
 def test_is_vowel() -> None:
@@ -81,10 +81,10 @@ def test_is_vowel() -> None:
     '''
 
     for i in vowels + vowels.upper():
-        assert validate.is_vowel(i) == True
+        assert validate.is_vowel(i)
 
     for i in consonants + numbers:
-        assert validate.is_vowel(i) == False
+        assert validate.is_vowel(i)
 
 
 def test_is_punctuation() -> None:
@@ -96,10 +96,10 @@ def test_is_punctuation() -> None:
     '''
 
     for i in '`~!@#$%^&*()-_=+\\|[{}]\'",<.>/?':
-        assert validate.is_punctuation(i) == True
-        assert validate.is_vowel(i) == False
-        assert validate.is_consonant(i) == False
-        assert validate.is_number(i) == False
+        assert validate.is_punctuation(i)
+        assert validate.is_vowel(i)
+        assert validate.is_consonant(i)
+        assert validate.is_number(i)
 
 
 def test_fix_string_case() -> None:
@@ -123,10 +123,10 @@ def test_is_exact() -> None:
     ### Test exact search response of needle in haystack.
     '''
 
-    assert validate.is_exact('abcd', 'abcdefgh', 0, 4, False) == True
-    assert validate.is_exact('abcd', 'abcdefgh', 0, 4, True) == False
-    assert validate.is_exact('bcd', 'abcdefgh', 0, 4, False) == False
-    assert validate.is_exact('bcd', 'abcdefgh', 0, 4, True) == True
+    assert validate.is_exact('abcd', 'abcdefgh', 0, 4, False)
+    assert validate.is_exact('abcd', 'abcdefgh', 0, 4, True)
+    assert validate.is_exact('bcd', 'abcdefgh', 0, 4, False)
+    assert validate.is_exact('bcd', 'abcdefgh', 0, 4, True)
 
-    assert validate.is_exact('a', 'a', 1, 2, False) == False
-    assert validate.is_exact('a', 'a', 1, 2, True) == True
+    assert validate.is_exact('a', 'a', 1, 2, False)
+    assert validate.is_exact('a', 'a', 1, 2, True)

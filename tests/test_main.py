@@ -70,7 +70,7 @@ def test_patterns_without_rules_not_from_config() -> None:
         "ভ্ল" : avro.parse("bhl"),
         "ব্ধ" : avro.parse("bdh"),
         "ড্ড" : avro.parse("DD"),
-        "স্তব্ধ বক" : avro.parse("stbdh bk") # Stunned stork!
+        "স্তব্ধ বক" : avro.parse("stbdh bk")  # Stunned stork!
     }
 
     for key, value in conjunctions.items():
@@ -95,7 +95,7 @@ def test_patterns_numbers() -> None:
         "৯" : avro.parse("9"),
         "১১২" : avro.parse("112")
     }
-    
+
     for key, value in numbers.items():
         assert key == value
 
@@ -110,7 +110,7 @@ def test_patterns_punctuations() -> None:
         "।।" : avro.parse(".."),
         "..." : avro.parse("...")
     }
-    
+
     for key, value in punctuations.items():
         assert key == value
 
@@ -147,7 +147,7 @@ def test_non_ascii() -> None:
     non_ascii = {
         'ব' : avro.parse('ব'),
         'অভ্র' : avro.parse('অভ্র'),
-        'বআবা গো' : avro.parse('বaba gO'), # Mixed strings.
+        'বআবা গো' : avro.parse('বaba gO'),  # Mixed strings.
         'আমি বাংলায় গান গাই' : avro.parse('aমি বাংলায় gaন গাi')
     }
 
