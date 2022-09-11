@@ -13,19 +13,19 @@ A modern Pythonic implementation of the popular Bengali phonetic-typing software
 
 **avro.py**, whilst being a Python package, provides a text parser that converts Bangla text written in Roman script to its phonetic equivalent of Bangla. It implements the **Avro Phonetic Dictionary Search Library** by [Mehdi Hasan Khan](https://github.com/mugli).
 
-This library is developed on **Python 3.10** but can be used on versions as low as **Python 3.8**! That being said, the latest tested / supported version of Python with this project is **Python 3.10.6**. However, the original project [pyAvroPhonetic](https://github.com/kaustavdm/pyAvroPhonetic) is based on Python 2 and can only work on versions up to **Python 2.7**. It is noteworthy that Python 2 has officially been deprecated by the original maintainers and its usage is being discouraged overall.
+The original project [pyAvroPhonetic](https://github.com/kaustavdm/pyAvroPhonetic) is based on Python 2 and can only work on versions up to **Python 2.7**. It is noteworthy that Python 2 has officially been deprecated by the original maintainers and its usage is being discouraged overall.
 
 <br>
 
 ## Inspirations
 
-This package is inspired from [Rifat Nabi's jsAvroPhonetic](https://github.com/torifat/jsAvroPhonetic) library and derives from [Kaustav Das Modak's pyAvroPhonetic](https://github.com/kaustavdm/pyAvroPhonetic). 
+This package is inspired from **Rifat Nabi's jsAvroPhonetic** library and derives from **Kaustav Das Modak's pyAvroPhonetic.**
 
 <br>
 
 ## Installation
 
-Installing Bangla phonetics via Avro inside your workspace is now easier than ever. Make sure you have installed [Python 3.10](https://www.python.org/downloads/) (or later) in your local machine. If it is already installed, then we can proceed with the following commands:
+Installing avro.py in your local machine is pretty straightforward. Make sure you have installed [Python 3.8 or higher](https://www.python.org/downloads/) (or later) in your local machine. If it is already installed, then we can proceed with the following commands:
 
 ```bash
 # Create a virtual environment named "venv". (1)
