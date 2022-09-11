@@ -1,4 +1,1 @@
-click
-rich
-pyclip
 pytest

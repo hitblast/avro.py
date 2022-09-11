@@ -30,7 +30,7 @@ SOFTWARE.
 
 
 # Set version information.
-__version_info__ = ('0', '1', '4', 'post1')
+__version_info__ = ('0', '1', '5')
 __version__ = '.'.join(__version_info__)
 
 
