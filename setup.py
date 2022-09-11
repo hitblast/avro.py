@@ -40,12 +40,7 @@ setup(
     },
     include_package_data=True,
     license='MIT',
-    install_requires=[
-        'click',
-        'pyclip',
-        'rich'
-    ],
-    python_requires=">=3.10.0",
+    python_requires=">=3.8",
     keywords=[
         'python',
         'avro',
