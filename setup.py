@@ -59,9 +59,5 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 3.10',
         'Topic :: Software Development :: Libraries :: Python Modules'
-    ],
-    entry_points='''
-        [console_scripts]
-        avro=avro.cli:cli
-    '''
+    ]
 )
