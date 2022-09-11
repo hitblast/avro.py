@@ -13,7 +13,7 @@ A modern Pythonic implementation of the popular Bengali phonetic-typing software
 
 **avro.py**, whilst being a Python package, provides a text parser that converts Bangla text written in Roman script to its phonetic equivalent of Bangla. It implements the **Avro Phonetic Dictionary Search Library** by [Mehdi Hasan Khan](https://github.com/mugli).
 
-This library is based on the syntax of Python 3.10. That being said, the latest tested / supported version of Python with this project is **Python 3.10.5**. However, the original project [pyAvroPhonetic](https://github.com/kaustavdm/pyAvroPhonetic) is based on Python 2 and can only work on versions up to **Python 2.7**. It is noteworthy that Python 2 has officially been deprecated by the original maintainers and its usage is being discouraged overall.
+This library is developed on **Python 3.10** but can be used on versions as low as **Python 3.8**! That being said, the latest tested / supported version of Python with this project is **Python 3.10.6**. However, the original project [pyAvroPhonetic](https://github.com/kaustavdm/pyAvroPhonetic) is based on Python 2 and can only work on versions up to **Python 2.7**. It is noteworthy that Python 2 has officially been deprecated by the original maintainers and its usage is being discouraged overall.
 
 <br>
 
@@ -46,7 +46,7 @@ pip install avro.py
 
 <br>
 
-## Usage
+## Usage Guide
 As of now, you can easily use the package by importing the module and calling the primary `parse` function.
 
 ```python
@@ -56,19 +56,7 @@ parsed_text = avro.parse('ami banglay gan gai.')
 print(parsed_text)
 ```
 
-Alternatively, you can use the built-in command line tool for parsing texts without writing code!
-```bash
-# Get help regarding the CLI inside your terminal.
-python3 -m avro --help 
-avro --help # Minified, both of them can work depending on your environment.
-
-# Parse a text.
-avro parse --text "ami banglay gan gai."
-avro parse -t "eije dekh waTar." # Minified --text option.
-
-# Parse multiple texts.
-avro parse -t "amar swopnera" -t "Dana mele ure cole" -t "obarito nIle."
-```
+Other use cases include [your terminal](https://github.com/hitblast/avro.py-cli), literally!
 
 <br>
 
@@ -83,7 +71,7 @@ avro parse -t "amar swopnera" -t "Dana mele ure cole" -t "obarito nIle."
 
 **Additional Developer Notes**
 
-The coding style for this project embraces readability and consistency over traditional styling methods. To start off, [flake8](https://flake8.pycqa.org/en/latest/) has been used as the primary linting tool. The unit tests are done using the [pytest](https://pypi.python.org/pypi/pytest) framework. The command line tool, on the other hand, is made using [Click](https://pypi.python.org/pypi/click) and the [Rich](https://github.com/Textualize/rich) framework. Coupled with the CLI, [PyClip](https://pypi.python.org/pypi/pyclip) has been used to implement clipboard functionality into the library.
+The coding style for this project embraces readability and consistency over traditional styling methods. To start off, [flake8](https://flake8.pycqa.org/en/latest/) has been used as the primary linting tool. The unit tests are done using the [pytest](https://pypi.python.org/pypi/pytest) framework.
 
 If you want to set up your coding environment for this project, then you can do so by running the following command in your terminal:
 
@@ -105,7 +93,6 @@ python3 -m pytest --verbose
 ### We're looking for bug hunters!
 
 If you come across any kind of bug or wanna request a feature, please let us know by opening an issue [here](https://github.com/hitblast/avro.py/issues). We do need more ideas to keep the project alive and running, don't we? :P
-
 
 ---
 
