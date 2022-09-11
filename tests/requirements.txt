@@ -1,0 +1,4 @@
+click
+rich
+pyclip
+pytest
