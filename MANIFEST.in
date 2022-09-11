@@ -1,0 +1,2 @@
+include LICENSE *.py *.md
+recursive-include avro *.json *.md
