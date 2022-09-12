@@ -29,13 +29,13 @@ Installing avro.py in your local machine is pretty straightforward. Make sure yo
 
 ```bash
 # Create a virtual environment named "venv". (1)
-python3 -m venv venv 
+$ python3 -m venv venv 
 
 # Activate the virtual environment. (2)
-source venv/bin/activate 
+$ source venv/bin/activate 
 
 # Install the package. (3)
-pip install avro.py
+$ pip install avro.py
 ```
 
 - This will create a new virtual environment in your working diretory and install avro.py inside it.
@@ -76,13 +76,13 @@ The coding style for this project embraces readability and consistency over trad
 If you want to set up your coding environment for this project, then you can do so by running the following command in your terminal:
 
 ```bash
-pip install -r tests/requirements.txt
+$ pip install -U pytest
 ```
 
 This will install all the required packages to test/develop over avro.py, and to make things simpler, you can run the command mentioned below to test the project:
 
 ```bash
-python3 -m pytest --verbose
+$ python3 -m pytest --verbose
 
 # The results should appear onwards.
 # The --verbose / -v flag is used to show all the test results in detail.
