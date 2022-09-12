@@ -73,15 +73,11 @@ Other use cases include [your terminal](https://github.com/hitblast/avro.py-cli)
 
 The coding style for this project embraces readability and consistency over traditional styling methods. To start off, [flake8](https://flake8.pycqa.org/en/latest/) has been used as the primary linting tool. The unit tests are done using the [pytest](https://pypi.python.org/pypi/pytest) framework.
 
-If you want to set up your coding environment for this project, then you can do so by running the following command in your terminal:
-
 ```bash
+# Installing pytest as the package for unit-testing.
 $ pip install -U pytest
-```
 
-This will install all the required packages to test/develop over avro.py, and to make things simpler, you can run the command mentioned below to test the project:
-
-```bash
+# Running pytest.
 $ python3 -m pytest --verbose
 
 # The results should appear onwards.
