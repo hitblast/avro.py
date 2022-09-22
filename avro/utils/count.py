@@ -44,6 +44,7 @@ def count_vowels(text) -> int:
             count += 1
     return count
 
+
 def count_consonants(text) -> int:
     '''
     ### Count number of occurrences of consonants in a given string.
