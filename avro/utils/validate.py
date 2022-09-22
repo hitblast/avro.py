@@ -41,12 +41,14 @@ def is_vowel(text: str) -> bool:
 
     return text.lower() in config.AVRO_VOWELS
 
+
 def is_consonant(text: str) -> bool:
     '''
     ### Check if given string is a consonant.
     '''
 
     return text.lower() in config.AVRO_CONSONANTS
+
 
 def is_number(text: str) -> bool:
     '''
@@ -55,13 +57,17 @@ def is_number(text: str) -> bool:
 
     return text.lower() in config.AVRO_NUMBERS
 
+
 def is_punctuation(text: str) -> bool:
     '''
     ### Check if given string is a punctuation.
     '''
 
-    return not (text.lower() in config.AVRO_VOWELS or
-                text.lower() in config.AVRO_CONSONANTS)
+    return not (
+        text.lower() in config.AVRO_VOWELS
+        or text.lower() in config.AVRO_CONSONANTS
+    )
+
 
 def is_case_sensitive(text: str) -> bool:
     '''
@@ -70,13 +76,20 @@ def is_case_sensitive(text: str) -> bool:
 
     return text.lower() in config.AVRO_CASESENSITIVES
 
+
 def is_exact(needle, haystack, start, end, matchnot):
     '''
     ### Check exact occurrence of needle in haystack.
     '''
 
-    return ((start >= 0 and end < len(haystack) and
-             haystack[start:end] == needle) ^ matchnot)
+    return (
+        (
+            start >= 0
+            and end < len(haystack)
+            and haystack[start:end] == needle
+        ) ^ matchnot
+    )
+
 
 def fix_string_case(text: str) -> str:
     '''
