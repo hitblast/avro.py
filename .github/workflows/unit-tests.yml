@@ -10,7 +10,7 @@ on:
  
 jobs:
   build:
-    name: Run Unit Tests
+    name: pytest
     runs-on: ubuntu-latest
  
     steps:

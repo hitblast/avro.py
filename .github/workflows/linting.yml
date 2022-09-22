@@ -1,4 +1,4 @@
-name: Linting (flake8)
+name: Linting
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
 
 jobs:
   flake8_lint:
-    name: Lint
+    name: flake8
     runs-on: ubuntu-latest
     
     steps:
