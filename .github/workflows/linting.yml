@@ -1,0 +1,31 @@
+name: Linting (flake8)
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  flake8_lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install flake8
+        run: pip install flake8
+
+      - name: Run flake8
+        uses: suo/flake8-github-action@releases/v1
+        with:
+          checkName: 'flake8_lint'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
