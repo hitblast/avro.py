@@ -8,3 +8,5 @@ ignore=
     F403,
     F601,
     W503
+per-file-ignores =
+    avro/resources/avrodict.py:E501

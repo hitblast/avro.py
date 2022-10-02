@@ -29,25 +29,15 @@ SOFTWARE.
 '''
 
 
-# Import build-in libraries.
+# Import built-in libraries.
 import os
-import json
-import codecs
+
+# Import local modules.
+from .resources import AVRO_DICT
 
 
 # Path to current directory.
 BASE_PATH = os.path.dirname(__file__)
-
-# Path to avrodict.json.
-AVRO_DICT_FILE = os.path.abspath(
-    os.path.join(
-        BASE_PATH,
-        'resources/avrodict.json'
-    )
-)
-
-# Loads json data from avrodict.json.
-AVRO_DICT = json.load(codecs.open(AVRO_DICT_FILE, encoding='utf-8'))
 
 # Shortcuts to vowels, constants, case-sensitives and numbers.
 AVRO_VOWELS = set(AVRO_DICT['data']['vowel'])
