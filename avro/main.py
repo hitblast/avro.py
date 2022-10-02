@@ -33,8 +33,8 @@ SOFTWARE.
 from typing import Any, List, Dict, Union
 
 # Import local modules.
-from avro import config
-from avro.utils import validate
+from . import config
+from .utils import validate
 
 
 # Constants.
