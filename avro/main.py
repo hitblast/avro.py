@@ -125,7 +125,76 @@ def parse(*texts: str) -> Union[str, List[str]]:
     return output[0] if len(output) == 1 else output
 
 
-def match_patterns(fixed_text: str, cur: int=0, rule: bool=False) -> Dict[str, Any]:
+def reverse(*texts: str) -> Union[str, List[str]]:
+
+    def subparse(text: str) -> str:
+
+        # Prepare output list.
+        output = []
+
+        # Cursor end point.
+        cur_end = 0
+
+        # Iterate through input text.
+        for cur, i in enumerate(text):
+            try:
+                i.encode('utf-8')
+            except UnicodeDecodeError:
+                uni_pass = False
+            else:
+                uni_pass = True
+
+            match = {
+                "matched": False
+            }
+
+            if not uni_pass:
+                cur_end = cur + 1
+                output.append(i)
+
+            elif uni_pass:
+                match = match_patterns(text, cur, rule=False, reversed=True)
+
+                if match['matched']:
+                    if not match['reversed'] is None:
+                        output.append(match['reversed'])
+                    else:
+                        output.append(match['found'])
+
+                    cur_end = cur + len(match['found'])
+
+                # else:
+                #     match = match_patterns(text, cur, rule=True)
+
+                #     if match['matched']:
+                #         cur_end = cur + len(match['found'])
+                #         replaced = process_rules(
+                #             rules=match['rules'],
+                #             fixed_text=text,
+                #             cur=cur,
+                #             cur_end=cur_end
+                #         )
+
+                #         if replaced is not None:
+                #             output.append(replaced)
+
+                #         else:
+                #             output.append(match['replaced'])
+
+                if not match['matched']:
+                    cur_end = cur + 1
+                    output.append(i)
+
+        return ''.join(output)
+
+    output = []
+    for text in texts:  # Applies to non-keyword arguments.
+        output.append(subparse(text))
+
+    return output[0] if len(output) == 1 else output
+
+
+def match_patterns(fixed_text: str, cur: int=0, rule: bool=False, reversed: bool=False) -> Dict[str, Any]:
     '''
     ### Matches given text at cursor position with rule / non rule patterns.
 
@@ -137,14 +206,15 @@ def match_patterns(fixed_text: str, cur: int=0, rule: bool=False) -> Dict[str, A
     '''
 
     rule_type = NON_RULE_PATTERNS if not rule else RULE_PATTERNS
-    pattern = exact_find_in_pattern(fixed_text, cur, rule_type)
+    pattern = exact_find_in_pattern(fixed_text, reversed, cur, rule_type)
 
     if len(pattern) > 0:
         if not rule:
             return {
                 "matched": True,
                 "found": pattern[0]['find'],
-                "replaced": pattern[0]['replace']
+                "replaced": pattern[0]['replace'],
+                "reversed": pattern[0].get('reverse', None)
             }
         else:
             return {
@@ -169,10 +239,16 @@ def match_patterns(fixed_text: str, cur: int=0, rule: bool=False) -> Dict[str, A
             }
 
 
-def exact_find_in_pattern(fixed_text: str, cur: int=0, patterns: Any=PATTERNS) -> list:
+def exact_find_in_pattern(fixed_text: str, reversed: bool, cur: int=0, patterns: Any=PATTERNS) -> list:
     '''
     ### Returns pattern items that match given text, cursor position and pattern.
     '''
+    if reversed:
+        return [
+            x for x in patterns if (
+                cur + len(x['replace']) <= len(fixed_text)
+            ) and x['replace'] == fixed_text[cur:(cur + len(x['replace']))]
+        ]
 
     return [
         x for x in patterns if (
