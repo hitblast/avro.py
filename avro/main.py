@@ -149,7 +149,7 @@ def reverse(*texts: str) -> Union[str, List[str]]:
             }
 
             if not uni_pass:
-                cur_end = cur + 1
+                # cur_end = cur + 1
                 output.append(i)
 
             elif uni_pass:
@@ -159,9 +159,10 @@ def reverse(*texts: str) -> Union[str, List[str]]:
                     if not match['reversed'] is None:
                         output.append(match['reversed'])
                     else:
+                        # match = match_patterns(text, cur, rule=True, reversed=True)
                         output.append(match['found'])
 
-                    cur_end = cur + len(match['found'])
+                    # cur_end = cur + len(match['found'])
 
                 # else:
                 #     match = match_patterns(text, cur, rule=True)
@@ -182,7 +183,7 @@ def reverse(*texts: str) -> Union[str, List[str]]:
                 #             output.append(match['replaced'])
 
                 if not match['matched']:
-                    cur_end = cur + 1
+                    # cur_end = cur + 1
                     output.append(i)
 
         return ''.join(output)
@@ -212,8 +213,8 @@ def match_patterns(fixed_text: str, cur: int=0, rule: bool=False, reversed: bool
         if not rule:
             return {
                 "matched": True,
-                "found": pattern[0]['find'],
-                "replaced": pattern[0]['replace'],
+                "found": pattern[0].get('find', None),
+                "replaced": pattern[0].get('replace', None),
                 "reversed": pattern[0].get('reverse', None)
             }
         else:
@@ -251,9 +252,10 @@ def exact_find_in_pattern(fixed_text: str, reversed: bool, cur: int=0, patterns:
         ]
 
     return [
-        x for x in patterns if (
-            cur + len(x['find']) <= len(fixed_text)
-        ) and x['find'] == fixed_text[cur:(cur + len(x['find']))]
+        x for x in patterns if 
+        (not x.get('find', None) is None) 
+        and (cur + len(x['find']) <= len(fixed_text)) 
+        and x['find'] == fixed_text[cur:(cur + len(x['find']))]
     ]
 
 

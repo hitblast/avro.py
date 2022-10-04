@@ -1571,6 +1571,10 @@ AVRO_DICT: dict = {
                 "reverse": "a"
             },
             {
+                "replace": "আ",
+                "reverse": "a"
+            },
+            {
                 "find": "a",
                 "replace": "া",
                 "rules": [
