@@ -46,7 +46,7 @@ AVRO_DICT: dict = {
             {
                 "find": "bhl",
                 "replace": "ভ্ল",
-                "reversed": "vl"
+                "reverse": "vl"
             },
             {
                 "find": "psh",
@@ -55,122 +55,122 @@ AVRO_DICT: dict = {
             {
                 "find": "bdh",
                 "replace": "ব্ধ",
-                "reversed": "bdh"
+                "reverse": "bdh"
             },
             {
                 "find": "bj",
                 "replace": "ব্জ",
-                "reversed": "bj"
+                "reverse": "bj"
             },
             {
                 "find": "bd",
                 "replace": "ব্দ",
-                "reversed": "bd"
+                "reverse": "bd"
             },
             {
                 "find": "bb",
                 "replace": "ব্ব",
-                "reversed": "bb"
+                "reverse": "bb"
             },
             {
                 "find": "bl",
                 "replace": "ব্ল",
-                "reversed": "bl"
+                "reverse": "bl"
             },
             {
                 "find": "bh",
                 "replace": "ভ",
-                "reversed": "bh"
+                "reverse": "bh"
             },
             {
                 "find": "vl",
                 "replace": "ভ্ল",
-                "reversed": "vl"
+                "reverse": "vl"
             },
             {
                 "find": "b",
                 "replace": "ব",
-                "reversed": "b"
+                "reverse": "b"
             },
             {
                 "find": "v",
                 "replace": "ভ",
-                "reversed": "bh"
+                "reverse": "bh"
             },
             {
                 "find": "cNG",
                 "replace": "চ্ঞ",
-                "reversed": "cng"
+                "reverse": "cng"
             },
             {
                 "find": "cch",
                 "replace": "চ্ছ",
-                "reversed": "cch"
+                "reverse": "cch"
             },
             {
                 "find": "cc",
                 "replace": "চ্চ",
-                "reversed": "cc"
+                "reverse": "cc"
             },
             {
                 "find": "ch",
                 "replace": "ছ",
-                "reversed": "s"
+                "reverse": "s"
             },
             {
                 "find": "c",
                 "replace": "চ",
-                "reversed": "ch"
+                "reverse": "ch"
             },
             {
                 "find": "dhn",
                 "replace": "ধ্ন",
-                "reversed": "dhn"
+                "reverse": "dhn"
             },
             {
                 "find": "dhm",
                 "replace": "ধ্ম",
-                "reversed": "dhm"
+                "reverse": "dhm"
             },
             {
                 "find": "dgh",
                 "replace": "দ্ঘ",
-                "reversed": "dgh"
+                "reverse": "dgh"
             },
             {
                 "find": "ddh",
                 "replace": "দ্ধ",
-                "reversed": "ddh"
+                "reverse": "ddh"
             },
             {
                 "find": "dbh",
                 "replace": "দ্ভ",
-                "reversed": "dv"
+                "reverse": "dv"
             },
             {
                 "find": "dv",
                 "replace": "দ্ভ",
-                "reversed": "dv"
+                "reverse": "dv"
             },
             {
                 "find": "dm",
                 "replace": "দ্ম",
-                "reversed": "dd"
+                "reverse": "dd"
             },
             {
                 "find": "DD",
                 "replace": "ড্ড",
-                "reversed": "dd"
+                "reverse": "dd"
             },
             {
                 "find": "Dh",
                 "replace": "ঢ",
-                "reversed": "dh"
+                "reverse": "dh"
             },
             {
                 "find": "dh",
                 "replace": "ধ",
-                "reversed": "dh"
+                "reverse": "dh"
             },
             {
                 "find": "dg",
@@ -179,17 +179,17 @@ AVRO_DICT: dict = {
             {
                 "find": "dd",
                 "replace": "দ্দ",
-                "reversed": "dd"
+                "reverse": "dd"
             },
             {
                 "find": "D",
                 "replace": "ড",
-                "reversed": "d"
+                "reverse": "d"
             },
             {
                 "find": "d",
                 "replace": "দ",
-                "reversed": "d"
+                "reverse": "d"
             },
             {
                 "find": "...",
@@ -206,47 +206,47 @@ AVRO_DICT: dict = {
             {
                 "find": ".",
                 "replace": "।",
-                "reversed": "."
+                "reverse": "."
             },
             {
                 "find": "ghn",
                 "replace": "ঘ্ন",
-                "reversed": "ghn"
+                "reverse": "ghn"
             },
             {
                 "find": "Ghn",
                 "replace": "ঘ্ন",
-                "reversed": "ghn"
+                "reverse": "ghn"
             },
             {
                 "find": "gdh",
                 "replace": "গ্ধ",
-                "reversed": "gdh"
+                "reverse": "gdh"
             },
             {
                 "find": "Gdh",
                 "replace": "গ্ধ",
-                "reversed": "gdh"
+                "reverse": "gdh"
             },
             {
                 "find": "gN",
                 "replace": "গ্ণ",
-                "reversed": "gn"
+                "reverse": "gn"
             },
             {
                 "find": "GN",
                 "replace": "গ্ণ",
-                "reversed": "gn"
+                "reverse": "gn"
             },
             {
                 "find": "gn",
                 "replace": "গ্ন",
-                "reversed": "gn"
+                "reverse": "gn"
             },
             {
                 "find": "Gn",
                 "replace": "গ্ন",
-                "reversed": "gn"
+                "reverse": "gn"
             },
             {
                 "find": "gm",
@@ -255,72 +255,72 @@ AVRO_DICT: dict = {
             {
                 "find": "Gm",
                 "replace": "গ্ম",
-                "reversed": "gm"
+                "reverse": "gm"
             },
             {
                 "find": "gl",
                 "replace": "গ্ল",
-                "reversed": "gl"
+                "reverse": "gl"
             },
             {
                 "find": "Gl",
                 "replace": "গ্ল",
-                "reversed": "gl"
+                "reverse": "gl"
             },
             {
                 "find": "gg",
                 "replace": "জ্ঞ",
-                "reversed": "gg"
+                "reverse": "gg"
             },
             {
                 "find": "GG",
                 "replace": "জ্ঞ",
-                "reversed": "gg"
+                "reverse": "gg"
             },
             {
                 "find": "Gg",
                 "replace": "জ্ঞ",
-                "reversed": "gg"
+                "reverse": "gg"
             },
             {
                 "find": "gG",
                 "replace": "জ্ঞ",
-                "reversed": "gg"
+                "reverse": "gg"
             },
             {
                 "find": "gh",
                 "replace": "ঘ",
-                "reversed": "gh"
+                "reverse": "gh"
             },
             {
                 "find": "Gh",
                 "replace": "ঘ",
-                "reversed": "gh"
+                "reverse": "gh"
             },
             {
                 "find": "g",
                 "replace": "গ",
-                "reversed": "g"
+                "reverse": "g"
             },
             {
                 "find": "G",
                 "replace": "গ",
-                "reversed": "g"
+                "reverse": "g"
             },
             {
                 "find": "hN",
                 "replace": "হ্ণ",
-                "reversed": "nn"
+                "reverse": "nn"
             },
             {
                 "find": "hn",
                 "replace": "হ্ন",
-                "reversed": "nn"
+                "reverse": "nn"
             },
             {
                 "find": "hm",
                 "replace": "হ্ম",
-                "reversed": "mm"
+                "reverse": "mm"
             },
             {
                 "find": "hl",
@@ -329,7 +329,7 @@ AVRO_DICT: dict = {
             {
                 "find": "h",
                 "replace": "হ",
-                "reversed": "h"
+                "reverse": "h"
             },
             {
                 "find": "jjh",
@@ -338,37 +338,37 @@ AVRO_DICT: dict = {
             {
                 "find": "jNG",
                 "replace": "জ্ঞ",
-                "reversed": "gg"
+                "reverse": "gg"
             },
             {
                 "find": "jh",
                 "replace": "ঝ",
-                "reversed": "jh"
+                "reverse": "jh"
             },
             {
                 "find": "jj",
                 "replace": "জ্জ",
-                "reversed": "jj"
+                "reverse": "jj"
             },
             {
                 "find": "j",
                 "replace": "জ",
-                "reversed": "j"
+                "reverse": "j"
             },
             {
                 "find": "J",
                 "replace": "জ",
-                "reversed": "j"
+                "reverse": "j"
             },
             {
                 "find": "kkhN",
                 "replace": "ক্ষ্ণ",
-                "reversed": "kkhn"
+                "reverse": "kkhn"
             },
             {
                 "find": "kShN",
                 "replace": "ক্ষ্ণ",
-                "reversed": "kkhn"
+                "reverse": "kkhn"
             },
             {
                 "find": "kkhm",
@@ -377,27 +377,27 @@ AVRO_DICT: dict = {
             {
                 "find": "kShm",
                 "replace": "ক্ষ্ম",
-                "reversed": "kkh"
+                "reverse": "kkh"
             },
             {
                 "find": "kxN",
                 "replace": "ক্ষ্ণ",
-                "reversed": "kkh"
+                "reverse": "kkh"
             },
             {
                 "find": "kxm",
                 "replace": "ক্ষ্ম",
-                "reversed": "kkh"
+                "reverse": "kkh"
             },
             {
                 "find": "kkh",
                 "replace": "ক্ষ",
-                "reversed": "kkh"
+                "reverse": "kkh"
             },
             {
                 "find": "kSh",
                 "replace": "ক্ষ",
-                "reversed": "kkh"
+                "reverse": "kkh"
             },
             {
                 "find": "ksh",
@@ -406,42 +406,42 @@ AVRO_DICT: dict = {
             {
                 "find": "kx",
                 "replace": "ক্ষ",
-                "reversed": "kkh"
+                "reverse": "kkh"
             },
             {
                 "find": "kk",
                 "replace": "ক্ক",
-                "reversed": "kk"
+                "reverse": "kk"
             },
             {
                 "find": "kT",
                 "replace": "ক্ট",
-                "reversed": "kt"
+                "reverse": "kt"
             },
             {
                 "find": "kt",
                 "replace": "ক্ত",
-                "reversed": "kt"
+                "reverse": "kt"
             },
             {
                 "find": "kl",
                 "replace": "ক্ল",
-                "reversed": "kl"
+                "reverse": "kl"
             },
             {
                 "find": "ks",
                 "replace": "ক্স",
-                "reversed": "ks"
+                "reverse": "ks"
             },
             {
                 "find": "kh",
                 "replace": "খ",
-                "reversed": "kh"
+                "reverse": "kh"
             },
             {
                 "find": "k",
                 "replace": "ক",
-                "reversed": "k"
+                "reverse": "k"
             },
             {
                 "find": "lbh",
@@ -466,7 +466,7 @@ AVRO_DICT: dict = {
             {
                 "find": "lk",
                 "replace": "ল্ক",
-                "reversed": "lk"
+                "reverse": "lk"
             },
             {
                 "find": "lg",
@@ -475,17 +475,17 @@ AVRO_DICT: dict = {
             {
                 "find": "lT",
                 "replace": "ল্ট",
-                "reversed": "lt"
+                "reverse": "lt"
             },
             {
                 "find": "lD",
                 "replace": "ল্ড",
-                "reversed": "ld"
+                "reverse": "ld"
             },
             {
                 "find": "lp",
                 "replace": "ল্প",
-                "reversed": "lp"
+                "reverse": "lp"
             },
             {
                 "find": "lv",
@@ -494,22 +494,22 @@ AVRO_DICT: dict = {
             {
                 "find": "lm",
                 "replace": "ল্ম",
-                "reversed": "lm"
+                "reverse": "lm"
             },
             {
                 "find": "ll",
                 "replace": "ল্ল",
-                "reversed": "ll"
+                "reverse": "ll"
             },
             {
                 "find": "lb",
                 "replace": "ল্ব",
-                "reversed": "lb"
+                "reverse": "lb"
             },
             {
                 "find": "l",
                 "replace": "ল",
-                "reversed": "l"
+                "reverse": "l"
             },
             {
                 "find": "mth",
@@ -518,12 +518,12 @@ AVRO_DICT: dict = {
             {
                 "find": "mph",
                 "replace": "ম্ফ",
-                "reversed": "mf"
+                "reverse": "mf"
             },
             {
                 "find": "mbh",
                 "replace": "ম্ভ",
-                "reversed": "mv"
+                "reverse": "mv"
             },
             {
                 "find": "mpl",
@@ -532,107 +532,107 @@ AVRO_DICT: dict = {
             {
                 "find": "mn",
                 "replace": "ম্ন",
-                "reversed": "mn"
+                "reverse": "mn"
             },
             {
                 "find": "mp",
                 "replace": "ম্প",
-                "reversed": "mp"
+                "reverse": "mp"
             },
             {
                 "find": "mv",
                 "replace": "ম্ভ",
-                "reversed": "mv"
+                "reverse": "mv"
             },
             {
                 "find": "mm",
                 "replace": "ম্ম",
-                "reversed": "mm"
+                "reverse": "mm"
             },
             {
                 "find": "ml",
                 "replace": "ম্ল",
-                "reversed": "ml"
+                "reverse": "ml"
             },
             {
                 "find": "mb",
                 "replace": "ম্ব",
-                "reversed": "mb"
+                "reverse": "mb"
             },
             {
                 "find": "mf",
                 "replace": "ম্ফ",
-                "reversed": "mf"
+                "reverse": "mf"
             },
             {
                 "find": "m",
                 "replace": "ম",
-                "reversed": "m"
+                "reverse": "m"
             },
             {
                 "find": "0",
                 "replace": "০",
-                "reversed": "0"
+                "reverse": "0"
             },
             {
                 "find": "1",
                 "replace": "১",
-                "reversed": "1"
+                "reverse": "1"
             },
             {
                 "find": "2",
                 "replace": "২",
-                "reversed": "2"
+                "reverse": "2"
             },
             {
                 "find": "3",
                 "replace": "৩",
-                "reversed": "3"
+                "reverse": "3"
             },
             {
                 "find": "4",
                 "replace": "৪",
-                "reversed": "4"
+                "reverse": "4"
             },
             {
                 "find": "5",
                 "replace": "৫",
-                "reversed": "5"
+                "reverse": "5"
             },
             {
                 "find": "6",
                 "replace": "৬",
-                "reversed": "6"
+                "reverse": "6"
             },
             {
                 "find": "7",
                 "replace": "৭",
-                "reversed": "7"
+                "reverse": "7"
             },
             {
                 "find": "8",
                 "replace": "৮",
-                "reversed": "8"
+                "reverse": "8"
             },
             {
                 "find": "9",
                 "replace": "৯",
-                "reversed": "9"
+                "reverse": "9"
             },
             {
                 "find": "NgkSh",
                 "replace": "ঙ্ক্ষ",
-                "reversed": "ngkh"
+                "reverse": "ngkh"
             },
             {
                 "find": "Ngkkh",
                 "replace": "ঙ্ক্ষ",
-                "reversed": "ngkh"
+                "reverse": "ngkh"
             },
             {
                 "find": "NGch",
                 "replace": "ঞ্ছ",
-                "reversed": "ngch"
+                "reverse": "ngch"
             },
             {
                 "find": "Nggh",
@@ -641,7 +641,7 @@ AVRO_DICT: dict = {
             {
                 "find": "Ngkh",
                 "replace": "ঙ্খ",
-                "reversed": "ngkh"
+                "reverse": "ngkh"
             },
             {
                 "find": "NGjh",
@@ -658,17 +658,17 @@ AVRO_DICT: dict = {
             {
                 "find": "Ngkx",
                 "replace": "ঙ্ক্ষ",
-                "reversed": "ngkh"
+                "reverse": "ngkh"
             },
             {
                 "find": "NGc",
                 "replace": "ঞ্চ",
-                "reversed": "nch"
+                "reverse": "nch"
             },
             {
                 "find": "nch",
                 "replace": "ঞ্ছ",
-                "reversed": "ngch"
+                "reverse": "ngch"
             },
             {
                 "find": "njh",
@@ -681,7 +681,7 @@ AVRO_DICT: dict = {
             {
                 "find": "Ngk",
                 "replace": "ঙ্ক",
-                "reversed": "ngk"
+                "reverse": "ngk"
             },
             {
                 "find": "Ngx",
@@ -690,7 +690,7 @@ AVRO_DICT: dict = {
             {
                 "find": "Ngg",
                 "replace": "ঙ্গ",
-                "reversed": "ngg"
+                "reverse": "ngg"
             },
             {
                 "find": "Ngm",
@@ -699,37 +699,37 @@ AVRO_DICT: dict = {
             {
                 "find": "NGj",
                 "replace": "ঞ্জ",
-                "reversed": "ngj"
+                "reverse": "ngj"
             },
             {
                 "find": "ndh",
                 "replace": "ন্ধ",
-                "reversed": "ndh"
+                "reverse": "ndh"
             },
             {
                 "find": "nTh",
                 "replace": "ন্ঠ",
-                "reversed": "nth"
+                "reverse": "nth"
             },
             {
                 "find": "NTh",
                 "replace": "ণ্ঠ",
-                "reversed": "nth"
+                "reverse": "nth"
             },
             {
                 "find": "nth",
                 "replace": "ন্থ",
-                "reversed": "nth"
+                "reverse": "nth"
             },
             {
                 "find": "nkh",
                 "replace": "ঙ্খ",
-                "reversed": "ngkh"
+                "reverse": "ngkh"
             },
             {
                 "find": "ngo",
                 "replace": "ঙ্গ",
-                "reversed": "ngg"
+                "reverse": "ngg"
             },
             {
                 "find": "nga",
@@ -782,32 +782,32 @@ AVRO_DICT: dict = {
             {
                 "find": "nj",
                 "replace": "ঞ্জ",
-                "reversed": "ngj"
+                "reverse": "ngj"
             },
             {
                 "find": "Ng",
                 "replace": "ঙ",
-                "reversed": "ng"
+                "reverse": "ng"
             },
             {
                 "find": "NG",
                 "replace": "ঞ",
-                "reversed": "y"
+                "reverse": "y"
             },
             {
                 "find": "nk",
                 "replace": "ঙ্ক",
-                "reversed": "ngk"
+                "reverse": "ngk"
             },
             {
                 "find": "ng",
                 "replace": "ং",
-                "reversed": "ng"
+                "reverse": "ng"
             },
             {
                 "find": "nn",
                 "replace": "ন্ন",
-                "reversed": "nn"
+                "reverse": "nn"
             },
             {
                 "find": "NN",
@@ -820,7 +820,7 @@ AVRO_DICT: dict = {
             {
                 "find": "nm",
                 "replace": "ন্ম",
-                "reversed": "nm"
+                "reverse": "nm"
             },
             {
                 "find": "Nm",
@@ -829,32 +829,32 @@ AVRO_DICT: dict = {
             {
                 "find": "nd",
                 "replace": "ন্দ",
-                "reversed": "nd"
+                "reverse": "nd"
             },
             {
                 "find": "nT",
                 "replace": "ন্ট",
-                "reversed": "nt"
+                "reverse": "nt"
             },
             {
                 "find": "NT",
                 "replace": "ণ্ট",
-                "reversed": "nt"
+                "reverse": "nt"
             },
             {
                 "find": "nD",
                 "replace": "ন্ড",
-                "reversed": "nd"
+                "reverse": "nd"
             },
             {
                 "find": "ND",
                 "replace": "ণ্ড",
-                "reversed": "nd"
+                "reverse": "nd"
             },
             {
                 "find": "nt",
                 "replace": "ন্ত",
-                "reversed": "nt"
+                "reverse": "nt"
             },
             {
                 "find": "ns",
@@ -863,32 +863,32 @@ AVRO_DICT: dict = {
             {
                 "find": "nc",
                 "replace": "ঞ্চ",
-                "reversed": "nch"
+                "reverse": "nch"
             },
             {
                 "find": "n",
                 "replace": "ন",
-                "reversed": "n"
+                "reverse": "n"
             },
             {
                 "find": "N",
                 "replace": "ণ",
-                "reversed": "n"
+                "reverse": "n"
             },
             {
                 "find": "OI`",
                 "replace": "ৈ",
-                "reversed": "oi"
+                "reverse": "oi"
             },
             {
                 "find": "OU`",
                 "replace": "ৌ",
-                "reversed": "ou"
+                "reverse": "ou"
             },
             {
                 "find": "O`",
                 "replace": "ো",
-                "reversed": "o"
+                "reverse": "o"
             },
             {
                 "find": "OI",
@@ -913,7 +913,7 @@ AVRO_DICT: dict = {
                         "replace": "ঐ"
                     }
                 ],
-                "reversed": "oi"
+                "reverse": "oi"
             },
             {
                 "find": "OU",
@@ -938,7 +938,7 @@ AVRO_DICT: dict = {
                         "replace": "ঔ"
                     }
                 ],
-                "reversed": "ou"
+                "reverse": "ou"
             },
             {
                 "find": "O",
@@ -963,67 +963,67 @@ AVRO_DICT: dict = {
                         "replace": "ও"
                     }
                 ],
-                "reversed": "o"
+                "reverse": "o"
             },
             {
                 "find": "phl",
                 "replace": "ফ্ল",
-                "reversed": "fl"
+                "reverse": "fl"
             },
             {
                 "find": "pT",
                 "replace": "প্ট",
-                "reversed": "pt"
+                "reverse": "pt"
             },
             {
                 "find": "pt",
                 "replace": "প্ত",
-                "reversed": "pt"
+                "reverse": "pt"
             },
             {
                 "find": "pn",
                 "replace": "প্ন",
-                "reversed": "pn"
+                "reverse": "pn"
             },
             {
                 "find": "pp",
                 "replace": "প্প",
-                "reversed": "pp"
+                "reverse": "pp"
             },
             {
                 "find": "pl",
                 "replace": "প্ল",
-                "reversed": "pl"
+                "reverse": "pl"
             },
             {
                 "find": "ps",
                 "replace": "প্স",
-                "reversed": "ps"
+                "reverse": "ps"
             },
             {
                 "find": "ph",
                 "replace": "ফ",
-                "reversed": "ph"
+                "reverse": "ph"
             },
             {
                 "find": "fl",
                 "replace": "ফ্ল",
-                "reversed": "fl"
+                "reverse": "fl"
             },
             {
                 "find": "f",
                 "replace": "ফ",
-                "reversed": "ph"
+                "reverse": "ph"
             },
             {
                 "find": "p",
                 "replace": "প",
-                "reversed": "p"
+                "reverse": "p"
             },
             {
                 "find": "rri`",
                 "replace": "ৃ",
-                "reversed": "ri"
+                "reverse": "ri"
             },
             {
                 "find": "rri",
@@ -1048,7 +1048,7 @@ AVRO_DICT: dict = {
                         "replace": "ঋ"
                     }
                 ],
-                "reversed": "ri"
+                "reverse": "ri"
             },
             {
                 "find": "rrZ",
@@ -1181,7 +1181,7 @@ AVRO_DICT: dict = {
             {
                 "find": "R",
                 "replace": "ড়",
-                "reversed": "r"
+                "reverse": "r"
             },
             {
                 "find": "r",
@@ -1222,27 +1222,27 @@ AVRO_DICT: dict = {
                         "replace": "্র"
                     }
                 ],
-                "reversed": "r"
+                "reverse": "r"
             },
             {
                 "find": "shch",
                 "replace": "শ্ছ",
-                "reversed": "sch"
+                "reverse": "sch"
             },
             {
                 "find": "ShTh",
                 "replace": "ষ্ঠ",
-                "reversed": "sth"
+                "reverse": "sth"
             },
             {
                 "find": "Shph",
                 "replace": "ষ্ফ",
-                "reversed": "sf"
+                "reverse": "sf"
             },
             {
                 "find": "Sch",
                 "replace": "শ্ছ",
-                "reversed": "sch"
+                "reverse": "sch"
             },
             {
                 "find": "skl",
@@ -1255,17 +1255,17 @@ AVRO_DICT: dict = {
             {
                 "find": "sth",
                 "replace": "স্থ",
-                "reversed": "sth"
+                "reverse": "sth"
             },
             {
                 "find": "sph",
                 "replace": "স্ফ",
-                "reversed": "sf"
+                "reverse": "sf"
             },
             {
                 "find": "shc",
                 "replace": "শ্চ",
-                "reversed": "scch"
+                "reverse": "scch"
             },
             {
                 "find": "sht",
@@ -1274,47 +1274,47 @@ AVRO_DICT: dict = {
             {
                 "find": "shn",
                 "replace": "শ্ন",
-                "reversed": "sn"
+                "reverse": "sn"
             },
             {
                 "find": "shm",
                 "replace": "শ্ম",
-                "reversed": "ss"
+                "reverse": "ss"
             },
             {
                 "find": "shl",
                 "replace": "শ্ল",
-                "reversed": "sl"
+                "reverse": "sl"
             },
             {
                 "find": "Shk",
                 "replace": "ষ্ক",
-                "reversed": "sk"
+                "reverse": "sk"
             },
             {
                 "find": "ShT",
                 "replace": "ষ্ট",
-                "reversed": "st"
+                "reverse": "st"
             },
             {
                 "find": "ShN",
                 "replace": "ষ্ণ",
-                "reversed": "sn"
+                "reverse": "sn"
             },
             {
                 "find": "Shp",
                 "replace": "ষ্প",
-                "reversed": "sp"
+                "reverse": "sp"
             },
             {
                 "find": "Shf",
                 "replace": "ষ্ফ",
-                "reversed": "sf"
+                "reverse": "sf"
             },
             {
                 "find": "Shm",
                 "replace": "ষ্ম",
-                "reversed": "sm"
+                "reverse": "sm"
             },
             {
                 "find": "spl",
@@ -1323,57 +1323,57 @@ AVRO_DICT: dict = {
             {
                 "find": "sk",
                 "replace": "স্ক",
-                "reversed": "sk"
+                "reverse": "sk"
             },
             {
                 "find": "Sc",
                 "replace": "শ্চ",
-                "reversed": "scch"
+                "reverse": "scch"
             },
             {
                 "find": "sT",
                 "replace": "স্ট",
-                "reversed": "st"
+                "reverse": "st"
             },
             {
                 "find": "st",
                 "replace": "স্ত",
-                "reversed": "st"
+                "reverse": "st"
             },
             {
                 "find": "sn",
                 "replace": "স্ন",
-                "reversed": "sn"
+                "reverse": "sn"
             },
             {
                 "find": "sp",
                 "replace": "স্প",
-                "reversed": "sp"
+                "reverse": "sp"
             },
             {
                 "find": "sf",
                 "replace": "স্ফ",
-                "reversed": "sf"
+                "reverse": "sf"
             },
             {
                 "find": "sm",
                 "replace": "স্ম",
-                "reversed": "sh"
+                "reverse": "sh"
             },
             {
                 "find": "sl",
                 "replace": "স্ল",
-                "reversed": "sl"
+                "reverse": "sl"
             },
             {
                 "find": "sh",
                 "replace": "শ",
-                "reversed": "sh"
+                "reverse": "sh"
             },
             {
                 "find": "Sc",
                 "replace": "শ্চ",
-                "reversed": "scch"
+                "reverse": "scch"
             },
             {
                 "find": "St",
@@ -1382,37 +1382,37 @@ AVRO_DICT: dict = {
             {
                 "find": "Sn",
                 "replace": "শ্ন",
-                "reversed": "sn"
+                "reverse": "sn"
             },
             {
                 "find": "Sm",
                 "replace": "শ্ম",
-                "reversed": "ss"
+                "reverse": "ss"
             },
             {
                 "find": "Sl",
                 "replace": "শ্ল",
-                "reversed": "sl"
+                "reverse": "sl"
             },
             {
                 "find": "Sh",
                 "replace": "ষ",
-                "reversed": "sh"
+                "reverse": "sh"
             },
             {
                 "find": "s",
                 "replace": "স",
-                "reversed": "s"
+                "reverse": "s"
             },
             {
                 "find": "S",
                 "replace": "শ",
-                "reversed": "sh"
+                "reverse": "sh"
             },
             {
                 "find": "oo`",
                 "replace": "ু",
-                "reversed": "u"
+                "reverse": "u"
             },
             {
                 "find": "oo",
@@ -1447,12 +1447,12 @@ AVRO_DICT: dict = {
                         "replace": "উ"
                     }
                 ],
-                "reversed": "u"
+                "reverse": "u"
             },
-            {
-                "find": "o`",
-                "replace": ""
-            },
+            # {
+            #     "find": "o`",
+            #     "replace": ""
+            # },
             {
                 "find": "oZ",
                 "replace": "অ্য"
@@ -1507,12 +1507,12 @@ AVRO_DICT: dict = {
             {
                 "find": "t``",
                 "replace": "ৎ",
-                "reversed": "t"
+                "reverse": "t"
             },
             {
                 "find": "TT",
                 "replace": "ট্ট",
-                "reversed": "tt"
+                "reverse": "tt"
             },
             {
                 "find": "Tm",
@@ -1521,7 +1521,7 @@ AVRO_DICT: dict = {
             {
                 "find": "Th",
                 "replace": "ঠ",
-                "reversed": "th"
+                "reverse": "th"
             },
             {
                 "find": "tn",
@@ -1530,27 +1530,27 @@ AVRO_DICT: dict = {
             {
                 "find": "tm",
                 "replace": "ত্ম",
-                "reversed": "tt"
+                "reverse": "tt"
             },
             {
                 "find": "th",
                 "replace": "থ",
-                "reversed": "th"
+                "reverse": "th"
             },
             {
                 "find": "tt",
                 "replace": "ত্ত",
-                "reversed": "tt"
+                "reverse": "tt"
             },
             {
                 "find": "T",
                 "replace": "ট",
-                "reversed": "t"
+                "reverse": "t"
             },
             {
                 "find": "t",
                 "replace": "ত",
-                "reversed": "t"
+                "reverse": "t"
             },
             {
                 "find": "aZ",
@@ -1563,12 +1563,12 @@ AVRO_DICT: dict = {
             {
                 "find": "a`",
                 "replace": "া",
-                "reversed": "a"
+                "reverse": "a"
             },
             {
                 "find": "A`",
                 "replace": "া",
-                "reversed": "a"
+                "reverse": "a"
             },
             {
                 "find": "a",
@@ -1623,12 +1623,12 @@ AVRO_DICT: dict = {
                         "replace": "আ"
                     }
                 ],
-                "reversed": "a"
+                "reverse": "a"
             },
             {
                 "find": "i`",
                 "replace": "ি",
-                "reversed": "i"
+                "reverse": "i"
             },
             {
                 "find": "i",
@@ -1663,12 +1663,12 @@ AVRO_DICT: dict = {
                         "replace": "ই"
                     }
                 ],
-                "reversed": "i"
+                "reverse": "i"
             },
             {
                 "find": "I`",
                 "replace": "ী",
-                "reversed": "i"
+                "reverse": "i"
             },
             {
                 "find": "I",
@@ -1703,12 +1703,12 @@ AVRO_DICT: dict = {
                         "replace": "ঈ"
                     }
                 ],
-                "reversed": "i"
+                "reverse": "i"
             },
             {
                 "find": "u`",
                 "replace": "ু",
-                "reversed": "u"
+                "reverse": "u"
             },
             {
                 "find": "u",
@@ -1743,12 +1743,12 @@ AVRO_DICT: dict = {
                         "replace": "উ"
                     }
                 ],
-                "reversed": "u"
+                "reverse": "u"
             },
             {
                 "find": "U`",
                 "replace": "ূ",
-                "reversed": "u"
+                "reverse": "u"
             },
             {
                 "find": "U",
@@ -1783,12 +1783,12 @@ AVRO_DICT: dict = {
                         "replace": "ঊ"
                     }
                 ],
-                "reversed": "u"
+                "reverse": "u"
             },
             {
                 "find": "ee`",
                 "replace": "ী",
-                "reversed": "i"
+                "reverse": "i"
             },
             {
                 "find": "ee",
@@ -1823,12 +1823,12 @@ AVRO_DICT: dict = {
                         "replace": "ঈ"
                     }
                 ],
-                "reversed": "i"
+                "reverse": "i"
             },
             {
                 "find": "e`",
                 "replace": "ে",
-                "reversed": "e"
+                "reverse": "e"
             },
             {
                 "find": "e",
@@ -1863,12 +1863,12 @@ AVRO_DICT: dict = {
                         "replace": "এ"
                     }
                 ],
-                "reversed": "e"
+                "reverse": "e"
             },
             {
                 "find": "z",
                 "replace": "য",
-                "reversed": "z"
+                "reverse": "z"
             },
             {
                 "find": "Z",
@@ -1905,12 +1905,12 @@ AVRO_DICT: dict = {
             {
                 "find": "Y",
                 "replace": "য়",
-                "reversed": "y"
+                "reverse": "y"
             },
             {
                 "find": "q",
                 "replace": "ক",
-                "reversed": "k"
+                "reverse": "k"
             },
             {
                 "find": "w",
@@ -1939,7 +1939,7 @@ AVRO_DICT: dict = {
                         "replace": "্ব"
                     }
                 ],
-                "reversed": "o"
+                "reverse": "o"
             },
             {
                 "find": "x",
@@ -1955,7 +1955,7 @@ AVRO_DICT: dict = {
                         "replace": "এক্স"
                     }
                 ],
-                "reversed": "ks"
+                "reverse": "ks"
             },
             {
                 "find": ":`",
@@ -1972,7 +1972,7 @@ AVRO_DICT: dict = {
             {
                 "find": "^",
                 "replace": "ঁ",
-                "reversed": ""
+                "reverse": ""
             },
             {
                 "find": ",,",
@@ -1986,10 +1986,10 @@ AVRO_DICT: dict = {
                 "find": "$",
                 "replace": "৳"
             },
-            {
-                "find": "`",
-                "replace": ""
-            }
+            # {
+            #     "find": "`",
+            #     "replace": ""
+            # }
         ],
         "vowel": "aeiou",
         "consonant": "bcdfghjklmnpqrstvwxyz",
