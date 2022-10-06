@@ -1221,8 +1221,7 @@ AVRO_DICT: dict = {
                         ],
                         "replace": "্র"
                     }
-                ],
-                "reverse": "r"
+                ]
             },
             {
                 "find": "shch",
@@ -1450,7 +1449,7 @@ AVRO_DICT: dict = {
                 "reverse": "u"
             },
             # {
-            #     "find": "o`",
+            #     "find": "o`"
             #     "replace": ""
             # },
             {
@@ -1575,6 +1574,10 @@ AVRO_DICT: dict = {
                 "reverse": "a"
             },
             {
+                "replace": "র",
+                "reverse": "r"
+            },
+            {
                 "find": "a",
                 "replace": "া",
                 "rules": [
@@ -1635,6 +1638,10 @@ AVRO_DICT: dict = {
                 "reverse": "i"
             },
             {
+                "replace": "ই",
+                "reverse": "i"
+            },
+            {
                 "find": "i",
                 "replace": "ি",
                 "rules": [
@@ -1666,8 +1673,7 @@ AVRO_DICT: dict = {
                         ],
                         "replace": "ই"
                     }
-                ],
-                "reverse": "i"
+                ]
             },
             {
                 "find": "I`",
@@ -1998,6 +2004,10 @@ AVRO_DICT: dict = {
         "vowel": "aeiou",
         "consonant": "bcdfghjklmnpqrstvwxyz",
         "casesensitive": "oiudgjnrstyz",
-        "number": "0123456789"
+        "number": "0123456789",
+        
+        # For reverse parsing
+        "shorborno": "অআইঈউঊঊএঐওঔ",
+        "kar": {'া', 'ি', 'ী', 'ু', 'ূ', 'ৃ', 'ে', 'ৈ', 'ো', 'ৌ'}
     }
 }
