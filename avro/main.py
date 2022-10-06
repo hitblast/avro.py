@@ -209,13 +209,16 @@ def match_patterns(fixed_text: str, cur: int=0, rule: bool=False, reversed: bool
     rule_type = NON_RULE_PATTERNS if not rule else RULE_PATTERNS
     pattern = exact_find_in_pattern(fixed_text, reversed, cur, rule_type)
 
+    # print(fixed_text[cur])
+    # print(has_shorborno_or_kar(cur, fixed_text))
+
     if len(pattern) > 0:
         if not rule:
             return {
                 "matched": True,
                 "found": pattern[0].get('find', None),
                 "replaced": pattern[0].get('replace', None),
-                "reversed": pattern[0].get('reverse', None)
+                "reversed": pattern[0].get('reverse', None) if has_shorborno_or_kar(cur, fixed_text) else pattern[0].get('reverse', '') + 'o'
             }
         else:
             return {
@@ -252,11 +255,23 @@ def exact_find_in_pattern(fixed_text: str, reversed: bool, cur: int=0, patterns:
         ]
 
     return [
-        x for x in patterns if 
-        (not x.get('find', None) is None) 
-        and (cur + len(x['find']) <= len(fixed_text)) 
+        x for x in patterns if
+        (not x.get('find', None) is None)
+        and (cur + len(x['find']) <= len(fixed_text))
         and x['find'] == fixed_text[cur:(cur + len(x['find']))]
     ]
+
+
+def has_shorborno_or_kar(cursor: int, fixed_text: str) -> bool:
+    if fixed_text[cursor] in config.AVRO_KAR:
+        return True
+    elif fixed_text[cursor] in config.AVRO_SHORBORNO:
+        return True
+    else:
+        try:
+            return True if fixed_text[cursor + 1] in config.AVRO_KAR else False
+        except IndexError:
+            return False
 
 
 def process_rules(rules: Any, fixed_text: str, cur: int=0, cur_end: int=1) -> Union[Any, None]:
