@@ -189,10 +189,13 @@ def reverse(*texts: str) -> Union[str, List[str]]:
         return ''.join(output)
 
     output = []
-    for text in texts:  # Applies to non-keyword arguments.
-        output.append(subparse(text))
+    space_separated_texts = texts[0].split(" ")
 
-    return output[0] if len(output) == 1 else output
+    for _ in texts:  # Applies to non-keyword arguments.
+        for space_separated_text in space_separated_texts:
+            output.append(subparse(space_separated_text))
+
+    return ' '.join(output)
 
 
 def match_patterns(fixed_text: str, cur: int=0, rule: bool=False, reversed: bool=False) -> Dict[str, Any]:
@@ -209,7 +212,7 @@ def match_patterns(fixed_text: str, cur: int=0, rule: bool=False, reversed: bool
     rule_type = NON_RULE_PATTERNS if not rule else RULE_PATTERNS
     pattern = exact_find_in_pattern(fixed_text, reversed, cur, rule_type)
 
-    # print(fixed_text[cur])
+    # print(fixed_text)
     # print(has_shorborno_or_kar(cur, fixed_text))
 
     if len(pattern) > 0:
@@ -263,9 +266,12 @@ def exact_find_in_pattern(fixed_text: str, reversed: bool, cur: int=0, patterns:
 
 
 def has_shorborno_or_kar(cursor: int, fixed_text: str) -> bool:
+    # print(fixed_text)
     if fixed_text[cursor] in config.AVRO_KAR:
         return True
     elif fixed_text[cursor] in config.AVRO_SHORBORNO:
+        return True
+    elif len(fixed_text) == cursor + 1:
         return True
     else:
         try:
