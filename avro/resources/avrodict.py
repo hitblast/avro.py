@@ -197,7 +197,8 @@ AVRO_DICT: dict = {
             },
             {
                 "find": ".`",
-                "replace": "."
+                "replace": ".",
+                "reverse": '.'
             },
             {
                 "find": "..",
@@ -1721,6 +1722,10 @@ AVRO_DICT: dict = {
                 "reverse": "u"
             },
             {
+                "replace": 'উ',
+                "reverse": "u"
+            },
+            {
                 "find": "u",
                 "replace": "ু",
                 "rules": [
@@ -1839,6 +1844,14 @@ AVRO_DICT: dict = {
                 "find": "e`",
                 "replace": "ে",
                 "reverse": "e"
+            },
+            {
+                "replace": "এ",
+                "reverse": "e"
+            },
+            {
+                "replace": "ও",
+                "reverse": 'w'
             },
             {
                 "find": "e",
@@ -2009,6 +2022,6 @@ AVRO_DICT: dict = {
         # For reverse parsing
         "shorborno": "অআইঈউঊঊএঐওঔ",
         "kar": {'া', 'ি', 'ী', 'ু', 'ূ', 'ৃ', 'ে', 'ৈ', 'ো', 'ৌ'},
-        "ignore": {"ঁ"}
+        "ignore": {"ঁ", "।", "?", ".", "-", ";"}
     }
 }
