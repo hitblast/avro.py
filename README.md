@@ -63,8 +63,8 @@ Also, you can reverse it Bangla text to English typed Bangla text for readabilit
 ```python
 import avro
 
-reversed_parse_text = avro.reverse('আমার সোনার বাংলা।')
-print(reversed_parse_text)
+reversed_text = avro.reverse('আমার সোনার বাংলা।')
+print(reversed_text)
 ```
 `output: amar sonar bangla.`
 
