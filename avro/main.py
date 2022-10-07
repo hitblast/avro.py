@@ -126,7 +126,21 @@ def parse(*texts: str) -> Union[str, List[str]]:
 
 
 def reverse(*texts: str) -> Union[str, List[str]]:
+    '''
+    ### For Parsing Bangla input text to English typed Bangla text reversibly
 
+    If a valid replacement is found, then it returns the replaced string.
+    If no replacement is found, then it instead returns the input text.
+
+    Usage:
+    ```python
+    import avro
+
+    target = avro.reverse('আমার সোনার বাংলা')
+    print(target)
+    ```
+    `output: amar sonar bangla`
+    '''
     def subparse(text: str) -> str:
 
         # Prepare output list.
@@ -149,7 +163,6 @@ def reverse(*texts: str) -> Union[str, List[str]]:
             }
 
             if not uni_pass:
-                # cur_end = cur + 1
                 output.append(i)
 
             elif uni_pass:
@@ -159,43 +172,25 @@ def reverse(*texts: str) -> Union[str, List[str]]:
                     if not match['reversed'] is None:
                         output.append(match['reversed'])
                     else:
-                        # match = match_patterns(text, cur, rule=True, reversed=True)
                         output.append(match['found'])
 
-                    # cur_end = cur + len(match['found'])
-
-                # else:
-                #     match = match_patterns(text, cur, rule=True)
-
-                #     if match['matched']:
-                #         cur_end = cur + len(match['found'])
-                #         replaced = process_rules(
-                #             rules=match['rules'],
-                #             fixed_text=text,
-                #             cur=cur,
-                #             cur_end=cur_end
-                #         )
-
-                #         if replaced is not None:
-                #             output.append(replaced)
-
-                #         else:
-                #             output.append(match['replaced'])
-
                 if not match['matched']:
-                    # cur_end = cur + 1
                     output.append(i)
 
         return ''.join(output)
 
+    text_segments = []
     output = []
-    space_separated_texts = texts[0].split(" ")
 
-    for _ in texts:  # Applies to non-keyword arguments.
+    for text in texts:  # Applies to non-keyword arguments.
+        space_separated_texts = text.split(" ")
         for space_separated_text in space_separated_texts:
-            output.append(subparse(space_separated_text))
+            text_segments.append(subparse(space_separated_text))
+        
+        output.append(' '.join(text_segments))
+        text_segments = []
 
-    return ' '.join(output)
+    return output[0] if len(output) == 1 else output
 
 
 def match_patterns(fixed_text: str, cur: int=0, rule: bool=False, reversed: bool=False) -> Dict[str, Any]:
@@ -221,7 +216,7 @@ def match_patterns(fixed_text: str, cur: int=0, rule: bool=False, reversed: bool
                 "matched": True,
                 "found": pattern[0].get('find', None),
                 "replaced": pattern[0].get('replace', None),
-                "reversed": pattern[0].get('reverse', None) if has_shorborno_or_kar(cur, fixed_text) else pattern[0].get('reverse', '') + 'o'
+                "reversed":  reverse_with_rules(cur, fixed_text, pattern[0].get('reverse', None))
             }
         else:
             return {
@@ -265,19 +260,25 @@ def exact_find_in_pattern(fixed_text: str, reversed: bool, cur: int=0, patterns:
     ]
 
 
-def has_shorborno_or_kar(cursor: int, fixed_text: str) -> bool:
-    # print(fixed_text)
-    if fixed_text[cursor] in config.AVRO_KAR:
-        return True
-    elif fixed_text[cursor] in config.AVRO_SHORBORNO:
-        return True
-    elif len(fixed_text) == cursor + 1:
-        return True
-    else:
-        try:
-            return True if fixed_text[cursor + 1] in config.AVRO_KAR else False
-        except IndexError:
-            return False
+def reverse_with_rules(cursor: int, fixed_text: str, text_reversed) -> bool:
+    '''Enhances The Word With Rules For Reverse Parsing'''
+    added_suffix = ''
+
+    if not (fixed_text[cursor] in config.AVRO_KAR or \
+    fixed_text[cursor] in config.AVRO_SHORBORNO or \
+    len(fixed_text) == cursor + 1):
+        added_suffix = 'o'
+
+    try:
+        if fixed_text[cursor + 1] in config.AVRO_KAR:
+            added_suffix = ''
+        if fixed_text[cursor + 2] in config.AVRO_KAR and not cursor == 0:
+            added_suffix = ''
+            
+    except IndexError:
+        pass
+    
+    return text_reversed if text_reversed is None else (text_reversed + added_suffix)
 
 
 def process_rules(rules: Any, fixed_text: str, cur: int=0, cur_end: int=1) -> Union[Any, None]:
