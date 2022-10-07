@@ -2014,6 +2014,13 @@ AVRO_DICT: dict = {
             #     "replace": ""
             # }
         ],
+        
+        "exceptions":{
+            "ফেসবুক": "Facebook",
+            "গুগল": "Google",
+
+        },
+
         "vowel": "aeiou",
         "consonant": "bcdfghjklmnpqrstvwxyz",
         "casesensitive": "oiudgjnrstyz",

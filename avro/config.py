@@ -49,3 +49,4 @@ AVRO_NUMBERS = set(AVRO_DICT['data']['number'])
 AVRO_SHORBORNO = set(AVRO_DICT['data']['shorborno'])
 AVRO_KAR = AVRO_DICT['data']['kar']
 AVRO_IGNORE = AVRO_DICT['data']['ignore']
+EXCEPTIONS = AVRO_DICT['data']['exceptions']

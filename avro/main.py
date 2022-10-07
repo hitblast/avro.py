@@ -188,14 +188,20 @@ def reverse(*texts: str) -> Union[str, List[str]]:
     compiled_regex = re.compile(regex_pattern, re.UNICODE)
 
     for text in texts:  # Applies to non-keyword arguments.
-        
-        separated_texts = compiled_regex.split(text)
 
-        for separated_text in separated_texts:
-            text_segments.append(subparse(separated_text))
+        exceptions = config.EXCEPTIONS.get(text, None)
         
-        output.append(''.join(text_segments))
-        text_segments = []
+        if exceptions is None:
+            separated_texts = compiled_regex.split(text)
+
+            for separated_text in separated_texts:
+                text_segments.append(subparse(separated_text))
+            
+            output.append(''.join(text_segments))
+            text_segments = []
+        
+        else:
+            output.append(exceptions)
 
     return output[0] if len(output) == 1 else output
 
