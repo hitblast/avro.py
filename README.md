@@ -56,6 +56,17 @@ import avro
 parsed_text = avro.parse('ami banglay gan gai.')
 print(parsed_text)
 ```
+`output: আমি বাংলায় গান গাই।`
+
+Also, you can reverse it Bangla text to English typed Bangla text for readability
+
+```python
+import avro
+
+reversed_parse_text = avro.reverse('আমার সোনার বাংলা।')
+print(reversed_parse_text)
+```
+`output: amar sonar bangla.`
 
 Other use cases include [your terminal](https://github.com/hitblast/avro.py-cli), literally!
 
