@@ -35,6 +35,7 @@ from typing import Any, List, Dict, Union
 # Import local modules.
 from . import config
 from .utils import validate
+import re
 
 
 # Constants.
@@ -182,12 +183,18 @@ def reverse(*texts: str) -> Union[str, List[str]]:
     text_segments = []
     output = []
 
+    # Split using regex to remove noise
+    regex_pattern = "(\s|\.|,|\?|\।|\-|;|')"
+    compiled_regex = re.compile(regex_pattern, re.UNICODE)
+
     for text in texts:  # Applies to non-keyword arguments.
-        space_separated_texts = text.split(" ")
-        for space_separated_text in space_separated_texts:
-            text_segments.append(subparse(space_separated_text))
         
-        output.append(' '.join(text_segments))
+        separated_texts = compiled_regex.split(text)
+
+        for separated_text in separated_texts:
+            text_segments.append(subparse(separated_text))
+        
+        output.append(''.join(text_segments))
         text_segments = []
 
     return output[0] if len(output) == 1 else output
@@ -206,9 +213,6 @@ def match_patterns(fixed_text: str, cur: int=0, rule: bool=False, reversed: bool
 
     rule_type = NON_RULE_PATTERNS if not rule else RULE_PATTERNS
     pattern = exact_find_in_pattern(fixed_text, reversed, cur, rule_type)
-
-    # print(fixed_text)
-    # print(has_shorborno_or_kar(cur, fixed_text))
 
     if len(pattern) > 0:
         if not rule:
