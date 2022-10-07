@@ -266,6 +266,7 @@ def reverse_with_rules(cursor: int, fixed_text: str, text_reversed) -> bool:
 
     if not (fixed_text[cursor] in config.AVRO_KAR or \
     fixed_text[cursor] in config.AVRO_SHORBORNO or \
+    fixed_text[cursor] in config.AVRO_IGNORE or \
     len(fixed_text) == cursor + 1):
         added_suffix = 'o'
 
