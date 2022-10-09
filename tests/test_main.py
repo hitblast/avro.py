@@ -53,7 +53,8 @@ def test_patterns_without_rules_from_config() -> None:
 
     for pattern in AVRO_DICT['data']['patterns']:
         if 'rules' not in pattern:
-            assert pattern['replace'] == avro.parse(pattern['find'])
+            if pattern.get('find', None) is not None:
+                assert pattern['replace'] == avro.parse(pattern['find'])
 
 
 def test_patterns_without_rules_not_from_config() -> None:

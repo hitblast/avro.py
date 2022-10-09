@@ -147,9 +147,6 @@ def reverse(*texts: str) -> Union[str, List[str]]:
         # Prepare output list.
         output = []
 
-        # Cursor end point.
-        cur_end = 0
-
         # Iterate through input text.
         for cur, i in enumerate(text):
             try:
@@ -184,22 +181,22 @@ def reverse(*texts: str) -> Union[str, List[str]]:
     output = []
 
     # Split using regex to remove noise
-    regex_pattern = "(\s|\.|,|\?|\।|\-|;|')"
+    regex_pattern = "(\\s|\\.|,|\\?|\\।|\\-|;|')"
     compiled_regex = re.compile(regex_pattern, re.UNICODE)
 
     for text in texts:  # Applies to non-keyword arguments.
 
         exceptions = config.EXCEPTIONS.get(text, None)
-        
+
         if exceptions is None:
             separated_texts = compiled_regex.split(text)
 
             for separated_text in separated_texts:
                 text_segments.append(subparse(separated_text))
-            
+
             output.append(''.join(text_segments))
             text_segments = []
-        
+
         else:
             output.append(exceptions)
 
@@ -226,7 +223,7 @@ def match_patterns(fixed_text: str, cur: int=0, rule: bool=False, reversed: bool
                 "matched": True,
                 "found": pattern[0].get('find', None),
                 "replaced": pattern[0].get('replace', None),
-                "reversed":  reverse_with_rules(cur, fixed_text, pattern[0].get('reverse', None))
+                "reversed": reverse_with_rules(cur, fixed_text, pattern[0].get('reverse', None))
             }
         else:
             return {
@@ -274,10 +271,10 @@ def reverse_with_rules(cursor: int, fixed_text: str, text_reversed) -> bool:
     '''Enhances The Word With Rules For Reverse Parsing'''
     added_suffix = ''
 
-    if not (fixed_text[cursor] in config.AVRO_KAR or \
-    fixed_text[cursor] in config.AVRO_SHORBORNO or \
-    fixed_text[cursor] in config.AVRO_IGNORE or \
-    len(fixed_text) == cursor + 1):
+    if not (fixed_text[cursor] in config.AVRO_KAR
+            or fixed_text[cursor] in config.AVRO_SHORBORNO
+            or fixed_text[cursor] in config.AVRO_IGNORE
+            or len(fixed_text) == cursor + 1):
         added_suffix = 'o'
 
     try:
@@ -285,10 +282,10 @@ def reverse_with_rules(cursor: int, fixed_text: str, text_reversed) -> bool:
             added_suffix = ''
         if fixed_text[cursor + 2] in config.AVRO_KAR and not cursor == 0:
             added_suffix = ''
-            
+
     except IndexError:
         pass
-    
+
     return text_reversed if text_reversed is None else (text_reversed + added_suffix)
 
 
