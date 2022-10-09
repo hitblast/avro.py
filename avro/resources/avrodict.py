@@ -2014,8 +2014,8 @@ AVRO_DICT: dict = {
             #     "replace": ""
             # }
         ],
-        
-        "exceptions":{
+
+        "exceptions": {
             "ফেসবুক": "Facebook",
             "গুগল": "Google",
 
@@ -2025,10 +2025,29 @@ AVRO_DICT: dict = {
         "consonant": "bcdfghjklmnpqrstvwxyz",
         "casesensitive": "oiudgjnrstyz",
         "number": "0123456789",
-        
+
         # For reverse parsing
         "shorborno": "অআইঈউঊঊএঐওঔ",
-        "kar": {'া', 'ি', 'ী', 'ু', 'ূ', 'ৃ', 'ে', 'ৈ', 'ো', 'ৌ'},
-        "ignore": {"ঁ", "।", "?", ".", "-", ";"}
+        "kar": {
+            'া',
+            'ি',
+            'ী',
+            'ু',
+            'ূ',
+            'ৃ',
+            'ে',
+            'ৈ',
+            'ো',
+            'ৌ'
+        },
+
+        "ignore": {
+            "ঁ",
+            "।",
+            "?",
+            ".",
+            "-",
+            ";"
+        }
     }
 }
