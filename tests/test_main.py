@@ -177,3 +177,9 @@ def test_sentences() -> None:
     '''
 
     assert 'আমি বাংলায় গান গাই' == avro.parse('ami banglay gan gai')
+
+
+def test_reverse_func() -> None:
+    assert 'ami banglay gan gai' == avro.reverse('আমি বাংলায় গান গাই')
+    assert 'rahim, tomake korim dakse. ekhon ki rowna debe?' == avro.reverse(
+        'রাহিম, তোমাকে করিম ডাকছে। এখন কি রওনা দেবে?')
