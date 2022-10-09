@@ -35,6 +35,7 @@ from typing import Any, List, Dict, Union
 # Import local modules.
 from . import config
 from .utils import validate
+import re
 
 
 # Constants.
@@ -125,7 +126,84 @@ def parse(*texts: str) -> Union[str, List[str]]:
     return output[0] if len(output) == 1 else output
 
 
-def match_patterns(fixed_text: str, cur: int=0, rule: bool=False) -> Dict[str, Any]:
+def reverse(*texts: str) -> Union[str, List[str]]:
+    '''
+    ### For Parsing Bangla input text to English typed Bangla text reversibly
+
+    If a valid replacement is found, then it returns the replaced string.
+    If no replacement is found, then it instead returns the input text.
+
+    Usage:
+    ```python
+    import avro
+
+    target = avro.reverse('আমার সোনার বাংলা')
+    print(target)
+    ```
+    `output: amar sonar bangla`
+    '''
+    def subparse(text: str) -> str:
+
+        # Prepare output list.
+        output = []
+
+        # Iterate through input text.
+        for cur, i in enumerate(text):
+            try:
+                i.encode('utf-8')
+            except UnicodeDecodeError:
+                uni_pass = False
+            else:
+                uni_pass = True
+
+            match = {
+                "matched": False
+            }
+
+            if not uni_pass:
+                output.append(i)
+
+            elif uni_pass:
+                match = match_patterns(text, cur, rule=False, reversed=True)
+
+                if match['matched']:
+                    if not match['reversed'] is None:
+                        output.append(match['reversed'])
+                    else:
+                        output.append(match['found'])
+
+                if not match['matched']:
+                    output.append(i)
+
+        return ''.join(output)
+
+    text_segments = []
+    output = []
+
+    # Split using regex to remove noise
+    regex_pattern = "(\\s|\\.|,|\\?|\\।|\\-|;|')"
+    compiled_regex = re.compile(regex_pattern, re.UNICODE)
+
+    for text in texts:  # Applies to non-keyword arguments.
+
+        exceptions = config.EXCEPTIONS.get(text, None)
+
+        if exceptions is None:
+            separated_texts = compiled_regex.split(text)
+
+            for separated_text in separated_texts:
+                text_segments.append(subparse(separated_text))
+
+            output.append(''.join(text_segments))
+            text_segments = []
+
+        else:
+            output.append(exceptions)
+
+    return output[0] if len(output) == 1 else output
+
+
+def match_patterns(fixed_text: str, cur: int=0, rule: bool=False, reversed: bool=False) -> Dict[str, Any]:
     '''
     ### Matches given text at cursor position with rule / non rule patterns.
 
@@ -137,14 +215,15 @@ def match_patterns(fixed_text: str, cur: int=0, rule: bool=False) -> Dict[str, A
     '''
 
     rule_type = NON_RULE_PATTERNS if not rule else RULE_PATTERNS
-    pattern = exact_find_in_pattern(fixed_text, cur, rule_type)
+    pattern = exact_find_in_pattern(fixed_text, reversed, cur, rule_type)
 
     if len(pattern) > 0:
         if not rule:
             return {
                 "matched": True,
-                "found": pattern[0]['find'],
-                "replaced": pattern[0]['replace']
+                "found": pattern[0].get('find', None),
+                "replaced": pattern[0].get('replace', None),
+                "reversed": reverse_with_rules(cur, fixed_text, pattern[0].get('reverse', None))
             }
         else:
             return {
@@ -169,16 +248,45 @@ def match_patterns(fixed_text: str, cur: int=0, rule: bool=False) -> Dict[str, A
             }
 
 
-def exact_find_in_pattern(fixed_text: str, cur: int=0, patterns: Any=PATTERNS) -> list:
+def exact_find_in_pattern(fixed_text: str, reversed: bool, cur: int=0, patterns: Any=PATTERNS) -> list:
     '''
     ### Returns pattern items that match given text, cursor position and pattern.
     '''
+    if reversed:
+        return [
+            x for x in patterns if (
+                cur + len(x['replace']) <= len(fixed_text)
+            ) and x['replace'] == fixed_text[cur:(cur + len(x['replace']))]
+        ]
 
     return [
-        x for x in patterns if (
-            cur + len(x['find']) <= len(fixed_text)
-        ) and x['find'] == fixed_text[cur:(cur + len(x['find']))]
+        x for x in patterns if
+        (not x.get('find', None) is None)
+        and (cur + len(x['find']) <= len(fixed_text))
+        and x['find'] == fixed_text[cur:(cur + len(x['find']))]
     ]
+
+
+def reverse_with_rules(cursor: int, fixed_text: str, text_reversed) -> bool:
+    '''Enhances The Word With Rules For Reverse Parsing'''
+    added_suffix = ''
+
+    if not (fixed_text[cursor] in config.AVRO_KAR
+            or fixed_text[cursor] in config.AVRO_SHORBORNO
+            or fixed_text[cursor] in config.AVRO_IGNORE
+            or len(fixed_text) == cursor + 1):
+        added_suffix = 'o'
+
+    try:
+        if fixed_text[cursor + 1] in config.AVRO_KAR:
+            added_suffix = ''
+        if fixed_text[cursor + 2] in config.AVRO_KAR and not cursor == 0:
+            added_suffix = ''
+
+    except IndexError:
+        pass
+
+    return text_reversed if text_reversed is None else (text_reversed + added_suffix)
 
 
 def process_rules(rules: Any, fixed_text: str, cur: int=0, cur_end: int=1) -> Union[Any, None]:
