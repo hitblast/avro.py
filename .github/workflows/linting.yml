@@ -12,22 +12,19 @@ jobs:
   flake8_lint:
     name: flake8
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: ['3.8', '3.9', '3.10']
     
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Set up Python 3
+      - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:
-          python-version: '3.x'
+          python-version: ${{ matrix.python-version }}
 
-      - name: Install flake8
-        run: pip install flake8
-
-      - name: Run flake8
-        uses: suo/flake8-github-action@releases/v1
-        with:
-          checkName: 'flake8_lint'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: flake8 Lint
+        uses: py-actions/flake8@v2
