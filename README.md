@@ -88,8 +88,8 @@ Other use cases include [your terminal](https://github.com/hitblast/avro.py-cli)
 The coding style for this project embraces readability and consistency over traditional styling methods. To start off, [flake8](https://flake8.pycqa.org/en/latest/) has been used as the primary linting tool. The unit tests are done using the [pytest](https://pypi.python.org/pypi/pytest) framework.
 
 ```bash
-# Installing pytest as the package for unit-testing.
-$ pip install -U pytest
+# Installing the required developer toolchain.
+$ python3 -m pip install -r dev-requirements.txt
 
 # Running pytest.
 $ python3 -m pytest --verbose
