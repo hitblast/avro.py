@@ -26,12 +26,13 @@ This package is inspired from **Rifat Nabi's jsAvroPhonetic** library and derive
 
 ## Installation
 
-- 1. using pip (requires **Python 3.8 or higher**)
+1. using pip (requires **Python 3.8 or higher**)
+
     ```bash
     $ pip install avro.py
     ```
 
-- 2. coming soon, can you guess?
+2. coming soon, can you guess?
 
 
 <br>
