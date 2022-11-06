@@ -26,28 +26,13 @@ This package is inspired from **Rifat Nabi's jsAvroPhonetic** library and derive
 
 ## Installation
 
-### 1. using pip
+- 1. using pip (requires **Python 3.8 or higher**)
+    ```bash
+    $ pip install avro.py
+    ```
 
-Installing avro.py in your local machine is pretty straightforward. Make sure you have installed [Python 3.8 or higher](https://www.python.org/downloads/) (or later) in your local machine. If it is already installed, then we can proceed with the following commands:
+- 2. coming soon, can you guess?
 
-```bash
-# Create a virtual environment named "venv". (1)
-$ python3 -m venv venv 
-
-# Activate the virtual environment. (2)
-$ source venv/bin/activate 
-
-# Install the package. (3)
-$ pip install avro.py
-```
-
-- This will create a new virtual environment in your working diretory and install avro.py inside it.
-
-- In order to use the package, the virtual environment has to be activated every time you start working on your personal project.
-
-- If you already have a virtual environment set up / you don't need one, then you can skip the first two steps and proceed with a vanilla configuration using [Pip](https://pypi.python.org/pypi/pip). <br>
-
-### 2. coming soon :P
 
 <br>
 
