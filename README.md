@@ -26,6 +26,8 @@ This package is inspired from **Rifat Nabi's jsAvroPhonetic** library and derive
 
 ## Installation
 
+### 1. using pip
+
 Installing avro.py in your local machine is pretty straightforward. Make sure you have installed [Python 3.8 or higher](https://www.python.org/downloads/) (or later) in your local machine. If it is already installed, then we can proceed with the following commands:
 
 ```bash
@@ -43,7 +45,9 @@ $ pip install avro.py
 
 - In order to use the package, the virtual environment has to be activated every time you start working on your personal project.
 
-- If you already have a virtual environment set up / you don't need one, then you can skip the first two steps and proceed with a vanilla configuration using [Pip](https://pypi.python.org/pypi/pip).
+- If you already have a virtual environment set up / you don't need one, then you can skip the first two steps and proceed with a vanilla configuration using [Pip](https://pypi.python.org/pypi/pip). <br>
+
+### 2. coming soon :P
 
 <br>
 
