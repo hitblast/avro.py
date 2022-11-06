@@ -9,13 +9,13 @@ on:
       - main
 
 jobs:
-  flake8_lint:
+  flake8:
     name: flake8
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        python-version: ['3.8', '3.9', '3.10']
+        python-version: ['3.8', '3.9', '3.10', '3.11']
     
     steps:
       - name: Checkout
@@ -26,5 +26,5 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: flake8 Lint
+      - name: Lint
         uses: py-actions/flake8@v2
