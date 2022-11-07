@@ -24,22 +24,12 @@ This package is inspired from **Rifat Nabi's jsAvroPhonetic** library and derive
 
 ## Installation
 
-1. Pip (requires **Python 3.8 or higher**)
+Installing avro.py in your project is pretty straightforward. Run the command mentioned below (requires **Python 3.8 or higher**):
 
-    ```bash
-    # simply install / upgrade using one command
-    $ pip install -U avro.py
-    ```
-
-2. Homebrew
-
-    ```bash
-    # tapping the formula
-    $ brew tap hitblast/avro
-
-    # installing it
-    $ brew install avro
-    ```
+```bash
+# install / upgrade
+$ pip install avro.py
+```
 
 <br>
 
