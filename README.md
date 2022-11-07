@@ -14,9 +14,7 @@ A modern Pythonic implementation of the popular Bengali phonetic-typing software
 
 **avro.py**, whilst being a Python package, provides a text parser that converts Bangla text written in Roman script to its phonetic equivalent of Bangla. It implements the **Avro Phonetic Dictionary Search Library** by [Mehdi Hasan Khan](https://github.com/mugli).
 
-The original project [pyAvroPhonetic](https://github.com/kaustavdm/pyAvroPhonetic) is based on Python 2 and can only work on versions up to **Python 2.7**. It is noteworthy that Python 2 has officially been deprecated by the original maintainers and its usage is being discouraged overall.
-
-<br>
+The original project [pyAvroPhonetic](https://github.com/kaustavdm/pyAvroPhonetic) is based on Python 2 and can only work on versions up to **Python 2.7**. It is noteworthy that Python 2 has officially been deprecated by the original maintainers and its usage is being discouraged overall. <br>
 
 ## Inspirations
 
@@ -26,14 +24,22 @@ This package is inspired from **Rifat Nabi's jsAvroPhonetic** library and derive
 
 ## Installation
 
-1. using pip (requires **Python 3.8 or higher**)
+1. Pip (requires **Python 3.8 or higher**)
 
     ```bash
-    $ pip install avro.py
+    # simply install / upgrade using one command
+    $ pip install -U avro.py
     ```
 
-2. coming soon, can you guess?
+2. Homebrew
 
+    ```bash
+    # tapping the formula
+    $ brew tap hitblast/avro
+
+    # installing it
+    $ brew install avro
+    ```
 
 <br>
 
