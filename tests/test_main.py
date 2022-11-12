@@ -118,7 +118,7 @@ def test_patterns_punctuations() -> None:
 
 def test_patterns_with_rules_svaravarna() -> None:
     '''
-    ### Test patterns - with rules - svaravarna / shoroborno (derived from Bangla)
+    ### Test patterns - with rules - svaravarna / shoroborno (derived from Bengali)
     '''
 
     svaravarna = {

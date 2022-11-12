@@ -46,7 +46,9 @@ setup(
         'avro',
         'avro phonetic',
         'bangla',
-        'bangla phonetics'
+        'bangla phonetics',
+        'bengali',
+        'bengali phonetics'
     ],
     classifiers=[
         'Intended Audience :: Developers',
