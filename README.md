@@ -12,7 +12,7 @@ A modern Pythonic implementation of the popular Bengali phonetic-typing software
 
 ## Overview
 
-**avro.py**, whilst being a Python package, provides a text parser that converts Bangla text written in Roman script to its phonetic equivalent of Bangla. It implements the **Avro Phonetic Dictionary Search Library** by [Mehdi Hasan Khan](https://github.com/mugli).
+**avro.py**, whilst being a Python package, provides a text parser that converts English text written in Roman script to its phonetic equivalent of Bangla. It implements the **Avro Phonetic Dictionary Search Library** by [Mehdi Hasan Khan](https://github.com/mugli).
 
 The original project [pyAvroPhonetic](https://github.com/kaustavdm/pyAvroPhonetic) is based on Python 2 and can only work on versions up to **Python 2.7**. It is noteworthy that Python 2 has officially been deprecated by the original maintainers and its usage is being discouraged overall. <br>
 
@@ -45,7 +45,7 @@ print(parsed_text)
 # আমি বাংলায় গান গাই।
 ```
 
-Also, you can reverse it Bangla text to English typed Bangla text for readability
+Also, you can reverse unicode Bangla to English as well (new)!
 
 ```python
 import avro
