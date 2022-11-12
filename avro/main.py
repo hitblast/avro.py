@@ -128,7 +128,7 @@ def parse(*texts: str) -> Union[str, List[str]]:
 
 def reverse(*texts: str) -> Union[str, List[str]]:
     '''
-    ### For Parsing Bangla input text to English typed Bangla text reversibly
+    ### Reverses input text to Roman script typed in English.
 
     If a valid replacement is found, then it returns the replaced string.
     If no replacement is found, then it instead returns the input text.
