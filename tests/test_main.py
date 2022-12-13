@@ -34,11 +34,7 @@ import os
 import sys
 
 # Add support layer for accessing the primary package.
-sys.path.append(
-    os.path.abspath(
-        os.path.join(os.path.dirname(__file__), os.path.pardir)
-    )
-)
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
 
 # Import local modules.
 import avro
@@ -68,10 +64,10 @@ def test_patterns_without_rules_not_from_config() -> None:
     '''
 
     conjunctions = {
-        "ভ্ল" : avro.parse("bhl"),
-        "ব্ধ" : avro.parse("bdh"),
-        "ড্ড" : avro.parse("DD"),
-        "স্তব্ধ বক" : avro.parse("stbdh bk")  # Stunned stork!
+        "ভ্ল": avro.parse("bhl"),
+        "ব্ধ": avro.parse("bdh"),
+        "ড্ড": avro.parse("DD"),
+        "স্তব্ধ বক": avro.parse("stbdh bk"),  # Stunned stork!
     }
 
     for key, value in conjunctions.items():
@@ -84,17 +80,17 @@ def test_patterns_numbers() -> None:
     '''
 
     numbers = {
-        "০" : avro.parse("0"),
-        "১" : avro.parse("1"),
-        "২" : avro.parse("2"),
-        "৩" : avro.parse("3"),
-        "৪" : avro.parse("4"),
-        "৫" : avro.parse("5"),
-        "৬" : avro.parse("6"),
-        "৭" : avro.parse("7"),
-        "৮" : avro.parse("8"),
-        "৯" : avro.parse("9"),
-        "১১২" : avro.parse("112")
+        "০": avro.parse("0"),
+        "১": avro.parse("1"),
+        "২": avro.parse("2"),
+        "৩": avro.parse("3"),
+        "৪": avro.parse("4"),
+        "৫": avro.parse("5"),
+        "৬": avro.parse("6"),
+        "৭": avro.parse("7"),
+        "৮": avro.parse("8"),
+        "৯": avro.parse("9"),
+        "১১২": avro.parse("112"),
     }
 
     for key, value in numbers.items():
@@ -106,11 +102,7 @@ def test_patterns_punctuations() -> None:
     ### Tests patterns - punctuations
     '''
 
-    punctuations = {
-        "।" : avro.parse("."),
-        "।।" : avro.parse(".."),
-        "..." : avro.parse("...")
-    }
+    punctuations = {"।": avro.parse("."), "।।": avro.parse(".."), "...": avro.parse("...")}
 
     for key, value in punctuations.items():
         assert key == value
@@ -122,17 +114,17 @@ def test_patterns_with_rules_svaravarna() -> None:
     '''
 
     svaravarna = {
-        "অ" : avro.parse("o"),
-        "আ" : avro.parse("a"),
-        "ই" : avro.parse("i"),
-        "ঈ" : avro.parse("I"),
-        "উ" : avro.parse("u"),
-        "ঊ" : avro.parse("oo"),
-        "ঊ" : avro.parse("U"),
-        "এ" : avro.parse("e"),
-        "ঐ" : avro.parse("OI"),
-        "ও" : avro.parse("O"),
-        "ঔ" : avro.parse("OU"),
+        "অ": avro.parse("o"),
+        "আ": avro.parse("a"),
+        "ই": avro.parse("i"),
+        "ঈ": avro.parse("I"),
+        "উ": avro.parse("u"),
+        "ঊ": avro.parse("oo"),
+        "ঊ": avro.parse("U"),
+        "এ": avro.parse("e"),
+        "ঐ": avro.parse("OI"),
+        "ও": avro.parse("O"),
+        "ঔ": avro.parse("OU"),
     }
 
     for key, value in svaravarna.items():
@@ -146,10 +138,10 @@ def test_non_ascii() -> None:
     '''
 
     non_ascii = {
-        'ব' : avro.parse('ব'),
-        'অভ্র' : avro.parse('অভ্র'),
-        'বআবা গো' : avro.parse('বaba gO'),  # Mixed strings.
-        'আমি বাংলায় গান গাই' : avro.parse('aমি বাংলায় gaন গাi')
+        'ব': avro.parse('ব'),
+        'অভ্র': avro.parse('অভ্র'),
+        'বআবা গো': avro.parse('বaba gO'),  # Mixed strings.
+        'আমি বাংলায় গান গাই': avro.parse('aমি বাংলায় gaন গাi'),
     }
 
     for key, value in non_ascii.items():
@@ -162,10 +154,10 @@ def test_words_with_punctuations() -> None:
     '''
 
     words_with_punctuations = {
-        'আয়রে,' : avro.parse('ayre,'),
-        'ভোলা' : avro.parse('bhOla'),
-        'খেয়াল' : avro.parse('kheyal'),
-        'খোলা' : avro.parse('khOla')
+        'আয়রে,': avro.parse('ayre,'),
+        'ভোলা': avro.parse('bhOla'),
+        'খেয়াল': avro.parse('kheyal'),
+        'খোলা': avro.parse('khOla'),
     }
 
     for key, value in words_with_punctuations.items():
@@ -183,4 +175,5 @@ def test_sentences() -> None:
 def test_reverse_func() -> None:
     assert 'ami banglay gan gai' == avro.reverse('আমি বাংলায় গান গাই')
     assert 'rahim, tomake korim dakse. ekhon ki rowna debe?' == avro.reverse(
-        'রাহিম, তোমাকে করিম ডাকছে। এখন কি রওনা দেবে?')
+        'রাহিম, তোমাকে করিম ডাকছে। এখন কি রওনা দেবে?'
+    )

@@ -24,20 +24,8 @@ setup(
     author='HitBlast',
     author_email='hitblastlive@gmail.com',
     url='https://github.com/hitblast/avro.py',
-    packages=find_packages(
-        exclude=[
-            '*.tests',
-            '*.tests.*',
-            'tests.*',
-            'tests'
-        ]
-    ),
-    package_data={
-        'avro': [
-            '*.md',
-            'resources/*.json'
-        ]
-    },
+    packages=find_packages(exclude=['*.tests', '*.tests.*', 'tests.*', 'tests']),
+    package_data={'avro': ['*.md', 'resources/*.json']},
     include_package_data=True,
     license='MIT',
     python_requires=">=3.8",
@@ -48,7 +36,7 @@ setup(
         'bangla',
         'bangla phonetics',
         'bengali',
-        'bengali phonetics'
+        'bengali phonetics',
     ],
     classifiers=[
         'Intended Audience :: Developers',
@@ -58,6 +46,6 @@ setup(
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
         'Programming Language :: Python :: 3.11',
-        'Topic :: Software Development :: Libraries :: Python Modules'
-    ]
+        'Topic :: Software Development :: Libraries :: Python Modules',
+    ],
 )
