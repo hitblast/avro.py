@@ -64,9 +64,7 @@ Other use cases include [your terminal](https://github.com/hitblast/avro.py-cli)
 
 ## Contributing
 
-:octocat: *Fork -> Do your changes -> Send a Pull Request, it's that easy!*
-
-<br>
+:octocat: *Fork -> Do your changes -> Send a Pull Request, it's that easy!* <br>
 
 ---
 
