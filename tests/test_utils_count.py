@@ -34,11 +34,7 @@ import os
 import sys
 
 # Add support layer for accessing the primary package.
-sys.path.append(
-    os.path.abspath(
-        os.path.join(os.path.dirname(__file__), os.path.pardir)
-    )
-)
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
 
 # Import local modules.
 from avro.utils import count
@@ -51,10 +47,10 @@ def test_count_vowels() -> None:
     '''
 
     strings = {
-        'haTTima Tim Tim' : 5,
-        'tara maThe paRe Dim' : 7,
-        'tader mathay duTO sing' : 7,
-        'tara haTTima Tim Tim' : 7
+        'haTTima Tim Tim': 5,
+        'tara maThe paRe Dim': 7,
+        'tader mathay duTO sing': 7,
+        'tara haTTima Tim Tim': 7,
     }
 
     for string, integer in strings.items():
@@ -67,10 +63,10 @@ def test_count_consonants() -> None:
     '''
 
     strings = {
-        'ei dekh pensil' : 7,
-        'nOTbuk e hate' : 6,
-        'ei dekh bhora sob' : 8,
-        'kil`bil lekha te' : 8
+        'ei dekh pensil': 7,
+        'nOTbuk e hate': 6,
+        'ei dekh bhora sob': 8,
+        'kil`bil lekha te': 8,
     }
 
     for string, integer in strings.items():

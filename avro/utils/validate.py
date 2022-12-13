@@ -63,10 +63,7 @@ def is_punctuation(text: str) -> bool:
     ### Check if given string is a punctuation.
     '''
 
-    return not (
-        text.lower() in config.AVRO_VOWELS
-        or text.lower() in config.AVRO_CONSONANTS
-    )
+    return not (text.lower() in config.AVRO_VOWELS or text.lower() in config.AVRO_CONSONANTS)
 
 
 def is_case_sensitive(text: str) -> bool:
@@ -82,13 +79,7 @@ def is_exact(needle, haystack, start, end, matchnot):
     ### Check exact occurrence of needle in haystack.
     '''
 
-    return (
-        (
-            start >= 0
-            and end < len(haystack)
-            and haystack[start:end] == needle
-        ) ^ matchnot
-    )
+    return (start >= 0 and end < len(haystack) and haystack[start:end] == needle) ^ matchnot
 
 
 def fix_string_case(text: str) -> str:

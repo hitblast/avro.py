@@ -80,9 +80,7 @@ def parse(*texts: str) -> Union[str, List[str]]:
             else:
                 uni_pass = True
 
-            match = {
-                "matched": False
-            }
+            match = {"matched": False}
 
             if not uni_pass:
                 cur_end = cur + 1
@@ -101,10 +99,7 @@ def parse(*texts: str) -> Union[str, List[str]]:
                     if match['matched']:
                         cur_end = cur + len(match['found'])
                         replaced = process_rules(
-                            rules=match['rules'],
-                            fixed_text=fixed_text,
-                            cur=cur,
-                            cur_end=cur_end
+                            rules=match['rules'], fixed_text=fixed_text, cur=cur, cur_end=cur_end
                         )
 
                         if replaced is not None:
@@ -142,6 +137,7 @@ def reverse(*texts: str) -> Union[str, List[str]]:
     ```
     `output: amar sonar bangla`
     '''
+
     def subparse(text: str) -> str:
 
         # Prepare output list.
@@ -156,9 +152,7 @@ def reverse(*texts: str) -> Union[str, List[str]]:
             else:
                 uni_pass = True
 
-            match = {
-                "matched": False
-            }
+            match = {"matched": False}
 
             if not uni_pass:
                 output.append(i)
@@ -203,7 +197,9 @@ def reverse(*texts: str) -> Union[str, List[str]]:
     return output[0] if len(output) == 1 else output
 
 
-def match_patterns(fixed_text: str, cur: int=0, rule: bool=False, reversed: bool=False) -> Dict[str, Any]:
+def match_patterns(
+    fixed_text: str, cur: int = 0, rule: bool = False, reversed: bool = False
+) -> Dict[str, Any]:
     '''
     ### Matches given text at cursor position with rule / non rule patterns.
 
@@ -223,47 +219,42 @@ def match_patterns(fixed_text: str, cur: int=0, rule: bool=False, reversed: bool
                 "matched": True,
                 "found": pattern[0].get('find', None),
                 "replaced": pattern[0].get('replace', None),
-                "reversed": reverse_with_rules(cur, fixed_text, pattern[0].get('reverse', None))
+                "reversed": reverse_with_rules(cur, fixed_text, pattern[0].get('reverse', None)),
             }
         else:
             return {
                 "matched": True,
                 "found": pattern[0]['find'],
                 "replaced": pattern[0]['replace'],
-                "rules": pattern[0]['rules']
+                "rules": pattern[0]['rules'],
             }
     else:
         if not rule:
-            return {
-                "matched": False,
-                "found": None,
-                "replaced": fixed_text[cur]
-            }
+            return {"matched": False, "found": None, "replaced": fixed_text[cur]}
         else:
-            return {
-                "matched": False,
-                "found": None,
-                "replaced": fixed_text[cur],
-                "rules": None
-            }
+            return {"matched": False, "found": None, "replaced": fixed_text[cur], "rules": None}
 
 
-def exact_find_in_pattern(fixed_text: str, reversed: bool, cur: int=0, patterns: Any=PATTERNS) -> list:
+def exact_find_in_pattern(
+    fixed_text: str, reversed: bool, cur: int = 0, patterns: Any = PATTERNS
+) -> list:
     '''
     ### Returns pattern items that match given text, cursor position and pattern.
     '''
     if reversed:
         return [
-            x for x in patterns if (
-                cur + len(x['replace']) <= len(fixed_text)
-            ) and x['replace'] == fixed_text[cur:(cur + len(x['replace']))]
+            x
+            for x in patterns
+            if (cur + len(x['replace']) <= len(fixed_text))
+            and x['replace'] == fixed_text[cur : (cur + len(x['replace']))]
         ]
 
     return [
-        x for x in patterns if
-        (not x.get('find', None) is None)
+        x
+        for x in patterns
+        if (not x.get('find', None) is None)
         and (cur + len(x['find']) <= len(fixed_text))
-        and x['find'] == fixed_text[cur:(cur + len(x['find']))]
+        and x['find'] == fixed_text[cur : (cur + len(x['find']))]
     ]
 
 
@@ -271,10 +262,12 @@ def reverse_with_rules(cursor: int, fixed_text: str, text_reversed) -> bool:
     '''Enhances The Word With Rules For Reverse Parsing'''
     added_suffix = ''
 
-    if not (fixed_text[cursor] in config.AVRO_KAR
-            or fixed_text[cursor] in config.AVRO_SHORBORNO
-            or fixed_text[cursor] in config.AVRO_IGNORE
-            or len(fixed_text) == cursor + 1):
+    if not (
+        fixed_text[cursor] in config.AVRO_KAR
+        or fixed_text[cursor] in config.AVRO_SHORBORNO
+        or fixed_text[cursor] in config.AVRO_IGNORE
+        or len(fixed_text) == cursor + 1
+    ):
         added_suffix = 'o'
 
     try:
@@ -289,7 +282,7 @@ def reverse_with_rules(cursor: int, fixed_text: str, text_reversed) -> bool:
     return text_reversed if text_reversed is None else (text_reversed + added_suffix)
 
 
-def process_rules(rules: Any, fixed_text: str, cur: int=0, cur_end: int=1) -> Union[Any, None]:
+def process_rules(rules: Any, fixed_text: str, cur: int = 0, cur_end: int = 1) -> Union[Any, None]:
     '''
     ### Process rules matched in pattern and returns suitable replacement.
 
@@ -325,7 +318,7 @@ def process_match(match: Any, fixed_text: str, cur: int, cur_end: int) -> bool:
     replace = True
 
     # Set check cursor depending on match['type']
-    chk = (cur - 1 if match['type'] == 'prefix' else cur_end)
+    chk = cur - 1 if match['type'] == 'prefix' else cur_end
 
     # Set scope based on whether scope is negative.
     if match['scope'].startswith('!'):
@@ -339,16 +332,11 @@ def process_match(match: Any, fixed_text: str, cur: int, cur_end: int) -> bool:
     if scope == 'punctuation':
         if (
             not (
-                (
-                    chk < 0
-                    and match['type'] == 'prefix'
-                )
-                or (
-                    chk >= len(fixed_text)
-                    and match['type'] == 'suffix'
-                )
+                (chk < 0 and match['type'] == 'prefix')
+                or (chk >= len(fixed_text) and match['type'] == 'suffix')
                 or validate.is_punctuation(fixed_text[chk])
-            ) ^ negative
+            )
+            ^ negative
         ):
             replace = False
 
@@ -356,17 +344,12 @@ def process_match(match: Any, fixed_text: str, cur: int, cur_end: int) -> bool:
         if (
             not (
                 (
-                    (
-                        chk >= 0
-                        and match['type'] == 'prefix'
-                    )
-                    or (
-                        chk < len(fixed_text)
-                        and match['type'] == 'suffix'
-                    )
+                    (chk >= 0 and match['type'] == 'prefix')
+                    or (chk < len(fixed_text) and match['type'] == 'suffix')
                 )
                 and validate.is_vowel(fixed_text[chk])
-            ) ^ negative
+            )
+            ^ negative
         ):
             replace = False
 
@@ -374,17 +357,12 @@ def process_match(match: Any, fixed_text: str, cur: int, cur_end: int) -> bool:
         if (
             not (
                 (
-                    (
-                        chk >= 0
-                        and match['type'] == 'prefix'
-                    )
-                    or (
-                        chk < len(fixed_text)
-                        and match['type'] == 'suffix'
-                    )
+                    (chk >= 0 and match['type'] == 'prefix')
+                    or (chk < len(fixed_text) and match['type'] == 'suffix')
                 )
                 and validate.is_consonant(fixed_text[chk])
-            ) ^ negative
+            )
+            ^ negative
         ):
             replace = False
 
@@ -396,13 +374,7 @@ def process_match(match: Any, fixed_text: str, cur: int, cur_end: int) -> bool:
             exact_start = cur_end
             exact_end = cur_end + len(match['value'])
 
-        if not validate.is_exact(
-            match['value'],
-            fixed_text,
-            exact_start,
-            exact_end,
-            negative
-        ):
+        if not validate.is_exact(match['value'], fixed_text, exact_start, exact_end, negative):
             replace = False
 
     return replace
