@@ -1,19 +1,27 @@
 <div align="center">
 
-# avro.py
+# <img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/python/python.png" height="28px"/> avro.py
 
 A modern Pythonic implementation of the popular Bengali phonetic-typing software **Avro Phonetic.**
 
-[![Unit Tests](https://github.com/hitblast/avro.py/actions/workflows/unit-tests.yml/badge.svg?branch=main)](https://github.com/hitblast/avro.py/actions/workflows/unit-tests.yml)
-[![Linting](https://github.com/hitblast/avro.py/actions/workflows/linting.yml/badge.svg?branch=main)](https://github.com/hitblast/avro.py/actions/workflows/linting.yml)
-[![Format](https://github.com/hitblast/avro.py/actions/workflows/formatting.yml/badge.svg?branch=main)](https://github.com/hitblast/avro.py/actions/workflows/formatting.yml) <br>
+
+
+
 [![Downloads](https://static.pepy.tech/personalized-badge/avro-py?period=total&units=international_system&left_color=grey&right_color=black&left_text=Downloads)](https://pepy.tech/project/avro-py)
 ![Python Version](https://img.shields.io/pypi/pyversions/avro.py.svg?color=black&label=Python)
 ![License](https://img.shields.io/pypi/l/avro.py.svg?color=black&label=License)
 
-</div>
+<br>
+
+ Checks | Status
+---|---
+usability | [![Unit Tests](https://github.com/hitblast/avro.py/actions/workflows/unit-tests.yml/badge.svg?branch=main)](https://github.com/hitblast/avro.py/actions/workflows/unit-tests.yml)
+beauty | [![Linting](https://github.com/hitblast/avro.py/actions/workflows/linting.yml/badge.svg?branch=main)](https://github.com/hitblast/avro.py/actions/workflows/linting.yml)
+cleanliness | [![Format](https://github.com/hitblast/avro.py/actions/workflows/formatting.yml/badge.svg?branch=main)](https://github.com/hitblast/avro.py/actions/workflows/formatting.yml)
 
 <br>
+
+</div>
 
 ## Overview
 
