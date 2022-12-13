@@ -75,9 +75,9 @@ Other use cases include [your terminal](https://github.com/hitblast/avro.py-cli)
 
 In short, avro.py doesn't depend on any third-party libraries. However, if you'd like to contribute to the project, you'll need a handful of such useful tools.
 
-- To start off, [flake8](https://flake8.pycqa.org/en/latest/) has been used as the primary linting tool. 
-- The unit tests are done using the [pytest](https://pypi.python.org/pypi/pytest) framework.
-- The whole codebase has been formatted using [black](https://github.com/psf/black).
+- [flake8](https://flake8.pycqa.org/en/latest/) - linter
+- [pytest](https://pypi.python.org/pypi/pytest) - testing framework
+- [black](https://github.com/psf/black) - formatting.
 
 ```bash
 # Installing the required developer toolchain.
