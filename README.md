@@ -1,12 +1,17 @@
+<div align="center">
+
 # avro.py
 
 A modern Pythonic implementation of the popular Bengali phonetic-typing software **Avro Phonetic.**
 
 [![Unit Tests](https://github.com/hitblast/avro.py/actions/workflows/unit-tests.yml/badge.svg?branch=main)](https://github.com/hitblast/avro.py/actions/workflows/unit-tests.yml)
 [![Linting](https://github.com/hitblast/avro.py/actions/workflows/linting.yml/badge.svg?branch=main)](https://github.com/hitblast/avro.py/actions/workflows/linting.yml)
+[![Format](https://github.com/hitblast/avro.py/actions/workflows/formatting.yml/badge.svg?branch=main)](https://github.com/hitblast/avro.py/actions/workflows/formatting.yml) <br>
 [![Downloads](https://static.pepy.tech/personalized-badge/avro-py?period=total&units=international_system&left_color=grey&right_color=black&left_text=Downloads)](https://pepy.tech/project/avro-py)
 ![Python Version](https://img.shields.io/pypi/pyversions/avro.py.svg?color=black&label=Python)
 ![License](https://img.shields.io/pypi/l/avro.py.svg?color=black&label=License)
+
+</div>
 
 <br>
 
