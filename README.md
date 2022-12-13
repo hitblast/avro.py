@@ -73,11 +73,11 @@ Other use cases include [your terminal](https://github.com/hitblast/avro.py-cli)
 
 **Additional Developer Notes**
 
-In short, avro.py doesn't depend on any third-party libraries. However, if you'd like to contribute to the project, you'll need a handful of such useful tools.
+In short, avro.py doesn't depend on any third-party libraries. However, if you'd like to contribute to the project, you'll need a handful of such useful tools. <br>
 
 - [flake8](https://flake8.pycqa.org/en/latest/) - linter
 - [pytest](https://pypi.python.org/pypi/pytest) - testing framework
-- [black](https://github.com/psf/black) - formatting.
+- [black](https://github.com/psf/black) - formatting
 
 ```bash
 # Installing the required developer toolchain.
