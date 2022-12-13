@@ -14,17 +14,19 @@ A modern Pythonic implementation of the popular Bengali phonetic-typing software
 
 **avro.py**, whilst being a Python package, provides a text parser that converts English text written in Roman script to its phonetic equivalent of Bengali. It implements the **Avro Phonetic Dictionary Search Library** by [Mehdi Hasan Khan](https://github.com/mugli).
 
-The original project [pyAvroPhonetic](https://github.com/kaustavdm/pyAvroPhonetic) is based on Python 2 and can only work on versions up to **Python 2.7**. It is noteworthy that Python 2 has officially been deprecated by the original maintainers and its usage is being discouraged overall. <br>
+The original project ([pyAvroPhonetic](https://github.com/kaustavdm/pyAvroPhonetic)) can only be used on versions up to **Python 2.7** and doesn't contain proper support for Python's third major version AKA Python 3. It is noteworthy that Python 2 has officially been deprecated by the original maintainers and its usage is being discouraged overall.
+
+<br>
 
 ## Inspirations
 
-This package is inspired from **Rifat Nabi's jsAvroPhonetic** library and derives from **Kaustav Das Modak's pyAvroPhonetic.**
+This package is inspired from Rifat Nabi's jsAvroPhonetic library and derives from Kaustav Das Modak's pyAvroPhonetic.
 
 <br>
 
 ## Installation
 
-Installing avro.py in your project is pretty straightforward. Run the command mentioned below (requires **Python 3.8 or higher**):
+This package requires **Python 3.8 or higher** to be used inside your development environment.
 
 ```bash
 # install / upgrade
@@ -34,7 +36,7 @@ $ pip install avro.py
 <br>
 
 ## Usage Guide
-As of now, you can easily use the package by importing the module and calling the primary `parse` function.
+As of now, you can easily use avro.py by importing the module and calling the primary `parse` function.
 
 ```python
 import avro
@@ -45,7 +47,7 @@ print(parsed_text)
 # আমি বাংলায় গান গাই।
 ```
 
-Also, you can reverse unicode Bengali to English as well (new)!
+Also, you can reverse unicode Bengali to English text as well (new, doesn't contain phonetic rules)!
 
 ```python
 import avro
