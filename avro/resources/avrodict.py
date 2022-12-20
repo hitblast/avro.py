@@ -198,7 +198,7 @@ AVRO_DICT: dict = {
             {
                 "find": ".`",
                 "replace": ".",
-                "reverse": '.'
+                "reverse": "."
             },
             {
                 "find": "..",
@@ -1722,7 +1722,7 @@ AVRO_DICT: dict = {
                 "reverse": "u"
             },
             {
-                "replace": 'উ',
+                "replace": "উ",
                 "reverse": "u"
             },
             {
@@ -1851,7 +1851,7 @@ AVRO_DICT: dict = {
             },
             {
                 "replace": "ও",
-                "reverse": 'w'
+                "reverse": "w"
             },
             {
                 "find": "e",
