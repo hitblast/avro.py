@@ -74,7 +74,7 @@ def is_case_sensitive(text: str) -> bool:
     return text.lower() in config.AVRO_CASESENSITIVES
 
 
-def is_exact(needle, haystack, start, end, matchnot):
+def is_exact(needle: str, haystack: str, start: int, end: int, matchnot: bool) -> bool:
     '''
     ### Check exact occurrence of needle in haystack.
     '''
