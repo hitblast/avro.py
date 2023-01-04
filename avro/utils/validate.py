@@ -79,7 +79,7 @@ def is_exact(needle: str, haystack: str, start: int, end: int, matchnot: bool) -
     ### Check exact occurrence of needle in haystack.
     '''
 
-    return (start >= 0 and end < len(haystack) and haystack[start:end] == needle) ^ matchnot
+    return (start >= 0 and end < len(haystack) and haystack[start:end] == needle) != matchnot
 
 
 def fix_string_case(text: str) -> str:

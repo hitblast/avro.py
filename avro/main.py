@@ -139,7 +139,6 @@ def reverse(*texts: str) -> Union[str, List[str]]:
     '''
 
     def subparse(text: str) -> str:
-
         # Prepare output list.
         output = []
 
@@ -174,12 +173,11 @@ def reverse(*texts: str) -> Union[str, List[str]]:
     text_segments = []
     output = []
 
-    # Split using regex to remove noise
+    # Split using regex to remove noise.
     regex_pattern = "(\\s|\\.|,|\\?|\\।|\\-|;|')"
     compiled_regex = re.compile(regex_pattern, re.UNICODE)
 
     for text in texts:  # Applies to non-keyword arguments.
-
         exceptions = config.EXCEPTIONS.get(text, None)
 
         if exceptions is None:
@@ -336,7 +334,7 @@ def process_match(match: Any, fixed_text: str, cur: int, cur_end: int) -> bool:
                 or (chk >= len(fixed_text) and match['type'] == 'suffix')
                 or validate.is_punctuation(fixed_text[chk])
             )
-            ^ negative
+            != negative
         ):
             replace = False
 
@@ -349,7 +347,7 @@ def process_match(match: Any, fixed_text: str, cur: int, cur_end: int) -> bool:
                 )
                 and validate.is_vowel(fixed_text[chk])
             )
-            ^ negative
+            != negative
         ):
             replace = False
 
@@ -362,7 +360,7 @@ def process_match(match: Any, fixed_text: str, cur: int, cur_end: int) -> bool:
                 )
                 and validate.is_consonant(fixed_text[chk])
             )
-            ^ negative
+            != negative
         ):
             replace = False
 
