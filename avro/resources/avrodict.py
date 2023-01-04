@@ -33,12 +33,12 @@ SOFTWARE.
 AVRO_DICT: dict = {
     "meta": {
         "file_name": "avrodict.py",
-        "file_description": "Provides Avro Dictionary in JSON. Adapted from avrodict.json",
+        "file_description": "Provides Avro Dictionary in native Python dictionary. Adapted from avrodict.json",
         "package": "avro.py",
         "license": "MIT License",
         "source": "https://github.com/kaustavdm/pyAvroPhonetic/blob/master/pyavrophonetic/resources/avrodict.json",
         "adapted_by": "HitBlast",
-        "updated": "20221001",
+        "updated": "20220104",
         "encoding": "utf-8"
     },
     "data": {
@@ -2015,12 +2015,14 @@ AVRO_DICT: dict = {
             # }
         ],
 
+        # Remapped words
         "exceptions": {
             "ফেসবুক": "Facebook",
             "গুগল": "Google",
-
+            "উইকিপিডিয়া": "Wikipedia"
         },
 
+        # Constant values
         "vowel": "aeiou",
         "consonant": "bcdfghjklmnpqrstvwxyz",
         "casesensitive": "oiudgjnrstyz",
@@ -2041,6 +2043,7 @@ AVRO_DICT: dict = {
             'ৌ'
         },
 
+        # Ignored symbols
         "ignore": {
             "ঁ",
             "।",
