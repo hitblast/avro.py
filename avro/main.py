@@ -257,7 +257,10 @@ def exact_find_in_pattern(
 
 
 def reverse_with_rules(cursor: int, fixed_text: str, text_reversed) -> bool:
-    '''Enhances The Word With Rules For Reverse Parsing'''
+    '''
+    ### Enhances the word with rules for reverse-parsing.
+    '''
+
     added_suffix = ''
 
     if not (
