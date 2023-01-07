@@ -54,14 +54,19 @@ def parse(*texts: str, in_ascii: bool = False) -> Union[str, List[str]]:
 
     Parameters:
     - `*texts (str)`: The text to parse.
-    - `in_ascii (bool)`: Whether to output in ASCII or not (Unicode).
+    - `in_ascii (bool = False)`: Whether to output in ASCII or not (Unicode).
 
     Usage:
     ```python
     import avro
 
+    # Unicode
     parsed = avro.parse('ami banglay gan gai')
     print(parsed)
+
+    # ASCII
+    parsed_ascii = avro.parse('ami banglay gan gai', in_ascii=True)
+    print(parsed_ascii)
     ```
     '''
 
@@ -135,6 +140,9 @@ def reverse(*texts: str) -> Union[str, List[str]]:
 
     If a valid replacement is found, then it returns the replaced string.
     If no replacement is found, then it instead returns the input text.
+
+    Parameters:
+    - `*texts (str)`: The text to reverse.
 
     Usage:
     ```python
