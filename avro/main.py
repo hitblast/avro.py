@@ -45,12 +45,16 @@ RULE_PATTERNS: list = [p for p in PATTERNS if 'rules' in p]
 
 
 # The primary parse function for the library.
-def parse(*texts: str) -> Union[str, List[str]]:
+def parse(*texts: str, in_ascii: bool = False) -> Union[str, List[str]]:
     '''
     ### Parses input text, matches and replaces using avrodict.
 
     If a valid replacement is found, then it returns the replaced string.
     If no replacement is found, then it instead returns the input text.
+
+    Parameters:
+    - `*texts (str)`: The text to parse.
+    - `in_ascii (bool)`: Whether to output in ASCII or not (Unicode).
 
     Usage:
     ```python
@@ -116,7 +120,11 @@ def parse(*texts: str) -> Union[str, List[str]]:
 
     output = []
     for text in texts:  # Applies to non-keyword arguments.
-        output.append(subparse(text))
+        output.append(
+            subparse(text)
+            if not in_ascii
+            else str(subparse(text).encode('ascii', errors='backslashreplace'))
+        )
 
     return output[0] if len(output) == 1 else output
 
