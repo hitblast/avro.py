@@ -211,7 +211,7 @@ def match_patterns(
 
     Returns a dictionary of three elements:
 
-    - `matched`  - Bool: depending on if match found.
+    - `matched` - Bool: depending on if match found.
     - `found` - string/None: Value of matched pattern's 'find' key or none.
     - `replaced` - string: Replaced string if match found else input string at cursor.
     '''
@@ -247,6 +247,7 @@ def exact_find_in_pattern(
     '''
     ### Returns pattern items that match given text, cursor position and pattern.
     '''
+
     if reversed:
         return [
             x
