@@ -51,10 +51,13 @@ As of now, you can easily use avro.py by importing the module and calling the pr
 ```python
 import avro
 
+# Unicode
 parsed_text = avro.parse('ami banglay gan gai.')
 print(parsed_text)
 
-# আমি বাংলায় গান গাই।
+# ASCII
+parsed_ascii = avro.parse('srabon dharay', in_ascii=True)
+print(parsed_ascii)
 ```
 
 Also, you can reverse unicode Bengali to English text as well (new, doesn't contain phonetic rules)!
