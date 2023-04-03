@@ -25,7 +25,7 @@ setup(
     author_email='hitblastlive@gmail.com',
     url='https://github.com/hitblast/avro.py',
     packages=find_packages(exclude=['*.tests', '*.tests.*', 'tests.*', 'tests']),
-    package_data={'avro': ['*.md', 'resources/*.json']},
+    package_data={'avro': ['*.md']},
     include_package_data=True,
     license='MIT',
     python_requires=">=3.8",
