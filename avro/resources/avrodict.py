@@ -29,8 +29,12 @@ SOFTWARE.
 '''
 
 
+# Imports.
+from typing import Dict
+
+
 # The dictionary variable.
-AVRO_DICT: dict = {
+AVRO_DICT: Dict[str, str] = {
     "meta": {
         "file_name": "avrodict.py",
         "file_description": "Provides Avro Dictionary in native Python dictionary. Adapted from avrodict.json",
@@ -38,7 +42,7 @@ AVRO_DICT: dict = {
         "license": "MIT License",
         "source": "https://github.com/kaustavdm/pyAvroPhonetic/blob/master/pyavrophonetic/resources/avrodict.json",
         "adapted_by": "HitBlast",
-        "updated": "20220104",
+        "updated": "20230403",
         "encoding": "utf-8"
     },
     "data": {
