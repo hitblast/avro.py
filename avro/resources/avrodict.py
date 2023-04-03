@@ -49,8 +49,7 @@ AVRO_DICT: Dict[str, str] = {
         "patterns": [
             {
                 "find": "bhl",
-                "replace": "ভ্ল",
-                "reverse": "vl"
+                "replace": "ভ্ল"
             },
             {
                 "find": "psh",
@@ -58,43 +57,35 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "bdh",
-                "replace": "ব্ধ",
-                "reverse": "bdh"
+                "replace": "ব্ধ"
             },
             {
                 "find": "bj",
-                "replace": "ব্জ",
-                "reverse": "bj"
+                "replace": "ব্জ"
             },
             {
                 "find": "bd",
-                "replace": "ব্দ",
-                "reverse": "bd"
+                "replace": "ব্দ"
             },
             {
                 "find": "bb",
-                "replace": "ব্ব",
-                "reverse": "bb"
+                "replace": "ব্ব"
             },
             {
                 "find": "bl",
-                "replace": "ব্ল",
-                "reverse": "bl"
+                "replace": "ব্ল"
             },
             {
                 "find": "bh",
-                "replace": "ভ",
-                "reverse": "bh"
+                "replace": "ভ"
             },
             {
                 "find": "vl",
-                "replace": "ভ্ল",
-                "reverse": "vl"
+                "replace": "ভ্ল"
             },
             {
                 "find": "b",
-                "replace": "ব",
-                "reverse": "b"
+                "replace": "ব"
             },
             {
                 "find": "v",
@@ -108,18 +99,15 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "cch",
-                "replace": "চ্ছ",
-                "reverse": "cch"
+                "replace": "চ্ছ"
             },
             {
                 "find": "cc",
-                "replace": "চ্চ",
-                "reverse": "cc"
+                "replace": "চ্চ"
             },
             {
                 "find": "ch",
-                "replace": "ছ",
-                "reverse": "s"
+                "replace": "ছ"
             },
             {
                 "find": "c",
@@ -128,33 +116,27 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "dhn",
-                "replace": "ধ্ন",
-                "reverse": "dhn"
+                "replace": "ধ্ন"
             },
             {
                 "find": "dhm",
-                "replace": "ধ্ম",
-                "reverse": "dhm"
+                "replace": "ধ্ম"
             },
             {
                 "find": "dgh",
-                "replace": "দ্ঘ",
-                "reverse": "dgh"
+                "replace": "দ্ঘ"
             },
             {
                 "find": "ddh",
-                "replace": "দ্ধ",
-                "reverse": "ddh"
+                "replace": "দ্ধ"
             },
             {
                 "find": "dbh",
-                "replace": "দ্ভ",
-                "reverse": "dv"
+                "replace": "দ্ভ"
             },
             {
                 "find": "dv",
-                "replace": "দ্ভ",
-                "reverse": "dv"
+                "replace": "দ্ভ"
             },
             {
                 "find": "dm",
@@ -173,8 +155,7 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "dh",
-                "replace": "ধ",
-                "reverse": "dh"
+                "replace": "ধ"
             },
             {
                 "find": "dg",
@@ -182,8 +163,7 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "dd",
-                "replace": "দ্দ",
-                "reverse": "dd"
+                "replace": "দ্দ"
             },
             {
                 "find": "D",
@@ -192,8 +172,7 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "d",
-                "replace": "দ",
-                "reverse": "d"
+                "replace": "দ"
             },
             {
                 "find": "...",
@@ -210,13 +189,11 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": ".",
-                "replace": "।",
-                "reverse": "."
+                "replace": "।"
             },
             {
                 "find": "ghn",
-                "replace": "ঘ্ন",
-                "reverse": "ghn"
+                "replace": "ঘ্ন"
             },
             {
                 "find": "Ghn",
@@ -225,8 +202,7 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "gdh",
-                "replace": "গ্ধ",
-                "reverse": "gdh"
+                "replace": "গ্ধ"
             },
             {
                 "find": "Gdh",
@@ -245,8 +221,7 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "gn",
-                "replace": "গ্ন",
-                "reverse": "gn"
+                "replace": "গ্ন"
             },
             {
                 "find": "Gn",
@@ -264,8 +239,7 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "gl",
-                "replace": "গ্ল",
-                "reverse": "gl"
+                "replace": "গ্ল"
             },
             {
                 "find": "Gl",
@@ -274,8 +248,7 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "gg",
-                "replace": "জ্ঞ",
-                "reverse": "gg"
+                "replace": "জ্ঞ"
             },
             {
                 "find": "GG",
@@ -294,8 +267,7 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "gh",
-                "replace": "ঘ",
-                "reverse": "gh"
+                "replace": "ঘ"
             },
             {
                 "find": "Gh",
@@ -304,8 +276,7 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "g",
-                "replace": "গ",
-                "reverse": "g"
+                "replace": "গ"
             },
             {
                 "find": "G",
@@ -324,8 +295,7 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "hm",
-                "replace": "হ্ম",
-                "reverse": "mm"
+                "replace": "হ্ম"
             },
             {
                 "find": "hl",
@@ -333,8 +303,7 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "h",
-                "replace": "হ",
-                "reverse": "h"
+                "replace": "হ"
             },
             {
                 "find": "jjh",
@@ -347,18 +316,15 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "jh",
-                "replace": "ঝ",
-                "reverse": "jh"
+                "replace": "ঝ"
             },
             {
                 "find": "jj",
-                "replace": "জ্জ",
-                "reverse": "jj"
+                "replace": "জ্জ"
             },
             {
                 "find": "j",
-                "replace": "জ",
-                "reverse": "j"
+                "replace": "জ"
             },
             {
                 "find": "J",
@@ -396,8 +362,7 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "kkh",
-                "replace": "ক্ষ",
-                "reverse": "kkh"
+                "replace": "ক্ষ"
             },
             {
                 "find": "kSh",
@@ -415,8 +380,7 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "kk",
-                "replace": "ক্ক",
-                "reverse": "kk"
+                "replace": "ক্ক"
             },
             {
                 "find": "kT",
@@ -425,28 +389,23 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "kt",
-                "replace": "ক্ত",
-                "reverse": "kt"
+                "replace": "ক্ত"
             },
             {
                 "find": "kl",
-                "replace": "ক্ল",
-                "reverse": "kl"
+                "replace": "ক্ল"
             },
             {
                 "find": "ks",
-                "replace": "ক্স",
-                "reverse": "ks"
+                "replace": "ক্স"
             },
             {
                 "find": "kh",
-                "replace": "খ",
-                "reverse": "kh"
+                "replace": "খ"
             },
             {
                 "find": "k",
-                "replace": "ক",
-                "reverse": "k"
+                "replace": "ক"
             },
             {
                 "find": "lbh",
@@ -470,8 +429,7 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "lk",
-                "replace": "ল্ক",
-                "reverse": "lk"
+                "replace": "ল্ক"
             },
             {
                 "find": "lg",
@@ -489,8 +447,7 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "lp",
-                "replace": "ল্প",
-                "reverse": "lp"
+                "replace": "ল্প"
             },
             {
                 "find": "lv",
@@ -498,23 +455,19 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "lm",
-                "replace": "ল্ম",
-                "reverse": "lm"
+                "replace": "ল্ম"
             },
             {
                 "find": "ll",
-                "replace": "ল্ল",
-                "reverse": "ll"
+                "replace": "ল্ল"
             },
             {
                 "find": "lb",
-                "replace": "ল্ব",
-                "reverse": "lb"
+                "replace": "ল্ব"
             },
             {
                 "find": "l",
-                "replace": "ল",
-                "reverse": "l"
+                "replace": "ল"
             },
             {
                 "find": "mth",
@@ -527,8 +480,7 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "mbh",
-                "replace": "ম্ভ",
-                "reverse": "mv"
+                "replace": "ম্ভ"
             },
             {
                 "find": "mpl",
@@ -536,93 +488,75 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "mn",
-                "replace": "ম্ন",
-                "reverse": "mn"
+                "replace": "ম্ন"
             },
             {
                 "find": "mp",
-                "replace": "ম্প",
-                "reverse": "mp"
+                "replace": "ম্প"
             },
             {
                 "find": "mv",
-                "replace": "ম্ভ",
-                "reverse": "mv"
+                "replace": "ম্ভ"
             },
             {
                 "find": "mm",
-                "replace": "ম্ম",
-                "reverse": "mm"
+                "replace": "ম্ম"
             },
             {
                 "find": "ml",
-                "replace": "ম্ল",
-                "reverse": "ml"
+                "replace": "ম্ল"
             },
             {
                 "find": "mb",
-                "replace": "ম্ব",
-                "reverse": "mb"
+                "replace": "ম্ব"
             },
             {
                 "find": "mf",
-                "replace": "ম্ফ",
-                "reverse": "mf"
+                "replace": "ম্ফ"
             },
             {
                 "find": "m",
-                "replace": "ম",
-                "reverse": "m"
+                "replace": "ম"
             },
             {
                 "find": "0",
-                "replace": "০",
-                "reverse": "0"
+                "replace": "০"
             },
             {
                 "find": "1",
-                "replace": "১",
-                "reverse": "1"
+                "replace": "১"
             },
             {
                 "find": "2",
-                "replace": "২",
-                "reverse": "2"
+                "replace": "২"
             },
             {
                 "find": "3",
-                "replace": "৩",
-                "reverse": "3"
+                "replace": "৩"
             },
             {
                 "find": "4",
-                "replace": "৪",
-                "reverse": "4"
+                "replace": "৪"
             },
             {
                 "find": "5",
-                "replace": "৫",
-                "reverse": "5"
+                "replace": "৫"
             },
             {
                 "find": "6",
-                "replace": "৬",
-                "reverse": "6"
+                "replace": "৬"
             },
             {
                 "find": "7",
-                "replace": "৭",
-                "reverse": "7"
+                "replace": "৭"
             },
             {
                 "find": "8",
-                "replace": "৮",
-                "reverse": "8"
+                "replace": "৮"
             },
             {
                 "find": "9",
-                "replace": "৯",
-                "reverse": "9"
+                "replace": "৯"
             },
             {
                 "find": "NgkSh",
@@ -637,11 +571,12 @@ AVRO_DICT: Dict[str, str] = {
             {
                 "find": "NGch",
                 "replace": "ঞ্ছ",
-                "reverse": "ngch"
+                "reverse": "nch"
             },
             {
                 "find": "Nggh",
-                "replace": "ঙ্ঘ"
+                "replace": "ঙ্ঘ",
+                "reverse": "ngh"
             },
             {
                 "find": "Ngkh",
@@ -690,7 +625,8 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "Ngx",
-                "replace": "ঙ্ষ"
+                "replace": "ঙ্ষ",
+                "reverse": "nsh"
             },
             {
                 "find": "Ngg",
@@ -699,7 +635,8 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "Ngm",
-                "replace": "ঙ্ম"
+                "replace": "ঙ্ম",
+                "reverse": "ngm"
             },
             {
                 "find": "NGj",
@@ -708,8 +645,7 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "ndh",
-                "replace": "ন্ধ",
-                "reverse": "ndh"
+                "replace": "ন্ধ"
             },
             {
                 "find": "nTh",
@@ -723,8 +659,7 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "nth",
-                "replace": "ন্থ",
-                "reverse": "nth"
+                "replace": "ন্থ"
             },
             {
                 "find": "nkh",
@@ -733,8 +668,7 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "ngo",
-                "replace": "ঙ্গ",
-                "reverse": "ngg"
+                "replace": "ঙ্গ"
             },
             {
                 "find": "nga",
@@ -746,7 +680,8 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "ngI",
-                "replace": "ঙ্গী"
+                "replace": "ঙ্গী",
+                "reverse": "ngi"
             },
             {
                 "find": "ngu",
@@ -754,7 +689,8 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "ngU",
-                "replace": "ঙ্গূ"
+                "replace": "ঙ্গূ",
+                "reverse": "ngu"
             },
             {
                 "find": "nge",
@@ -762,11 +698,13 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "ngO",
-                "replace": "ঙ্গো"
+                "replace": "ঙ্গো",
+                "reverse": "ngo"
             },
             {
                 "find": "NDh",
-                "replace": "ণ্ঢ"
+                "replace": "ণ্ঢ",
+                "reverse": "ndh"
             },
             {
                 "find": "nsh",
@@ -774,7 +712,8 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "Ngr",
-                "replace": "ঙর"
+                "replace": "ঙর",
+                "reverse": "ngr"
             },
             {
                 "find": "NGr",
@@ -786,8 +725,7 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "nj",
-                "replace": "ঞ্জ",
-                "reverse": "ngj"
+                "replace": "ঞ্জ"
             },
             {
                 "find": "Ng",
@@ -806,35 +744,34 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "ng",
-                "replace": "ং",
-                "reverse": "ng"
+                "replace": "ং"
             },
             {
                 "find": "nn",
-                "replace": "ন্ন",
-                "reverse": "nn"
+                "replace": "ন্ন"
             },
             {
                 "find": "NN",
-                "replace": "ণ্ণ"
+                "replace": "ণ্ণ",
+                "reverse": "nn"
             },
             {
                 "find": "Nn",
-                "replace": "ণ্ন"
+                "replace": "ণ্ন",
+                "reverse": "nn"
             },
             {
                 "find": "nm",
-                "replace": "ন্ম",
-                "reverse": "nm"
+                "replace": "ন্ম"
             },
             {
                 "find": "Nm",
-                "replace": "ণ্ম"
+                "replace": "ণ্ম",
+                "reverse": "nm"
             },
             {
                 "find": "nd",
-                "replace": "ন্দ",
-                "reverse": "nd"
+                "replace": "ন্দ"
             },
             {
                 "find": "nT",
@@ -858,8 +795,7 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "nt",
-                "replace": "ন্ত",
-                "reverse": "nt"
+                "replace": "ন্ত"
             },
             {
                 "find": "ns",
@@ -872,8 +808,7 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "n",
-                "replace": "ন",
-                "reverse": "n"
+                "replace": "ন"
             },
             {
                 "find": "N",
@@ -982,38 +917,31 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "pt",
-                "replace": "প্ত",
-                "reverse": "pt"
+                "replace": "প্ত"
             },
             {
                 "find": "pn",
-                "replace": "প্ন",
-                "reverse": "pn"
+                "replace": "প্ন"
             },
             {
                 "find": "pp",
-                "replace": "প্প",
-                "reverse": "pp"
+                "replace": "প্প"
             },
             {
                 "find": "pl",
-                "replace": "প্ল",
-                "reverse": "pl"
+                "replace": "প্ল"
             },
             {
                 "find": "ps",
-                "replace": "প্স",
-                "reverse": "ps"
+                "replace": "প্স"
             },
             {
                 "find": "ph",
-                "replace": "ফ",
-                "reverse": "ph"
+                "replace": "ফ"
             },
             {
                 "find": "fl",
-                "replace": "ফ্ল",
-                "reverse": "fl"
+                "replace": "ফ্ল"
             },
             {
                 "find": "f",
@@ -1022,8 +950,7 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "p",
-                "replace": "প",
-                "reverse": "p"
+                "replace": "প"
             },
             {
                 "find": "rri`",
@@ -1057,7 +984,8 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "rrZ",
-                "replace": "রর‍্য"
+                "replace": "রর‍্য",
+                "replace": "rry"
             },
             {
                 "find": "rry",
@@ -1096,7 +1024,8 @@ AVRO_DICT: Dict[str, str] = {
                         ],
                         "replace": "্র্য"
                     }
-                ]
+                ],
+                "reverse": "ry"
             },
             {
                 "find": "ry",
@@ -1177,11 +1106,13 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "Rg",
-                "replace": "ড়্গ"
+                "replace": "ড়্গ",
+                "reverse": "rg"
             },
             {
                 "find": "Rh",
-                "replace": "ঢ়"
+                "replace": "ঢ়",
+                "reverse": "rh"
             },
             {
                 "find": "R",
@@ -1258,8 +1189,7 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "sth",
-                "replace": "স্থ",
-                "reverse": "sth"
+                "replace": "স্থ"
             },
             {
                 "find": "sph",
@@ -1277,48 +1207,45 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "shn",
-                "replace": "শ্ন",
-                "reverse": "sn"
+                "replace": "শ্ন"
             },
             {
                 "find": "shm",
-                "replace": "শ্ম",
-                "reverse": "ss"
+                "replace": "শ্ম"
             },
             {
                 "find": "shl",
-                "replace": "শ্ল",
-                "reverse": "sl"
+                "replace": "শ্ল"
             },
             {
                 "find": "Shk",
                 "replace": "ষ্ক",
-                "reverse": "sk"
+                "reverse": "shk"
             },
             {
                 "find": "ShT",
                 "replace": "ষ্ট",
-                "reverse": "st"
+                "reverse": "sht"
             },
             {
                 "find": "ShN",
                 "replace": "ষ্ণ",
-                "reverse": "sn"
+                "reverse": "shn"
             },
             {
                 "find": "Shp",
                 "replace": "ষ্প",
-                "reverse": "sp"
+                "reverse": "shp"
             },
             {
                 "find": "Shf",
                 "replace": "ষ্ফ",
-                "reverse": "sf"
+                "reverse": "shf"
             },
             {
                 "find": "Shm",
                 "replace": "ষ্ম",
-                "reverse": "sm"
+                "reverse": "shm"
             },
             {
                 "find": "spl",
@@ -1326,8 +1253,7 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "sk",
-                "replace": "স্ক",
-                "reverse": "sk"
+                "replace": "স্ক"
             },
             {
                 "find": "Sc",
@@ -1341,38 +1267,32 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "st",
-                "replace": "স্ত",
-                "reverse": "st"
+                "replace": "স্ত"
             },
             {
                 "find": "sn",
-                "replace": "স্ন",
-                "reverse": "sn"
+                "replace": "স্ন"
             },
             {
                 "find": "sp",
-                "replace": "স্প",
-                "reverse": "sp"
+                "replace": "স্প"
             },
             {
                 "find": "sf",
                 "replace": "স্ফ",
-                "reverse": "sf"
             },
             {
                 "find": "sm",
                 "replace": "স্ম",
-                "reverse": "sh"
+                "reverse": "shm"
             },
             {
                 "find": "sl",
-                "replace": "স্ল",
-                "reverse": "sl"
+                "replace": "স্ল"
             },
             {
                 "find": "sh",
-                "replace": "শ",
-                "reverse": "sh"
+                "replace": "শ"
             },
             {
                 "find": "Sc",
@@ -1386,7 +1306,7 @@ AVRO_DICT: Dict[str, str] = {
             {
                 "find": "Sn",
                 "replace": "শ্ন",
-                "reverse": "sn"
+                "reverse": "shn"
             },
             {
                 "find": "Sm",
@@ -1405,8 +1325,7 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "s",
-                "replace": "স",
-                "reverse": "s"
+                "replace": "স"
             },
             {
                 "find": "S",
@@ -1453,10 +1372,6 @@ AVRO_DICT: Dict[str, str] = {
                 ],
                 "reverse": "u"
             },
-            # {
-            #     "find": "o`"
-            #     "replace": ""
-            # },
             {
                 "find": "oZ",
                 "replace": "অ্য"
@@ -1520,7 +1435,8 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "Tm",
-                "replace": "ট্ম"
+                "replace": "ট্ম",
+                "reverse": "tm"
             },
             {
                 "find": "Th",
@@ -1538,13 +1454,11 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "th",
-                "replace": "থ",
-                "reverse": "th"
+                "replace": "থ"
             },
             {
                 "find": "tt",
-                "replace": "ত্ত",
-                "reverse": "tt"
+                "replace": "ত্ত"
             },
             {
                 "find": "T",
@@ -1553,8 +1467,7 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "t",
-                "replace": "ত",
-                "reverse": "t"
+                "replace": "ত"
             },
             {
                 "find": "aZ",
@@ -1634,8 +1547,7 @@ AVRO_DICT: Dict[str, str] = {
                         ],
                         "replace": "আ"
                     }
-                ],
-                "reverse": "a"
+                ]
             },
             {
                 "find": "i`",
@@ -1761,8 +1673,7 @@ AVRO_DICT: Dict[str, str] = {
                         ],
                         "replace": "উ"
                     }
-                ],
-                "reverse": "u"
+                ]
             },
             {
                 "find": "U`",
@@ -1889,17 +1800,16 @@ AVRO_DICT: Dict[str, str] = {
                         ],
                         "replace": "এ"
                     }
-                ],
-                "reverse": "e"
+                ]
             },
             {
                 "find": "z",
-                "replace": "য",
-                "reverse": "z"
+                "replace": "য"
             },
             {
                 "find": "Z",
-                "replace": "্য"
+                "replace": "্য",
+                "reverse": "z"
             },
             {
                 "find": "y",
@@ -2013,10 +1923,6 @@ AVRO_DICT: Dict[str, str] = {
                 "find": "$",
                 "replace": "৳"
             },
-            # {
-            #     "find": "`",
-            #     "replace": ""
-            # }
         ],
 
         # Remapped words
