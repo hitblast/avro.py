@@ -189,6 +189,6 @@ def test_reverse_func() -> None:
     '''
 
     assert 'ami banglay gan gai' == avro.reverse('আমি বাংলায় গান গাই')
-    assert 'rahim, tomake korim dakse. ekhon ki rowna debe?' == avro.reverse(
-        'রাহিম, তোমাকে করিম ডাকছে। এখন কি রওনা দেবে?'
+    assert 'rahim, tomake korim dakche. ekhon ki rowna debe?' == avro.reverse(
+        'রাহিম, তোমাকে করিম ডাকছে ডাকচ্চে ডাকচে। এখন কি রওনা দেবে?'
     )

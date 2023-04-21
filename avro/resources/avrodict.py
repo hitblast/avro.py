@@ -117,8 +117,7 @@ AVRO_DICT: Dict[str, str] = {
             },
             {
                 "find": "ch",
-                "replace": "ছ",
-                "reverse": "s"
+                "replace": "ছ"
             },
             {
                 "find": "c",
