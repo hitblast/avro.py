@@ -30,7 +30,7 @@ SOFTWARE.
 
 
 # Set version information.
-__version_info__ = ('2023', '4', '3')  # YYYY / MM / DD
+__version_info__ = ('2023', '4', '21')  # YYYY / MM / DD
 __version__ = '.'.join(__version_info__)
 
 
