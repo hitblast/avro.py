@@ -40,7 +40,7 @@ AVRO_DICT: Dict[str, str] = {
         "file_description": "Provides Avro Dictionary in native Python dictionary. Adapted from avrodict.json",
         "package": "avro.py",
         "license": "MIT License",
-        "source": "https://github.com/kaustavdm/pyAvroPhonetic/blob/master/pyavrophonetic/resources/avrodict.json",
+        "source": "https://github.com/hitblast/avro.py/blob/main/avro/resources/avrodict.py",
         "adapted_by": "HitBlast",
         "updated": "20230421",
         "encoding": "utf-8"
