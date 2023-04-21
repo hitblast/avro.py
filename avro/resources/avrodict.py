@@ -42,7 +42,7 @@ AVRO_DICT: Dict[str, str] = {
         "license": "MIT License",
         "source": "https://github.com/kaustavdm/pyAvroPhonetic/blob/master/pyavrophonetic/resources/avrodict.json",
         "adapted_by": "HitBlast",
-        "updated": "20230403",
+        "updated": "20230421",
         "encoding": "utf-8"
     },
     "data": {
@@ -2022,7 +2022,10 @@ AVRO_DICT: Dict[str, str] = {
         "exceptions": {
             "ফেসবুক": "Facebook",
             "গুগল": "Google",
-            "উইকিপিডিয়া": "Wikipedia"
+            "উইকিপিডিয়া": "Wikipedia",
+            "হোয়াটসঅ্যাপ": "Whatsapp",
+            "টুইটার": "Twitter",
+            "লিঙ্কডইন": "Linkedin"
         },
 
         # Constant values
