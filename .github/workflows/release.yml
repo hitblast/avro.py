@@ -19,7 +19,9 @@ jobs:
         python-version: '3.x'
 
     - name: Build source distribution
-      run: python setup.py sdist
+      run: |
+        pip install setuptools
+        python setup.py sdist
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
@@ -46,7 +48,9 @@ jobs:
           python-version: '3.x'
 
       - name: Build binary distribution
-        run: python setup.py bdist_wheel
+        run: |
+          pip install setuptools wheel
+          python setup.py bdist_wheel
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
