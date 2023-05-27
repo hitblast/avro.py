@@ -67,6 +67,7 @@ jobs:
         mkdir dist
 
     - name: Download artifacts
+      uses: actions/download-artifact@v3
       with:
         path: dist
 
