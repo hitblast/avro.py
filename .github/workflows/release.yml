@@ -70,9 +70,28 @@ jobs:
       run: |
         mkdir dist
 
-    - name: Download artifacts
+    - name: Download source artifact
       uses: actions/download-artifact@v3
       with:
+        name: sdist
+        path: dist
+
+    - name: Download macOS artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: bdist-macos-latest
+        path: dist
+
+    - name: Download macOS artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: bdist-macos-latest
+        path: dist
+
+    - name: Download macOS artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: bdist-macos-latest
         path: dist
 
     - name: Upload binaries to release
