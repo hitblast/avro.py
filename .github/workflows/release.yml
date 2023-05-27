@@ -50,7 +50,7 @@ jobs:
       - name: Build binary distribution
         run: |
           pip install setuptools wheel
-          python setup.py bdist_wheel
+          python setup.py bdist_wheel --plat-name ${{ matrix.os }}
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
