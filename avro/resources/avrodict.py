@@ -2034,7 +2034,7 @@ AVRO_DICT: Dict[str, str] = {
         "number": "0123456789",
 
         # For reverse parsing
-        "shorborno": "অআইঈউঊঊএঐওঔ",
+        "shorborno": "অআইঈউঊএঐওঔ",
         "kar": {
             'া',
             'ি',
