@@ -36,9 +36,6 @@ import os
 from .resources import AVRO_DICT
 
 
-# Path to current directory.
-BASE_PATH = os.path.dirname(__file__)
-
 # Shortcuts to vowels, constants, case-sensitives and numbers.
 AVRO_VOWELS = set(AVRO_DICT['data']['vowel'])
 AVRO_CONSONANTS = set(AVRO_DICT['data']['consonant'])
