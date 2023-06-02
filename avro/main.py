@@ -28,15 +28,13 @@ SOFTWARE.
 
 '''
 
-
 # Import third-party modules.
-from typing import Any, List, Dict, Union
+import re
+from typing import Any, Dict, List, Union
 
 # Import local modules.
 from . import config
 from .utils import validate
-import re
-
 
 # Constants.
 PATTERNS: Any = config.AVRO_DICT['data']['patterns']
@@ -126,9 +124,7 @@ def parse(*texts: str, in_ascii: bool = False) -> Union[str, List[str]]:
     output = []
     for text in texts:  # Applies to non-keyword arguments.
         output.append(
-            subparse(text)
-            if not in_ascii
-            else str(subparse(text).encode('ascii', errors='backslashreplace'))
+            subparse(text) if not in_ascii else str(subparse(text).encode('ascii', errors='backslashreplace'))
         )
 
     return output[0] if len(output) == 1 else output
@@ -251,7 +247,7 @@ def match_patterns(
 
 def exact_find_in_pattern(
     fixed_text: str, reversed: bool, cur: int = 0, patterns: Any = PATTERNS
-) -> list:
+) -> List[Dict[str, Any]]:
     '''
     ### Returns pattern items that match given text, cursor position and pattern.
     '''
@@ -273,7 +269,7 @@ def exact_find_in_pattern(
     ]
 
 
-def reverse_with_rules(cursor: int, fixed_text: str, text_reversed) -> bool:
+def reverse_with_rules(cursor: int, fixed_text: str, text_reversed: str) -> str:
     '''
     ### Enhances the word with rules for reverse-parsing.
     '''
@@ -297,10 +293,10 @@ def reverse_with_rules(cursor: int, fixed_text: str, text_reversed) -> bool:
     except IndexError:
         pass
 
-    return text_reversed if text_reversed is None else (text_reversed + added_suffix)
+    return text_reversed if text_reversed is None else text_reversed + added_suffix
 
 
-def process_rules(rules: Any, fixed_text: str, cur: int = 0, cur_end: int = 1) -> Union[Any, None]:
+def process_rules(rules: Dict[str, Any], fixed_text: str, cur: int = 0, cur_end: int = 1) -> Union[Any, None]:
     '''
     ### Process rules matched in pattern and returns suitable replacement.
 
