@@ -29,12 +29,8 @@ SOFTWARE.
 '''
 
 
-# Import built-in libraries.
-import os
-
 # Import local modules.
 from .resources import AVRO_DICT
-
 
 # Shortcuts to vowels, constants, case-sensitives and numbers.
 AVRO_VOWELS = set(AVRO_DICT['data']['vowel'])
