@@ -28,7 +28,9 @@ The original project ([pyAvroPhonetic](https://github.com/kaustavdm/pyAvroPhonet
 
 ## Inspirations
 
-This package is inspired from Rifat Nabi's jsAvroPhonetic library and derives from Kaustav Das Modak's pyAvroPhonetic. <br>
+This package is inspired from Rifat Nabi's jsAvroPhonetic library and derives from Kaustav Das Modak's pyAvroPhonetic. 
+
+<br>
 
 ## Installation
 
@@ -67,7 +69,9 @@ print(reversed_text)
 # amar sonar bangla.
 ```
 
-Other use cases include [your terminal](https://github.com/hitblast/avro.py-cli), literally! <br>
+Other use cases include [your terminal](https://github.com/hitblast/avro.py-cli), literally! 
+
+<br>
 
 ## Contributing
 
@@ -93,8 +97,6 @@ $ python3 -m pytest --verbose
 # The results should appear onwards.
 # The --verbose / -v flag is used to show all the test results in detail.
 ```
-
-<br>
 
 ### We're looking for bug hunters, by the way!
 
