@@ -29,7 +29,7 @@ SOFTWARE.
 '''
 
 
-# Imports
+# Import local modules.
 from avro import config
 
 
