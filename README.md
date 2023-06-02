@@ -24,15 +24,11 @@ A modern Pythonic implementation of the popular Bengali phonetic-typing software
 
 **avro.py**, being a Python package, provides a text parser that converts English text written in Roman script to its phonetic equivalent of Bengali. It implements the **Avro Phonetic Dictionary Search Library** by [Mehdi Hasan Khan](https://github.com/mugli).
 
-The original project ([pyAvroPhonetic](https://github.com/kaustavdm/pyAvroPhonetic)) can only be used on versions up to **Python 2.7** and doesn't contain proper support for Python's third major version AKA Python 3. It is noteworthy that Python 2 has officially been deprecated by the original maintainers and its usage is being discouraged overall.
-
-<br>
+The original project ([pyAvroPhonetic](https://github.com/kaustavdm/pyAvroPhonetic)) can only be used on versions up to **Python 2.7** and doesn't contain proper support for Python's third major version AKA Python 3. It is noteworthy that Python 2 has officially been deprecated by the original maintainers and its usage is being discouraged overall. <br>
 
 ## Inspirations
 
-This package is inspired from Rifat Nabi's jsAvroPhonetic library and derives from Kaustav Das Modak's pyAvroPhonetic.
-
-<br>
+This package is inspired from Rifat Nabi's jsAvroPhonetic library and derives from Kaustav Das Modak's pyAvroPhonetic. <br>
 
 ## Installation
 
@@ -71,16 +67,13 @@ print(reversed_text)
 # amar sonar bangla.
 ```
 
-Other use cases include [your terminal](https://github.com/hitblast/avro.py-cli), literally!
-
-<br>
+Other use cases include [your terminal](https://github.com/hitblast/avro.py-cli), literally! <br>
 
 ## Contributing
 
 :octocat: *Fork -> Do your changes -> Send a Pull Request, it's that easy!* <br>
 
 ---
-
 
 **Additional Developer Notes**
 
@@ -103,7 +96,7 @@ $ python3 -m pytest --verbose
 
 <br>
 
-### We're looking for bug hunters!
+### We're looking for bug hunters, by the way!
 
 If you come across any kind of bug or wanna request a feature, please let us know by opening an issue [here](https://github.com/hitblast/avro.py/issues). We do need more ideas to keep the project alive and running, don't we? :P
 
