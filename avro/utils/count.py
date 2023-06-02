@@ -29,10 +29,11 @@ SOFTWARE.
 '''
 
 
-# Imports
+# Import local modules.
 from avro import config
 
 
+# Functions.
 def count_vowels(text) -> int:
     '''
     ### Count number of occurrences of vowels in a given string.
