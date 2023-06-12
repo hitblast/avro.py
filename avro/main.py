@@ -30,7 +30,7 @@ SOFTWARE.
 
 # Import third-party modules.
 import re
-from typing import Any, Dict, List, Union
+from typing import Any, Dict, List, Optional, Union
 
 # Import local modules.
 from . import config
@@ -296,7 +296,7 @@ def reverse_with_rules(cursor: int, fixed_text: str, text_reversed: str) -> str:
     return text_reversed if not text_reversed else text_reversed + added_suffix
 
 
-def process_rules(rules: Dict[str, Any], fixed_text: str, cur: int = 0, cur_end: int = 1) -> Union[Any, None]:
+def process_rules(rules: Dict[str, Any], fixed_text: str, cur: int = 0, cur_end: int = 1) -> Optional[str]:
     '''
     ### Process rules matched in pattern and returns suitable replacement.
 
