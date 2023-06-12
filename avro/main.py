@@ -172,7 +172,7 @@ def reverse(*texts: str) -> Union[str, List[str]]:
                 match = match_patterns(text, cur, rule=False, reversed=True)
 
                 if match['matched']:
-                    if not match['reversed'] is None:
+                    if match['reversed']:
                         output.append(match['reversed'])
                     else:
                         output.append(match['found'])
@@ -192,7 +192,7 @@ def reverse(*texts: str) -> Union[str, List[str]]:
     for text in texts:  # Applies to non-keyword arguments.
         exceptions = config.EXCEPTIONS.get(text, None)
 
-        if exceptions is None:
+        if not exceptions:
             separated_texts = compiled_regex.split(text)
 
             for separated_text in separated_texts:
@@ -263,7 +263,7 @@ def exact_find_in_pattern(
     return [
         x
         for x in patterns
-        if (not x.get('find', None) is None)
+        if x.get('find', None)
         and (cur + len(x['find']) <= len(fixed_text))
         and x['find'] == fixed_text[cur : (cur + len(x['find']))]
     ]
@@ -293,7 +293,7 @@ def reverse_with_rules(cursor: int, fixed_text: str, text_reversed: str) -> str:
     except IndexError:
         pass
 
-    return text_reversed if text_reversed is None else text_reversed + added_suffix
+    return text_reversed if not text_reversed else text_reversed + added_suffix
 
 
 def process_rules(rules: Dict[str, Any], fixed_text: str, cur: int = 0, cur_end: int = 1) -> Union[Any, None]:
