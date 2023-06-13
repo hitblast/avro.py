@@ -30,6 +30,7 @@ SOFTWARE.
 
 # Import third-party modules.
 import re
+from functools import lru_cache
 from typing import Any, Dict, List, Optional, Union
 
 # Import local modules.
@@ -43,6 +44,7 @@ RULE_PATTERNS: list = [p for p in PATTERNS if 'rules' in p]
 
 
 # The primary parse function for the library.
+@lru_cache
 def parse(*texts: str, in_ascii: bool = False) -> Union[str, List[str]]:
     '''
     ### Parses input text, matches and replaces using avrodict.
@@ -130,6 +132,7 @@ def parse(*texts: str, in_ascii: bool = False) -> Union[str, List[str]]:
     return output[0] if len(output) == 1 else output
 
 
+@lru_cache
 def reverse(*texts: str) -> Union[str, List[str]]:
     '''
     ### Reverses input text to Roman script typed in English.
@@ -269,6 +272,7 @@ def exact_find_in_pattern(
     ]
 
 
+@lru_cache
 def reverse_with_rules(cursor: int, fixed_text: str, text_reversed: str) -> str:
     '''
     ### Enhances the word with rules for reverse-parsing.
