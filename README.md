@@ -13,8 +13,7 @@ A modern Pythonic implementation of the popular Bengali phonetic-typing software
 | Checks | Status | 
 |:---|---:|
 | usability | [![Unit Tests](https://github.com/hitblast/avro.py/actions/workflows/unit-tests.yml/badge.svg?branch=main)](https://github.com/hitblast/avro.py/actions/workflows/unit-tests.yml) |
-| beauty | [![Linting](https://github.com/hitblast/avro.py/actions/workflows/linting.yml/badge.svg?branch=main)](https://github.com/hitblast/avro.py/actions/workflows/linting.yml) |
-| cleanliness | [![Format](https://github.com/hitblast/avro.py/actions/workflows/formatting.yml/badge.svg?branch=main)](https://github.com/hitblast/avro.py/actions/workflows/formatting.yml) |
+| beauty | [![Style Check](https://github.com/hitblast/avro.py/actions/workflows/stylecheck.yml/badge.svg)](https://github.com/hitblast/avro.py/actions/workflows/stylecheck.yml) |
 
 <br>
 
