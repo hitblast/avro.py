@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 {
     // See https://go.microsoft.com/fwlink/?LinkId=827846 to learn about workspace recommendations.
     // Extension identifier format: ${publisher}.${name}. Example: vscode.csharp
@@ -5,8 +6,9 @@
     "recommendations": [
         "ms-python.python",
         "ms-python.vscode-pylance",
-        "ms-python.isort"
+        "charliermarsh.ruff",
     ],
-    // List of extensions recommended by VS Code that should not be recommended for users of this workspace.
-    "unwantedRecommendations": []
+    "unwantedRecommendations": [
+        "ms-python.isort"
+    ]
 }
