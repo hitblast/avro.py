@@ -4,7 +4,6 @@
 target-version = "py38"
 line-length = 110
 ignore = ["E203", "E252", "E402", "F401", "F403", "F601"]
-exclude = ["avro/resources/avrodict.py"]
 
 [tool.black]
 line-length = 110
@@ -13,7 +12,6 @@ exclude = '''
 ^/(
   (
     venv
-    | avro/resources/avrodict.py
   )
 )
 '''

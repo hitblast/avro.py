@@ -2,4 +2,4 @@
 
 
 # Import local modules.
-from .avrodict import AVRO_DICT
+from .avrodict import *
