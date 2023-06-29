@@ -1,11 +1,14 @@
+# SPDX-License-Identifier: MIT
+
+
 # Import both local and third-party setup modules.
-import os
 import codecs
-from setuptools import setup, find_packages
+import os
+
+from setuptools import find_packages, setup
 
 # Import local modules to fetch version number.
 from avro import __version__
-
 
 # Constants.
 here = os.path.abspath(os.path.dirname(__file__))
