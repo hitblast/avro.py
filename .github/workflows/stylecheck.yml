@@ -1,7 +1,12 @@
-name: Format
+# SPDX-License-Identifier: MIT
+
+name: Style Check
 
 on:
   push:
+    branches:
+      - main
+  pull_request:
     branches:
       - main
 
@@ -10,9 +15,22 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  format:
-    name: black
+  linting:
+    name: Ruff
     runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Run Ruff
+        uses: chartboost/ruff-action@v1
+
+  formatting:
+    name: Black
+
+    runs-on: ubuntu-latest
+    needs: [linting]
 
     steps:
       - name: Checkout
@@ -22,7 +40,7 @@ jobs:
         id: checkifneeded
         uses: psf/black@stable
         with:
-          options: "--check"
+          options: "--check --verbose"
           version: "~= 23.0"
         continue-on-error: true
 
@@ -34,14 +52,14 @@ jobs:
 
       - name: Create pull request
         if: steps.checkifneeded.outcome != 'success'
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          title: "Resolved formatting errors"
+          title: "🎨 [tuning] Resolved formatting errors"
           commit-message: "format code using psf/black"
           body: |
             Formatter errors found in: ${{ github.sha }}.
           base: ${{ github.head_ref }}
           branch: actions/black
           reviewers: hitblast
-          delete-branch: true
+          delete-branch: true 
