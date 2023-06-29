@@ -5,11 +5,11 @@
 import os
 import sys
 
-# Import local modules.
-from avro.utils import count
-
 # Add support layer for accessing the primary package.
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
+
+# Import local modules.
+from avro.utils import count
 
 
 # Test functions for this file.

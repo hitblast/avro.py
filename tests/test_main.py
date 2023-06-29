@@ -5,12 +5,12 @@
 import os
 import sys
 
+# Add support layer for accessing the primary package.
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
+
 # Import local modules.
 import avro
 from avro.config import AVRO_DICT
-
-# Add support layer for accessing the primary package.
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
 
 
 # Test functions for this file.
