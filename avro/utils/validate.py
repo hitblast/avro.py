@@ -65,9 +65,11 @@ def fix_string_case(text: str) -> str:
     '''
 
     fixed = []
+
     for i in text:
         if is_case_sensitive(i):
             fixed.append(i)
         else:
             fixed.append(i.lower())
+
     return ''.join(fixed)
