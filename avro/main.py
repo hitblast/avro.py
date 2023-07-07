@@ -3,8 +3,9 @@
 
 # Import third-party modules.
 import re
+from concurrent.futures import ThreadPoolExecutor
 from functools import lru_cache
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 
 # Import local modules.
 from . import config
@@ -14,6 +15,19 @@ from .utils import validate
 PATTERNS = config.AVRO_DICT['data']['patterns']
 NON_RULE_PATTERNS = [p for p in PATTERNS if 'rules' not in p]
 RULE_PATTERNS = [p for p in PATTERNS if 'rules' in p]
+
+
+# The helper function for handling multithreaded workloads.
+def _concurrency_helper(func: Callable, params: Tuple[str]) -> List[str]:
+    output = []
+
+    with ThreadPoolExecutor() as executor:
+        futures = [executor.submit(func, text) for text in params]
+
+        for future in futures:
+            output.append(future.result())
+
+    return output
 
 
 # The primary parse function for the library.
@@ -37,10 +51,11 @@ def parse(*texts: str) -> Union[str, List[str]]:
     ```
     '''
 
-    def subparse(text: str) -> str:
-        # Sanitize text case to meet phonetic comparison standards.
-        fixed_text = validate.fix_string_case(text)
-
+    # Internal function for multiple parses.
+    def _parse_backend(text: str) -> str:
+        fixed_text = validate.fix_string_case(
+            text
+        )  # Sanitize text case to meet phonetic comparison standards.
         output = []  # The output list of strings.
         cur_end = 0  # Cursor end point.
 
@@ -87,10 +102,8 @@ def parse(*texts: str) -> Union[str, List[str]]:
 
         return ''.join(output)
 
-    output = []
-    for text in texts:  # Applies to non-keyword arguments.
-        output.append(subparse(text))
-
+    # Do the final output.
+    output = _concurrency_helper(_parse_backend, texts)
     return output[0] if len(output) == 1 else output
 
 
@@ -114,7 +127,8 @@ def reverse(*texts: str) -> Union[str, List[str]]:
     ```
     '''
 
-    def subparse(text: str) -> str:
+    # Internal function for multiple reverses.
+    def _reverse_backend(text: str) -> str:
         output = []  # The output list of strings.
 
         # Iterate through input text.
@@ -145,27 +159,27 @@ def reverse(*texts: str) -> Union[str, List[str]]:
 
         return ''.join(output)
 
-    text_segments = []
-    output = []
-
     # Split using regex to remove noise.
-    regex_pattern = "(\\s|\\.|,|\\?|\\।|\\-|;|')"
-    compiled_regex = re.compile(regex_pattern, re.UNICODE)
+    compiled_regex = re.compile("(\\s|\\.|,|\\?|\\।|\\-|;|')", re.UNICODE)
 
-    for text in texts:  # Applies to non-keyword arguments.
+    # Extension for the _reverse_backend() function.
+    def _reverse_backend_ext(text: str) -> str:
+        text_segments = []
         exceptions = config.EXCEPTIONS.get(text, None)
 
         if not exceptions:
             separated_texts = compiled_regex.split(text)
 
             for separated_text in separated_texts:
-                text_segments.append(subparse(separated_text))
+                text_segments.append(_reverse_backend(separated_text))
 
-            output.append(''.join(text_segments))
+            return ''.join(text_segments)
 
         else:
-            output.append(exceptions)
+            return exceptions
 
+    # Prepare final output.
+    output = _concurrency_helper(_reverse_backend_ext, texts)
     return output[0] if len(output) == 1 else output
 
 
