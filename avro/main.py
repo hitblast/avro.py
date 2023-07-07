@@ -175,11 +175,7 @@ def match_patterns(
     '''
     Matches given text at cursor position with rule / non rule patterns.
 
-    Returns a dictionary of three elements:
-
-    - `matched` - Bool: depending on if match found.
-    - `found` - string (optional): Value of matched pattern's 'find' key or none.
-    - `replaced` - string: Replaced string if match found else input string at cursor.
+    Returns a dictionary of three (upto four) elements.
     '''
 
     rule_type = NON_RULE_PATTERNS if not rule else RULE_PATTERNS
