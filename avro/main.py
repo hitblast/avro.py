@@ -40,7 +40,7 @@ def parse(*texts: str) -> Union[str, List[str]]:
     If no replacement is found, then it instead returns the input text.
 
     Parameters:
-    - `*texts (str)`: The text(s) to parse.
+    - `*texts: str | Tuple[str]`: The text(s) to parse.
 
     Usage:
     ```python
@@ -116,7 +116,7 @@ def reverse(*texts: str) -> Union[str, List[str]]:
     If no replacement is found, then it instead returns the input text.
 
     Parameters:
-    - `*texts (str)`: The text(s) to reverse.
+    - `*texts: str | Tuple[str]`: The text(s) to reverse.
 
     Usage:
     ```python
