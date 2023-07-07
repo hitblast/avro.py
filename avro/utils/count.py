@@ -12,9 +12,11 @@ def count_vowels(text) -> int:
     '''
 
     count = 0
+
     for i in text:
         if i.lower() in config.AVRO_VOWELS:
             count += 1
+
     return count
 
 
@@ -24,7 +26,9 @@ def count_consonants(text) -> int:
     '''
 
     count = 0
+
     for i in text:
         if i.lower() in config.AVRO_CONSONANTS:
             count += 1
+
     return count

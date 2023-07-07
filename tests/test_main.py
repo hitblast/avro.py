@@ -144,17 +144,6 @@ def tests_sentences_with_default() -> None:
     assert 'আমি বাংলায় গান গাই' == avro.parse('ami banglay gan gai')
 
 
-def test_sentences_with_ascii_flag() -> None:
-    '''
-    ### Test parsing of sentences (ASCII).
-    '''
-
-    assert str(
-        b'\\u0986\\u09ae\\u09bf \\u09ac\\u09be\\u0982\\u09b2\\u09be\\u09df'
-        + b' \\u0997\\u09be\\u09a8 \\u0997\\u09be\\u0987'
-    ) == avro.parse('ami banglay gan gai', in_ascii=True)
-
-
 def test_reverse_func() -> None:
     '''
     ### Test reverse-parsing with sentences.

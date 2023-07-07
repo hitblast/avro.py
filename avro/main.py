@@ -11,35 +11,29 @@ from . import config
 from .utils import validate
 
 # Constants.
-PATTERNS: Any = config.AVRO_DICT['data']['patterns']
-NON_RULE_PATTERNS: list = [p for p in PATTERNS if 'rules' not in p]
-RULE_PATTERNS: list = [p for p in PATTERNS if 'rules' in p]
+PATTERNS = config.AVRO_DICT['data']['patterns']
+NON_RULE_PATTERNS = [p for p in PATTERNS if 'rules' not in p]
+RULE_PATTERNS = [p for p in PATTERNS if 'rules' in p]
 
 
 # The primary parse function for the library.
 @lru_cache
-def parse(*texts: str, in_ascii: bool = False) -> Union[str, List[str]]:
+def parse(*texts: str) -> Union[str, List[str]]:
     '''
-    ### Parses input text, matches and replaces using avrodict.
+    ### Parses input text, matches and replaces using the Avro Dictionary.
 
     If a valid replacement is found, then it returns the replaced string.
     If no replacement is found, then it instead returns the input text.
 
     Parameters:
-    - `*texts (str)`: The text to parse.
-    - `in_ascii (bool = False)`: Whether to output in ASCII or not (Unicode).
+    - `*texts (str)`: The text(s) to parse.
 
     Usage:
     ```python
     import avro
 
-    # Unicode
     parsed = avro.parse('ami banglay gan gai')
     print(parsed)
-
-    # ASCII
-    parsed_ascii = avro.parse('ami banglay gan gai', in_ascii=True)
-    print(parsed_ascii)
     ```
     '''
 
@@ -47,11 +41,8 @@ def parse(*texts: str, in_ascii: bool = False) -> Union[str, List[str]]:
         # Sanitize text case to meet phonetic comparison standards.
         fixed_text = validate.fix_string_case(text)
 
-        # Prepare output list.
-        output = []
-
-        # Cursor end point.
-        cur_end = 0
+        output = []  # The output list of strings.
+        cur_end = 0  # Cursor end point.
 
         # Iterate through input text.
         for cur, i in enumerate(fixed_text):
@@ -98,9 +89,7 @@ def parse(*texts: str, in_ascii: bool = False) -> Union[str, List[str]]:
 
     output = []
     for text in texts:  # Applies to non-keyword arguments.
-        output.append(
-            subparse(text) if not in_ascii else str(subparse(text).encode('ascii', errors='backslashreplace'))
-        )
+        output.append(subparse(text))
 
     return output[0] if len(output) == 1 else output
 
@@ -114,21 +103,19 @@ def reverse(*texts: str) -> Union[str, List[str]]:
     If no replacement is found, then it instead returns the input text.
 
     Parameters:
-    - `*texts (str)`: The text to reverse.
+    - `*texts (str)`: The text(s) to reverse.
 
     Usage:
     ```python
     import avro
 
-    target = avro.reverse('আমার সোনার বাংলা')
-    print(target)
+    reversed = avro.reverse('আমার সোনার বাংলা')
+    print(reversed)
     ```
-    `output: amar sonar bangla`
     '''
 
     def subparse(text: str) -> str:
-        # Prepare output list.
-        output = []
+        output = []  # The output list of strings.
 
         # Iterate through input text.
         for cur, i in enumerate(text):
@@ -175,7 +162,6 @@ def reverse(*texts: str) -> Union[str, List[str]]:
                 text_segments.append(subparse(separated_text))
 
             output.append(''.join(text_segments))
-            text_segments = []
 
         else:
             output.append(exceptions)
@@ -187,12 +173,12 @@ def match_patterns(
     fixed_text: str, cur: int = 0, rule: bool = False, reversed: bool = False
 ) -> Dict[str, Any]:
     '''
-    ### Matches given text at cursor position with rule / non rule patterns.
+    Matches given text at cursor position with rule / non rule patterns.
 
     Returns a dictionary of three elements:
 
     - `matched` - Bool: depending on if match found.
-    - `found` - string/None: Value of matched pattern's 'find' key or none.
+    - `found` - string (optional): Value of matched pattern's 'find' key or none.
     - `replaced` - string: Replaced string if match found else input string at cursor.
     '''
 
@@ -215,17 +201,19 @@ def match_patterns(
                 "rules": pattern[0]['rules'],
             }
     else:
-        if not rule:
-            return {"matched": False, "found": None, "replaced": fixed_text[cur]}
-        else:
-            return {"matched": False, "found": None, "replaced": fixed_text[cur], "rules": None}
+        result = {"matched": False, "found": None, "replaced": fixed_text[cur]}
+
+        if rule:
+            result['rules'] = None
+
+        return result
 
 
 def exact_find_in_pattern(
     fixed_text: str, reversed: bool, cur: int = 0, patterns: Any = PATTERNS
 ) -> List[Dict[str, Any]]:
     '''
-    ### Returns pattern items that match given text, cursor position and pattern.
+    Returns pattern items that match given text, cursor position and pattern.
     '''
 
     if reversed:
@@ -248,7 +236,7 @@ def exact_find_in_pattern(
 @lru_cache
 def reverse_with_rules(cursor: int, fixed_text: str, text_reversed: str) -> str:
     '''
-    ### Enhances the word with rules for reverse-parsing.
+    Enhances the word with rules for reverse-parsing.
     '''
 
     added_suffix = ''
@@ -275,7 +263,7 @@ def reverse_with_rules(cursor: int, fixed_text: str, text_reversed: str) -> str:
 
 def process_rules(rules: Dict[str, Any], fixed_text: str, cur: int = 0, cur_end: int = 1) -> Optional[str]:
     '''
-    ### Process rules matched in pattern and returns suitable replacement.
+    Process rules matched in pattern and returns suitable replacement.
 
     If any rule's condition is satisfied, output the rules "replace",
     else output None.
@@ -302,7 +290,7 @@ def process_rules(rules: Dict[str, Any], fixed_text: str, cur: int = 0, cur_end:
 
 def process_match(match: Any, fixed_text: str, cur: int, cur_end: int) -> bool:
     '''
-    ### Processes a single match in rules.
+    Processes a single match in rules.
     '''
 
     # Initial/default value for replace.
