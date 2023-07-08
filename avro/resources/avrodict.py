@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: MIT
 
 
-# Imports.
+# Import first-party Python modules.
 from typing import Dict
 
-# The dictionary variable.
+# The Avro Dictionary, implemented in Python.
 AVRO_DICT: Dict[str, str] = {
     "meta": {
         "file_name": "avrodict.py",

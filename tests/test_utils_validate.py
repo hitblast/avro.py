@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 
 
-# Import third-party modules.
+# Import first-party Python modules.
 import os
 import sys
 
