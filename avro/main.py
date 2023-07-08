@@ -31,10 +31,9 @@ def _concurrency_helper(func: Callable, params: Tuple[str]) -> List[str]:
 
 
 # The primary parse function for the library.
-@lru_cache
 def parse(*texts: str) -> Union[str, List[str]]:
     '''
-    ### Parses input text, matches and replaces using the Avro Dictionary.
+    #### Parses input text, matches and replaces using the Avro Dictionary.
 
     If a valid replacement is found, then it returns the replaced string.
     If no replacement is found, then it instead returns the input text.
@@ -52,6 +51,7 @@ def parse(*texts: str) -> Union[str, List[str]]:
     '''
 
     # Internal function for multiple parses.
+    @lru_cache
     def _parse_backend(text: str) -> str:
         fixed_text = validate.fix_string_case(
             text
@@ -107,10 +107,9 @@ def parse(*texts: str) -> Union[str, List[str]]:
     return output[0] if len(output) == 1 else output
 
 
-@lru_cache
 def reverse(*texts: str) -> Union[str, List[str]]:
     '''
-    ### Reverses input text to Roman script typed in English.
+    #### Reverses input text to Roman script typed in English.
 
     If a valid replacement is found, then it returns the replaced string.
     If no replacement is found, then it instead returns the input text.
@@ -128,6 +127,7 @@ def reverse(*texts: str) -> Union[str, List[str]]:
     '''
 
     # Internal function for multiple reverses.
+    @lru_cache
     def _reverse_backend(text: str) -> str:
         output = []  # The output list of strings.
 
@@ -163,6 +163,7 @@ def reverse(*texts: str) -> Union[str, List[str]]:
     compiled_regex = re.compile("(\\s|\\.|,|\\?|\\।|\\-|;|')", re.UNICODE)
 
     # Extension for the _reverse_backend() function.
+    @lru_cache
     def _reverse_backend_ext(text: str) -> str:
         text_segments = []
         exceptions = config.EXCEPTIONS.get(text, None)
