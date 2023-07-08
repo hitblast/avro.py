@@ -38,8 +38,8 @@ This package is inspired from Rifat Nabi's jsAvroPhonetic library and derives fr
 This package requires **Python 3.8 or higher** to be used inside your development environment.
 
 ```bash
-# install / upgrade
-$ pip install avro.py
+# Install / upgrade.
+$ pip install -U avro.py
 ```
 
 <br>
