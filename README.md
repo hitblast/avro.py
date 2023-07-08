@@ -56,7 +56,7 @@ parsed_text = avro.parse('ami banglay gan gai.')
 print(parsed_text)
 ```
 
-Also, you can reverse unicode Bengali to English text as well (new, doesn't contain phonetic rules)!
+Also, you can reverse unicode Bengali to English text as well (new, doesn't contain phonetic rules).
 
 ```python
 # Imports.
