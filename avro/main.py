@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 
 
-# Import third-party modules.
+# Import first-party Python libraries.
 import re
 from concurrent.futures import ThreadPoolExecutor
 from functools import lru_cache
