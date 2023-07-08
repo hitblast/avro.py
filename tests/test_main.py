@@ -127,9 +127,9 @@ def test_words_with_punctuations() -> None:
 
     words_with_punctuations = {
         'আয়রে,': avro.parse('ayre,'),
-        'ভোলা': avro.parse('bhOla'),
-        'খেয়াল': avro.parse('kheyal'),
-        'খোলা': avro.parse('khOla'),
+        'ভোলা;': avro.parse('bhOla;'),
+        '/খেয়াল': avro.parse('/kheyal'),
+        'খোলা|': avro.parse('khOla|'),
     }
 
     for key, value in words_with_punctuations.items():
@@ -141,7 +141,10 @@ def tests_sentences_with_default() -> None:
     ### Test parsing of sentences (Unicode).
     '''
 
-    assert 'আমি বাংলায় গান গাই' == avro.parse('ami banglay gan gai')
+    assert 'আমি বাংলায় গান গাই;' == avro.parse('ami banglay gan gai;')
+    assert ['আমি বাংলার গান গাই।', 'আমি আমার আমিকে চিরদিন এই বাংলায় খুঁজে পাই।'] == avro.parse(
+        'ami banglar gan gai.', 'ami amar amike cirodin ei banglay khu^je pai.'
+    )
 
 
 def test_reverse_func() -> None:
@@ -149,7 +152,8 @@ def test_reverse_func() -> None:
     ### Test reverse-parsing with sentences.
     '''
 
-    assert 'ami banglay gan gai' == avro.reverse('আমি বাংলায় গান গাই')
-    assert 'rahim, tomake korim dakche. ekhon ki rowna debe?' == avro.reverse(
-        'রাহিম, তোমাকে করিম ডাকছে। এখন কি রওনা দেবে?'
-    )
+    assert 'ami banglay gan gai.' == avro.reverse('আমি বাংলায় গান গাই।')
+    assert [
+        'rohim, tomake korim dakche. ekhon ki rowna debe?',
+        'rowna dile amake bole zew.',
+    ] == avro.reverse('রহিম, তোমাকে করিম ডাকছে। এখন কি রওনা দেবে?', 'রওনা দিলে আমাকে বলে যেও।')
