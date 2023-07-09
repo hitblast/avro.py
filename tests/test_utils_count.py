@@ -15,7 +15,7 @@ from avro.utils import count
 # Test functions for this file.
 def test_count_vowels() -> None:
     '''
-    ### Test vowel count in a given string.
+    Test vowel count in a given string.
     '''
 
     strings = {
@@ -31,7 +31,7 @@ def test_count_vowels() -> None:
 
 def test_count_consonants() -> None:
     '''
-    ### Test consonant count in a given string.
+    Test consonant count in a given string.
     '''
 
     strings = {
