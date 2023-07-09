@@ -8,7 +8,7 @@ from avro import config
 # Functions.
 def is_vowel(text: str) -> bool:
     '''
-    ### Check if given string is a vowel.
+    Check if given string is a vowel.
     '''
 
     return text.lower() in config.AVRO_VOWELS
@@ -16,7 +16,7 @@ def is_vowel(text: str) -> bool:
 
 def is_consonant(text: str) -> bool:
     '''
-    ### Check if given string is a consonant.
+    Check if given string is a consonant.
     '''
 
     return text.lower() in config.AVRO_CONSONANTS
@@ -24,7 +24,7 @@ def is_consonant(text: str) -> bool:
 
 def is_number(text: str) -> bool:
     '''
-    ### Check if given string is a number.
+    Check if given string is a number.
     '''
 
     return text.lower() in config.AVRO_NUMBERS
@@ -32,7 +32,7 @@ def is_number(text: str) -> bool:
 
 def is_punctuation(text: str) -> bool:
     '''
-    ### Check if given string is a punctuation.
+    Check if given string is a punctuation.
     '''
 
     return not (text.lower() in config.AVRO_VOWELS or text.lower() in config.AVRO_CONSONANTS)
@@ -40,7 +40,7 @@ def is_punctuation(text: str) -> bool:
 
 def is_case_sensitive(text: str) -> bool:
     '''
-    ### Check if given string is case sensitive.
+    Check if given string is case sensitive.
     '''
 
     return text.lower() in config.AVRO_CASESENSITIVES
@@ -48,7 +48,7 @@ def is_case_sensitive(text: str) -> bool:
 
 def is_exact(needle: str, haystack: str, start: int, end: int, matchnot: bool) -> bool:
     '''
-    ### Check exact occurrence of needle in haystack.
+    Check exact occurrence of needle in haystack.
     '''
 
     return (start >= 0 and end < len(haystack) and haystack[start:end] == needle) != matchnot
@@ -56,7 +56,7 @@ def is_exact(needle: str, haystack: str, start: int, end: int, matchnot: bool) -
 
 def fix_string_case(text: str) -> str:
     '''
-    ### Converts case-insensitive characters to lower case.
+    Converts case-insensitive characters to lower case.
 
     Case-sensitive characters as defined in config.AVRO_CASESENSITIVES
     retain their case, but others are converted to their lowercase

@@ -16,7 +16,7 @@ from avro.config import AVRO_DICT
 # Test functions for this file.
 def test_patterns_without_rules_from_config() -> None:
     '''
-    ### Tests all patterns from config that don't have rules.
+    Tests all patterns from config that don't have rules.
     '''
 
     for pattern in AVRO_DICT['data']['patterns']:
@@ -27,7 +27,7 @@ def test_patterns_without_rules_from_config() -> None:
 
 def test_patterns_without_rules_not_from_config() -> None:
     '''
-    ### Tests all patterns not from config that don't have rules.
+    Tests all patterns not from config that don't have rules.
 
     This test is done in addition to
     test_patterns_without_rules_from_config() to ensure that text
@@ -48,7 +48,7 @@ def test_patterns_without_rules_not_from_config() -> None:
 
 def test_patterns_numbers() -> None:
     '''
-    ### Test patterns - numbers
+    Test patterns - numbers
     '''
 
     numbers = {
@@ -71,7 +71,7 @@ def test_patterns_numbers() -> None:
 
 def test_patterns_punctuations() -> None:
     '''
-    ### Tests patterns - punctuations
+    Tests patterns - punctuations
     '''
 
     punctuations = {"।": avro.parse("."), "।।": avro.parse(".."), "...": avro.parse("...")}
@@ -82,7 +82,7 @@ def test_patterns_punctuations() -> None:
 
 def test_patterns_with_rules_svaravarna() -> None:
     '''
-    ### Test patterns - with rules - svaravarna / shoroborno (derived from Bengali)
+    Test patterns - with rules - svaravarna / shoroborno (derived from Bengali)
     '''
 
     svaravarna = {
@@ -105,7 +105,7 @@ def test_patterns_with_rules_svaravarna() -> None:
 
 def test_non_ascii() -> None:
     '''
-    ### Test parser response for non ascii characters.
+    Test parser response for non ascii characters.
     Parser should return any non-ascii characters that is passed to it.
     '''
 
@@ -122,7 +122,7 @@ def test_non_ascii() -> None:
 
 def test_words_with_punctuations() -> None:
     '''
-    ### Test parsing of words with punctuations.
+    Test parsing of words with punctuations.
     '''
 
     words_with_punctuations = {
@@ -138,7 +138,7 @@ def test_words_with_punctuations() -> None:
 
 def tests_sentences_with_default() -> None:
     '''
-    ### Test parsing of sentences (Unicode).
+    Test parsing of sentences (Unicode).
     '''
 
     assert 'আমি বাংলায় গান গাই;' == avro.parse('ami banglay gan gai;')
@@ -149,7 +149,7 @@ def tests_sentences_with_default() -> None:
 
 def test_reverse_func() -> None:
     '''
-    ### Test reverse-parsing with sentences.
+    Test reverse-parsing with sentences.
     '''
 
     assert 'ami banglay gan gai.' == avro.reverse('আমি বাংলায় গান গাই।')

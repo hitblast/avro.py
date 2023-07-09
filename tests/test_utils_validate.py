@@ -20,7 +20,7 @@ numbers = '0123456789'
 # Test functions for this file.
 def test_is_consonant() -> None:
     '''
-    ### Test that consonants are correctly identified.
+    Test that consonants are correctly identified.
     '''
 
     for i in consonants + consonants.upper():
@@ -32,7 +32,7 @@ def test_is_consonant() -> None:
 
 def test_is_number() -> None:
     '''
-    ### Test that numbers are correctly identified.
+    Test that numbers are correctly identified.
     '''
 
     for i in numbers:
@@ -44,7 +44,7 @@ def test_is_number() -> None:
 
 def test_is_vowel() -> None:
     '''
-    ### Test that vowels are correctly identified.
+    Test that vowels are correctly identified.
     '''
 
     for i in vowels + vowels.upper():
@@ -56,7 +56,7 @@ def test_is_vowel() -> None:
 
 def test_is_punctuation() -> None:
     '''
-    ### Test that punctuations are correctly identified.
+    Test that punctuations are correctly identified.
 
     Anything that is neither a number, nor vowel nor consonant is
     identified as a punctuation.
@@ -71,7 +71,7 @@ def test_is_punctuation() -> None:
 
 def test_fix_string_case() -> None:
     '''
-    ### Test phonetic-compatible case-transformations of strings.
+    Test phonetic-compatible case-transformations of strings.
 
     This ensures validate.fix_strings function works as
     expected. It should properly change text to lowercase but
@@ -87,7 +87,7 @@ def test_fix_string_case() -> None:
 
 def test_is_exact() -> None:
     '''
-    ### Test exact search response of needle in haystack.
+    Test exact search response of needle in haystack.
     '''
 
     assert validate.is_exact('abcd', 'abcdefgh', 0, 4, False)
