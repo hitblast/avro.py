@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
 
-black==23.7.0
-pytest==7.4.0
-ruff==0.0.282
+black
+pytest
+ruff
