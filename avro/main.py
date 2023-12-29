@@ -3,7 +3,7 @@
 
 # Import first-party Python libraries.
 import re
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from functools import lru_cache
 from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 
@@ -22,9 +22,9 @@ def _concurrency_helper(func: Callable, params: Tuple[str]) -> List[str]:
     output = []
 
     with ThreadPoolExecutor() as executor:
-        futures = [executor.submit(func, text) for text in params]
+        futures = {executor.submit(func, text): text for text in params}
 
-        for future in futures:
+        for future in as_completed(futures):
             output.append(future.result())
 
     return output
