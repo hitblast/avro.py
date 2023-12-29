@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: MIT
 
-name: Format
+name: Lint
 
 on:
   push:
@@ -24,26 +24,26 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Check
-        id: formatcheck
+        id: lintcheck
         uses: chartboost/ruff-action@v1
         continue-on-error: true
         with:
-          args: format --check .
+          args: check .
 
-      - name: Format
+      - name: Lint
         uses: chartboost/ruff-action@v1
         with:
-          args: format .
+          args: check . --fix
 
       - name: Create pull request
-        if: steps.formatcheck.outcome != 'success'
+        if: steps.lintcheck.outcome != 'success'
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          title: "🎨 Automated formatting errors fix"
-          commit-message: "fixed formatting errors (ruff)"
+          title: "🎨 Automated linting errors fix"
+          commit-message: "fixed linting errors (ruff)"
           body: |
-            Formatter errors found in: ${{ github.sha }}.
+            Linter errors found in: ${{ github.sha }}.
           base: ${{ github.head_ref }}
           branch: actions/ruff
           reviewers: hitblast
