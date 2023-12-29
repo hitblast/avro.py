@@ -5,5 +5,5 @@
 from .main import *
 
 # Set version information.
-__version_info__ = ('2023', '10', '26')  # YYYY / MM / DD
+__version_info__ = ('2023', '12', '29')  # YYYY / MM / DD
 __version__ = '.'.join(__version_info__)
