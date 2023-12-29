@@ -15,9 +15,9 @@ from avro.config import AVRO_DICT
 
 # Test functions for this file.
 def test_patterns_without_rules_from_config() -> None:
-    '''
+    """
     Tests all patterns from config that don't have rules.
-    '''
+    """
 
     for pattern in AVRO_DICT['data']['patterns']:
         if 'rules' not in pattern and pattern.get('find', None):
@@ -25,20 +25,20 @@ def test_patterns_without_rules_from_config() -> None:
 
 
 def test_patterns_without_rules_not_from_config() -> None:
-    '''
+    """
     Tests all patterns not from config that don't have rules.
 
     This test is done in addition to
     test_patterns_without_rules_from_config() to ensure that text
     passed manually to avro.parse are properly parsed when they
     don't exact match a pattern that has no rules specified.
-    '''
+    """
 
     conjunctions = {
-        "ভ্ল": avro.parse("bhl"),
-        "ব্ধ": avro.parse("bdh"),
-        "ড্ড": avro.parse("DD"),
-        "স্তব্ধ বক": avro.parse("stbdh bk"),  # Stunned stork!
+        'ভ্ল': avro.parse('bhl'),
+        'ব্ধ': avro.parse('bdh'),
+        'ড্ড': avro.parse('DD'),
+        'স্তব্ধ বক': avro.parse('stbdh bk'),  # Stunned stork!
     }
 
     for key, value in conjunctions.items():
@@ -46,22 +46,22 @@ def test_patterns_without_rules_not_from_config() -> None:
 
 
 def test_patterns_numbers() -> None:
-    '''
+    """
     Test patterns - numbers
-    '''
+    """
 
     numbers = {
-        "০": avro.parse("0"),
-        "১": avro.parse("1"),
-        "২": avro.parse("2"),
-        "৩": avro.parse("3"),
-        "৪": avro.parse("4"),
-        "৫": avro.parse("5"),
-        "৬": avro.parse("6"),
-        "৭": avro.parse("7"),
-        "৮": avro.parse("8"),
-        "৯": avro.parse("9"),
-        "১১২": avro.parse("112"),
+        '০': avro.parse('0'),
+        '১': avro.parse('1'),
+        '২': avro.parse('2'),
+        '৩': avro.parse('3'),
+        '৪': avro.parse('4'),
+        '৫': avro.parse('5'),
+        '৬': avro.parse('6'),
+        '৭': avro.parse('7'),
+        '৮': avro.parse('8'),
+        '৯': avro.parse('9'),
+        '১১২': avro.parse('112'),
     }
 
     for key, value in numbers.items():
@@ -69,33 +69,33 @@ def test_patterns_numbers() -> None:
 
 
 def test_patterns_punctuations() -> None:
-    '''
+    """
     Tests patterns - punctuations
-    '''
+    """
 
-    punctuations = {"।": avro.parse("."), "।।": avro.parse(".."), "...": avro.parse("...")}
+    punctuations = {'।': avro.parse('.'), '।।': avro.parse('..'), '...': avro.parse('...')}
 
     for key, value in punctuations.items():
         assert key == value
 
 
 def test_patterns_with_rules_svaravarna() -> None:
-    '''
+    """
     Test patterns - with rules - svaravarna / shoroborno (derived from Bengali)
-    '''
+    """
 
     svaravarna = {
-        "অ": avro.parse("o"),
-        "আ": avro.parse("a"),
-        "ই": avro.parse("i"),
-        "ঈ": avro.parse("I"),
-        "উ": avro.parse("u"),
-        "ঊ": avro.parse("oo"),
-        "ঊ": avro.parse("U"),
-        "এ": avro.parse("e"),
-        "ঐ": avro.parse("OI"),
-        "ও": avro.parse("O"),
-        "ঔ": avro.parse("OU"),
+        'অ': avro.parse('o'),
+        'আ': avro.parse('a'),
+        'ই': avro.parse('i'),
+        'ঈ': avro.parse('I'),
+        'উ': avro.parse('u'),
+        'ঊ': avro.parse('oo'),
+        'ঊ': avro.parse('U'),
+        'এ': avro.parse('e'),
+        'ঐ': avro.parse('OI'),
+        'ও': avro.parse('O'),
+        'ঔ': avro.parse('OU'),
     }
 
     for key, value in svaravarna.items():
@@ -103,10 +103,10 @@ def test_patterns_with_rules_svaravarna() -> None:
 
 
 def test_non_ascii() -> None:
-    '''
+    """
     Test parser response for non ascii characters.
     Parser should return any non-ascii characters that is passed to it.
-    '''
+    """
 
     non_ascii = {
         'ব': avro.parse('ব'),
@@ -120,9 +120,9 @@ def test_non_ascii() -> None:
 
 
 def test_words_with_punctuations() -> None:
-    '''
+    """
     Test parsing of words with punctuations.
-    '''
+    """
 
     words_with_punctuations = {
         'আয়রে,': avro.parse('ayre,'),
@@ -136,9 +136,9 @@ def test_words_with_punctuations() -> None:
 
 
 def tests_sentences_with_default() -> None:
-    '''
+    """
     Test parsing of sentences (Unicode).
-    '''
+    """
 
     assert 'আমি বাংলায় গান গাই;' == avro.parse('ami banglay gan gai;')
     assert ['আমি বাংলার গান গাই।', 'আমি আমার আমিকে চিরদিন এই বাংলায় খুঁজে পাই।'] == avro.parse(
@@ -147,9 +147,9 @@ def tests_sentences_with_default() -> None:
 
 
 def test_reverse_func() -> None:
-    '''
+    """
     Test reverse-parsing with sentences.
-    '''
+    """
 
     assert 'ami banglay gan gai.' == avro.reverse('আমি বাংলায় গান গাই।')
     assert [

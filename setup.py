@@ -14,7 +14,7 @@ from avro import __version__
 here = os.path.abspath(os.path.dirname(__file__))
 
 with codecs.open(os.path.join(here, 'README.md'), encoding='utf-8') as fh:
-    long_description = "\n" + fh.read()
+    long_description = '\n' + fh.read()
 
 
 # Call the setup function.
@@ -31,7 +31,7 @@ setup(
     package_data={'avro': ['*.md']},
     include_package_data=True,
     license='MIT',
-    python_requires=">=3.8",
+    python_requires='>=3.8',
     keywords=[
         'python',
         'avro',

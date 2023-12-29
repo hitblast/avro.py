@@ -32,7 +32,7 @@ def _concurrency_helper(func: Callable, params: Tuple[str]) -> List[str]:
 
 # The primary parse function for the library.
 def parse(*texts: str) -> Union[str, List[str]]:
-    '''
+    """
     #### Parses input text, matches and replaces using the Avro Dictionary.
 
     If a valid replacement is found, then it returns the replaced string.
@@ -48,7 +48,7 @@ def parse(*texts: str) -> Union[str, List[str]]:
     parsed = avro.parse('ami banglay gan gai')
     print(parsed)
     ```
-    '''
+    """
 
     # Internal function for multiple parses.
     @lru_cache
@@ -68,7 +68,7 @@ def parse(*texts: str) -> Union[str, List[str]]:
             else:
                 uni_pass = True
 
-            match = {"matched": False}
+            match = {'matched': False}
 
             if not uni_pass:
                 cur_end = cur + 1
@@ -108,7 +108,7 @@ def parse(*texts: str) -> Union[str, List[str]]:
 
 
 def reverse(*texts: str) -> Union[str, List[str]]:
-    '''
+    """
     #### Reverses input text to Roman script typed in English.
 
     If a valid replacement is found, then it returns the replaced string.
@@ -124,7 +124,7 @@ def reverse(*texts: str) -> Union[str, List[str]]:
     reversed = avro.reverse('আমার সোনার বাংলা')
     print(reversed)
     ```
-    '''
+    """
 
     # Internal function for multiple reverses.
     @lru_cache
@@ -140,7 +140,7 @@ def reverse(*texts: str) -> Union[str, List[str]]:
             else:
                 uni_pass = True
 
-            match = {"matched": False}
+            match = {'matched': False}
 
             if not uni_pass:
                 output.append(i)
@@ -187,11 +187,11 @@ def reverse(*texts: str) -> Union[str, List[str]]:
 def match_patterns(
     fixed_text: str, cur: int = 0, rule: bool = False, reversed: bool = False
 ) -> Dict[str, Any]:
-    '''
+    """
     Matches given text at cursor position with rule / non rule patterns.
 
     Returns a dictionary of three (upto four) elements.
-    '''
+    """
 
     rule_type = NON_RULE_PATTERNS if not rule else RULE_PATTERNS
     pattern = exact_find_in_pattern(fixed_text, reversed, cur, rule_type)
@@ -199,20 +199,20 @@ def match_patterns(
     if len(pattern) > 0:
         if not rule:
             return {
-                "matched": True,
-                "found": pattern[0].get('find', None),
-                "replaced": pattern[0].get('replace', None),
-                "reversed": reverse_with_rules(cur, fixed_text, pattern[0].get('reverse', None)),
+                'matched': True,
+                'found': pattern[0].get('find', None),
+                'replaced': pattern[0].get('replace', None),
+                'reversed': reverse_with_rules(cur, fixed_text, pattern[0].get('reverse', None)),
             }
         else:
             return {
-                "matched": True,
-                "found": pattern[0]['find'],
-                "replaced": pattern[0]['replace'],
-                "rules": pattern[0]['rules'],
+                'matched': True,
+                'found': pattern[0]['find'],
+                'replaced': pattern[0]['replace'],
+                'rules': pattern[0]['rules'],
             }
     else:
-        result = {"matched": False, "found": None, "replaced": fixed_text[cur]}
+        result = {'matched': False, 'found': None, 'replaced': fixed_text[cur]}
 
         if rule:
             result['rules'] = None
@@ -223,9 +223,9 @@ def match_patterns(
 def exact_find_in_pattern(
     fixed_text: str, reversed: bool, cur: int = 0, patterns: Any = PATTERNS
 ) -> List[Dict[str, Any]]:
-    '''
+    """
     Returns pattern items that match given text, cursor position and pattern.
-    '''
+    """
 
     if reversed:
         return [
@@ -246,9 +246,9 @@ def exact_find_in_pattern(
 
 @lru_cache
 def reverse_with_rules(cursor: int, fixed_text: str, text_reversed: str) -> str:
-    '''
+    """
     Enhances the word with rules for reverse-parsing.
-    '''
+    """
 
     added_suffix = ''
 
@@ -273,12 +273,12 @@ def reverse_with_rules(cursor: int, fixed_text: str, text_reversed: str) -> str:
 
 
 def process_rules(rules: Dict[str, Any], fixed_text: str, cur: int = 0, cur_end: int = 1) -> Optional[str]:
-    '''
+    """
     Process rules matched in pattern and returns suitable replacement.
 
     If any rule's condition is satisfied, output the rules "replace",
     else output None.
-    '''
+    """
 
     replaced = ''
 
@@ -300,9 +300,9 @@ def process_rules(rules: Dict[str, Any], fixed_text: str, cur: int = 0, cur_end:
 
 
 def process_match(match: Any, fixed_text: str, cur: int, cur_end: int) -> bool:
-    '''
+    """
     Processes a single match in rules.
-    '''
+    """
 
     # Initial/default value for replace.
     replace = True
