@@ -1,11 +1,13 @@
 // SPDX-License-Identifier: MIT
+
 {
     "[python]": {
+        "editor.formatOnSave": true,
         "editor.codeActionsOnSave": {
             "source.fixAll.ruff": "explicit",
             "source.organizeImports.ruff": "explicit"
         },
-        "editor.formatOnSave": true
+        "editor.defaultFormatter": "charliermarsh.ruff",
     },
     "python.testing.pytestArgs": [
         "tests"
