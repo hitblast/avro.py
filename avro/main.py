@@ -175,28 +175,23 @@ def match_patterns(
     rule_type = NON_RULE_PATTERNS if not rule else RULE_PATTERNS
     pattern = exact_find_in_pattern(fixed_text, reversed, cur, rule_type)
 
-    if len(pattern) > 0:
-        if not rule:
-            return {
-                'matched': True,
-                'found': pattern[0].get('find', None),
-                'replaced': pattern[0].get('replace', None),
-                'reversed': reverse_with_rules(cur, fixed_text, pattern[0].get('reverse', None)),
-            }
-        else:
-            return {
-                'matched': True,
-                'found': pattern[0]['find'],
-                'replaced': pattern[0]['replace'],
-                'rules': pattern[0]['rules'],
-            }
-    else:
-        result = {'matched': False, 'found': None, 'replaced': fixed_text[cur]}
+    if pattern:
+        p = pattern[0]
 
-        if rule:
-            result['rules'] = None
+        return {
+            'matched': True,
+            'found': p.get('find'),
+            'replaced': p.get('replace'),
+            'reversed': reverse_with_rules(cur, fixed_text, p.get('reverse')) if not rule else None,
+            'rules': p.get('rules') if rule else None,
+        }
 
-        return result
+    return {
+        'matched': False,
+        'found': None,
+        'replaced': fixed_text[cur],
+        'rules': None if rule else None,
+    }
 
 
 def exact_find_in_pattern(
