@@ -1,2 +1,2 @@
 include LICENSE *.py *.md
-recursive-include avro *.json *.md
+recursive-include avro *.md
