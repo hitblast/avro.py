@@ -84,7 +84,6 @@ In short, avro.py doesn't depend on any third-party libraries. However, if you'd
 
 - [ruff](https://github.com/astral-sh/ruff) - linter
 - [pytest](https://pypi.python.org/pypi/pytest) - testing framework
-- [black](https://github.com/psf/black) - formatting
 
 ```bash
 # Installing the required developer toolchain.
