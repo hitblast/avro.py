@@ -235,9 +235,9 @@ def reverse_with_rules(cursor: int, fixed_text: str, text_reversed: str) -> str:
         added_suffix = 'o'
 
     try:
-        if fixed_text[cursor + 1] in config.AVRO_KAR:
-            added_suffix = ''
-        if fixed_text[cursor + 2] in config.AVRO_KAR and not cursor == 0:
+        if (fixed_text[cursor + 1] in config.AVRO_KAR) or (
+            fixed_text[cursor + 2] in config.AVRO_KAR and not cursor == 0
+        ):
             added_suffix = ''
 
     except IndexError:
