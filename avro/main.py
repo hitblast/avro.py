@@ -32,7 +32,7 @@ def _concurrency_helper(func: Callable, params: Tuple[str]) -> List[str]:
 
 
 # The primary parse function for the library.
-def parse(*texts: str) -> Union[str, List[str]]:
+def parse(*texts: str, bijoy: bool = False) -> Union[str, List[str]]:
     """
     #### Parses input text, matches and replaces using the Avro Dictionary.
 
@@ -41,6 +41,7 @@ def parse(*texts: str) -> Union[str, List[str]]:
 
     Parameters:
     - `*texts: str | Tuple[str]`: The text(s) to parse.
+    - `bijoy: bool`: Whether to convert the output to Bijoy Keyboard format.
 
     Usage:
     ```python
@@ -100,6 +101,20 @@ def parse(*texts: str) -> Union[str, List[str]]:
         return ''.join(chain.from_iterable(output_generator()))
 
     output = _concurrency_helper(_parse_backend, texts)
+
+    if bijoy:
+        # Converts output to Bijoy format if applied.
+        def convert_to_bijoy(text: str) -> str:
+            text = re.sub('ো', 'ো', text)
+            text = re.sub('ৌ', 'ৌ', text)
+
+            for unic in config.AVRO_TO_BIJ:
+                text = re.sub(unic, config.AVRO_TO_BIJ[unic], text).strip()
+
+            return text
+
+        output = _concurrency_helper(convert_to_bijoy, output)
+
     return output[0] if len(output) == 1 else output
 
 
