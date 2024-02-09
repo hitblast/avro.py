@@ -146,6 +146,14 @@ def tests_sentences_with_default() -> None:
     )
 
 
+def tests_sentences_with_bijoy() -> None:
+    """
+    Test parsing of sentences (Bijoy).
+    """
+
+    assert 'Avgw evsjvq Mvb MvB;' == avro.parse('ami banglay gan gai;', bijoy=True)
+
+
 def test_reverse_func() -> None:
     """
     Test reverse-parsing with sentences.
