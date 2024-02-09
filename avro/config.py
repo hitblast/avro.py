@@ -15,3 +15,6 @@ AVRO_SHORBORNO = set(AVRO_DICT['data']['shorborno'])
 AVRO_KAR = AVRO_DICT['data']['kar']
 AVRO_IGNORE = AVRO_DICT['data']['ignore']
 EXCEPTIONS = AVRO_DICT['data']['exceptions']
+
+# Shortcuts for conversion (e.g. for Bijoy Keyboard support).
+AVRO_TO_BIJ = AVRO_DICT['data']['avro_to_bijoy']
