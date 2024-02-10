@@ -2,19 +2,19 @@
 
 
 # Import local modules.
-from .resources import AVRO_DICT
+from .resources import DICT
 
 # Shortcuts to vowels, constants, case-sensitives and numbers.
-AVRO_VOWELS = set(AVRO_DICT['data']['vowel'])
-AVRO_CONSONANTS = set(AVRO_DICT['data']['consonant'])
-AVRO_CASESENSITIVES = set(AVRO_DICT['data']['casesensitive'])
-AVRO_NUMBERS = set(AVRO_DICT['data']['number'])
+AVRO_VOWELS = set(DICT['avro']['vowel'])
+AVRO_CONSONANTS = set(DICT['avro']['consonant'])
+AVRO_CASESENSITIVES = set(DICT['avro']['casesensitive'])
+AVRO_NUMBERS = set(DICT['avro']['number'])
 
 # Shortcuts to Bengali Svaravarna, Kar(s)
-AVRO_SHORBORNO = set(AVRO_DICT['data']['shorborno'])
-AVRO_KAR = AVRO_DICT['data']['kar']
-AVRO_IGNORE = AVRO_DICT['data']['ignore']
-EXCEPTIONS = AVRO_DICT['data']['exceptions']
+AVRO_SHORBORNO = set(DICT['avro']['shorborno'])
+AVRO_KAR = DICT['avro']['kar']
+AVRO_IGNORE = DICT['avro']['ignore']
+EXCEPTIONS = DICT['avro']['exceptions']
 
 # Shortcuts for conversion (e.g. for Bijoy Keyboard support).
-AVRO_TO_BIJ = AVRO_DICT['data']['avro_to_bijoy']
+BIJOY_MAP = DICT['bijoy']['unicode_map']
