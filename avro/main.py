@@ -105,13 +105,12 @@ def parse(*texts: str, bijoy: bool = False) -> Union[str, List[str]]:
     if bijoy:
         # Converts output to Bijoy format if applied.
         def convert_to_bijoy(text: str) -> str:
-            text = re.sub('ো', 'ো', text)
-            text = re.sub('ৌ', 'ৌ', text)
+            text = re.sub('ৌ', 'ৌ', re.sub('ো', 'ো', text))
 
             for unic in config.AVRO_TO_BIJ:
-                text = re.sub(unic, config.AVRO_TO_BIJ[unic], text).strip()
+                text = re.sub(unic, config.AVRO_TO_BIJ[unic], text)
 
-            return text
+            return text.strip()
 
         output = _concurrency_helper(convert_to_bijoy, output)
 
