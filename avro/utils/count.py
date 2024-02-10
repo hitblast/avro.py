@@ -6,7 +6,7 @@ from avro import config
 
 
 # Functions.
-def count_vowels(text) -> int:
+def count_vowels(text: str) -> int:
     """
     Count number of occurrences of vowels in a given string.
     """
@@ -20,7 +20,7 @@ def count_vowels(text) -> int:
     return count
 
 
-def count_consonants(text) -> int:
+def count_consonants(text: str) -> int:
     """
     Count number of occurrences of consonants in a given string.
     """
