@@ -57,9 +57,7 @@ def parse(*texts: str, bijoy: bool = False) -> Union[str, List[str]]:
 
     @lru_cache
     def _parse_backend(text: str) -> str:
-        fixed_text = validate.fix_string_case(
-            text
-        )  # Sanitize input text to meet phonetic comparison standards.
+        fixed_text = validate.fix_string_case(text)  # Sanitize input text.
         cur_end = 0  # Cursor end point.
 
         def output_generator() -> Generator[str, None, None]:
