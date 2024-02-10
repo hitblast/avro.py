@@ -13,7 +13,7 @@ from . import config
 from .utils import validate
 
 # Constants.
-PATTERNS = config.AVRO_DICT['data']['patterns']
+PATTERNS = config.DICT['avro']['patterns']
 NON_RULE_PATTERNS = [p for p in PATTERNS if 'rules' not in p]
 RULE_PATTERNS = [p for p in PATTERNS if 'rules' in p]
 
@@ -105,8 +105,8 @@ def parse(*texts: str, bijoy: bool = False) -> Union[str, List[str]]:
         def convert_to_bijoy(text: str) -> str:
             text = re.sub('ৌ', 'ৌ', re.sub('ো', 'ো', text))
 
-            for unic in config.AVRO_TO_BIJ:
-                text = re.sub(unic, config.AVRO_TO_BIJ[unic], text)
+            for unic in config.BIJOY_MAP:
+                text = re.sub(unic, config.BIJOY_MAP[unic], text)
 
             return text.strip()
 

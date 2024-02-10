@@ -10,7 +10,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.
 
 # Import local modules.
 import avro
-from avro.config import AVRO_DICT
+from avro.config import DICT
 
 
 # Test functions for this file.
@@ -19,7 +19,7 @@ def test_patterns_without_rules_from_config() -> None:
     Tests all patterns from config that don't have rules.
     """
 
-    for pattern in AVRO_DICT['data']['patterns']:
+    for pattern in DICT['avro']['patterns']:
         if 'rules' not in pattern and pattern.get('find', None):
             assert pattern['replace'] == avro.parse(pattern['find'])
 
