@@ -87,7 +87,7 @@ In short, avro.py doesn't depend on any third-party libraries. However, if you'd
 
 ```bash
 # Installing the required developer toolchain.
-$ python3 -m pip install -r dev-requirements.txt
+$ python3 -m pip install -r requirements-dev.txt
 
 # Running pytest.
 $ python3 -m pytest --verbose
