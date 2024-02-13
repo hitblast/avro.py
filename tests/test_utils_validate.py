@@ -4,6 +4,7 @@
 # Import first-party Python modules.
 import os
 import sys
+from typing import NoReturn
 
 # Add support layer for accessing the primary package.
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
@@ -18,7 +19,7 @@ numbers = '0123456789'
 
 
 # Test functions for this file.
-def test_is_consonant() -> None:
+def test_is_consonant() -> NoReturn:
     """
     Test that consonants are correctly identified.
     """
@@ -30,7 +31,7 @@ def test_is_consonant() -> None:
         assert not validate.is_consonant(i)
 
 
-def test_is_number() -> None:
+def test_is_number() -> NoReturn:
     """
     Test that numbers are correctly identified.
     """
@@ -42,7 +43,7 @@ def test_is_number() -> None:
         assert not validate.is_number(i)
 
 
-def test_is_vowel() -> None:
+def test_is_vowel() -> NoReturn:
     """
     Test that vowels are correctly identified.
     """
@@ -54,7 +55,7 @@ def test_is_vowel() -> None:
         assert not validate.is_vowel(i)
 
 
-def test_is_punctuation() -> None:
+def test_is_punctuation() -> NoReturn:
     """
     Test that punctuations are correctly identified.
 
@@ -69,7 +70,7 @@ def test_is_punctuation() -> None:
         assert not validate.is_number(i)
 
 
-def test_fix_string_case() -> None:
+def test_fix_string_case() -> NoReturn:
     """
     Test phonetic-compatible case-transformations of strings.
 
@@ -85,7 +86,7 @@ def test_fix_string_case() -> None:
     assert validate.fix_string_case('raMgoRurer Chana') == 'ramgoRurer chana'
 
 
-def test_is_exact() -> None:
+def test_is_exact() -> NoReturn:
     """
     Test exact search response of needle in haystack.
     """
