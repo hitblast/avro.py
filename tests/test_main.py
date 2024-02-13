@@ -4,6 +4,7 @@
 # Import first-party Python modules.
 import os
 import sys
+from typing import NoReturn
 
 # Add support layer for accessing the primary package.
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
@@ -14,7 +15,7 @@ from avro.config import DICT
 
 
 # Test functions for this file.
-def test_patterns_without_rules_from_config() -> None:
+def test_patterns_without_rules_from_config() -> NoReturn:
     """
     Tests all patterns from config that don't have rules.
     """
@@ -24,7 +25,7 @@ def test_patterns_without_rules_from_config() -> None:
             assert pattern['replace'] == avro.parse(pattern['find'])
 
 
-def test_patterns_without_rules_not_from_config() -> None:
+def test_patterns_without_rules_not_from_config() -> NoReturn:
     """
     Tests all patterns not from config that don't have rules.
 
@@ -45,7 +46,7 @@ def test_patterns_without_rules_not_from_config() -> None:
         assert key == value
 
 
-def test_patterns_numbers() -> None:
+def test_patterns_numbers() -> NoReturn:
     """
     Test patterns - numbers
     """
@@ -68,7 +69,7 @@ def test_patterns_numbers() -> None:
         assert key == value
 
 
-def test_patterns_punctuations() -> None:
+def test_patterns_punctuations() -> NoReturn:
     """
     Tests patterns - punctuations
     """
@@ -79,7 +80,7 @@ def test_patterns_punctuations() -> None:
         assert key == value
 
 
-def test_patterns_with_rules_svaravarna() -> None:
+def test_patterns_with_rules_svaravarna() -> NoReturn:
     """
     Test patterns - with rules - svaravarna / shoroborno (derived from Bengali)
     """
@@ -102,7 +103,7 @@ def test_patterns_with_rules_svaravarna() -> None:
         assert key == value
 
 
-def test_non_ascii() -> None:
+def test_non_ascii() -> NoReturn:
     """
     Test parser response for non ascii characters.
     Parser should return any non-ascii characters that is passed to it.
@@ -119,7 +120,7 @@ def test_non_ascii() -> None:
         assert key == value
 
 
-def test_words_with_punctuations() -> None:
+def test_words_with_punctuations() -> NoReturn:
     """
     Test parsing of words with punctuations.
     """
@@ -135,7 +136,7 @@ def test_words_with_punctuations() -> None:
         assert key == value
 
 
-def tests_sentences_with_default() -> None:
+def tests_sentences_with_default() -> NoReturn:
     """
     Test parsing of sentences (Unicode).
     """
@@ -146,7 +147,7 @@ def tests_sentences_with_default() -> None:
     )
 
 
-def tests_sentences_with_bijoy() -> None:
+def tests_sentences_with_bijoy() -> NoReturn:
     """
     Test parsing of sentences (Bijoy).
     """
@@ -154,7 +155,7 @@ def tests_sentences_with_bijoy() -> None:
     assert 'Avgw evsjvq Mvb MvB;' == avro.parse('ami banglay gan gai;', bijoy=True)
 
 
-def test_reverse_func() -> None:
+def test_reverse_func() -> NoReturn:
     """
     Test reverse-parsing with sentences.
     """

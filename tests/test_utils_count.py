@@ -4,6 +4,7 @@
 # Import first-party Python modules.
 import os
 import sys
+from typing import NoReturn
 
 # Add support layer for accessing the primary package.
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
@@ -13,7 +14,7 @@ from avro.utils import count
 
 
 # Test functions for this file.
-def test_count_vowels() -> None:
+def test_count_vowels() -> NoReturn:
     """
     Test vowel count in a given string.
     """
@@ -29,7 +30,7 @@ def test_count_vowels() -> None:
         assert count.count_vowels(string) == integer
 
 
-def test_count_consonants() -> None:
+def test_count_consonants() -> NoReturn:
     """
     Test consonant count in a given string.
     """
