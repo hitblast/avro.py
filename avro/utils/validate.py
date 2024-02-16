@@ -5,7 +5,8 @@
 from avro import config
 
 
-# Functions.
+# Unicode-specific validation functions.
+# These are only used for converting to and from Unicode characters.
 def is_vowel(text: str) -> bool:
     """
     Check if given string is a vowel.
@@ -73,3 +74,29 @@ def fix_string_case(text: str) -> str:
             fixed.append(i.lower())
 
     return ''.join(fixed)
+
+
+# ANSI-specific validation functions.
+# These are used for validating output while converting to ANSI after the initial conversion.
+def IsBanglaPreKar(char: str):
+    """
+    Check if given character is a pre-kar.
+    """
+
+    return char in ['ি', 'ৈ', 'ে']
+
+
+def IsBanglaBanjonborno(char: str):
+    """
+    Check if given character is a Bengali banjonborno.
+    """
+
+    return char in 'কখগঘঙচছজঝঞটঠডঢণতথদধনপফবভমশষসহযরলয়ংঃঁৎ'
+
+
+def IsBanglaHalant(char: str):
+    """
+    Check if given character is a Bengali halant.
+    """
+
+    return char == '্'
