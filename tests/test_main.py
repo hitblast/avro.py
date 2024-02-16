@@ -152,7 +152,10 @@ def tests_sentences_with_bijoy() -> NoReturn:
     Test parsing of sentences (Bijoy).
     """
 
-    assert 'Avgw evsjvq Mvb MvB;' == avro.parse('ami banglay gan gai;', bijoy=True)
+    assert 'Avwg evsjvq Mvb MvB;' == avro.parse('ami banglay gan gai;', bijoy=True)
+    assert 'Avwg Avgvi Avwg‡K wPiw`b GB evsjvq Lyu‡R cvB!' == avro.parse(
+        'ami amar amike cirodin ei banglay khu^je pai!', bijoy=True
+    )
 
 
 def test_reverse_func() -> NoReturn:

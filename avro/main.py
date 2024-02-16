@@ -100,10 +100,74 @@ def parse(*texts: str, bijoy: bool = False) -> Union[str, List[str]]:
 
     output = _concurrency_helper(_parse_backend, texts)
 
+    # If the `bijoy` parameter is set to `True`, then convert the output to Bijoy Keyboard format.
     if bijoy:
-        # Converts output to Bijoy format if applied.
+        # Rearranges the Unicode text to match Bijoy standards.
+        def rearrange_unicode_text(string: str):
+            barrier = 0
+            i = 0
+
+            while i < len(string):
+                if i < len(string) and validate.is_bangla_prekar(string[i]):
+                    j = 1
+                    while validate.is_bangla_banjorborno(string[i - j]):
+                        if i - j < 0:
+                            break
+                        if i - j <= barrier:
+                            break
+                        if validate.is_bangla_halant(string[i - j - 1]):
+                            j += 2
+                        else:
+                            break
+
+                    temp = string[0 : i - j] + string[i] + string[i - j : i] + string[i + 1 :]
+                    string = temp
+                    barrier = i + 1
+                    i += 1
+                    continue
+
+                if (
+                    i < len(string) - 1
+                    and validate.is_bangla_halant(string[i])
+                    and string[i - 1] == 'র'
+                    and not validate.is_bangla_halant(string[i - 2])
+                ):
+                    j = 1
+                    found_pre_kar = 0
+
+                    while True:
+                        if validate.is_bangla_banjorborno(string[i + j]) and validate.is_bangla_halant(
+                            string[i + j + 1]
+                        ):
+                            j += 2
+                        elif validate.is_bangla_banjorborno(string[i + j]) and validate.is_bangla_prekar(
+                            string[i + j + 1]
+                        ):
+                            found_pre_kar = 1
+                            break
+                        else:
+                            break
+
+                    temp = (
+                        string[0 : i - 1]
+                        + string[i + j + 1 : i + j + found_pre_kar + 1]
+                        + string[i + 1 : i + j + 1]
+                        + string[i - 1]
+                        + string[i]
+                        + string[i + j + found_pre_kar + 1 :]
+                    )
+                    string = temp
+                    i += j + found_pre_kar
+                    barrier = i + 1
+                    continue
+
+                i += 1
+
+            return string
+
+        # Finally, the function for combining the logic above and converting the output.
         def convert_to_bijoy(text: str) -> str:
-            text = re.sub('ৌ', 'ৌ', re.sub('ো', 'ো', text))
+            text = rearrange_unicode_text(re.sub('ৌ', 'ৌ', re.sub('ো', 'ো', text)))
 
             for unic in config.BIJOY_MAP:
                 text = re.sub(unic, config.BIJOY_MAP[unic], text)
