@@ -17,4 +17,4 @@ AVRO_IGNORE = DICT['avro']['ignore']
 EXCEPTIONS = DICT['avro']['exceptions']
 
 # Shortcuts for conversion (e.g. for Bijoy Keyboard support).
-BIJOY_MAP = DICT['bijoy']['unicode_map']
+BIJOY_MAP = DICT['bijoy']
