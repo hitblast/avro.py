@@ -162,7 +162,7 @@ def reverse(*texts: str) -> Union[str, List[str]]:
     # Extension for the _reverse_backend() function.
     @lru_cache
     def _reverse_backend_ext(text: str) -> str:
-        exceptions = config.EXCEPTIONS.get(text, None)
+        exceptions = config.AVRO_EXCEPTIONS.get(text, None)
 
         if not exceptions:
             separated_texts = compiled_regex.split(text)
