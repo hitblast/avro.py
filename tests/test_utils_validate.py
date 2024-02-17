@@ -16,6 +16,8 @@ from avro.utils import validate
 vowels = 'aeiou'
 consonants = 'bcdfghjklmnpqrstvwxyz'
 numbers = '0123456789'
+prekars = ['ি', 'ৈ', 'ে']
+banjonborno = 'কখগঘঙচছজঝঞটঠডঢণতথদধনপফবভমশষসহযরলয়ংঃঁৎ'
 
 
 # Test functions for this file.
@@ -98,3 +100,49 @@ def test_is_exact() -> NoReturn:
 
     assert not validate.is_exact('a', 'a', 1, 2, False)
     assert validate.is_exact('a', 'a', 1, 2, True)
+
+
+def test_is_prekar() -> NoReturn:
+    """
+    Test if given string is a prekar.
+    """
+
+    for i in prekars:
+        assert validate.is_bangla_prekar(i)
+
+    assert not (
+        validate.is_bangla_prekar('া')
+        and validate.is_bangla_prekar('ূ')
+        and validate.is_bangla_prekar('a')
+        and validate.is_bangla_prekar('b')
+    )
+
+
+def test_is_banjonborno() -> NoReturn:
+    """
+    Test if given string is a banjonborno.
+    """
+
+    for i in banjonborno:
+        assert validate.is_bangla_banjonborno(i)
+
+    assert not (
+        validate.is_bangla_banjonborno('a')
+        and validate.is_bangla_banjonborno('ূ')
+        and validate.is_bangla_banjonborno('া')
+        and validate.is_bangla_banjonborno('b')
+    )
+
+
+def test_is_halant() -> NoReturn:
+    """
+    Test if given string is a halant.
+    """
+
+    assert validate.is_bangla_halant('্')
+    assert not (
+        validate.is_bangla_halant('a')
+        and validate.is_bangla_halant('ূ')
+        and validate.is_bangla_halant('া')
+        and validate.is_bangla_halant('b')
+    )

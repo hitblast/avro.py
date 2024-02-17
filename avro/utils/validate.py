@@ -78,7 +78,7 @@ def fix_string_case(text: str) -> str:
 
 # ASCII-specific validation functions.
 # These are used for validating output while converting to ASCII after the initial conversion.
-def is_bangla_prekar(char: str):
+def is_bangla_prekar(char: str) -> bool:
     """
     Check if given character is a Bengali pre-kar.
     """
@@ -86,7 +86,7 @@ def is_bangla_prekar(char: str):
     return char in config.BIJOY_PREKAR
 
 
-def is_bangla_banjorborno(char: str):
+def is_bangla_banjonborno(char: str) -> bool:
     """
     Check if given character is a Bengali banjonborno.
     """
@@ -94,7 +94,7 @@ def is_bangla_banjorborno(char: str):
     return char in config.BIJOY_BANJONBORNO
 
 
-def is_bangla_halant(char: str):
+def is_bangla_halant(char: str) -> bool:
     """
     Check if given character is a Bengali halant.
     """
