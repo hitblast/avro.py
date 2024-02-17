@@ -142,9 +142,10 @@ def test_conversion_bijoy_func() -> NoReturn:
     """
 
     assert 'Avwg evsjvq Mvb MvB;' == avro.to_bijoy('আমি বাংলায় গান গাই;')
-    assert 'Avwg Avgvi Avwg‡K wPiw`b GB evsjvq Lyu‡R cvB!' == avro.to_bijoy(
-        'আমি আমার আমিকে চিরদিন এই বাংলায় খুঁজে পাই!'
-    )
+    assert [
+        'Avwg evsjvi Mvb MvB|',
+        'Avwg Avgvi Avwg‡K wPiw`b GB evsjvq Lyu‡R cvB!',
+    ] == avro.to_bijoy('আমি বাংলার গান গাই।', 'আমি আমার আমিকে চিরদিন এই বাংলায় খুঁজে পাই!')
 
 
 def test_full_sentences() -> NoReturn:
@@ -154,15 +155,17 @@ def test_full_sentences() -> NoReturn:
 
     # Default settings.
     assert 'আমি বাংলায় গান গাই;' == avro.parse('ami banglay gan gai;')
-    assert ['আমি বাংলার গান গাই।', 'আমি আমার আমিকে চিরদিন এই বাংলায় খুঁজে পাই।'] == avro.parse(
-        'ami banglar gan gai.', 'ami amar amike cirodin ei banglay khu^je pai.'
-    )
+    assert [
+        'আমি বাংলার গান গাই।',
+        'আমি আমার আমিকে চিরদিন এই বাংলায় খুঁজে পাই।',
+    ] == avro.parse('ami banglar gan gai.', 'ami amar amike cirodin ei banglay khu^je pai.')
 
     # Bijoy settings.
     assert 'Avwg evsjvq Mvb MvB;' == avro.parse('ami banglay gan gai;', bijoy=True)
-    assert 'Avwg Avgvi Avwg‡K wPiw`b GB evsjvq Lyu‡R cvB!' == avro.parse(
-        'ami amar amike cirodin ei banglay khu^je pai!', bijoy=True
-    )
+    assert [
+        'Avwg evsjvi Mvb MvB|',
+        'Avwg Avgvi Avwg‡K wPiw`b GB evsjvq Lyu‡R cvB!',
+    ] == avro.parse('ami banglar gan gai.', 'ami amar amike cirodin ei banglay khu^je pai!', bijoy=True)
 
 
 def test_reverse_func() -> NoReturn:

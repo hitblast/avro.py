@@ -102,12 +102,12 @@ def parse(*texts: str, bijoy: bool = False) -> Union[str, List[str]]:
 
     # If the `bijoy` parameter is set to `True`, then convert the output to Bijoy Keyboard format.
     if bijoy:
-        output = _concurrency_helper(to_bijoy, output)
+        return to_bijoy(*output)
+    else:
+        return output[0] if len(output) == 1 else output
 
-    return output[0] if len(output) == 1 else output
 
-
-def to_bijoy(*texts: str) -> str:
+def to_bijoy(*texts: str) -> Union[str, List[str]]:
     """
     #### Converts input text to Bijoy Keyboard format.
 
