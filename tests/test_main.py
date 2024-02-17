@@ -136,20 +136,9 @@ def test_words_with_punctuations() -> NoReturn:
         assert key == value
 
 
-def test_sentences_with_default() -> NoReturn:
+def test_conversion_bijoy_func() -> NoReturn:
     """
-    Test parsing of sentences (Unicode).
-    """
-
-    assert 'আমি বাংলায় গান গাই;' == avro.parse('ami banglay gan gai;')
-    assert ['আমি বাংলার গান গাই।', 'আমি আমার আমিকে চিরদিন এই বাংলায় খুঁজে পাই।'] == avro.parse(
-        'ami banglar gan gai.', 'ami amar amike cirodin ei banglay khu^je pai.'
-    )
-
-
-def test_conversion_to_bijoy() -> NoReturn:
-    """
-    Test conversion to Bijoy.
+    Test conversion to Bijoy directly.
     """
 
     assert 'Avwg evsjvq Mvb MvB;' == avro.to_bijoy('আমি বাংলায় গান গাই;')
@@ -158,11 +147,18 @@ def test_conversion_to_bijoy() -> NoReturn:
     )
 
 
-def test_parse_to_bijoy() -> NoReturn:
+def test_full_sentences() -> NoReturn:
     """
-    Test parsing of sentences (Bijoy).
+    Test parsing of sentences (Unicode).
     """
 
+    # Default settings.
+    assert 'আমি বাংলায় গান গাই;' == avro.parse('ami banglay gan gai;')
+    assert ['আমি বাংলার গান গাই।', 'আমি আমার আমিকে চিরদিন এই বাংলায় খুঁজে পাই।'] == avro.parse(
+        'ami banglar gan gai.', 'ami amar amike cirodin ei banglay khu^je pai.'
+    )
+
+    # Bijoy settings.
     assert 'Avwg evsjvq Mvb MvB;' == avro.parse('ami banglay gan gai;', bijoy=True)
     assert 'Avwg Avgvi Avwg‡K wPiw`b GB evsjvq Lyu‡R cvB!' == avro.parse(
         'ami amar amike cirodin ei banglay khu^je pai!', bijoy=True
