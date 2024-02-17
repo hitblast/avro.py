@@ -136,7 +136,7 @@ def test_words_with_punctuations() -> NoReturn:
         assert key == value
 
 
-def tests_sentences_with_default() -> NoReturn:
+def test_sentences_with_default() -> NoReturn:
     """
     Test parsing of sentences (Unicode).
     """
@@ -147,7 +147,18 @@ def tests_sentences_with_default() -> NoReturn:
     )
 
 
-def tests_sentences_with_bijoy() -> NoReturn:
+def test_conversion_to_bijoy() -> NoReturn:
+    """
+    Test conversion to Bijoy.
+    """
+
+    assert 'Avwg evsjvq Mvb MvB;' == avro.to_bijoy('আমি বাংলায় গান গাই;')
+    assert 'Avwg Avgvi Avwg‡K wPiw`b GB evsjvq Lyu‡R cvB!' == avro.to_bijoy(
+        'আমি আমার আমিকে চিরদিন এই বাংলায় খুঁজে পাই!'
+    )
+
+
+def test_parse_to_bijoy() -> NoReturn:
     """
     Test parsing of sentences (Bijoy).
     """

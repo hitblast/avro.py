@@ -41,7 +41,7 @@ def parse(*texts: str, bijoy: bool = False) -> Union[str, List[str]]:
 
     Parameters:
     - `*texts: str | Tuple[str]`: The text(s) to parse.
-    - `bijoy: bool`: Whether to convert the output to Bijoy Keyboard format.
+    - `bijoy: bool`: Whether to return in the Bijoy Keyboard format (ASCII).
 
     Usage:
     ```python
@@ -102,17 +102,39 @@ def parse(*texts: str, bijoy: bool = False) -> Union[str, List[str]]:
 
     # If the `bijoy` parameter is set to `True`, then convert the output to Bijoy Keyboard format.
     if bijoy:
-        # Finally, the function for combining the logic above and converting the output.
-        def convert_to_bijoy(text: str) -> str:
-            text = _rearrange_unicode_text(re.sub('ৌ', 'ৌ', re.sub('ো', 'ো', text)))
+        output = _concurrency_helper(to_bijoy, output)
 
-            for unic in config.BIJOY_MAP:
-                text = re.sub(unic, config.BIJOY_MAP[unic], text)
+    return output[0] if len(output) == 1 else output
 
-            return text.strip()
 
-        output = _concurrency_helper(convert_to_bijoy, output)
+def to_bijoy(*texts: str) -> str:
+    """
+    #### Converts input text to Bijoy Keyboard format.
 
+    If a valid conversion is found, then it returns the converted string.
+
+    Parameters:
+    - `*texts: str | Tuple[str]`: The text(s) to convert.
+
+    Usage:
+    ```python
+    import avro
+
+    converted = avro.to_bijoy('আমার সোনার বাংলা')
+    print(converted)
+    ```
+    """
+
+    @lru_cache
+    def _convert_backend(text: str) -> str:
+        text = _rearrange_unicode_text(re.sub('ৌ', 'ৌ', re.sub('ো', 'ো', text)))
+
+        for unic in config.BIJOY_MAP:
+            text = re.sub(unic, config.BIJOY_MAP[unic], text)
+
+        return text.strip()
+
+    output = _concurrency_helper(_convert_backend, texts)
     return output[0] if len(output) == 1 else output
 
 
