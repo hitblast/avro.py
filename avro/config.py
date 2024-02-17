@@ -14,7 +14,7 @@ AVRO_NUMBERS = set(DICT['avro']['number'])
 AVRO_SHORBORNO = set(DICT['avro']['shorborno'])
 AVRO_KAR = DICT['avro']['kar']
 AVRO_IGNORE = DICT['avro']['ignore']
-EXCEPTIONS = DICT['avro']['exceptions']
+AVRO_EXCEPTIONS = DICT['avro']['exceptions']
 
 # Shortcuts for conversion (e.g. for Bijoy Keyboard support).
-BIJOY_MAP = DICT['bijoy']
+BIJOY_MAP = DICT['bijoy']['mappings']
