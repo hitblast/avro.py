@@ -73,7 +73,6 @@ We can also use avro.py to convert existing unicode Bengali to its Bijoy Keyboar
 ```python
 # Converting some text.
 bijoy_text = avro.to_bijoy('আমি বাংলায় গান গাই।')
-print(bijoy_text)
 ```
 
 ### 4. `reverse()`
@@ -82,7 +81,6 @@ Finally, you can reverse unicode Bengali to English as well (newly added).
 ```python
 # Reversing some text.
 reversed_text = avro.reverse('আমার সোনার বাংলা।')
-print(reversed_text)
 ```
 
 <br>
