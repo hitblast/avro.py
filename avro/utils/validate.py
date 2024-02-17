@@ -77,7 +77,7 @@ def fix_string_case(text: str) -> str:
 
 
 # ASCII-specific validation functions.
-# These are used for validating output while converting to ANSI after the initial conversion.
+# These are used for validating output while converting to ASCII after the initial conversion.
 def is_bangla_prekar(char: str):
     """
     Check if given character is a Bengali pre-kar.
