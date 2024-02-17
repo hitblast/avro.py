@@ -83,7 +83,7 @@ def is_bangla_prekar(char: str):
     Check if given character is a Bengali pre-kar.
     """
 
-    return char in ['ি', 'ৈ', 'ে']
+    return char in config.BIJOY_PREKAR
 
 
 def is_bangla_banjorborno(char: str):
@@ -91,7 +91,7 @@ def is_bangla_banjorborno(char: str):
     Check if given character is a Bengali banjonborno.
     """
 
-    return char in 'কখগঘঙচছজঝঞটঠডঢণতথদধনপফবভমশষসহযরলয়ংঃঁৎ'
+    return char in config.BIJOY_BANJONBORNO
 
 
 def is_bangla_halant(char: str):
@@ -99,4 +99,4 @@ def is_bangla_halant(char: str):
     Check if given character is a Bengali halant.
     """
 
-    return char == '্'
+    return char == config.BIJOY_EXCEPTIONS['halant']
