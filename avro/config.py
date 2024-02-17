@@ -18,3 +18,6 @@ AVRO_EXCEPTIONS = DICT['avro']['exceptions']
 
 # Shortcuts for conversion (e.g. for Bijoy Keyboard support).
 BIJOY_MAP = DICT['bijoy']['mappings']
+BIJOY_PREKAR = DICT['bijoy']['prekar']
+BIJOY_BANJONBORNO = DICT['bijoy']['banjonborno']
+BIJOY_EXCEPTIONS = DICT['bijoy']['exceptions']
