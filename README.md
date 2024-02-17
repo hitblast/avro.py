@@ -47,7 +47,7 @@ $ pip install -U avro.py
 
 ## Usage Guide
 
-#### `parse()`
+### 1. `parse()`
 This is the most basic use case for avro.py, which includes parsing English Roman script to unicode Bengali:
 
 ```python
@@ -59,7 +59,7 @@ output = avro.parse('ami banglay gan gai.')
 print(output)
 ```
 
-#### `parse(bijoy=True)`
+### 2. `parse(bijoy=True)`
 Alternatively, we can generate the same output, but in compliance with the Bijoy Keyboard format:
 
 ```python
@@ -67,7 +67,7 @@ Alternatively, we can generate the same output, but in compliance with the Bijoy
 output = avro.parse('tumi emon keno?', bijoy=True)
 ```
 
-#### `to_bijoy()`
+### 3. `to_bijoy()`
 We can also use avro.py to convert existing unicode Bengali to its Bijoy Keyboard equivalent:
 
 ```python
@@ -76,7 +76,7 @@ bijoy_text = avro.to_bijoy('আমি বাংলায় গান গাই।'
 print(bijoy_text)
 ```
 
-#### `reverse()`
+### 4. `reverse()`
 Finally, you can reverse unicode Bengali to English as well (newly added).
 
 ```python
