@@ -71,19 +71,19 @@ def parse(*texts: str, bijoy: bool = False) -> Union[str, List[str]]:
                     cur_end = cur + 1
                     yield i
                 elif cur >= cur_end and uni_pass:
-                    match = match_patterns(fixed_text, cur, rule=False)
+                    match = _match_patterns(fixed_text, cur, rule=False)
                     matched = match['matched']
 
                     if matched:
                         yield match['replaced']
                         cur_end = cur + len(match['found'])
                     else:
-                        match = match_patterns(fixed_text, cur, rule=True)
+                        match = _match_patterns(fixed_text, cur, rule=True)
                         matched = match['matched']
 
                         if matched:
                             cur_end = cur + len(match['found'])
-                            replaced = process_rules(
+                            replaced = _process_rules(
                                 rules=match['rules'], fixed_text=fixed_text, cur=cur, cur_end=cur_end
                             )
 
@@ -102,72 +102,9 @@ def parse(*texts: str, bijoy: bool = False) -> Union[str, List[str]]:
 
     # If the `bijoy` parameter is set to `True`, then convert the output to Bijoy Keyboard format.
     if bijoy:
-        # Rearranges the Unicode text to match Bijoy standards.
-        def rearrange_unicode_text(string: str):
-            barrier = 0
-            i = 0
-
-            while i < len(string):
-                if i < len(string) and validate.is_bangla_prekar(string[i]):
-                    j = 1
-                    while validate.is_bangla_banjorborno(string[i - j]):
-                        if i - j < 0:
-                            break
-                        if i - j <= barrier:
-                            break
-                        if validate.is_bangla_halant(string[i - j - 1]):
-                            j += 2
-                        else:
-                            break
-
-                    temp = string[0 : i - j] + string[i] + string[i - j : i] + string[i + 1 :]
-                    string = temp
-                    barrier = i + 1
-                    i += 1
-                    continue
-
-                if (
-                    i < len(string) - 1
-                    and validate.is_bangla_halant(string[i])
-                    and string[i - 1] == 'র'
-                    and not validate.is_bangla_halant(string[i - 2])
-                ):
-                    j = 1
-                    found_pre_kar = 0
-
-                    while True:
-                        if validate.is_bangla_banjorborno(string[i + j]) and validate.is_bangla_halant(
-                            string[i + j + 1]
-                        ):
-                            j += 2
-                        elif validate.is_bangla_banjorborno(string[i + j]) and validate.is_bangla_prekar(
-                            string[i + j + 1]
-                        ):
-                            found_pre_kar = 1
-                            break
-                        else:
-                            break
-
-                    temp = (
-                        string[0 : i - 1]
-                        + string[i + j + 1 : i + j + found_pre_kar + 1]
-                        + string[i + 1 : i + j + 1]
-                        + string[i - 1]
-                        + string[i]
-                        + string[i + j + found_pre_kar + 1 :]
-                    )
-                    string = temp
-                    i += j + found_pre_kar
-                    barrier = i + 1
-                    continue
-
-                i += 1
-
-            return string
-
         # Finally, the function for combining the logic above and converting the output.
         def convert_to_bijoy(text: str) -> str:
-            text = rearrange_unicode_text(re.sub('ৌ', 'ৌ', re.sub('ো', 'ো', text)))
+            text = _rearrange_unicode_text(re.sub('ৌ', 'ৌ', re.sub('ো', 'ো', text)))
 
             for unic in config.BIJOY_MAP:
                 text = re.sub(unic, config.BIJOY_MAP[unic], text)
@@ -207,7 +144,7 @@ def reverse(*texts: str) -> Union[str, List[str]]:
         for cur, i in enumerate(text):
             try:
                 i.encode('utf-8')
-                match = match_patterns(text, cur, rule=False, reversed=True)
+                match = _match_patterns(text, cur, rule=False, reversed=True)
 
                 if match['matched']:
                     output.append(match['reversed'] if match['reversed'] else match['found'])
@@ -239,7 +176,65 @@ def reverse(*texts: str) -> Union[str, List[str]]:
     return output[0] if len(output) == 1 else output
 
 
-def match_patterns(
+def _rearrange_unicode_text(string: str) -> str:
+    """
+    Rearranges Unicode (Avro) text to match conversion standards for ASCII.
+
+    Returns the rearranged string.
+    """
+
+    chars = list(string)
+    length = len(chars)
+    barrier = 0
+
+    for i in range(length):
+        if validate.is_bangla_prekar(chars[i]):
+            j = 1
+
+            while validate.is_bangla_banjorborno(chars[i - j]):
+                if i - j < 0 or i - j <= barrier or not validate.is_bangla_halant(chars[i - j - 1]):
+                    break
+                j += 2
+
+            chars[i - j], chars[i] = chars[i], chars[i - j]
+            barrier = i + 1
+
+        if (
+            i < length - 1
+            and validate.is_bangla_halant(chars[i])
+            and chars[i - 1] == 'র'
+            and not validate.is_bangla_halant(chars[i - 2])
+        ):
+            j = 1
+            found_pre_kar = 0
+
+            while True:
+                if validate.is_bangla_banjorborno(chars[i + j]) and validate.is_bangla_halant(
+                    chars[i + j + 1]
+                ):
+                    j += 2
+                elif validate.is_bangla_banjorborno(chars[i + j]) and validate.is_bangla_prekar(
+                    chars[i + j + 1]
+                ):
+                    found_pre_kar = 1
+                    break
+                else:
+                    break
+
+            chars[i - 1], chars[i], chars[i + 1 : i + j + found_pre_kar + 1], chars[i + j + 1 :] = (
+                chars[i + j + 1],
+                chars[i + 1 : i + j + 1],
+                chars[i - 1],
+                chars[i],
+                chars[i + j + found_pre_kar + 1 :],
+            )
+            i += j + found_pre_kar
+            barrier = i + 1
+
+    return ''.join(chars)
+
+
+def _match_patterns(
     fixed_text: str, cur: int = 0, rule: bool = False, reversed: bool = False
 ) -> Dict[str, Any]:
     """
@@ -249,7 +244,7 @@ def match_patterns(
     """
 
     rule_type = NON_RULE_PATTERNS if not rule else RULE_PATTERNS
-    pattern = exact_find_in_pattern(fixed_text, reversed, cur, rule_type)
+    pattern = _exact_find_in_pattern(fixed_text, reversed, cur, rule_type)
 
     if pattern:
         p = pattern[0]
@@ -258,7 +253,7 @@ def match_patterns(
             'matched': True,
             'found': p.get('find'),
             'replaced': p.get('replace'),
-            'reversed': reverse_with_rules(cur, fixed_text, p.get('reverse')) if not rule else None,
+            'reversed': _reverse_with_rules(cur, fixed_text, p.get('reverse')) if not rule else None,
             'rules': p.get('rules') if rule else None,
         }
 
@@ -270,7 +265,7 @@ def match_patterns(
     }
 
 
-def exact_find_in_pattern(
+def _exact_find_in_pattern(
     fixed_text: str, reversed: bool, cur: int = 0, patterns: Any = PATTERNS
 ) -> List[Dict[str, Any]]:
     """
@@ -294,8 +289,7 @@ def exact_find_in_pattern(
     ]
 
 
-@lru_cache
-def reverse_with_rules(cursor: int, fixed_text: str, text_reversed: str) -> str:
+def _reverse_with_rules(cursor: int, fixed_text: str, text_reversed: str) -> str:
     """
     Enhances the word with rules for reverse-parsing.
     """
@@ -322,7 +316,7 @@ def reverse_with_rules(cursor: int, fixed_text: str, text_reversed: str) -> str:
     return text_reversed if not text_reversed else text_reversed + added_suffix
 
 
-def process_rules(rules: Dict[str, Any], fixed_text: str, cur: int = 0, cur_end: int = 1) -> Optional[str]:
+def _process_rules(rules: Dict[str, Any], fixed_text: str, cur: int = 0, cur_end: int = 1) -> Optional[str]:
     """
     Process rules matched in pattern and returns suitable replacement.
 
@@ -337,7 +331,7 @@ def process_rules(rules: Dict[str, Any], fixed_text: str, cur: int = 0, cur_end:
         matched = False
 
         for match in rule['matches']:
-            matched = process_match(match, fixed_text, cur, cur_end)
+            matched = _process_match(match, fixed_text, cur, cur_end)
 
             if not matched:
                 break
@@ -349,7 +343,7 @@ def process_rules(rules: Dict[str, Any], fixed_text: str, cur: int = 0, cur_end:
     return replaced if matched else None
 
 
-def process_match(match: Any, fixed_text: str, cur: int, cur_end: int) -> bool:
+def _process_match(match: Any, fixed_text: str, cur: int, cur_end: int) -> bool:
     """
     Processes a single match in rules.
     """
