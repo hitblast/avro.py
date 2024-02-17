@@ -79,7 +79,7 @@ bijoy_text = avro.to_bijoy('আমি বাংলায় গান গাই।'
 Finally, you can reverse unicode Bengali to English as well (newly added).
 
 ```python
-# Reversing some text.
+# Reversing back!
 reversed_text = avro.reverse('আমার সোনার বাংলা।')
 ```
 
