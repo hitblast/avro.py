@@ -655,9 +655,9 @@ DICT: Dict[str, Any] = {
         'number': '0123456789',
         # For reverse parsing.
         'shorborno': 'অআইঈউঊএঐওঔ',
-        'kar': {'া', 'ি', 'ী', 'ৗ', 'ু', 'ূ', 'ৃ', 'ে', 'ৈ', 'ো', 'ৌ'},
+        'kar': ['া', 'ি', 'ী', 'ৗ', 'ু', 'ূ', 'ৃ', 'ে', 'ৈ', 'ো', 'ৌ'],
         # Ignored symbols.
-        'ignore': {'ঁ', '।', '?', '.', '-', ';'},
+        'ignore': ['ঁ', '।', '?', '.', '-', ';'],
     },
     # Bijoy Keyboard mappings.
     'bijoy': {

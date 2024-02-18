@@ -12,12 +12,12 @@ AVRO_NUMBERS = set(DICT['avro']['number'])
 
 # Shortcuts to Bengali Svaravarna, Kar(s)
 AVRO_SHORBORNO = set(DICT['avro']['shorborno'])
-AVRO_KAR = DICT['avro']['kar']
-AVRO_IGNORE = DICT['avro']['ignore']
+AVRO_KAR = set(DICT['avro']['kar'])
+AVRO_IGNORE = set(DICT['avro']['ignore'])
 AVRO_EXCEPTIONS = DICT['avro']['exceptions']
 
 # Shortcuts for conversion (e.g. for Bijoy Keyboard support).
 BIJOY_MAP = DICT['bijoy']['mappings']
-BIJOY_PREKAR = DICT['bijoy']['prekar']
-BIJOY_BANJONBORNO = DICT['bijoy']['banjonborno']
+BIJOY_PREKAR = set(DICT['bijoy']['prekar'])
+BIJOY_BANJONBORNO = set(DICT['bijoy']['banjonborno'])
 BIJOY_EXCEPTIONS = DICT['bijoy']['exceptions']
