@@ -5,8 +5,5 @@ target-version = "py38"
 line-length = 110
 exclude = ["venv"]
 
-[tool.ruff.lint]
-ignore = ["E203", "E252", "E402", "F401", "F403", "F601"]
-
 [tool.ruff.format]
 quote-style = "single"
