@@ -5,5 +5,11 @@ target-version = "py38"
 line-length = 110
 exclude = ["venv"]
 
+[tool.ruff.lint.per-file-ignores]
+"avro/__init__.py" = ["F403"]
+"avro/resources/__init__.py" = ["F403"]
+"avro/resources/dictionary.py" = ["F601"]
+"tests/test_main.py" = ["F601"]
+
 [tool.ruff.format]
 quote-style = "single"
