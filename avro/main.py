@@ -70,6 +70,7 @@ def parse(*texts: str, bijoy: bool = False) -> Union[str, List[str]]:
                 if not uni_pass:
                     cur_end = cur + 1
                     yield i
+
                 elif cur >= cur_end and uni_pass:
                     match = _match_patterns(fixed_text, cur, rule=False)
                     matched = match['matched']
