@@ -100,13 +100,13 @@ In short, avro.py doesn't depend on any third-party libraries. However, if you'd
 
 ```bash
 # Installing the required developer toolchain.
-$ python3 -m pip install pytest ruff
+$ python3 -m pip install -r requirements.txt
 
-# Running pytest.
+# (Optional) Setting up the package itself for testing purposes.
+$ python3 setup.py develop
+
+# Running the predetermined tests inside the project.
 $ python3 -m pytest --verbose
-
-# The results should appear onwards.
-# The --verbose / -v flag is used to show all the test results in detail.
 ```
 
 ### 🐛 We're looking for bug hunters, by the way!

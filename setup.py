@@ -34,12 +34,13 @@ setup(
     python_requires='>=3.8',
     keywords=[
         'python',
+        'phonetics',
         'avro',
         'avro phonetic',
         'bangla',
-        'bangla phonetics',
         'bengali',
         'bengali phonetics',
+        'transliteration',
     ],
     classifiers=[
         'Intended Audience :: Developers',
