@@ -18,13 +18,13 @@ def main():
     def cli():
         pass
 
-    # Define the command.
+    # usage: avro parse <text>
     @cli.command('parse', help='Parse a given text to Bangla.')
     @click.argument('text')
     def _parse(text: str):
         click.echo(avro.parse(text))
 
-    # Define another command.
+    # usage: avro reverse <text>
     @cli.command('reverse', help='Reverse a given text to English.')
     @click.argument('text')
     def _reverse(text: str):
