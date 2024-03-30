@@ -52,4 +52,12 @@ setup(
         'Programming Language :: Python :: 3.12',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
+    extras_require={
+        'cli': ['click>=8.0.0'],
+    },
+    entry_points={
+        'console_scripts': [
+            'avro=avro.cli:main',
+        ],
+    },
 )
