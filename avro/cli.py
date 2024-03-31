@@ -14,7 +14,11 @@ def main():
         return print('In order to enable CLI, please install avro.py using: pip install avro.py[cli]')
 
     # Define the command group.
-    @click.group(help='(CLI) A modern Pythonic implementation of Avro Phonetic.')
+    @click.group(help=avro.__description__)
+    @click.version_option(
+        package_name='avro.py',
+        message='Package: %(prog)s, version %(version)s\nCore: version {0}'.format(avro.__version__),
+    )
     def cli():
         pass
 
