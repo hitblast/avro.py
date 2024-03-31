@@ -83,6 +83,19 @@ Finally, you can reverse unicode Bengali to English as well (newly added).
 reversed_text = avro.reverse('আমার সোনার বাংলা।')
 ```
 
+---
+
+or, you can use the command line interface (CLI) to interact with the package:
+
+```bash
+# Parsing some text.
+$ avro parse "tumi onek bhalO!"
+$ avro parse --bijoy "amio kharap na, taina?"  # (bijoy keyboard format)
+
+# Reversing.
+$ avro reverse "তাই তো!"
+```
+
 <br>
 
 ## 🛠️ Contributing

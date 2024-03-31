@@ -29,12 +29,6 @@ def main():
     def _parse(text: str, bijoy: bool = False):
         click.echo((avro.parse(text) if not bijoy else avro.parse(text, bijoy=True)))
 
-    # usage: avro tobijoy <text>
-    @cli.command('tobijoy', help='Convert a given text to Bijoy Keyboard format.')
-    @click.argument('text')
-    def _tobijoy(text: str):
-        click.echo(avro.to_bijoy(text))
-
     # usage: avro reverse <text>
     @cli.command('reverse', help='Reverse a given text to English.')
     @click.argument('text')
