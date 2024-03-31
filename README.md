@@ -38,9 +38,9 @@ This package is inspired from Rifat Nabi's jsAvroPhonetic library and derives fr
 
 This package requires **Python 3.8 or higher** to be used inside your development environment.
 
-```bash
+```sh
 # Install / upgrade.
-$ pip install -U avro.py
+$ pip install avro.py
 ```
 
 <br>
@@ -85,9 +85,22 @@ reversed_text = avro.reverse('আমার সোনার বাংলা।')
 
 ---
 
-or, you can use the command line interface (CLI) to interact with the package:
+## 🔖 Command Line Usgae
 
-```bash
+Alternatively, instead of using avro.py from within your Python project, you can also use it as a simple,
+tiny command-line interface for easy parsing and reversing of text.
+
+```sh
+# Installing the package.
+$ pip install avro.py[cli]
+```
+
+Here are some examples for you to get started with:
+
+```sh
+# Main help section.
+$ avro --help  # or, use: avro <command> --help
+
 # Parsing some text.
 $ avro parse "tumi onek bhalO!"
 $ avro parse --bijoy "amio kharap na, taina?"  # (bijoy keyboard format)
@@ -111,7 +124,7 @@ In short, avro.py doesn't depend on any third-party libraries. However, if you'd
 - [ruff](https://github.com/astral-sh/ruff) - linter
 - [pytest](https://pypi.python.org/pypi/pytest) - testing framework
 
-```bash
+```sh
 # Installing the required developer toolchain.
 $ python3 -m pip install -r requirements.txt
 
