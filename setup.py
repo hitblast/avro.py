@@ -8,7 +8,7 @@ import os
 from setuptools import find_packages, setup
 
 # Import local modules to fetch version number.
-from avro import __version__
+from avro import __description__, __version__
 
 # Constants.
 here = os.path.abspath(os.path.dirname(__file__))
@@ -21,7 +21,7 @@ with codecs.open(os.path.join(here, 'README.md'), encoding='utf-8') as fh:
 setup(
     name='avro.py',
     version=__version__,
-    description='A modern Pythonic implementation of Avro Phonetic.',
+    description=__description__,
     long_description_content_type='text/markdown',
     long_description=long_description,
     author='HitBlast',
