@@ -85,7 +85,7 @@ reversed_text = avro.reverse('আমার সোনার বাংলা।')
 
 ---
 
-## 🔖 Command Line Usgae
+## 🔖 Command Line Usage
 
 Alternatively, instead of using avro.py from within your Python project, you can also use it as a simple,
 tiny command-line interface for easy parsing and reversing of text.
