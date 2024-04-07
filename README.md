@@ -107,6 +107,11 @@ $ avro parse --bijoy "amio kharap na, taina?"  # (bijoy keyboard format)
 
 # Reversing.
 $ avro reverse "তাই তো!"
+
+# Using additional flags to ease workflow.
+$ avro parse --from-clip  # (fetching input from clipboard)
+$ avro parse "asolei!" --copy  # (copying output to clipboard)
+$ avro parse --from-clip --copy  # (clipboard input -> output)
 ```
 
 <br>
