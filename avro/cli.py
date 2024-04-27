@@ -54,14 +54,18 @@ def _cli_action(
                 return _print_err('No text found in the clipboard.')
 
     if reverse:
-        text = avro.reverse(text)
+        output = avro.reverse(text)
     else:
-        text = avro.parse(text) if not bijoy else avro.parse(text, bijoy=True)
+        output = avro.parse(text) if not bijoy else avro.parse(text, bijoy=True)
+
+    if output == text:
+        return _print_err('No changes in output.')
+
+    console.print(f'\n[bold green]Output[/bold green]\n {text}\n')
 
     if copy_on_success:
         pyclip.copy(text)
-
-    click.echo(text)
+        console.print('[bold yellow](copied to clipboard)[/bold yellow]\n')
 
 
 # usage: avro parse <text> [--bijoy] [--from-clip] [--copy]
