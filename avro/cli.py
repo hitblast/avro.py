@@ -10,6 +10,8 @@ import avro
 try:
     import click
     import pyclip
+    from rich.console import Console
+
 except ImportError:
     print('In order to enable CLI, please install avro.py using: pip install avro.py[cli]')
     exit()
@@ -25,6 +27,16 @@ def cli() -> None:
     pass
 
 
+# Initialize Console object for rich-based output.
+console = Console()
+
+
+# Helper functions for CLI commands.
+def _print_err(text: str) -> None:
+    console.print(text, style='red')
+    return click.echo(err=True)
+
+
 # Helper function for CLI actions.
 def _cli_action(
     text: str,
@@ -36,10 +48,10 @@ def _cli_action(
 ) -> Optional[str]:
     if not text:
         if not from_clipboard:
-            return click.echo('No text provided.')
+            return _print_err('No text provided.')
         else:
             if not (text := pyclip.paste(text=True).strip()):
-                return click.echo('No text found in the clipboard.')
+                return _print_err('No text found in the clipboard.')
 
     if reverse:
         text = avro.reverse(text)
