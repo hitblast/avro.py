@@ -2,3 +2,4 @@ click>=8.1.7
 pyclip>=0.7.0
 pytest>=8.1.1
 ruff>=0.3.4
+rich>=13.0.0
