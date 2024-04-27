@@ -54,7 +54,7 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
     extras_require={
-        'cli': ['click>=8.0.0', 'pyclip >= 0.7.0'],
+        'cli': ['click>=8.0.0', 'pyclip >= 0.7.0', 'rich>=13.0.0'],
     },
     entry_points={
         'console_scripts': [
