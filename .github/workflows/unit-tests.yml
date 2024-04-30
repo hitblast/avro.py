@@ -22,15 +22,16 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
- 
-    - name: Set up Python 3
-      uses: actions/setup-python@v5
+
+    - name: Install Poetry
+      uses: snok/install-poetry@v1
       with:
-        python-version: '3.x'
- 
-    - name: Set up dependencies
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+
+    - name: Install dependencies & setup project
       run: |
-        pip install -U pip && pip install pytest
+        poetry install --sync --no-interaction --no-root --with test
  
     - name: Run the tests
       run: pytest -v
