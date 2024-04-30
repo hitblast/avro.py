@@ -20,10 +20,10 @@ def test_count_vowels() -> NoReturn:
     """
 
     strings = {
-        'haTTima Tim Tim': 5,
-        'tara maThe paRe Dim': 7,
-        'tader mathay duTO sing': 7,
-        'tara haTTima Tim Tim': 7,
+        "haTTima Tim Tim": 5,
+        "tara maThe paRe Dim": 7,
+        "tader mathay duTO sing": 7,
+        "tara haTTima Tim Tim": 7,
     }
 
     for string, integer in strings.items():
@@ -36,10 +36,10 @@ def test_count_consonants() -> NoReturn:
     """
 
     strings = {
-        'ei dekh pensil': 7,
-        'nOTbuk e hate': 6,
-        'ei dekh bhora sob': 8,
-        'kil`bil lekha te': 8,
+        "ei dekh pensil": 7,
+        "nOTbuk e hate": 6,
+        "ei dekh bhora sob": 8,
+        "kil`bil lekha te": 8,
     }
 
     for string, integer in strings.items():

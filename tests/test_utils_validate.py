@@ -13,11 +13,11 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.
 from avro.utils import validate
 
 # Set up test environments.
-vowels = 'aeiou'
-consonants = 'bcdfghjklmnpqrstvwxyz'
-numbers = '0123456789'
-prekars = ['ি', 'ৈ', 'ে']
-banjonborno = 'কখগঘঙচছজঝঞটঠডঢণতথদধনপফবভমশষসহযরলয়ংঃঁৎ'
+vowels = "aeiou"
+consonants = "bcdfghjklmnpqrstvwxyz"
+numbers = "0123456789"
+prekars = ["ি", "ৈ", "ে"]
+banjonborno = "কখগঘঙচছজঝঞটঠডঢণতথদধনপফবভমশষসহযরলয়ংঃঁৎ"
 
 
 # Test functions for this file.
@@ -65,7 +65,7 @@ def test_is_punctuation() -> NoReturn:
     identified as a punctuation.
     """
 
-    for i in '`~!@#$%^&*()-_=+\\|[{}]\'",<.>/?':
+    for i in "`~!@#$%^&*()-_=+\\|[{}]'\",<.>/?":
         assert validate.is_punctuation(i)
         assert not validate.is_vowel(i)
         assert not validate.is_consonant(i)
@@ -82,10 +82,10 @@ def test_fix_string_case() -> NoReturn:
     uppercase.
     """
 
-    assert validate.fix_string_case('ABOL taBOl') == 'abOl tabOl'
-    assert validate.fix_string_case('KhiCuRi') == 'khicuRi'
-    assert validate.fix_string_case('KaTh-BuRO') == 'kaTh-buRO'
-    assert validate.fix_string_case('raMgoRurer Chana') == 'ramgoRurer chana'
+    assert validate.fix_string_case("ABOL taBOl") == "abOl tabOl"
+    assert validate.fix_string_case("KhiCuRi") == "khicuRi"
+    assert validate.fix_string_case("KaTh-BuRO") == "kaTh-buRO"
+    assert validate.fix_string_case("raMgoRurer Chana") == "ramgoRurer chana"
 
 
 def test_is_exact() -> NoReturn:
@@ -93,13 +93,13 @@ def test_is_exact() -> NoReturn:
     Test exact search response of needle in haystack.
     """
 
-    assert validate.is_exact('abcd', 'abcdefgh', 0, 4, False)
-    assert not validate.is_exact('abcd', 'abcdefgh', 0, 4, True)
-    assert not validate.is_exact('bcd', 'abcdefgh', 0, 4, False)
-    assert validate.is_exact('bcd', 'abcdefgh', 0, 4, True)
+    assert validate.is_exact("abcd", "abcdefgh", 0, 4, False)
+    assert not validate.is_exact("abcd", "abcdefgh", 0, 4, True)
+    assert not validate.is_exact("bcd", "abcdefgh", 0, 4, False)
+    assert validate.is_exact("bcd", "abcdefgh", 0, 4, True)
 
-    assert not validate.is_exact('a', 'a', 1, 2, False)
-    assert validate.is_exact('a', 'a', 1, 2, True)
+    assert not validate.is_exact("a", "a", 1, 2, False)
+    assert validate.is_exact("a", "a", 1, 2, True)
 
 
 def test_is_prekar() -> NoReturn:
@@ -111,10 +111,10 @@ def test_is_prekar() -> NoReturn:
         assert validate.is_bangla_prekar(i)
 
     assert not (
-        validate.is_bangla_prekar('া')
-        and validate.is_bangla_prekar('ূ')
-        and validate.is_bangla_prekar('a')
-        and validate.is_bangla_prekar('b')
+        validate.is_bangla_prekar("া")
+        and validate.is_bangla_prekar("ূ")
+        and validate.is_bangla_prekar("a")
+        and validate.is_bangla_prekar("b")
     )
 
 
@@ -127,10 +127,10 @@ def test_is_banjonborno() -> NoReturn:
         assert validate.is_bangla_banjonborno(i)
 
     assert not (
-        validate.is_bangla_banjonborno('a')
-        and validate.is_bangla_banjonborno('ূ')
-        and validate.is_bangla_banjonborno('া')
-        and validate.is_bangla_banjonborno('b')
+        validate.is_bangla_banjonborno("a")
+        and validate.is_bangla_banjonborno("ূ")
+        and validate.is_bangla_banjonborno("া")
+        and validate.is_bangla_banjonborno("b")
     )
 
 
@@ -139,10 +139,10 @@ def test_is_halant() -> NoReturn:
     Test if given string is a halant.
     """
 
-    assert validate.is_bangla_halant('্')
+    assert validate.is_bangla_halant("্")
     assert not (
-        validate.is_bangla_halant('a')
-        and validate.is_bangla_halant('ূ')
-        and validate.is_bangla_halant('া')
-        and validate.is_bangla_halant('b')
+        validate.is_bangla_halant("a")
+        and validate.is_bangla_halant("ূ")
+        and validate.is_bangla_halant("া")
+        and validate.is_bangla_halant("b")
     )

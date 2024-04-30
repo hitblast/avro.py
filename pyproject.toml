@@ -11,9 +11,6 @@ exclude = ["venv"]
 "avro/resources/dictionary.py" = ["F601"]
 "tests/test_main.py" = ["F601"]
 
-[tool.ruff.format]
-quote-style = "single"
-
 [tool.poetry]
 name = "avro-py"
 version = "2024.5.1"
