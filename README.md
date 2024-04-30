@@ -30,7 +30,7 @@ A modern Pythonic implementation of the popular Bengali phonetic-typing software
 
 ## ✨ Inspirations
 
-This package is inspired from Rifat Nabi's jsAvroPhonetic library and derives from Kaustav Das Modak's pyAvroPhonetic. 
+This package is inspired from Rifat Nabi's jsAvroPhonetic library and derives from Kaustav Das Modak's pyAvroPhonetic.
 
 <br>
 
@@ -48,6 +48,7 @@ $ pip install avro.py
 ## 🔖 Usage Guide
 
 ### 1. `parse()`
+
 This is the most basic use case for avro.py, which includes parsing English Roman script to unicode Bengali:
 
 ```python
@@ -60,6 +61,7 @@ print(output)
 ```
 
 ### 2. `parse(bijoy=True)`
+
 Alternatively, we can generate the same output, but in compliance with the Bijoy Keyboard format:
 
 ```python
@@ -68,6 +70,7 @@ output = avro.parse('tumi emon keno?', bijoy=True)
 ```
 
 ### 3. `to_bijoy()`
+
 We can also use avro.py to convert existing unicode Bengali to its Bijoy Keyboard equivalent:
 
 ```python
@@ -76,6 +79,7 @@ bijoy_text = avro.to_bijoy('আমি বাংলায় গান গাই।'
 ```
 
 ### 4. `reverse()`
+
 Finally, you can reverse unicode Bengali to English as well (newly added).
 
 ```python
@@ -118,7 +122,7 @@ $ avro parse --from-clip --copy  # (clipboard input -> output)
 
 ## 🛠️ Contributing
 
-:octocat: *Fork -> Do your changes -> Send a Pull Request, it's that easy!* <br>
+:octocat: _Fork -> Do your changes -> Send a Pull Request, it's that easy!_ <br>
 
 ---
 
