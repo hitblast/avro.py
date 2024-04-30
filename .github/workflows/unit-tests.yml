@@ -34,4 +34,4 @@ jobs:
         poetry install --sync --no-interaction --no-root --with test
  
     - name: Run the tests
-      run: pytest -v
+      run: poetry run pytest .
