@@ -18,10 +18,10 @@ except ImportError:
 
 
 # Create a new group for putting the CLI commands.
-@click.group(help=avro.__description__)
+@click.group(help="A modern Pythonic implementation of Avro Phonetic.")
 @click.version_option(
     package_name="avro.py",
-    message="Package: %(prog)s, version %(version)s\nCore: version {0}".format(avro.__version__),
+    message="Package: %(prog)s, version %(version)s\n",
 )
 def cli() -> None:
     pass
