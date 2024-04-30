@@ -19,16 +19,15 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - name: Set up Python 3
-      uses: actions/setup-python@v5
+    - name: Install Poetry
+      uses: snok/install-poetry@v1
       with:
-        python-version: '3.x'
+          virtualenvs-create: true
+          virtualenvs-in-project: true
 
     - name: Install dependencies & build
       run: |
-        pip install -U pip
-        pip install build
-        python -m build
+        poetry build -o dist --no-interaction --no-cache --verbose
 
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
