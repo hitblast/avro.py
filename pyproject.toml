@@ -13,3 +13,57 @@ exclude = ["venv"]
 
 [tool.ruff.format]
 quote-style = "single"
+
+[tool.poetry]
+name = "avro-py"
+version = "2024.5.1"
+description = "A modern Pythonic implementation of Avro Phonetic."
+authors = ["HitBlast <hitblastlive@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "avro"}]
+homepage = "https://pypi.org/project/avro-py"
+repository = "https://github.com/hitblast/avro.py"
+documentation = "https://hitblast.github.io/avro.py"
+keywords = [
+    'python',
+    'phonetics',
+    'avro',
+    'avro phonetic',
+    'bangla',
+    'bengali',
+    'bengali phonetics',
+    'transliteration',
+]
+classifiers=[
+    'Intended Audience :: Developers',
+    'License :: OSI Approved :: MIT License',
+    'Operating System :: OS Independent',
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
+    'Topic :: Software Development :: Libraries :: Python Modules',
+]
+
+[tool.poetry.scripts]
+avro = "avro.cli:main"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+click = { version="^8", optional = true }
+rich = { version="^13", optional = true }
+pyclip = { version="^0.7.0", optional = true }
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.2.0"
+ruff = "^0.4.2"
+
+[tool.poetry.extras]
+cli = ["click", "rich", "pyclip"]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
