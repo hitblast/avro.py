@@ -13,15 +13,15 @@ try:
     from rich.console import Console
 
 except ImportError:
-    print('In order to enable CLI, please install avro.py using: pip install avro.py[cli]')
+    print("In order to enable CLI, please install avro.py using: pip install avro.py[cli]")
     exit()
 
 
 # Create a new group for putting the CLI commands.
 @click.group(help=avro.__description__)
 @click.version_option(
-    package_name='avro.py',
-    message='Package: %(prog)s, version %(version)s\nCore: version {0}'.format(avro.__version__),
+    package_name="avro.py",
+    message="Package: %(prog)s, version %(version)s\nCore: version {0}".format(avro.__version__),
 )
 def cli() -> None:
     pass
@@ -33,7 +33,7 @@ console = Console()
 
 # Helper functions for CLI commands.
 def _print_err(text: str) -> None:
-    console.print(text, style='red')
+    console.print(text, style="red")
     return click.echo(err=True)
 
 
@@ -48,10 +48,10 @@ def _cli_action(
 ) -> Optional[str]:
     if not text:
         if not from_clipboard:
-            return _print_err('No text provided.')
+            return _print_err("No text provided.")
         else:
             if not (text := pyclip.paste(text=True).strip()):
-                return _print_err('No text found in the clipboard.')
+                return _print_err("No text found in the clipboard.")
 
     if reverse:
         output = avro.reverse(text)
@@ -59,22 +59,22 @@ def _cli_action(
         output = avro.parse(text) if not bijoy else avro.parse(text, bijoy=True)
 
     if output == text:
-        return _print_err('No changes in output.')
+        return _print_err("No changes in output.")
 
-    console.print(f'\n[bold green]Output[/bold green]\n {text}\n')
+    console.print(f"\n[bold green]Output[/bold green]\n {text}\n")
 
     if copy_on_success:
         pyclip.copy(text)
-        console.print('[bold yellow](copied to clipboard)[/bold yellow]\n')
+        console.print("[bold yellow](copied to clipboard)[/bold yellow]\n")
 
 
 # usage: avro parse <text> [--bijoy] [--from-clip] [--copy]
-@cli.command('parse', help='Parse a given text to Bangla / Bengali.')
-@click.argument('text', required=False)
-@click.option('--bijoy', is_flag=True, help='Use Bijoy Keyboard format for parsing.')
-@click.option('--from-clip', is_flag=True, help='Parse text from clipboard.')
-@click.option('--copy', is_flag=True, help='Copy the parsed text to clipboard.')
-def _parse(text: str = '', bijoy: bool = False, from_clip: bool = False, copy: bool = False) -> None:
+@cli.command("parse", help="Parse a given text to Bangla / Bengali.")
+@click.argument("text", required=False)
+@click.option("--bijoy", is_flag=True, help="Use Bijoy Keyboard format for parsing.")
+@click.option("--from-clip", is_flag=True, help="Parse text from clipboard.")
+@click.option("--copy", is_flag=True, help="Copy the parsed text to clipboard.")
+def _parse(text: str = "", bijoy: bool = False, from_clip: bool = False, copy: bool = False) -> None:
     _cli_action(
         text,
         bijoy=bijoy,
@@ -84,10 +84,10 @@ def _parse(text: str = '', bijoy: bool = False, from_clip: bool = False, copy: b
 
 
 # usage: avro reverse <text> [--from-clip] [--copy]
-@cli.command('reverse', help='Reverse a given text to English.')
-@click.argument('text')
-@click.option('--from-clip', is_flag=True, help='Reverse text from clipboard.')
-@click.option('--copy', is_flag=True, help='Copy the reversed text to clipboard.')
+@cli.command("reverse", help="Reverse a given text to English.")
+@click.argument("text")
+@click.option("--from-clip", is_flag=True, help="Reverse text from clipboard.")
+@click.option("--copy", is_flag=True, help="Copy the reversed text to clipboard.")
 def _reverse(text: str, from_clip: bool = False, copy: bool = False) -> None:
     _cli_action(
         text,
