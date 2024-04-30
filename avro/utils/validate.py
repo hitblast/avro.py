@@ -65,14 +65,7 @@ def fix_string_case(text: str) -> str:
     which will the parser will understand without confusion.
     """
 
-    fixed = []
-
-    for i in text:
-        if is_case_sensitive(i):
-            fixed.append(i)
-        else:
-            fixed.append(i.lower())
-
+    fixed = [i if is_case_sensitive(i) else i.lower() for i in text]
     return "".join(fixed)
 
 
