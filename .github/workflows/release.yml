@@ -29,6 +29,9 @@ jobs:
       run: |
         poetry install --sync --no-interaction --no-root
         poetry config pypi-token.pypi ${{ secrets.PYPI_TOKEN }}
+      
+    - name: Publish package
+      run: poetry publish --build
 
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
@@ -38,6 +41,3 @@ jobs:
         tag: ${{ github.ref }}
         overwrite: true
         file_glob: true
-      
-    - name: Publish package
-      run: poetry publish --build
