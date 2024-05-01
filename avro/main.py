@@ -13,9 +13,9 @@ from . import config
 from .utils import validate
 
 # Constants.
-PATTERNS = config.DICT['avro']['patterns']
-NON_RULE_PATTERNS = [p for p in PATTERNS if 'rules' not in p]
-RULE_PATTERNS = [p for p in PATTERNS if 'rules' in p]
+PATTERNS = config.DICT["avro"]["patterns"]
+NON_RULE_PATTERNS = [p for p in PATTERNS if "rules" not in p]
+RULE_PATTERNS = [p for p in PATTERNS if "rules" in p]
 
 
 # The helper function for handling multithreaded workloads.
@@ -53,7 +53,7 @@ def parse(*texts: str, bijoy: bool = False) -> Union[str, List[str]]:
     """
 
     # Compiled regular expression for UTF-8 validation
-    utf8_regex = re.compile(r'\A[\x00-\x7F]*\Z')
+    utf8_regex = re.compile(r"\A[\x00-\x7F]*\Z")
 
     @lru_cache
     def _parse_backend(text: str) -> str:
@@ -73,31 +73,31 @@ def parse(*texts: str, bijoy: bool = False) -> Union[str, List[str]]:
 
                 elif cur >= cur_end and uni_pass:
                     match = _match_patterns(fixed_text, cur, rule=False)
-                    matched = match['matched']
+                    matched = match["matched"]
 
                     if matched:
-                        yield match['replaced']
-                        cur_end = cur + len(match['found'])
+                        yield match["replaced"]
+                        cur_end = cur + len(match["found"])
                     else:
                         match = _match_patterns(fixed_text, cur, rule=True)
-                        matched = match['matched']
+                        matched = match["matched"]
 
                         if matched:
-                            cur_end = cur + len(match['found'])
+                            cur_end = cur + len(match["found"])
                             replaced = _process_rules(
-                                rules=match['rules'], fixed_text=fixed_text, cur=cur, cur_end=cur_end
+                                rules=match["rules"], fixed_text=fixed_text, cur=cur, cur_end=cur_end
                             )
 
                             if replaced:
                                 yield replaced
                             else:
-                                yield match['replaced']
+                                yield match["replaced"]
 
                     if not matched:
                         cur_end = cur + 1
                         yield i
 
-        return ''.join(chain.from_iterable(output_generator()))
+        return "".join(chain.from_iterable(output_generator()))
 
     output = _concurrency_helper(_parse_backend, texts)
 
@@ -128,7 +128,7 @@ def to_bijoy(*texts: str) -> Union[str, List[str]]:
 
     @lru_cache
     def _convert_backend(text: str) -> str:
-        text = _rearrange_unicode_text(re.sub('ৌ', 'ৌ', re.sub('ো', 'ো', text)))
+        text = _rearrange_unicode_text(re.sub("ৌ", "ৌ", re.sub("ো", "ো", text)))
 
         for unic in config.BIJOY_MAP:
             text = re.sub(unic, config.BIJOY_MAP[unic], text)
@@ -166,18 +166,18 @@ def reverse(*texts: str) -> Union[str, List[str]]:
         # Iterate through input text.
         for cur, i in enumerate(text):
             try:
-                i.encode('utf-8')
+                i.encode("utf-8")
                 match = _match_patterns(text, cur, rule=False, reversed=True)
 
-                if match['matched']:
-                    output.append(match['reversed'] if match['reversed'] else match['found'])
+                if match["matched"]:
+                    output.append(match["reversed"] if match["reversed"] else match["found"])
                 else:
                     output.append(i)
 
             except UnicodeDecodeError:
                 output.append(i)
 
-        return ''.join(output)
+        return "".join(output)
 
     # Split using regex to remove noise.
     compiled_regex = re.compile("(\\s|\\.|,|\\?|\\।|\\-|;|')", re.UNICODE)
@@ -190,7 +190,7 @@ def reverse(*texts: str) -> Union[str, List[str]]:
         if not exceptions:
             separated_texts = compiled_regex.split(text)
             text_segments = [_reverse_backend(separated_text) for separated_text in separated_texts]
-            return ''.join(text_segments)
+            return "".join(text_segments)
         else:
             return exceptions
 
@@ -225,7 +225,7 @@ def _rearrange_unicode_text(string: str) -> str:
         if (
             i < length - 1
             and validate.is_bangla_halant(chars[i])
-            and chars[i - 1] == 'র'
+            and chars[i - 1] == "র"
             and not validate.is_bangla_halant(chars[i - 2])
         ):
             j = 1
@@ -254,7 +254,7 @@ def _rearrange_unicode_text(string: str) -> str:
             i += j + found_pre_kar
             barrier = i + 1
 
-    return ''.join(chars)
+    return "".join(chars)
 
 
 def _match_patterns(
@@ -273,18 +273,18 @@ def _match_patterns(
         p = pattern[0]
 
         return {
-            'matched': True,
-            'found': p.get('find'),
-            'replaced': p.get('replace'),
-            'reversed': _reverse_with_rules(cur, fixed_text, p.get('reverse')) if not rule else None,
-            'rules': p.get('rules') if rule else None,
+            "matched": True,
+            "found": p.get("find"),
+            "replaced": p.get("replace"),
+            "reversed": _reverse_with_rules(cur, fixed_text, p.get("reverse")) if not rule else None,
+            "rules": p.get("rules") if rule else None,
         }
 
     return {
-        'matched': False,
-        'found': None,
-        'replaced': fixed_text[cur],
-        'rules': None if rule else None,
+        "matched": False,
+        "found": None,
+        "replaced": fixed_text[cur],
+        "rules": None if rule else None,
     }
 
 
@@ -299,16 +299,16 @@ def _exact_find_in_pattern(
         return [
             x
             for x in patterns
-            if (cur + len(x['replace']) <= len(fixed_text))
-            and x['replace'] == fixed_text[cur : (cur + len(x['replace']))]
+            if (cur + len(x["replace"]) <= len(fixed_text))
+            and x["replace"] == fixed_text[cur : (cur + len(x["replace"]))]
         ]
 
     return [
         x
         for x in patterns
-        if x.get('find', None)
-        and (cur + len(x['find']) <= len(fixed_text))
-        and x['find'] == fixed_text[cur : (cur + len(x['find']))]
+        if x.get("find", None)
+        and (cur + len(x["find"]) <= len(fixed_text))
+        and x["find"] == fixed_text[cur : (cur + len(x["find"]))]
     ]
 
 
@@ -317,7 +317,7 @@ def _reverse_with_rules(cursor: int, fixed_text: str, text_reversed: str) -> str
     Enhances the word with rules for reverse-parsing.
     """
 
-    added_suffix = ''
+    added_suffix = ""
 
     if not (
         fixed_text[cursor] in config.AVRO_KAR
@@ -325,13 +325,13 @@ def _reverse_with_rules(cursor: int, fixed_text: str, text_reversed: str) -> str
         or fixed_text[cursor] in config.AVRO_IGNORE
         or len(fixed_text) == cursor + 1
     ):
-        added_suffix = 'o'
+        added_suffix = "o"
 
     try:
         if (fixed_text[cursor + 1] in config.AVRO_KAR) or (
             fixed_text[cursor + 2] in config.AVRO_KAR and not cursor == 0
         ):
-            added_suffix = ''
+            added_suffix = ""
 
     except IndexError:
         pass
@@ -347,20 +347,20 @@ def _process_rules(rules: Dict[str, Any], fixed_text: str, cur: int = 0, cur_end
     else output None.
     """
 
-    replaced = ''
+    replaced = ""
 
     # Iterate through rules.
     for rule in rules:
         matched = False
 
-        for match in rule['matches']:
+        for match in rule["matches"]:
             matched = _process_match(match, fixed_text, cur, cur_end)
 
             if not matched:
                 break
 
         if matched:
-            replaced = rule['replace']
+            replaced = rule["replace"]
             break
 
     return replaced if matched else None
@@ -375,34 +375,34 @@ def _process_match(match: Any, fixed_text: str, cur: int, cur_end: int) -> bool:
     replace = True
 
     # Set check cursor depending on match['type']
-    chk = cur - 1 if match['type'] == 'prefix' else cur_end
+    chk = cur - 1 if match["type"] == "prefix" else cur_end
 
     # Set scope based on whether scope is negative.
-    if match['scope'].startswith('!'):
-        scope = match['scope'][1:]
+    if match["scope"].startswith("!"):
+        scope = match["scope"][1:]
         negative = True
     else:
-        scope = match['scope']
+        scope = match["scope"]
         negative = False
 
     # Let the matching begin!
-    if scope == 'punctuation':
+    if scope == "punctuation":
         if (
             not (
-                (chk < 0 and match['type'] == 'prefix')
-                or (chk >= len(fixed_text) and match['type'] == 'suffix')
+                (chk < 0 and match["type"] == "prefix")
+                or (chk >= len(fixed_text) and match["type"] == "suffix")
                 or validate.is_punctuation(fixed_text[chk])
             )
             != negative
         ):
             replace = False
 
-    elif scope == 'vowel':
+    elif scope == "vowel":
         if (
             not (
                 (
-                    (chk >= 0 and match['type'] == 'prefix')
-                    or (chk < len(fixed_text) and match['type'] == 'suffix')
+                    (chk >= 0 and match["type"] == "prefix")
+                    or (chk < len(fixed_text) and match["type"] == "suffix")
                 )
                 and validate.is_vowel(fixed_text[chk])
             )
@@ -410,12 +410,12 @@ def _process_match(match: Any, fixed_text: str, cur: int, cur_end: int) -> bool:
         ):
             replace = False
 
-    elif scope == 'consonant':
+    elif scope == "consonant":
         if (
             not (
                 (
-                    (chk >= 0 and match['type'] == 'prefix')
-                    or (chk < len(fixed_text) and match['type'] == 'suffix')
+                    (chk >= 0 and match["type"] == "prefix")
+                    or (chk < len(fixed_text) and match["type"] == "suffix")
                 )
                 and validate.is_consonant(fixed_text[chk])
             )
@@ -423,15 +423,15 @@ def _process_match(match: Any, fixed_text: str, cur: int, cur_end: int) -> bool:
         ):
             replace = False
 
-    elif scope == 'exact':
-        if match['type'] == 'prefix':
-            exact_start = cur - len(match['value'])
+    elif scope == "exact":
+        if match["type"] == "prefix":
+            exact_start = cur - len(match["value"])
             exact_end = cur
         else:
             exact_start = cur_end
-            exact_end = cur_end + len(match['value'])
+            exact_end = cur_end + len(match["value"])
 
-        if not validate.is_exact(match['value'], fixed_text, exact_start, exact_end, negative):
+        if not validate.is_exact(match["value"], fixed_text, exact_start, exact_end, negative):
             replace = False
 
     return replace

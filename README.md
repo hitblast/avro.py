@@ -124,20 +124,20 @@ $ avro parse --from-clip --copy  # (clipboard input -> output)
 
 **Additional Developer Notes**
 
-In short, avro.py doesn't depend on any third-party libraries. However, if you'd like to contribute to the project, you'll need a handful of such useful tools. <br>
+In short, avro.py doesn't depend on any third-party libraries. However, if you'd like to contribute to the project, you'll need a handful of such useful tools.
 
-- [ruff](https://github.com/astral-sh/ruff) - linter
-- [pytest](https://pypi.python.org/pypi/pytest) - testing framework
+**Poetry** has been used to manage the project's dependencies and virtual environment. You can install it by following [the instructions here](https://python-poetry.org/docs/). The dependencies have been configured using the `pyproject.toml` file and doesn't require manual installation. Simply set up your developer environment using the following commands: <br>
 
 ```sh
-# Installing the required developer toolchain.
-$ python3 -m pip install -r requirements.txt
+# Set up virtual environment and activate it.
+$ python3 -m venv venv && source venv/bin/activate
 
-# (Optional) Setting up the package itself for testing purposes.
-$ python3 setup.py develop
+# Install required first-party dependencies and Poetry for dependency management.
+# (Note: Skip this step if Poetry is globally installed and added to PATH.)
+$ pip install -U pip setuptools && pip install poetry
 
-# Running the predetermined tests inside the project.
-$ python3 -m pytest --verbose
+# Setup project using Poetry.
+$ poetry install --all-extras
 ```
 
 ### 🐛 We're looking for bug hunters, by the way!

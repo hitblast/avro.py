@@ -65,15 +65,8 @@ def fix_string_case(text: str) -> str:
     which will the parser will understand without confusion.
     """
 
-    fixed = []
-
-    for i in text:
-        if is_case_sensitive(i):
-            fixed.append(i)
-        else:
-            fixed.append(i.lower())
-
-    return ''.join(fixed)
+    fixed = [i if is_case_sensitive(i) else i.lower() for i in text]
+    return "".join(fixed)
 
 
 # ASCII-specific validation functions.
@@ -99,4 +92,4 @@ def is_bangla_halant(char: str) -> bool:
     Check if given character is a Bengali halant.
     """
 
-    return char == config.BIJOY_EXCEPTIONS['halant']
+    return char == config.BIJOY_EXCEPTIONS["halant"]

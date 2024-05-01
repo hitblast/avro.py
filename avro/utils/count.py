@@ -1,9 +1,8 @@
-from avro import config
-
 # SPDX-License-Identifier: MIT
 
 
 # Import local modules.
+from avro import config
 
 
 # Functions.
