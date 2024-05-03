@@ -140,6 +140,15 @@ $ pip install -U pip setuptools && pip install poetry
 $ poetry install --all-extras
 ```
 
+Later, you can run the tests provided with the project using the following command:
+
+```sh
+# Run tests within an appropriate environment.
+$ poetry run pytest
+```
+
+<br>
+
 ### 🐛 We're looking for bug hunters, by the way!
 
 If you come across any kind of bug or wanna request a feature, please let us know by opening an issue [here](https://github.com/hitblast/avro.py/issues). We do need more ideas to keep the project alive and running, don't we? :P
