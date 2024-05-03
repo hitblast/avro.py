@@ -57,6 +57,9 @@ pyclip = { version="^0.7.0", optional = true }
 [tool.poetry.group.test.dependencies]
 pytest = "^8.0.1"
 
+[tool.poetry.group.docs.dependencies]
+pdoc3 = "^0.10.0"
+
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.4.2"
 
