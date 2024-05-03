@@ -46,7 +46,7 @@ jobs:
 
       - name: Build
         run: |
-          pdoc avro --html
+          poetry run pdoc avro --html
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
