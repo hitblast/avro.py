@@ -143,8 +143,8 @@ $ poetry install --compile --sync --all-extras
 Later, you can run the tests provided with the project using the following command:
 
 ```sh
-# Run tests within an appropriate environment.
-$ poetry run pytest
+# Run unit tests.
+$ pytest --verbose
 ```
 
 <br>
