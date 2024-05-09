@@ -137,14 +137,14 @@ $ python3 -m venv venv && source venv/bin/activate
 $ pip install -U pip setuptools && pip install poetry
 
 # Setup project using Poetry.
-$ poetry install --compile --sync --all-extras
+$ poetry install
 ```
 
 Later, you can run the tests provided with the project using the following command:
 
 ```sh
 # Run unit tests.
-$ pytest --verbose
+$ poetry run pytest .
 ```
 
 <br>
