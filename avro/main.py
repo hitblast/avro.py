@@ -56,7 +56,7 @@ def parse(*texts: str, bijoy: bool = False) -> Union[str, List[str]]:
     # Compiled regular expression for UTF-8 validation
     utf8_regex = re.compile(r"\A[\x00-\x7F]*\Z")
 
-    @lru_cache
+    @lru_cache(maxsize=128)
     def _parse_backend(text: str) -> str:
         fixed_text = validate.fix_string_case(text)  # Sanitize input text.
         cur_end = 0  # Cursor end point.
@@ -127,7 +127,7 @@ def to_bijoy(*texts: str) -> Union[str, List[str]]:
     ```
     """
 
-    @lru_cache
+    @lru_cache(maxsize=128)
     def _convert_backend(text: str) -> str:
         text = _rearrange_unicode_text(re.sub("ৌ", "ৌ", re.sub("ো", "ো", text)))
 
@@ -160,7 +160,7 @@ def reverse(*texts: str) -> Union[str, List[str]]:
     """
 
     # Internal function for multiple reverses.
-    @lru_cache
+    @lru_cache(maxsize=128)
     def _reverse_backend(text: str) -> str:
         output = []  # The output list of strings.
 
@@ -184,7 +184,7 @@ def reverse(*texts: str) -> Union[str, List[str]]:
     compiled_regex = re.compile("(\\s|\\.|,|\\?|\\।|\\-|;|')", re.UNICODE)
 
     # Extension for the _reverse_backend() function.
-    @lru_cache
+    @lru_cache(maxsize=128)
     def _reverse_backend_ext(text: str) -> str:
         exceptions = config.AVRO_EXCEPTIONS.get(text, None)
 
