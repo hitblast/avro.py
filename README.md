@@ -134,10 +134,10 @@ $ python3 -m venv venv && source venv/bin/activate
 
 # Install required first-party dependencies and Poetry for dependency management.
 # (Note: Skip this step if Poetry is globally installed and added to PATH.)
-$ pip install -U pip setuptools && pip install poetry
+$ pip install -U pip setuptools
 
 # Setup project using Poetry.
-$ poetry install
+$ poetry install --all-extras
 ```
 
 Later, you can run the tests provided with the project using the following command:
