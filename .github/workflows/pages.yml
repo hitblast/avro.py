@@ -4,8 +4,6 @@ name: Deploy to Pages
 
 on:
   workflow_dispatch:
-  release:
-    types: [published]
 
 permissions:
   contents: read
