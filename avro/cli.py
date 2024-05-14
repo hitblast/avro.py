@@ -61,7 +61,7 @@ def _cli_action(
     if output == text:
         return _print_err("No changes in output.")
 
-    console.print(f"\n[bold green]Output[/bold green]\n {text}\n")
+    console.print(f"\n[bold green]Output[/bold green]\n {output}\n")
 
     if copy_on_success:
         pyclip.copy(text)
