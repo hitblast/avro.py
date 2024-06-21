@@ -212,6 +212,7 @@ def _rearrange_unicode_text(string: str) -> str:
     Returns the rearranged string.
     """
 
+    # Convert the string to a list of individual characters.
     chars = list(string)
     length = len(chars)
     barrier = 0
