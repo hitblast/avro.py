@@ -11,7 +11,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.
 
 # Import local modules.
 import avro
-from avro.config import DICT
+from avro import config
 
 
 # Test functions for this file.
@@ -20,7 +20,7 @@ def test_patterns_without_rules_from_config() -> NoReturn:
     Tests all patterns from config that don't have rules.
     """
 
-    for pattern in DICT["avro"]["patterns"]:
+    for pattern in config.DICT["avro"]["patterns"]:
         if "rules" not in pattern and pattern.get("find", None):
             assert pattern["replace"] == avro.parse(pattern["find"])
 
@@ -134,6 +134,14 @@ def test_words_with_punctuations() -> NoReturn:
 
     for key, value in words_with_punctuations.items():
         assert key == value
+
+
+def test_exceptions() -> NoReturn:
+    """
+    Test parsing of exceptions.
+    """
+
+    assert "আমি উইকিপিডিয়া আর ফেসবুক চালাই।" == avro.parse("ami wikipedia ar facebook calai.")
 
 
 def test_conversion_bijoy_func() -> NoReturn:
