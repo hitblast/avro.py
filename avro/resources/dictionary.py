@@ -641,12 +641,21 @@ DICT: Dict[str, Any] = {
         ],
         # Remapped words.
         "exceptions": {
+            "বাংলাদেশ": "Bangladesh",
             "ফেসবুক": "Facebook",
             "গুগল": "Google",
             "উইকিপিডিয়া": "Wikipedia",
             "হোয়াটসঅ্যাপ": "Whatsapp",
             "টুইটার": "Twitter",
             "লিঙ্কডইন": "Linkedin",
+            "ইনস্টাগ্রাম": "Instagram",
+            "ইউটিউব": "YouTube",
+            "আইএমডিবি": "IMDb",
+            "অ্যামাজন": "Amazon",
+            "মাইক্রোসফট": "Microsoft",
+            "আইবিএম": "IBM",
+            "ইমেইল": "Email",
+            "এসএমএস": "SMS",
         },
         # Constant values.
         "vowel": "aeiou",

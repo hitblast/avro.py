@@ -61,6 +61,11 @@ def parse(*texts: str, bijoy: bool = False) -> Union[str, List[str]]:
         fixed_text = validate.fix_string_case(text)  # Sanitize input text.
         cur_end = 0  # Cursor end point.
 
+        # Replace predefined exceptions in the input text.
+        for key, value in config.AVRO_EXCEPTIONS.items():
+            if (value := value.lower()) in fixed_text.lower():
+                fixed_text = fixed_text.replace(value, key)
+
         def output_generator() -> Generator[str, None, None]:
             nonlocal cur_end
 
