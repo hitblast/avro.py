@@ -169,6 +169,11 @@ def reverse(*texts: str) -> Union[str, List[str]]:
     def _reverse_backend(text: str) -> str:
         output = []  # The output list of strings.
 
+        # Replace predefined exceptions in the input text.
+        for key, value in config.AVRO_EXCEPTIONS.items():
+            if key.lower() in text.lower():
+                text = text.replace(key, value)
+
         # Iterate through input text.
         for cur, i in enumerate(text):
             try:
@@ -191,14 +196,9 @@ def reverse(*texts: str) -> Union[str, List[str]]:
     # Extension for the _reverse_backend() function.
     @lru_cache(maxsize=128)
     def _reverse_backend_ext(text: str) -> str:
-        exceptions = config.AVRO_EXCEPTIONS.get(text, None)
-
-        if not exceptions:
-            separated_texts = compiled_regex.split(text)
-            text_segments = [_reverse_backend(separated_text) for separated_text in separated_texts]
-            return "".join(text_segments)
-        else:
-            return exceptions
+        separated_texts = compiled_regex.split(text)
+        text_segments = [_reverse_backend(separated_text) for separated_text in separated_texts]
+        return "".join(text_segments)
 
     # Prepare final output.
     output = _concurrency_helper(_reverse_backend_ext, texts)

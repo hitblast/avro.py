@@ -138,10 +138,11 @@ def test_words_with_punctuations() -> NoReturn:
 
 def test_exceptions() -> NoReturn:
     """
-    Test parsing of exceptions.
+    Test parsing and reversing of exceptions.
     """
 
     assert "আমি উইকিপিডিয়া আর ফেসবুক চালাই।" == avro.parse("ami wikipedia ar facebook calai.")
+    assert "ami Wikipedia ar Facebook chalai." == avro.reverse("আমি উইকিপিডিয়া আর ফেসবুক চালাই।")
 
 
 def test_conversion_bijoy_func() -> NoReturn:
