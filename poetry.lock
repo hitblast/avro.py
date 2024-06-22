@@ -445,4 +445,4 @@ cli = ["click", "pyclip", "rich"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8,<4.0"
-content-hash = "aac29bcdeb1972d9f8fe1d1f2bb22f8b27f5ae129b1543437d6da193dfdd944d"
+content-hash = "4c5df1a8bd756214d1cb99b5e3acb902634265331ebc0df11e3725e6d328baac"
