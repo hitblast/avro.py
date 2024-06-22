@@ -141,7 +141,7 @@ def test_exceptions() -> NoReturn:
     Test parsing and reversing of exceptions.
     """
 
-    assert "আমি উইকিপিডিয়া আর ফেসবুক চালাই।" == avro.parse("ami wikipedia ar facebook calai.")
+    assert "আমি উইকিপিডিয়া আর ফেসবুক চালাই।" == avro.parse("ami Wikipedia ar Facebook calai.")
     assert "ami Wikipedia ar Facebook chalai." == avro.reverse("আমি উইকিপিডিয়া আর ফেসবুক চালাই।")
 
 
