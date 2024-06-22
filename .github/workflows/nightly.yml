@@ -27,7 +27,7 @@ jobs:
         virtualenvs-in-project: true
 
     - name: Install dependencies & build
-      run: 
+      run: |
         poetry install --sync --no-interaction --no-root
         poetry build
       
