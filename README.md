@@ -132,10 +132,6 @@ In short, avro.py doesn't depend on any third-party libraries. However, if you'd
 # Set up virtual environment and activate it.
 $ python3 -m venv venv && source venv/bin/activate
 
-# Install required first-party dependencies and Poetry for dependency management.
-# (Note: Skip this step if Poetry is globally installed and added to PATH.)
-$ pip install -U pip setuptools
-
 # Setup project using Poetry.
 $ poetry install --sync --all-extras
 ```
