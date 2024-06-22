@@ -33,7 +33,7 @@ def _concurrency_helper(func: Callable, params: Tuple[str]) -> List[str]:
 
 
 # The primary parse function for the library.
-def parse(*texts: str, bijoy: bool = False) -> Union[str, List[str]]:
+def parse(*texts: str, bijoy: bool = False, remap_words: bool = True) -> Union[str, List[str]]:
     """
     #### Parses input text, matches and replaces using the Avro Dictionary.
 
@@ -42,7 +42,8 @@ def parse(*texts: str, bijoy: bool = False) -> Union[str, List[str]]:
 
     Parameters:
     - `*texts: str | Tuple[str]`: The text(s) to parse.
-    - `bijoy: bool`: Whether to return in the Bijoy Keyboard format (ASCII).
+    - `bijoy: bool = False`: Whether to return in the Bijoy Keyboard format (ASCII).
+    - `remap_words: bool = True`: Whether to parse input text with remapped (exception) words.
 
     Usage:
     ```python
@@ -62,9 +63,10 @@ def parse(*texts: str, bijoy: bool = False) -> Union[str, List[str]]:
         cur_end = 0  # Cursor end point.
 
         # Replace predefined exceptions in the input text.
-        for key, value in config.AVRO_EXCEPTIONS.items():
-            if (value := value.lower()) in fixed_text.lower():
-                fixed_text = fixed_text.replace(value, key)
+        if remap_words:
+            for key, value in config.AVRO_EXCEPTIONS.items():
+                if (value := value.lower()) in fixed_text.lower():
+                    fixed_text = fixed_text.replace(value, key)
 
         def output_generator() -> Generator[str, None, None]:
             nonlocal cur_end
@@ -145,7 +147,7 @@ def to_bijoy(*texts: str) -> Union[str, List[str]]:
     return output[0] if len(output) == 1 else output
 
 
-def reverse(*texts: str) -> Union[str, List[str]]:
+def reverse(*texts: str, remap_words: bool = True) -> Union[str, List[str]]:
     """
     #### Reverses input text to Roman script typed in English.
 
@@ -154,6 +156,7 @@ def reverse(*texts: str) -> Union[str, List[str]]:
 
     Parameters:
     - `*texts: str | Tuple[str]`: The text(s) to reverse.
+    - `remap_words: bool = True`: Whether to reverse input text with remapped (exception) words.
 
     Usage:
     ```python
@@ -170,9 +173,10 @@ def reverse(*texts: str) -> Union[str, List[str]]:
         output = []  # The output list of strings.
 
         # Replace predefined exceptions in the input text.
-        for key, value in config.AVRO_EXCEPTIONS.items():
-            if key.lower() in text.lower():
-                text = text.replace(key, value)
+        if remap_words:
+            for key, value in config.AVRO_EXCEPTIONS.items():
+                if key.lower() in text.lower():
+                    text = text.replace(key, value)
 
         # Iterate through input text.
         for cur, i in enumerate(text):
