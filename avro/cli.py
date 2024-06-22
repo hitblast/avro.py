@@ -70,7 +70,7 @@ def _cli_action(
     console.print(f"\n[bold green]Output[/bold green]\n {output}\n")
 
     if copy_on_success:
-        pyclip.copy(text)
+        pyclip.copy(output)
         console.print("[bold yellow](copied to clipboard)[/bold yellow]\n")
 
 

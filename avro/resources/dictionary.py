@@ -661,6 +661,7 @@ DICT: Dict[str, Any] = {
             "কম্পিউটার": "Computer",
             "কোম্পানি": "Company",
             "কর্পোরেশন": "Corporation",
+            "করোনাভাইরাস": "Coronavirus",
             "আইবিএম": "IBM",
             "ইমেইল": "Email",
             "এসএমএস": "SMS",
