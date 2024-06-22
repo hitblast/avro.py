@@ -10,6 +10,7 @@ import avro
 try:
     import click
     import pyclip
+    import requests
     from rich.console import Console
 
 except ImportError:
@@ -21,7 +22,7 @@ except ImportError:
 @click.group(help="A modern Pythonic implementation of Avro Phonetic.")
 @click.version_option(
     package_name="avro-py",
-    message="Package: %(prog)s, version %(version)s\n",
+    message="Package: %(prog)s, version %(version)s" + f" (core {avro.__version__})\n",
 )
 def cli() -> None:
     pass
@@ -115,6 +116,22 @@ def _reverse(
         copy_on_success=copy,
         reverse=True,
     )
+
+
+# usage: avro checkupdate
+@cli.command("checkupdate", help="Check for version updates.")
+def _checkupdate() -> None:
+    req = requests.get("https://api.github.com/repos/hitblast/avro.py/tags")
+    latest_version = req.json()[0]["name"]
+
+    if latest_version == avro.__version__:
+        console.print(
+            f"\n[bold green]You are using the latest version of avro.py ({avro.__version__}).[/bold green]\n"
+        )
+    else:
+        console.print(
+            f"\n[bold yellow]A new version of avro.py ({latest_version}) is available.[/bold yellow]\n"
+        )
 
 
 # Run the main function.

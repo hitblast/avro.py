@@ -65,7 +65,7 @@ pdoc3 = "^0.10.0"
 ruff = "^0.4.2"
 
 [tool.poetry.extras]
-cli = ["click", "rich", "pyclip"]
+cli = ["click", "rich", "pyclip", "requests"]
 
 [build-system]
 requires = ["poetry-core"]
