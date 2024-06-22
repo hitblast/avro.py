@@ -82,7 +82,7 @@ def _cli_action(
 @click.option("-f", "--from-clip", is_flag=True, help="Parse text from clipboard.")
 @click.option("-c", "--copy", is_flag=True, help="Copy the parsed text to clipboard.")
 def _parse(
-    text: str = "",
+    text: str,
     bijoy: bool = False,
     ignore_remap: bool = False,
     from_clip: bool = False,
@@ -99,7 +99,7 @@ def _parse(
 
 # usage: avro reverse <text> [--from-clip] [--copy]
 @cli.command("reverse", help="Reverse a given text to English.")
-@click.argument("text")
+@click.argument("text", required=False)
 @click.option("-i", "--ignore-remap", is_flag=True, help="Ignore remapping of predefined words.")
 @click.option("-f", "--from-clip", is_flag=True, help="Reverse text from clipboard.")
 @click.option("-c", "--copy", is_flag=True, help="Copy the reversed text to clipboard.")
