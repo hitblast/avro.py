@@ -642,6 +642,9 @@ DICT: Dict[str, Any] = {
         # Remapped words.
         "exceptions": {
             "বাংলাদেশ": "Bangladesh",
+            "ইউএসএ": "USA",
+            "ইউরোপ": "Europe",
+            "আস্ট্রেলিয়া": "Australia",
             "ফেসবুক": "Facebook",
             "গুগল": "Google",
             "উইকিপিডিয়া": "Wikipedia",
@@ -653,6 +656,11 @@ DICT: Dict[str, Any] = {
             "আইএমডিবি": "IMDb",
             "অ্যামাজন": "Amazon",
             "মাইক্রোসফট": "Microsoft",
+            "অ্যাপল": "Apple",
+            "ইউনিভার্সিটি": "University",
+            "কম্পিউটার": "Computer",
+            "কোম্পানি": "Company",
+            "কর্পোরেশন": "Corporation",
             "আইবিএম": "IBM",
             "ইমেইল": "Email",
             "এসএমএস": "SMS",
