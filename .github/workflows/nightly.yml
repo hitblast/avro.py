@@ -26,8 +26,10 @@ jobs:
         virtualenvs-create: true
         virtualenvs-in-project: true
 
-    - name: Build
-      run: poetry build
+    - name: Install dependencies & build
+      run: 
+        poetry install --sync --no-interaction --no-root
+        poetry build
       
     - name: Upload artifact
       uses: actions/upload-artifact@v4
