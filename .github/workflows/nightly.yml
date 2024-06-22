@@ -1,0 +1,31 @@
+# SPDX-License-Identifier: MIT
+
+name: Nightly Builds
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Install Poetry
+      uses: snok/install-poetry@v1
+      with:
+        virtualenvs-create: true
+        virtualenvs-in-project: true
+
+    - name: Build
+      run: poetry build
+      
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        path: dist/*
+        retention-days: 10
