@@ -42,6 +42,9 @@ This package requires **Python 3.8 or higher** to be used inside your developmen
 ```sh
 # Install / upgrade.
 $ pip install avro.py
+
+# Install with integrated CLI tool.
+$ pip install avro.py[cli]
 ```
 
 <br>
@@ -90,11 +93,6 @@ reversed_text = avro.reverse('আমার সোনার বাংলা।')
 
 Alternatively, instead of using avro.py from within your Python project, you can also use it as a simple,
 tiny command-line interface for easy parsing and reversing of text.
-
-```sh
-# Installing the package.
-$ pip install avro.py[cli]
-```
 
 Here are some examples for you to get started with:
 
