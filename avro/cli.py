@@ -20,7 +20,7 @@ except ImportError:
 # Create a new group for putting the CLI commands.
 @click.group(help="A modern Pythonic implementation of Avro Phonetic.")
 @click.version_option(
-    package_name="avro.py",
+    package_name="avro-py",
     message="Package: %(prog)s, version %(version)s\n",
 )
 def cli() -> None:
@@ -42,6 +42,7 @@ def _cli_action(
     text: str,
     *,
     bijoy: bool = False,
+    remap_words: bool = True,
     from_clipboard: bool = False,
     copy_on_success: bool = False,
     reverse: bool = False,
@@ -54,9 +55,13 @@ def _cli_action(
                 return _print_err("No text found in the clipboard.")
 
     if reverse:
-        output = avro.reverse(text)
+        output = avro.reverse(text, remap_words=remap_words)
     else:
-        output = avro.parse(text) if not bijoy else avro.parse(text, bijoy=True)
+        output = (
+            avro.parse(text, remap_words=remap_words)
+            if not bijoy
+            else avro.parse(text, remap_words=remap_words, bijoy=True)
+        )
 
     if output == text:
         return _print_err("No changes in output.")
@@ -72,12 +77,20 @@ def _cli_action(
 @cli.command("parse", help="Parse a given text to Bangla / Bengali.")
 @click.argument("text", required=False)
 @click.option("--bijoy", is_flag=True, help="Use Bijoy Keyboard format for parsing.")
+@click.option("--ignore-remap", is_flag=True, help="Ignore remapping of predefined words.")
 @click.option("--from-clip", is_flag=True, help="Parse text from clipboard.")
 @click.option("--copy", is_flag=True, help="Copy the parsed text to clipboard.")
-def _parse(text: str = "", bijoy: bool = False, from_clip: bool = False, copy: bool = False) -> None:
+def _parse(
+    text: str = "",
+    bijoy: bool = False,
+    ignore_remap: bool = False,
+    from_clip: bool = False,
+    copy: bool = False,
+) -> None:
     _cli_action(
         text,
         bijoy=bijoy,
+        remap_words=not ignore_remap,
         from_clipboard=from_clip,
         copy_on_success=copy,
     )
@@ -86,11 +99,18 @@ def _parse(text: str = "", bijoy: bool = False, from_clip: bool = False, copy: b
 # usage: avro reverse <text> [--from-clip] [--copy]
 @cli.command("reverse", help="Reverse a given text to English.")
 @click.argument("text")
+@click.option("--ignore-remap", is_flag=True, help="Ignore remapping of predefined words.")
 @click.option("--from-clip", is_flag=True, help="Reverse text from clipboard.")
 @click.option("--copy", is_flag=True, help="Copy the reversed text to clipboard.")
-def _reverse(text: str, from_clip: bool = False, copy: bool = False) -> None:
+def _reverse(
+    text: str,
+    ignore_remap: bool = False,
+    from_clip: bool = False,
+    copy: bool = False,
+) -> None:
     _cli_action(
         text,
+        remap_words=not ignore_remap,
         from_clipboard=from_clip,
         copy_on_success=copy,
         reverse=True,
