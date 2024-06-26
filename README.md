@@ -12,7 +12,7 @@ A modern Pythonic implementation of the popular Bengali phonetic-typing software
 
 <br>
 
-<img src="https://github.com/hitblast/avro.py/blob/main/assets/banner.png" style="width: 500px; height: auto;"><br>
+<img src="https://github.com/hitblast/avro.py/blob/main/assets/banner.png?raw=True" style="width: 500px; height: auto;"><br>
 
 [![Unit Tests](https://github.com/hitblast/avro.py/actions/workflows/unit-tests.yml/badge.svg?branch=main)](https://github.com/hitblast/avro.py/actions/workflows/unit-tests.yml)
 [![Nightly Builds](https://github.com/hitblast/avro.py/actions/workflows/nightly.yml/badge.svg?branch=main)](https://github.com/hitblast/avro.py/actions/workflows/nightly.yml)
