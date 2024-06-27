@@ -264,6 +264,7 @@ def _rearrange_unicode_text(string: str) -> str:
     return "".join(chars)
 
 
+@lru_cache(maxsize=128)
 def _find_in_remap(text: str, *, reversed: bool = False) -> Optional[str]:
     """
     Finds and returns the remapped value for a given text.
@@ -278,6 +279,9 @@ def _find_in_remap(text: str, *, reversed: bool = False) -> Optional[str]:
             text = text.replace(key, value) if key.lower() in text.lower() else text
         else:
             text = text.replace(value, key) if (value := value.lower()) in text.lower() else text
+
+        if previous_text != text:
+            break
 
     return text if previous_text != text else None
 
