@@ -280,9 +280,6 @@ def _find_in_remap(text: str, *, reversed: bool = False) -> Optional[str]:
         else:
             text = text.replace(value, key) if (value := value.lower()) in text.lower() else text
 
-        if previous_text != text:
-            break
-
     return text if previous_text != text else None
 
 
