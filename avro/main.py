@@ -64,9 +64,7 @@ def parse(*texts: str, bijoy: bool = False, remap_words: bool = True) -> Union[s
 
         # Replace predefined exceptions in the input text.
         if remap_words:
-            for key, value in config.AVRO_EXCEPTIONS.items():
-                if (value := value.lower()) in fixed_text.lower():
-                    fixed_text = fixed_text.replace(value, key)
+            fixed_text = _find_in_remap(fixed_text) or fixed_text
 
         def output_generator() -> Generator[str, None, None]:
             nonlocal cur_end
@@ -174,9 +172,7 @@ def reverse(*texts: str, remap_words: bool = True) -> Union[str, List[str]]:
 
         # Replace predefined exceptions in the input text.
         if remap_words:
-            for key, value in config.AVRO_EXCEPTIONS.items():
-                if key.lower() in text.lower():
-                    text = text.replace(key, value)
+            text = _find_in_remap(text, reversed=True) or text
 
         # Iterate through input text.
         for cur, i in enumerate(text):
@@ -266,6 +262,24 @@ def _rearrange_unicode_text(string: str) -> str:
             barrier = i + 1
 
     return "".join(chars)
+
+
+def _find_in_remap(text: str, *, reversed: bool = False) -> Optional[str]:
+    """
+    Finds and returns the remapped value for a given text.
+
+    If the text is not found in the remap dictionary, it returns None.
+    """
+
+    previous_text = text
+
+    for key, value in config.AVRO_EXCEPTIONS.items():
+        if reversed:
+            text = text.replace(key, value) if key.lower() in text.lower() else text
+        else:
+            text = text.replace(value, key) if (value := value.lower()) in text.lower() else text
+
+    return text if previous_text != text else None
 
 
 def _match_patterns(
