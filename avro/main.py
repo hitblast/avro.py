@@ -60,11 +60,12 @@ def parse(*texts: str, bijoy: bool = False, remap_words: bool = True) -> Union[s
     @lru_cache(maxsize=128)
     def _parse_backend(text: str) -> str:
         fixed_text = validate.fix_string_case(text)  # Sanitize input text.
+        manual_required = True  # Whether manual intervention is required.
         cur_end = 0  # Cursor end point.
 
         # Replace predefined exceptions in the input text.
         if remap_words:
-            fixed_text = _find_in_remap(fixed_text) or fixed_text
+            fixed_text, manual_required = _find_in_remap(fixed_text)
 
         def output_generator() -> Generator[str, None, None]:
             nonlocal cur_end
@@ -103,7 +104,7 @@ def parse(*texts: str, bijoy: bool = False, remap_words: bool = True) -> Union[s
                         cur_end = cur + 1
                         yield i
 
-        return "".join(chain.from_iterable(output_generator()))
+        return "".join(chain.from_iterable(output_generator())) if manual_required else fixed_text
 
     output = _concurrency_helper(_parse_backend, texts)
 
@@ -168,27 +169,29 @@ def reverse(*texts: str, remap_words: bool = True) -> Union[str, List[str]]:
     # Internal function for multiple reverses.
     @lru_cache(maxsize=128)
     def _reverse_backend(text: str) -> str:
-        output = []  # The output list of strings.
+        manual_required = True  # Whether manual intervention is required.
 
         # Replace predefined exceptions in the input text.
         if remap_words:
-            text = _find_in_remap(text, reversed=True) or text
+            text, manual_required = _find_in_remap(text, reversed=True)
 
         # Iterate through input text.
-        for cur, i in enumerate(text):
-            try:
-                i.encode("utf-8")
-                match = _match_patterns(text, cur, rule=False, reversed=True)
+        def output_generator() -> Generator[str, None, None]:
+            for cur, i in enumerate(text):
+                try:
+                    i.encode("utf-8")
+                    match = _match_patterns(text, cur, rule=False, reversed=True)
 
-                if match["matched"]:
-                    output.append(match["reversed"] if match["reversed"] else match["found"])
-                else:
-                    output.append(i)
+                    yield (
+                        (match["reversed"] if match["reversed"] else match["found"])
+                        if match["matched"]
+                        else i
+                    )
 
-            except UnicodeDecodeError:
-                output.append(i)
+                except UnicodeDecodeError:
+                    yield i
 
-        return "".join(output)
+        return "".join(chain.from_iterable(output_generator())) if manual_required else text
 
     # Split using regex to remove noise.
     compiled_regex = re.compile("(\\s|\\.|,|\\?|\\।|\\-|;|')", re.UNICODE)
@@ -265,11 +268,13 @@ def _rearrange_unicode_text(string: str) -> str:
 
 
 @lru_cache(maxsize=128)
-def _find_in_remap(text: str, *, reversed: bool = False) -> Optional[str]:
+def _find_in_remap(text: str, *, reversed: bool = False) -> Tuple[str, bool]:
     """
     Finds and returns the remapped value for a given text.
 
-    If the text is not found in the remap dictionary, it returns None.
+    Returns a tuple of two elements:
+    - (`str`): The remapped text.
+    - (`bool`) Whether manual intervention is required.
     """
 
     previous_text = text
@@ -280,7 +285,11 @@ def _find_in_remap(text: str, *, reversed: bool = False) -> Optional[str]:
         else:
             text = text.replace(value, key) if (value := value.lower()) in text.lower() else text
 
-    return text if previous_text != text else None
+    manual_required = any(
+        word == previous_word for word, previous_word in zip(text.split(), previous_text.split())
+    )
+
+    return (text, manual_required)
 
 
 def _match_patterns(
