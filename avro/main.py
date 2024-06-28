@@ -208,7 +208,7 @@ def reverse(*texts: str, remap_words: bool = True) -> Union[str, List[str]]:
     return output[0] if len(output) == 1 else output
 
 
-def _rearrange_unicode_text(string: str) -> str:
+def _rearrange_unicode_text(text: str) -> str:
     """
     Rearranges Unicode (Avro) text to match conversion standards for ASCII.
 
@@ -216,7 +216,7 @@ def _rearrange_unicode_text(string: str) -> str:
     """
 
     # Convert the string to a list of individual characters.
-    chars = list(string)
+    chars = list(text)
     length = len(chars)
     barrier = 0
 
