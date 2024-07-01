@@ -63,7 +63,7 @@ setuptools = ">=69,<71"
 pdoc3 = ">=0.10,<0.12"
 
 [tool.poetry.group.dev.dependencies]
-ruff = "^0.4.2"
+ruff = ">=0.4.2,<0.6.0"
 
 [tool.poetry.extras]
 cli = ["click", "rich", "pyclip", "requests"]
