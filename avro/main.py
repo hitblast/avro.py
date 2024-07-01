@@ -220,9 +220,12 @@ def _rearrange_unicode_text(text: str) -> str:
         if validate.is_bangla_prekar(chars[i]):
             j = 1
 
-            while validate.is_bangla_banjonborno(chars[i - j]):
-                if i - j < 0 or i - j <= barrier or not validate.is_bangla_halant(chars[i - j - 1]):
-                    break
+            while (
+                i - j >= 0
+                and i - j > barrier
+                and validate.is_bangla_banjonborno(chars[i - j])
+                and validate.is_bangla_halant(chars[i - j - 1])
+            ):
                 j += 2
 
             chars[i - j], chars[i] = chars[i], chars[i - j]
@@ -238,15 +241,12 @@ def _rearrange_unicode_text(text: str) -> str:
             found_pre_kar = 0
 
             while True:
-                if validate.is_bangla_banjonborno(chars[i + j]) and validate.is_bangla_halant(
-                    chars[i + j + 1]
-                ):
-                    j += 2
-                elif validate.is_bangla_banjonborno(chars[i + j]) and validate.is_bangla_prekar(
-                    chars[i + j + 1]
-                ):
-                    found_pre_kar = 1
-                    break
+                if validate.is_bangla_banjonborno(chars[i + j]):
+                    if validate.is_bangla_halant(chars[i + j + 1]):
+                        j += 2
+                    elif validate.is_bangla_prekar(chars[i + j + 1]):
+                        found_pre_kar = 1
+                        break
                 else:
                     break
 
