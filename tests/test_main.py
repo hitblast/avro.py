@@ -36,14 +36,14 @@ def test_patterns_without_rules_not_from_config() -> NoReturn:
     """
 
     conjunctions = {
-        "ভ্ল": avro.parse("bhl"),
-        "ব্ধ": avro.parse("bdh"),
-        "ড্ড": avro.parse("DD"),
-        "স্তব্ধ বক": avro.parse("stbdh bk"),  # Stunned stork!
+        "ভ্ল": "bhl",
+        "ব্ধ": "bdh",
+        "ড্ড": "DD",
+        "স্তব্ধ বক": "stbdh bk",  # Stunned stork!
     }
 
     for key, value in conjunctions.items():
-        assert key == value
+        assert key == avro.parse(value)
 
 
 def test_patterns_numbers() -> NoReturn:
@@ -52,21 +52,21 @@ def test_patterns_numbers() -> NoReturn:
     """
 
     numbers = {
-        "০": avro.parse("0"),
-        "১": avro.parse("1"),
-        "২": avro.parse("2"),
-        "৩": avro.parse("3"),
-        "৪": avro.parse("4"),
-        "৫": avro.parse("5"),
-        "৬": avro.parse("6"),
-        "৭": avro.parse("7"),
-        "৮": avro.parse("8"),
-        "৯": avro.parse("9"),
-        "১১২": avro.parse("112"),
+        "০": "0",
+        "১": "1",
+        "২": "2",
+        "৩": "3",
+        "৪": "4",
+        "৫": "5",
+        "৬": "6",
+        "৭": "7",
+        "৮": "8",
+        "৯": "9",
+        "১১২": "112",
     }
 
     for key, value in numbers.items():
-        assert key == value
+        assert key == avro.parse(value)
 
 
 def test_patterns_punctuations() -> NoReturn:
@@ -74,10 +74,15 @@ def test_patterns_punctuations() -> NoReturn:
     Tests patterns - punctuations
     """
 
-    punctuations = {"।": avro.parse("."), "।।": avro.parse(".."), "...": avro.parse("...")}
+    punctuations = {
+        "।": ".",
+        "।।": "..",
+        "...": "...",
+    }
 
     for key, value in punctuations.items():
-        assert key == value
+        assert key == avro.parse(value)
+        assert value == avro.reverse(key)
 
 
 def test_patterns_with_rules_svaravarna() -> NoReturn:
@@ -86,21 +91,21 @@ def test_patterns_with_rules_svaravarna() -> NoReturn:
     """
 
     svaravarna = {
-        "অ": avro.parse("o"),
-        "আ": avro.parse("a"),
-        "ই": avro.parse("i"),
-        "ঈ": avro.parse("I"),
-        "উ": avro.parse("u"),
-        "ঊ": avro.parse("oo"),
-        "ঊ": avro.parse("U"),
-        "এ": avro.parse("e"),
-        "ঐ": avro.parse("OI"),
-        "ও": avro.parse("O"),
-        "ঔ": avro.parse("OU"),
+        "অ": "o",
+        "আ": "a",
+        "ই": "i",
+        "ঈ": "I",
+        "উ": "u",
+        "ঊ": "oo",
+        "ঊ": "U",
+        "এ": "e",
+        "ঐ": "OI",
+        "ও": "O",
+        "ঔ": "OU",
     }
 
     for key, value in svaravarna.items():
-        assert key == value
+        assert key == avro.parse(value)
 
 
 def test_non_ascii() -> NoReturn:
@@ -109,15 +114,16 @@ def test_non_ascii() -> NoReturn:
     Parser should return any non-ascii characters that is passed to it.
     """
 
+    # Mixed strings.
     non_ascii = {
-        "ব": avro.parse("ব"),
-        "অভ্র": avro.parse("অভ্র"),
-        "বআবা গো": avro.parse("বaba gO"),  # Mixed strings.
-        "আমি বাংলায় গান গাই": avro.parse("aমি বাংলায় gaন গাi"),
+        "ব": "ব",
+        "অভ্র": "অভ্র",
+        "বআবা গো": "বaba gO",
+        "আমি বাংলায় গান গাই": "aমি বাংলায় gaন গাi",
     }
 
     for key, value in non_ascii.items():
-        assert key == value
+        assert key == avro.parse(value)
 
 
 def test_words_with_punctuations() -> NoReturn:
@@ -125,15 +131,16 @@ def test_words_with_punctuations() -> NoReturn:
     Test parsing of words with punctuations.
     """
 
-    words_with_punctuations = {
-        "আয়রে,": avro.parse("ayre,"),
-        "ভোলা;": avro.parse("bhOla;"),
-        "/খেয়াল": avro.parse("/kheyal"),
-        "খোলা|": avro.parse("khOla|"),
+    test_words = {
+        "আয়রে,": "ayre,",
+        "ভোলা;": "bhOla;",
+        "/খেয়াল": "/kheyal",
+        "খোলা|": "khOla|",
     }
 
-    for key, value in words_with_punctuations.items():
-        assert key == value
+    for key, value in test_words.items():
+        assert key == avro.parse(value)
+        assert value.lower() == avro.reverse(key)
 
 
 def test_exceptions() -> NoReturn:
@@ -159,7 +166,7 @@ def test_conversion_bijoy_func() -> NoReturn:
 
 def test_full_sentences() -> NoReturn:
     """
-    Test parsing of sentences (Unicode).
+    Test parsing and reversing of sentences (Unicode).
     """
 
     # Default settings.
@@ -176,12 +183,7 @@ def test_full_sentences() -> NoReturn:
         "Avwg Avgvi Avwg‡K wPiw`b GB evsjvq Lyu‡R cvB!",
     ] == avro.parse("ami banglar gan gai.", "ami amar amike cirodin ei banglay khu^je pai!", bijoy=True)
 
-
-def test_reverse_func() -> NoReturn:
-    """
-    Test reverse-parsing with sentences.
-    """
-
+    # Reverse.
     assert "ami banglay gan gai." == avro.reverse("আমি বাংলায় গান গাই।")
     assert [
         "rohim, tomake korim dakche. ekhon ki rowna debe?",
