@@ -182,11 +182,7 @@ def reverse(*texts: str, remap_words: bool = True) -> Union[str, List[str]]:
                     i.encode("utf-8")
                     match = _match_patterns(text, cur, rule=False, reversed=True)
 
-                    yield (
-                        (match["reversed"] if match["reversed"] else match["found"])
-                        if match["matched"]
-                        else i
-                    )
+                    yield (match["reversed"] or match["found"]) if match["matched"] else i
 
                 except UnicodeDecodeError:
                     yield i
