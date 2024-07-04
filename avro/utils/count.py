@@ -2,7 +2,7 @@
 
 
 # Import local modules.
-from avro import config
+from avro.utils import config
 
 
 # Functions.
