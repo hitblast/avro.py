@@ -77,7 +77,7 @@ def _cli_action(
 # usage: avro parse <text> [--bijoy] [--from-clip] [--copy]
 @cli.command("parse", help="Parse a given text to Bangla / Bengali.")
 @click.argument("text", required=False)
-@click.option("-b", "--bijoy", is_flag=True, help="Use Bijoy Keyboard format for parsing.")
+@click.option("-b", "--bijoy", is_flag=True, help="Use Bijoy Keyboard (ASCII) format for parsing.")
 @click.option("-i", "--ignore-remap", is_flag=True, help="Ignore remapping of predefined words.")
 @click.option("-f", "--from-clip", is_flag=True, help="Parse text from clipboard.")
 @click.option("-c", "--copy", is_flag=True, help="Copy the parsed text to clipboard.")
