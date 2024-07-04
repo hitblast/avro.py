@@ -117,7 +117,7 @@ def parse(*texts: str, bijoy: bool = False, remap_words: bool = True) -> Union[s
 
 def to_bijoy(*texts: str) -> Union[str, List[str]]:
     """
-    #### Converts input text to Bijoy Keyboard format.
+    #### Converts input text to Bijoy Keyboard format (ASCII).
 
     If a valid conversion is found, then it returns the converted string.
 
