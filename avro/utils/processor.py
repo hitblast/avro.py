@@ -1,10 +1,15 @@
-#
+# SPDX-License-Identifier: MIT
+
+
+# Import first-party Python libraries.
 import contextlib
 from functools import lru_cache
 from typing import Any, Dict, List, Optional, Tuple
 
+# Import local modules.
 from . import config, validate
 
+# Setup pattern variables for matching.
 PATTERNS = config.DICT["avro"]["patterns"]
 NON_RULE_PATTERNS = [p for p in PATTERNS if "rules" not in p]
 RULE_PATTERNS = [p for p in PATTERNS if "rules" in p]
