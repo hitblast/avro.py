@@ -2,7 +2,7 @@
 
 
 # Import local modules.
-from .resources import DICT
+from ..resources import DICT
 
 # Shortcuts to vowels, constants, case-sensitives and numbers.
 AVRO_VOWELS = set(DICT["avro"]["vowel"])
