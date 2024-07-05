@@ -46,13 +46,12 @@ jobs:
 
       - name: Build
         run: |
-          poetry run pdoc avro.main --html
-          mv html/avro/main.html index.html
+          poetry run pdoc avro --html
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './html/avro/*'
+          path: './html/avro'
           
       - name: Deploy to GitHub Pages
         id: deployment
