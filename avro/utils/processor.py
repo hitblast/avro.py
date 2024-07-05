@@ -15,9 +15,9 @@ NON_RULE_PATTERNS = [p for p in PATTERNS if "rules" not in p]
 RULE_PATTERNS = [p for p in PATTERNS if "rules" in p]
 
 
-# The following functions provide the functionality for the main "avro module".
+# The following functions provide the functionality for the main "avro" package.
 # These include rule / non-rule based pattern matching, remapping, reversing and more.
-# Please do not modify these functions if you do not have intentions to change the core functionality of the module.
+# Please do not modify these functions if you do not have the intentions to alter the core functionality of the module.
 
 
 @lru_cache(maxsize=128)
