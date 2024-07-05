@@ -1,9 +1,10 @@
 # SPDX-License-Identifier: MIT
 
 
-# Imports.
+# Import first-party Python libraries.
 from typing import Optional
 
+# Import local modules.
 import avro
 
 # Try to import the required modules.

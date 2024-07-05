@@ -8,9 +8,8 @@ from functools import lru_cache
 from itertools import chain
 from typing import Callable, Generator, List, Tuple, Union
 
-from .utils import processor, validate
-
 # Import local modules.
+from .utils import processor, validate
 from .utils.config import BIJOY_MAP
 
 
