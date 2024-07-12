@@ -66,10 +66,12 @@ def test_is_punctuation() -> NoReturn:
     """
 
     for i in "`~!@#$%^&*()-_=+\\|[{}]'\",<.>/?":
-        assert validate.is_punctuation(i)
-        assert not validate.is_vowel(i)
-        assert not validate.is_consonant(i)
-        assert not validate.is_number(i)
+        assert (
+            validate.is_punctuation(i)
+            and not validate.is_vowel(i)
+            and not validate.is_consonant(i)
+            and not validate.is_number(i)
+        )
 
 
 def test_fix_string_case() -> NoReturn:
@@ -82,10 +84,15 @@ def test_fix_string_case() -> NoReturn:
     uppercase.
     """
 
-    assert validate.fix_string_case("ABOL taBOl") == "abOl tabOl"
-    assert validate.fix_string_case("KhiCuRi") == "khicuRi"
-    assert validate.fix_string_case("KaTh-BuRO") == "kaTh-buRO"
-    assert validate.fix_string_case("raMgoRurer Chana") == "ramgoRurer chana"
+    cases = {
+        "ABOL taBOl": "abOl tabOl",
+        "KhiCuRi": "khicuRi",
+        "KaTh-BuRO": "kaTh-buRO",
+        "raMgoRurer Chana": "ramgoRurer chana",
+    }
+
+    for key, value in cases.items():
+        assert validate.fix_string_case(key) == value
 
 
 def test_is_exact() -> NoReturn:
