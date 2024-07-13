@@ -122,7 +122,11 @@ def _reverse(
 # usage: avro checkupdate
 @cli.command("checkupdate", help="Check for version updates.")
 def _checkupdate() -> None:
-    req = requests.get("https://api.github.com/repos/hitblast/avro.py/tags")
+    try:
+        req = requests.get("https://api.github.com/repos/hitblast/avro.py/tags")
+    except requests.exceptions.RequestException:
+        return _print_err("Failed to fetch latest version information.")
+
     latest_version = req.json()[0]["name"]
 
     if latest_version == avro.__version__:
