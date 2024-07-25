@@ -42,9 +42,6 @@ This package requires **Python 3.8 or higher** to be used inside your developmen
 ```sh
 # Install / upgrade.
 $ pip install avro.py
-
-# Install with integrated CLI tool.
-$ pip install avro.py[cli]
 ```
 
 <br>
@@ -85,32 +82,6 @@ Finally, you can reverse unicode Bengali to English as well (newly added).
 ```python
 # Reversing back!
 reversed_text = avro.reverse('আমার সোনার বাংলা।')
-```
-
----
-
-## 🔖 Command Line Usage
-
-Alternatively, instead of using avro.py from within your Python project, you can also use it as a simple,
-tiny command-line interface for easy parsing and reversing of text.
-
-Here are some examples for you to get started with:
-
-```sh
-# Main help section.
-$ avro --help  # or, use: avro <command> --help
-
-# Parsing some text.
-$ avro parse "tumi onek bhalO!"
-$ avro parse --bijoy "amio kharap na, taina?"  # (bijoy keyboard format)
-
-# Reversing.
-$ avro reverse "তাই তো!"
-
-# Using additional flags to ease workflow.
-$ avro parse --from-clip  # (fetching input from clipboard)
-$ avro parse "asolei!" --copy  # (copying output to clipboard)
-$ avro parse --from-clip --copy  # (clipboard input -> output)
 ```
 
 <br>
