@@ -44,16 +44,8 @@ classifiers=[
     'Topic :: Software Development :: Libraries :: Python Modules',
 ]
 
-[tool.poetry.scripts]
-avro = "avro.cli:main"
-
 [tool.poetry.dependencies]
 python = ">=3.8,<4.0"
-
-click = { version="^8", optional = true }
-rich = { version="^13", optional = true }
-pyclip = { version="^0.7.0", optional = true }
-requests = {version = "^2.32.3", optional = true}
 
 [tool.poetry.group.test.dependencies]
 pytest = "^8.0.1"
@@ -64,9 +56,6 @@ pdoc3 = ">=0.10,<0.12"
 
 [tool.poetry.group.dev.dependencies]
 ruff = ">=0.4.2,<0.6.0"
-
-[tool.poetry.extras]
-cli = ["click", "rich", "pyclip", "requests"]
 
 [build-system]
 requires = ["poetry-core"]
