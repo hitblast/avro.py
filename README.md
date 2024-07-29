@@ -46,10 +46,10 @@ $ pip install avro.py
 
 #### 📦 ...or you can try the CLI!
 
-[avnie](https://github.com/hitblast/avnie) is a newly developed CLI tool that uses avro.py under the hood. You can install it using the following command:
+[**avnie**](https://github.com/hitblast/avnie) is a newly developed CLI tool that uses avro.py under the hood. You can install it using:
 
 ```sh   
-# Install the package.
+# Install / upgrade avnie.
 $ pip install avnie
 ```
 
