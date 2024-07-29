@@ -44,6 +44,15 @@ This package requires **Python 3.8 or higher** to be used inside your developmen
 $ pip install avro.py
 ```
 
+#### 📦 ...or you can try the CLI!
+
+[avnie](https://github.com/hitblast/avnie) is a newly developed CLI tool that uses avro.py under the hood. You can install it using the following command:
+
+```sh   
+# Install the package.
+$ pip install avnie
+```
+
 <br>
 
 ## 🔖 Usage Guide
