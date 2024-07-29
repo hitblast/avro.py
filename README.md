@@ -103,10 +103,13 @@ In short, avro.py doesn't depend on any third-party libraries. However, if you'd
 $ python3 -m venv venv && source venv/bin/activate
 
 # Setup project using Poetry.
-$ poetry install --sync --all-extras
+$ poetry install --sync
+
+# Perform updates on lockfile.
+$ poetry update
 ```
 
-Later, you can run the tests provided with the project using the following command:
+Later, you can run the tests provided with the project using the following command. This option has already been configured in the "Testing" panel if you're using Visual Studio Code as your primary IDE.
 
 ```sh
 # Run unit tests.

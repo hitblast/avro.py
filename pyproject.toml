@@ -47,14 +47,12 @@ classifiers=[
 [tool.poetry.dependencies]
 python = "^3.8"
 
-[tool.poetry.group.test.dependencies]
-pytest = "^8.0.1"
-
 [tool.poetry.group.docs.dependencies]
 setuptools = ">=69,<72"
 pdoc3 = ">=0.10,<0.12"
 
 [tool.poetry.group.dev.dependencies]
+pytest = "^8.0.1"
 ruff = ">=0.4.2,<0.6.0"
 
 [build-system]
