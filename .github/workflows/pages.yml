@@ -39,7 +39,7 @@ jobs:
     
       - name: Install dependencies
         run: |
-          poetry install --sync --no-interaction --all-extras --with docs
+          poetry install --sync --no-interaction --with docs
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

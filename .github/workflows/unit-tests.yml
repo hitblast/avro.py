@@ -31,7 +31,7 @@ jobs:
 
     - name: Install dependencies & setup project
       run: |
-        poetry install --sync --no-interaction --no-root --with test
+        poetry install --sync --no-interaction
  
     - name: Run the tests
       run: poetry run pytest .
