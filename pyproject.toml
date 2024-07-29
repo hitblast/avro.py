@@ -48,7 +48,7 @@ classifiers=[
 python = "^3.8"
 
 [tool.poetry.group.docs.dependencies]
-setuptools = ">=69,<72"
+setuptools = ">=69,<73"
 pdoc3 = ">=0.10,<0.12"
 
 [tool.poetry.group.dev.dependencies]
