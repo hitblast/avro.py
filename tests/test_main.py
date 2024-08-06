@@ -157,11 +157,15 @@ def test_conversion_bijoy_func() -> NoReturn:
     Test conversion to Bijoy directly.
     """
 
+    # Regular Conversion.
     assert "Avwg evsjvq Mvb MvB;" == avro.to_bijoy("আমি বাংলায় গান গাই;")
     assert [
         "Avwg evsjvi Mvb MvB|",
         "Avwg Avgvi Avwg‡K wPiw`b GB evsjvq Lyu‡R cvB!",
     ] == avro.to_bijoy("আমি বাংলার গান গাই।", "আমি আমার আমিকে চিরদিন এই বাংলায় খুঁজে পাই!")
+
+    # Fail-safe Conversion.
+    assert "Hello, World!" == avro.to_bijoy("Hello, World!")
 
 
 def test_full_sentences() -> NoReturn:
