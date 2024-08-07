@@ -279,3 +279,73 @@ def rearrange_unicode_text(text: str) -> str:
             barrier = i + 1
 
     return "".join(chars)
+
+
+def rearrange_bijoy_text(text: str) -> str:
+    """
+    Rearranges Bijoy Keyboard text to match conversion standards for Unicode.
+
+    Returns the rearranged string.
+    """
+
+    for i, char in enumerate(text):
+        if (
+            i > 0
+            and char == "\u09cd"
+            and (validate.is_bangla_kar(text[i - 1]) or validate.is_bangla_nukta(text[i - 1]))
+            and i < len(text) - 1
+        ):
+            text = text[: i - 1] + char + text[i] + text[i - 1] + text[i + 2 :]
+
+        if (
+            i > 0
+            and i < len(text) - 1
+            and char == "\u09cd"
+            and text[i - 1] == "\u09b0"
+            and text[i - 2] != "\u09cd"
+            and validate.is_bangla_kar(text[i + 1])
+        ):
+            text = text[: i - 1] + text[i + 1] + text[i - 1] + char + text[i + 2 :]
+
+        if (
+            i < len(text) - 1
+            and char == "র"
+            and validate.is_bangla_halant(text[i + 1])
+            and not validate.is_bangla_halant(text[i - 1])
+        ):
+            j = 1
+
+            while i - j >= 0 and (
+                validate.is_bangla_banjonborno(text[i - j])
+                and validate.is_bangla_halant(text[i - j - 1])
+                or (j == 1 and validate.is_bangla_kar(text[i - j]))
+            ):
+                j += 2 if validate.is_bangla_banjonborno(text[i - j]) else 1
+
+            text = text[: i - j] + char + text[i + 1] + text[i - j : i] + text[i + 2 :]
+            i += 1
+            continue
+
+        if i < len(text) - 1 and validate.is_bangla_prekar(char) and not (text[i + 1]) == " ":
+            j = 1
+            while validate.is_bangla_banjonborno(text[i + j]):
+                if validate.is_bangla_halant(text[i + j + 1]):
+                    j += 2
+                else:
+                    break
+
+            if char == "ে":
+                if text[i + j + 1] == "া":
+                    text = text[:i] + text[i + 1 : i + j + 1] + "ো" + text[i + j + 2 :]
+                elif text[i + j + 1] == "ৗ":
+                    text = text[:i] + text[i + 1 : i + j + 1] + "ৌ" + text[i + j + 2 :]
+                else:
+                    text = text[:i] + text[i + 1 : i + j + 1] + char + text[i + j + 1 :]
+            i += j
+
+        if i < len(text) - 1 and char == "ঁ" and validate.is_bangla_postkar(text[i + 1]):
+            text = text[:i] + text[i + 1] + char + text[i + 2 :]
+
+        i += 1
+
+    return text
