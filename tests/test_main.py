@@ -168,6 +168,22 @@ def test_conversion_bijoy_func() -> NoReturn:
     assert "Hello, World!" == avro.to_bijoy("Hello, World!")
 
 
+def test_conversion_unicode_func() -> NoReturn:
+    """
+    Test conversion to Unicode directly.
+    """
+
+    # Regular Conversion.
+    assert "আমি বাংলায় গান গাই;" == avro.to_unicode("Avwg evsjvh় Mvb MvB;")
+    assert [
+        "আমি বাংলার গান গাই।",
+        "আমি আমার আমিকে চিরদিন এই বাংলায় খুঁজে পাই।",
+    ] == avro.to_unicode("Avwg evsjvi Mvb MvB|", "Avwg Avgvi Avwg‡K wPiw`b GB evsjvq Lyu‡R cvB!")
+
+    # Fail-safe Conversion.
+    assert "Hello, World!" == avro.to_unicode("Hello, World!")
+
+
 def test_full_sentences() -> NoReturn:
     """
     Test parsing and reversing of sentences (Unicode).
