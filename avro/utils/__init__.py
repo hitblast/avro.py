@@ -3,5 +3,5 @@
 """
 Core utility package for avro.py
 
-Licensed under: MIT License
+Licensed under the terms of the MIT License.
 """

@@ -1,6 +1,12 @@
 # SPDX-License-Identifier: MIT
 
 
+"""
+A modern Pythonic implementation of Avro Phonetic.
+
+Licensed under the terms of the MIT License.
+"""
+
 # Import local modules.
 from .main import *
 
