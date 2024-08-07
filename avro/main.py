@@ -10,7 +10,7 @@ from typing import Callable, Generator, List, Tuple, Union
 
 # Import local modules.
 from .utils import processor, validate
-from .utils.config import BIJOY_MAP
+from .utils.config import BIJOY_MAP, BIJOY_MAP_REVERSE
 
 
 # The helper function for handling multithreaded workloads.
@@ -24,6 +24,13 @@ def _concurrency_helper(func: Callable, params: Tuple[str]) -> List[str]:
             output.append(future.result())
 
     return output
+
+
+# Compiled regular expression for UTF-8 validation.
+UTF8_REGEX = re.compile(r"\A[\x00-\x7F]*\Z")
+
+# Compiled regular expression for removing noise while reversing.
+REVERSE_REGEX = re.compile("(\\s|\\.|,|\\?|\\।|\\-|;|')", re.UNICODE)
 
 
 # The primary parse function for the library.
@@ -48,9 +55,6 @@ def parse(*texts: str, bijoy: bool = False, remap_words: bool = True) -> Union[s
     ```
     """
 
-    # Compiled regular expression for UTF-8 validation
-    utf8_regex = re.compile(r"\A[\x00-\x7F]*\Z")
-
     @lru_cache(maxsize=128)
     def _parse_backend(text: str) -> str:
         fixed_text = validate.fix_string_case(text)  # Sanitize input text.
@@ -66,7 +70,7 @@ def parse(*texts: str, bijoy: bool = False, remap_words: bool = True) -> Union[s
 
             # Iterate through input text.
             for cur, i in enumerate(fixed_text):
-                uni_pass = utf8_regex.match(i) is not None
+                uni_pass = UTF8_REGEX.match(i) is not None
 
                 if not uni_pass:
                     cur_end = cur + 1
@@ -140,6 +144,36 @@ def to_bijoy(*texts: str) -> Union[str, List[str]]:
     return output[0] if len(output) == 1 else output
 
 
+def to_unicode(*texts):
+    """
+    #### Converts input text to Unicode (Avro Keyboard format).
+
+    If a valid conversion is found, then it returns the converted string.
+
+    Parameters:
+    - `*texts: str | Tuple[str]`: The text(s) to convert.
+
+    Usage:
+    ```python
+    import avro
+
+    converted = avro.to_unicode('amar sonar bangla')
+    print(converted)
+    ```
+    """
+
+    @lru_cache(maxsize=128)
+    def _convert_backend(line: str) -> str:
+        for ascii_c in BIJOY_MAP_REVERSE:
+            line = re.sub(re.escape(ascii_c), BIJOY_MAP_REVERSE[ascii_c], line)
+
+        line = re.sub("অা", "আ", processor.rearrange_bijoy_text(line))
+        return line.strip()
+
+    output = _concurrency_helper(_convert_backend, texts)
+    return output[0] if len(output) == 1 else output
+
+
 def reverse(*texts: str, remap_words: bool = True) -> Union[str, List[str]]:
     """
     #### Reverses input text to Roman script typed in English.
@@ -183,13 +217,10 @@ def reverse(*texts: str, remap_words: bool = True) -> Union[str, List[str]]:
 
         return "".join(chain.from_iterable(output_generator())) if manual_required else text
 
-    # Split using regex to remove noise.
-    compiled_regex = re.compile("(\\s|\\.|,|\\?|\\।|\\-|;|')", re.UNICODE)
-
     # Extension for the _reverse_backend() function.
     @lru_cache(maxsize=128)
     def _reverse_backend_ext(text: str) -> str:
-        separated_texts = compiled_regex.split(text)
+        separated_texts = REVERSE_REGEX.split(text)
         text_segments = [_reverse_backend(separated_text) for separated_text in separated_texts]
         return "".join(text_segments)
 
