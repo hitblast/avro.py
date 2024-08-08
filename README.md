@@ -57,35 +57,48 @@ $ pip install avnie
 
 ## 🔖 Usage Guide
 
-### 1. `parse()`
-This is the most basic use case for avro.py, which includes parsing English Roman script to unicode Bengali:
+This small tour guide will describe how you can use avro.py back and forth to operate (cutlery! lame joke?) on Bengali text:
+
+#### 1. `parse()`
+Let's assume I want to parse some English text to Bengali, which is "ami banglay gan gai.", so in this case to convert it to Bengali, we can use this snippet:
 
 ```python
-# Imports.
+# Import the package.
 import avro
 
-# Parsing some text.
-output = avro.parse('ami banglay gan gai.')
-print(output)
+# Our dummy text.
+dummy = 'ami banglay gan gai.'
+
+# Parsing the text.
+avro_output = avro.parse(dummy)
+print(output)  # Output: আমি বাংলায় গান গাই।
 ```
 
-### 2. `parse(bijoy=True)`
-Alternatively, we can generate the same output, but in compliance with the Bijoy Keyboard format:
+#### 2. `parse(bijoy=True)`
+Alternatively, I can also do it in Bijoy Keyboard format:
 
 ```python
-# Parsing some text in Bijoy!
-output = avro.parse('tumi emon keno?', bijoy=True)
+# Parsing in Bijoy.
+bijoy_output = avro.parse(dummy, bijoy=True)  # Output: Avwg evsjvh় Mvb MvB।
 ```
 
-### 3. `to_bijoy()`
-We can also use avro.py to convert existing unicode Bengali to its Bijoy Keyboard equivalent:
+#### 3. `to_bijoy()`
+Or, we can take the previous `avro_output` and convert it to Bijoy if we want to, like this:
 
 ```python
-# Converting some text.
-bijoy_text = avro.to_bijoy('আমি বাংলায় গান গাই।')
+# Converting...
+bijoy_output = avro.to_bijoy(avro_output)  # Output: Avwg evsjvh় Mvb MvB।
 ```
 
-### 4. `reverse()`
+#### 4. `to_unicode()`
+Conversely, we can convert Bijoy Keyboard text to unicode Bengali:
+
+```python
+# Converting back!
+unicode_text = avro.to_unicode('Avwg evsjvh় Mvb MvB।')  # Output: আমি বাংলায় গান গাই।
+```
+
+#### 5. `reverse()`
 Finally, you can reverse unicode Bengali to English as well (newly added).
 
 ```python

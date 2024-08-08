@@ -323,23 +323,22 @@ def rearrange_bijoy_text(text: str) -> str:
                     j += 1
                 else:
                     break
-            temp = text[: i - j] + text[i] + text[i + 1] + text[i - j : i] + text[i + 2 :]
-            text = temp
+            text = text[: i - j] + text[i] + text[i + 1] + text[i - j : i] + text[i + 2 :]
             i += 1
             continue
 
         if i < len(text) - 1 and validate.is_bangla_prekar(text[i]) and text[i + 1] != " ":
             j = 1
             while validate.is_bangla_banjonborno(text[i + j]):
-                if validate.is_bangla_halant(text[i + j + 1]):
+                if validate.is_bangla_halant((part := text[i + j + 1])):
                     j += 2
                 else:
                     break
             temp = text[:i] + text[i + 1 : i + j + 1]
-            if text[i] == "ে" and text[i + j + 1] == "া":
+            if text[i] == "ে" and part == "া":
                 temp += "ো"
                 l = 1
-            elif text[i] == "ে" and text[i + j + 1] == "ৗ":
+            elif text[i] == "ে" and part == "ৗ":
                 temp += "ৌ"
                 l = 1
             else:
