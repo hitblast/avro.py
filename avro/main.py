@@ -115,7 +115,7 @@ def parse(*texts: str, bijoy: bool = False, remap_words: bool = True) -> Union[s
 
 def to_bijoy(*texts: str) -> Union[str, List[str]]:
     """
-    #### Converts input text to Bijoy Keyboard format (ASCII).
+    #### Converts input text (Avro, Unicode) to Bijoy Keyboard format (ASCII).
 
     If a valid conversion is found, then it returns the converted string.
 
@@ -146,7 +146,7 @@ def to_bijoy(*texts: str) -> Union[str, List[str]]:
 
 def to_unicode(*texts):
     """
-    #### Converts input text to Unicode (Avro Keyboard format).
+    #### Converts input text (Bijoy Keyboard, ASCII) to Unicode (Avro Keyboard format).
 
     If a valid conversion is found, then it returns the converted string.
 
@@ -157,7 +157,7 @@ def to_unicode(*texts):
     ```python
     import avro
 
-    converted = avro.to_unicode('amar sonar bangla')
+    converted = avro.to_unicode('Avwg evsjvh় Mvb MvB;')
     print(converted)
     ```
     """
