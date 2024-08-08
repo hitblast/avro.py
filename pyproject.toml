@@ -9,6 +9,7 @@ exclude = ["venv"]
 "avro/__init__.py" = ["F403"]
 "avro/resources/__init__.py" = ["F403"]
 "avro/resources/dictionary.py" = ["F601"]
+"avro/utils/processor.py" = ["E741"]
 "tests/test_main.py" = ["F601"]
 
 [tool.poetry]
