@@ -57,9 +57,9 @@ $ pip install avnie
 
 ## 🔖 Usage Guide
 
-This small tour guide will describe how you can use avro.py back and forth to operate (cutlery! lame joke?) on Bengali text:
+This small tour guide will describe how you can use avro.py back and forth to operate (cutlery!) on Bengali text:
 
-#### 1. `parse()`
+### 1. `parse()`
 Let's assume I want to parse some English text to Bengali, which is "ami banglay gan gai.", so in this case to convert it to Bengali, we can use this snippet:
 
 ```python
@@ -74,7 +74,7 @@ avro_output = avro.parse(dummy)
 print(output)  # Output: আমি বাংলায় গান গাই।
 ```
 
-#### 2. `parse(bijoy=True)`
+### 2. `parse(bijoy=True)`
 Alternatively, I can also do it in Bijoy Keyboard format:
 
 ```python
@@ -82,28 +82,28 @@ Alternatively, I can also do it in Bijoy Keyboard format:
 bijoy_output = avro.parse(dummy, bijoy=True)  # Output: Avwg evsjvh় Mvb MvB।
 ```
 
-#### 3. `to_bijoy()`
+### 3. `to_bijoy()`
 Or, we can take the previous `avro_output` and convert it to Bijoy if we want to, like this:
 
 ```python
-# Converting...
-bijoy_output = avro.to_bijoy(avro_output)  # Output: Avwg evsjvh় Mvb MvB।
+# Converting to Bijoy.
+bijoy_text = avro.to_bijoy(avro_output)
 ```
 
-#### 4. `to_unicode()`
-Conversely, we can convert Bijoy Keyboard text to unicode Bengali:
+### 4. `to_unicode()`
+Conversely, we can convert the Bijoy text we got just now and convert it back to Unicode Bengali:
 
 ```python
 # Converting back!
-unicode_text = avro.to_unicode('Avwg evsjvh় Mvb MvB।')  # Output: আমি বাংলায় গান গাই।
+unicode_text = avro.to_unicode(bijoy_text)
 ```
 
-#### 5. `reverse()`
-Finally, you can reverse unicode Bengali to English as well (newly added).
+### 4. `reverse()`
+Finally, we can just reverse back to the original text we passed as input in the first place:
 
 ```python
 # Reversing back!
-reversed_text = avro.reverse('আমার সোনার বাংলা।')
+reversed_text = avro.reverse(uncode_text)  # Output: ami banglay gan gai.
 ```
 
 <br>
@@ -125,7 +125,7 @@ In short, avro.py doesn't depend on any third-party libraries. However, if you'd
 $ python3 -m venv venv && source venv/bin/activate
 
 # Setup project using Poetry.
-$ poetry install --sync
+$ make install  # same as `poetry install --sync`
 
 # Perform updates on lockfile.
 $ poetry update
@@ -135,7 +135,7 @@ Later, you can run the tests provided with the project using the following comma
 
 ```sh
 # Run unit tests.
-$ poetry run pytest .
+$ make test  # same as `poetry run pytest .`
 ```
 
 <br>
