@@ -14,7 +14,7 @@ exclude = ["venv"]
 
 [tool.poetry]
 name = "avro-py"
-version = "2024.7.29"
+version = "2024.8.8"
 description = "A modern Pythonic implementation of Avro Phonetic."
 authors = ["HitBlast <hitblastlive@gmail.com>"]
 license = "MIT"
