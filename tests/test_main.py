@@ -177,7 +177,7 @@ def test_conversion_unicode_func() -> NoReturn:
     assert "আমি বাংলায় গান গাই;" == avro.to_unicode("Avwg evsjvh় Mvb MvB;")
     assert [
         "আমি বাংলার গান গাই।",
-        "আমি আমার আমিকে চিরদিন এই বাংলায় খুঁজে পাই।",
+        "আমি আমার আমিকে চিরদিন এই বাংলায় খুঁজে পাই!",
     ] == avro.to_unicode("Avwg evsjvi Mvb MvB|", "Avwg Avgvi Avwg‡K wPiw`b GB evsjvq Lyu‡R cvB!")
 
     # Fail-safe Conversion.
