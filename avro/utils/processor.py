@@ -287,64 +287,71 @@ def rearrange_bijoy_text(text: str) -> str:
 
     Returns the rearranged string.
     """
-
-    for i, char in enumerate(text):
+    i = 0
+    while i < len(text):
         if (
             i > 0
-            and char == "\u09cd"
+            and text[i] == "\u09cd"
             and (validate.is_bangla_kar(text[i - 1]) or validate.is_bangla_nukta(text[i - 1]))
             and i < len(text) - 1
         ):
-            text = text[: i - 1] + char + text[i] + text[i - 1] + text[i + 2 :]
+            text = text[: i - 1] + text[i] + text[i + 1] + text[i - 1] + text[i + 2 :]
 
         if (
             i > 0
             and i < len(text) - 1
-            and char == "\u09cd"
+            and text[i] == "\u09cd"
             and text[i - 1] == "\u09b0"
             and text[i - 2] != "\u09cd"
             and validate.is_bangla_kar(text[i + 1])
         ):
-            text = text[: i - 1] + text[i + 1] + text[i - 1] + char + text[i + 2 :]
+            text = text[: i - 1] + text[i + 1] + text[i - 1] + text[i] + text[i + 2 :]
 
         if (
             i < len(text) - 1
-            and char == "র"
+            and text[i] == "র"
             and validate.is_bangla_halant(text[i + 1])
             and not validate.is_bangla_halant(text[i - 1])
         ):
             j = 1
-
-            while i - j >= 0 and (
-                validate.is_bangla_banjonborno(text[i - j])
-                and validate.is_bangla_halant(text[i - j - 1])
-                or (j == 1 and validate.is_bangla_kar(text[i - j]))
-            ):
-                j += 2 if validate.is_bangla_banjonborno(text[i - j]) else 1
-
-            text = text[: i - j] + char + text[i + 1] + text[i - j : i] + text[i + 2 :]
+            while True:
+                if i - j < 0:
+                    break
+                if validate.is_bangla_banjonborno(text[i - j]) and validate.is_bangla_halant(text[i - j - 1]):
+                    j += 2
+                elif j == 1 and validate.is_bangla_kar(text[i - j]):
+                    j += 1
+                else:
+                    break
+            temp = text[: i - j] + text[i] + text[i + 1] + text[i - j : i] + text[i + 2 :]
+            text = temp
             i += 1
             continue
 
-        if i < len(text) - 1 and validate.is_bangla_prekar(char) and not (text[i + 1]) == " ":
+        if i < len(text) - 1 and validate.is_bangla_prekar(text[i]) and text[i + 1] != " ":
             j = 1
             while validate.is_bangla_banjonborno(text[i + j]):
                 if validate.is_bangla_halant(text[i + j + 1]):
                     j += 2
                 else:
                     break
-
-            if char == "ে":
-                if text[i + j + 1] == "া":
-                    text = text[:i] + text[i + 1 : i + j + 1] + "ো" + text[i + j + 2 :]
-                elif text[i + j + 1] == "ৗ":
-                    text = text[:i] + text[i + 1 : i + j + 1] + "ৌ" + text[i + j + 2 :]
-                else:
-                    text = text[:i] + text[i + 1 : i + j + 1] + char + text[i + j + 1 :]
+            temp = text[:i] + text[i + 1 : i + j + 1]
+            if text[i] == "ে" and text[i + j + 1] == "া":
+                temp += "ো"
+                l = 1
+            elif text[i] == "ে" and text[i + j + 1] == "ৗ":
+                temp += "ৌ"
+                l = 1
+            else:
+                temp += text[i]
+                l = 0
+            temp += text[i + j + l + 1 :]
+            text = temp
             i += j
 
-        if i < len(text) - 1 and char == "ঁ" and validate.is_bangla_postkar(text[i + 1]):
-            text = text[:i] + text[i + 1] + char + text[i + 2 :]
+        if i < len(text) - 1 and text[i] == "ঁ" and validate.is_bangla_postkar(text[i + 1]):
+            temp = text[:i] + text[i + 1] + text[i] + text[i + 2 :]
+            text = temp
 
         i += 1
 
