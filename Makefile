@@ -10,3 +10,6 @@ test:
 
 install:
 	@poetry install --sync
+
+build:
+	@poetry build --verbose --no-interaction

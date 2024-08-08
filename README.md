@@ -136,6 +136,9 @@ Later, you can run the tests provided with the project using the following comma
 ```sh
 # Run unit tests.
 $ make test  # same as `poetry run pytest .`
+
+# Build sdist and wheel packages for distributing the project.
+$ make build  # same as `poetry build --verbose --no-interaction`
 ```
 
 <br>
