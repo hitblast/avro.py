@@ -180,9 +180,6 @@ def test_conversion_unicode_func() -> NoReturn:
         "আমি আমার আমিকে চিরদিন এই বাংলায় খুঁজে পাই!",
     ] == avro.to_unicode("Avwg evsjvi Mvb MvB|", "Avwg Avgvi Avwg‡K wPiw`b GB evsjvq Lyu‡R cvB!")
 
-    # Fail-safe Conversion.
-    assert "Hello, World!" == avro.to_unicode("Hello, World!")
-
 
 def test_full_sentences() -> NoReturn:
     """

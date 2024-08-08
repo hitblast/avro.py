@@ -163,12 +163,12 @@ def to_unicode(*texts):
     """
 
     @lru_cache(maxsize=128)
-    def _convert_backend(line: str) -> str:
+    def _convert_backend(text: str) -> str:
         for ascii_c in BIJOY_MAP_REVERSE:
-            line = re.sub(re.escape(ascii_c), BIJOY_MAP_REVERSE[ascii_c], line)
+            text = re.sub(re.escape(ascii_c), BIJOY_MAP_REVERSE[ascii_c], text)
 
-        line = re.sub("অা", "আ", processor.rearrange_bijoy_text(line))
-        return line.strip()
+        text = re.sub("অা", "আ", processor.rearrange_bijoy_text(text))
+        return text.strip()
 
     output = _concurrency_helper(_convert_backend, texts)
     return output[0] if len(output) == 1 else output
