@@ -9,7 +9,7 @@ test:
 	@poetry run pytest .
 
 install:
-	@poetry install --sync
+	@poetry install --sync --no-interaction
 
 build:
 	@poetry build --verbose --no-interaction
