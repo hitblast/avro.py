@@ -27,9 +27,7 @@ jobs:
         virtualenvs-in-project: true
 
     - name: Install dependencies & build
-      run: |
-        poetry install --sync --no-interaction --no-root
-        poetry build
+      run: make install && make build
       
     - name: Upload artifact
       uses: actions/upload-artifact@v4
