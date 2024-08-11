@@ -26,7 +26,7 @@ def _concurrency_helper(func: Callable, params: Tuple[str, ...]) -> List[str]:
 
 
 # Compiled regular expression for UTF-8 validation.
-UTF8_REGEX = re.compile(r"\A[\x00-\x7F]*\Z")
+UTF8_REGEX = re.compile(r"\A[\x00-\x7F]*\Z", re.UNICODE)
 
 # Compiled regular expression for removing noise while reversing.
 REVERSE_REGEX = re.compile(r"(\s|\.|,|\?|।|-|;|')", re.UNICODE)
