@@ -32,6 +32,9 @@ UTF8_REGEX = re.compile(r"\A[\x00-\x7F]*\Z")
 REVERSE_REGEX = re.compile(r"(\s|\.|,|\?|।|-|;|')", re.UNICODE)
 
 
+# ---
+
+
 # Backend Functions.
 # The output generator for the parse function.
 def _parse_output_generator(fixed_text: str, cur_end: int) -> Generator[str, None, None]:
@@ -131,6 +134,9 @@ def _reverse_backend_ext(text: str, remap_words: bool) -> str:
     separated_texts = REVERSE_REGEX.split(text)
     text_segments = [_reverse_backend(separated_text, remap_words) for separated_text in separated_texts]
     return "".join(text_segments)
+
+
+# ---
 
 
 # Primary user-end functions.
@@ -235,6 +241,6 @@ def reverse(*texts: str, remap_words: bool = True) -> Union[str, List[str]]:
     print(reversed)
     ```
     """
-    
+
     output = _concurrency_helper(lambda text: _reverse_backend_ext(text, remap_words), texts)
     return output[0] if len(output) == 1 else output
