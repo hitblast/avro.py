@@ -137,6 +137,26 @@ def _reverse_backend_ext(text: str, remap_words: bool) -> str:
 # The parse() function.
 # Used to parse from English Roman script to Bengali in Unicode.
 def parse(*texts: str, bijoy: bool = False, remap_words: bool = True) -> Union[str, List[str]]:
+    """
+    #### Parses input text, matches and replaces using the Avro Dictionary.
+
+    If a valid replacement is found, then it returns the replaced string.
+    If no replacement is found, then it instead returns the input text.
+
+    Parameters:
+    - `*texts: str | Tuple[str]`: The text(s) to parse.
+    - `bijoy: bool = False`: Whether to return in the Bijoy Keyboard format (ASCII).
+    - `remap_words: bool = True`: Whether to parse input text with remapped (exception) words.
+
+    Usage:
+    ```python
+    import avro
+
+    parsed = avro.parse('ami banglay gan gai')
+    print(parsed)
+    ```
+    """
+
     output = _concurrency_helper(lambda text: _parse_backend(text, remap_words), texts)
 
     # If the `bijoy` parameter is set to `True`, then convert the output to Bijoy Keyboard format.
@@ -149,6 +169,23 @@ def parse(*texts: str, bijoy: bool = False, remap_words: bool = True) -> Union[s
 # The to_bijoy() function.
 # Used to parse from Bengali in Unicode to Bijoy Keyboard format.
 def to_bijoy(*texts: str) -> Union[str, List[str]]:
+    """
+    #### Converts input text (Avro, Unicode) to Bijoy Keyboard format (ASCII).
+
+    If a valid conversion is found, then it returns the converted string.
+
+    Parameters:
+    - `*texts: str | Tuple[str]`: The text(s) to convert.
+
+    Usage:
+    ```python
+    import avro
+
+    converted = avro.to_bijoy('আমার সোনার বাংলা')
+    print(converted)
+    ```
+    """
+
     output = _concurrency_helper(_convert_backend, texts)
     return output[0] if len(output) == 1 else output
 
@@ -156,6 +193,23 @@ def to_bijoy(*texts: str) -> Union[str, List[str]]:
 # The to_unicode() function.
 # Used to parse from Bijoy Keyboard format to Bengali in Unicode.
 def to_unicode(*texts):
+    """
+    #### Converts input text (Bijoy Keyboard, ASCII) to Unicode (Avro Keyboard format).
+
+    If a valid conversion is found, then it returns the converted string.
+
+    Parameters:
+    - `*texts: str | Tuple[str]`: The text(s) to convert.
+
+    Usage:
+    ```python
+    import avro
+
+    converted = avro.to_unicode('Avwg evsjvh় Mvb MvB;')
+    print(converted)
+    ```
+    """
+
     output = _concurrency_helper(_convert_backend_unicode, texts)
     return output[0] if len(output) == 1 else output
 
@@ -163,5 +217,24 @@ def to_unicode(*texts):
 # The reverse() function.
 # Used to parse from Bengali in Unicode to English Roman script.
 def reverse(*texts: str, remap_words: bool = True) -> Union[str, List[str]]:
+    """
+    #### Reverses input text to Roman script typed in English.
+
+    If a valid replacement is found, then it returns the replaced string.
+    If no replacement is found, then it instead returns the input text.
+
+    Parameters:
+    - `*texts: str | Tuple[str]`: The text(s) to reverse.
+    - `remap_words: bool = True`: Whether to reverse input text with remapped (exception) words.
+
+    Usage:
+    ```python
+    import avro
+
+    reversed = avro.reverse('আমার সোনার বাংলা')
+    print(reversed)
+    ```
+    """
+    
     output = _concurrency_helper(lambda text: _reverse_backend_ext(text, remap_words), texts)
     return output[0] if len(output) == 1 else output
