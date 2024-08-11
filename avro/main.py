@@ -235,6 +235,6 @@ def reverse(*texts: str, remap_words: bool = True) -> Union[str, List[str]]:
     print(reversed)
     ```
     """
-    
+
     output = _concurrency_helper(lambda text: _reverse_backend_ext(text, remap_words), texts)
     return output[0] if len(output) == 1 else output
