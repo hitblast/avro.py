@@ -30,7 +30,7 @@ def _concurrency_helper(func: Callable, params: Tuple[str]) -> List[str]:
 UTF8_REGEX = re.compile(r"\A[\x00-\x7F]*\Z")
 
 # Compiled regular expression for removing noise while reversing.
-REVERSE_REGEX = re.compile("(\\s|\\.|,|\\?|\\।|\\-|;|')", re.UNICODE)
+REVERSE_REGEX = re.compile(r"(\s|\.|,|\?|।|-|;|')", re.UNICODE)
 
 
 # The primary parse function for the library.
