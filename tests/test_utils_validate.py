@@ -16,7 +16,10 @@ from avro.core import validate
 vowels = "aeiou"
 consonants = "bcdfghjklmnpqrstvwxyz"
 numbers = "0123456789"
+kars = ["া", "ি", "ী", "ৗ", "ু", "ূ", "ৃ", "ে", "ৈ", "ো", "ৌ"]
 prekars = ["ি", "ৈ", "ে"]
+postkars = ["া", "ো", "ৌ", "ৗ", "ু", "ূ", "ী", "ৃ"]
+nuktabanjon = ["ং", "ঃ", "ঁ"]
 banjonborno = "কখগঘঙচছজঝঞটঠডঢণতথদধনপফবভমশষসহযরলয়ংঃঁৎ"
 
 
@@ -109,6 +112,17 @@ def test_is_exact() -> NoReturn:
     assert validate.is_exact("a", "a", 1, 2, True)
 
 
+def test_is_kar() -> NoReturn:
+    """
+    Test if given string is a kar.
+    """
+
+    for i in kars:
+        assert validate.is_bangla_kar(i)
+
+    assert not (validate.is_bangla_kar("a") and validate.is_bangla_kar("b"))
+
+
 def test_is_prekar() -> NoReturn:
     """
     Test if given string is a prekar.
@@ -117,12 +131,20 @@ def test_is_prekar() -> NoReturn:
     for i in prekars:
         assert validate.is_bangla_prekar(i)
 
-    assert not (
-        validate.is_bangla_prekar("া")
-        and validate.is_bangla_prekar("ূ")
-        and validate.is_bangla_prekar("a")
-        and validate.is_bangla_prekar("b")
-    )
+    for i in postkars:
+        assert not validate.is_bangla_prekar(i)
+
+
+def test_is_postkar() -> NoReturn:
+    """
+    Test if given string is a postkar.
+    """
+
+    for i in postkars:
+        assert validate.is_bangla_postkar(i)
+
+    for i in prekars:
+        assert not validate.is_bangla_postkar(i)
 
 
 def test_is_banjonborno() -> NoReturn:
@@ -141,12 +163,16 @@ def test_is_banjonborno() -> NoReturn:
     )
 
 
-def test_is_halant() -> NoReturn:
+def test_is_exception() -> NoReturn:
     """
-    Test if given string is a halant.
+    Test if given string is a conversion exception.
     """
 
     assert validate.is_bangla_halant("্")
+
+    for i in nuktabanjon:
+        assert validate.is_bangla_nukta(i)
+
     assert not (
         validate.is_bangla_halant("a")
         and validate.is_bangla_halant("ূ")
