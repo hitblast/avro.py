@@ -1,6 +1,12 @@
 # SPDX-License-Identifier: MIT
 
 
+"""
+Avro Keyboard for Pythoneers
+
+Licensed under the terms of the MIT License.
+"""
+
 # Import first-party Python libraries.
 import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -9,8 +15,9 @@ from itertools import chain
 from typing import Callable, Generator, List, Tuple, Union
 
 # Import local modules.
-from .utils import processor, validate
-from .utils.config import BIJOY_MAP, BIJOY_MAP_REVERSE
+from . import processor
+from .core import validate
+from .core.config import BIJOY_MAP, BIJOY_MAP_REVERSE
 
 
 # Concurrency helper function for handling multithreaded workloads.

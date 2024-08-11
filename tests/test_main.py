@@ -11,7 +11,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.
 
 # Import local modules.
 import avro
-from avro.utils import config
+from avro.core import config
 
 
 # Test functions for this file.

@@ -42,7 +42,7 @@ def find_in_remap(text: str, *, reversed: bool = False) -> Tuple[str, bool]:
         word == previous_word for word, previous_word in zip(text.split(), previous_text.split())
     )
 
-    return (text, manual_required)
+    return text, manual_required
 
 
 def match_patterns(
@@ -298,8 +298,7 @@ def rearrange_bijoy_text(text: str) -> str:
             text = text[: i - 1] + text[i] + text[i + 1] + text[i - 1] + text[i + 2 :]
 
         if (
-            i > 0
-            and i < len(text) - 1
+            0 < i < len(text) - 1
             and text[i] == "\u09cd"
             and text[i - 1] == "\u09b0"
             and text[i - 2] != "\u09cd"
@@ -337,14 +336,14 @@ def rearrange_bijoy_text(text: str) -> str:
             temp = text[:i] + text[i + 1 : i + j + 1]
             if text[i] == "ে" and part == "া":
                 temp += "ো"
-                l = 1
+                add = 1
             elif text[i] == "ে" and part == "ৗ":
                 temp += "ৌ"
-                l = 1
+                add = 1
             else:
                 temp += text[i]
-                l = 0
-            temp += text[i + j + l + 1 :]
+                add = 0
+            temp += text[i + j + add + 1 :]
             text = temp
             i += j
 

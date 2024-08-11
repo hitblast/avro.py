@@ -10,7 +10,7 @@ from typing import NoReturn
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
 
 # Import local modules.
-from avro.utils import count
+from avro.core import count
 
 
 # Test functions for this file.

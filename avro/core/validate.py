@@ -2,12 +2,11 @@
 
 
 # Import local modules.
-from avro.utils import config
+from avro.core import config
+
 
 # Unicode-specific validation functions.
 # These are only used for converting to and from Unicode characters.
-
-
 def is_vowel(text: str) -> bool:
     """
     Check if given string is a vowel.
