@@ -69,8 +69,13 @@ def fix_string_case(text: str) -> str:
     return "".join(fixed)
 
 
-# ASCII-specific validation functions.
-# These are used for validating output while converting to ASCII after the initial conversion.
+# Conversion-specific validation functions.
+# These are only used for converting to and from ASCII characters.
+def is_bangla_kar(char: str) -> bool:
+    """
+    Check if given character is a Bengali kar.
+    """
+    return char in config.AVRO_KAR
 
 
 def is_bangla_prekar(char: str) -> bool:
@@ -86,13 +91,6 @@ def is_bangla_postkar(char: str) -> bool:
     Check if given character is a Bengali post-kar.
     """
     return char in config.BIJOY_POSTKAR
-
-
-def is_bangla_kar(char: str) -> bool:
-    """
-    Check if given character is a Bengali kar.
-    """
-    return is_bangla_prekar(char) or is_bangla_postkar(char)
 
 
 def is_bangla_banjonborno(char: str) -> bool:
