@@ -8,6 +8,10 @@ SHELL := /bin/bash
 test:
 	@poetry run pytest .
 
+coverage:
+	@coverage run -m pytest .
+	@coverage report -m > coverage.txt
+
 install:
 	@poetry install --sync --no-interaction
 
