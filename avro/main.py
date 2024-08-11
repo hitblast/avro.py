@@ -15,8 +15,7 @@ from itertools import chain
 from typing import Callable, Generator, List, Tuple, Union
 
 # Import local modules.
-from . import processor
-from .core import validate
+from .core import processor, validate
 from .core.config import BIJOY_MAP, BIJOY_MAP_REVERSE
 
 
