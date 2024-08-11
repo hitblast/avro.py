@@ -11,5 +11,5 @@ Licensed under the terms of the MIT License.
 from .main import *
 
 # Version information.
-__version_info__ = (2024, 8, 8)
+__version_info__ = (2024, 8, 11)
 __version__ = ".".join(map(str, __version_info__))
