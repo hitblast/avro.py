@@ -223,7 +223,7 @@ def to_unicode(*texts):
 
 # The reverse() function.
 # Used to parse from Bengali in Unicode to English Roman script.
-def reverse(*texts: str, remap_words: bool = True) -> Union[str, List[str]]:
+def reverse(*texts: str, from_bijoy: bool = False, remap_words: bool = True) -> Union[str, List[str]]:
     """
     #### Reverses input text to Roman script typed in English.
 
@@ -243,6 +243,12 @@ def reverse(*texts: str, remap_words: bool = True) -> Union[str, List[str]]:
     print(reversed)
     ```
     """
+
+    # Convert from Bijoy to Unicode if from_bijoy is True
+    if from_bijoy:
+        texts = to_unicode(*texts)
+        if isinstance(texts, str):
+            texts = (texts,)
 
     output = _concurrency_helper(lambda text: _reverse_backend_ext(text, remap_words), texts)
     return output[0] if len(output) == 1 else output
