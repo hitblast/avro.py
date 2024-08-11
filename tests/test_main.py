@@ -206,3 +206,6 @@ def test_full_sentences() -> NoReturn:
         "rohim, tomake korim dakche. ekhon ki rowna debe?",
         "rowna dile amake bole zew.",
     ] == avro.reverse("রহিম, তোমাকে করিম ডাকছে। এখন কি রওনা দেবে?", "রওনা দিলে আমাকে বলে যেও।")
+
+    # Reverse (Bijoy Settings).
+    assert "ami banglar gan gai." == avro.reverse("Avwg evsjvi Mvb MvB|", from_bijoy=True)
