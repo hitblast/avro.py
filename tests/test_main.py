@@ -110,8 +110,8 @@ def test_patterns_with_rules_svaravarna() -> NoReturn:
 
 def test_non_ascii() -> NoReturn:
     """
-    Test parser response for non ascii characters.
-    Parser should return any non-ascii characters that is passed to it.
+    Test parser response for non-ASCII characters.
+    Parser should return any non-ASCII characters that is passed to it.
     """
 
     # Mixed strings.
@@ -128,7 +128,7 @@ def test_non_ascii() -> NoReturn:
 
 def test_words_with_punctuations() -> NoReturn:
     """
-    Test parsing of words with punctuations.
+    Test parsing and reversing of words with punctuations.
     """
 
     test_words = {
@@ -181,31 +181,37 @@ def test_conversion_unicode_func() -> NoReturn:
     ] == avro.to_unicode("Avwg evsjvi Mvb MvB|", "Avwg Avgvi Avwg‡K wPiw`b GB evsjvq Lyu‡R cvB!")
 
 
-def test_full_sentences() -> NoReturn:
+def test_parse_sentences() -> NoReturn:
     """
-    Test parsing and reversing of sentences (Unicode).
+    Test parsing of sentences (Unicode).
     """
 
-    # Default settings.
+    # Default parsing.
     assert "আমি বাংলায় গান গাই;" == avro.parse("ami banglay gan gai;")
     assert [
         "আমি বাংলার গান গাই।",
         "আমি আমার আমিকে চিরদিন এই বাংলায় খুঁজে পাই।",
     ] == avro.parse("ami banglar gan gai.", "ami amar amike cirodin ei banglay khu^je pai.")
 
-    # Bijoy settings.
+    # Bijoy parsing.
     assert "Avwg evsjvq Mvb MvB;" == avro.parse("ami banglay gan gai;", bijoy=True)
     assert [
         "Avwg evsjvi Mvb MvB|",
         "Avwg Avgvi Avwg‡K wPiw`b GB evsjvq Lyu‡R cvB!",
     ] == avro.parse("ami banglar gan gai.", "ami amar amike cirodin ei banglay khu^je pai!", bijoy=True)
 
-    # Reverse.
+
+def test_reverse_sentences() -> NoReturn:
+    """
+    Test reversing of sentences (Unicode).
+    """
+
+    # Default reversing.
     assert "ami banglay gan gai." == avro.reverse("আমি বাংলায় গান গাই।")
     assert [
         "rohim, tomake korim dakche. ekhon ki rowna debe?",
         "rowna dile amake bole zew.",
     ] == avro.reverse("রহিম, তোমাকে করিম ডাকছে। এখন কি রওনা দেবে?", "রওনা দিলে আমাকে বলে যেও।")
 
-    # Reverse (Bijoy Settings).
+    # Bijoy reversing.
     assert "ami banglar gan gai." == avro.reverse("Avwg evsjvi Mvb MvB|", from_bijoy=True)
