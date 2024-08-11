@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: MIT
 
+
 # Import first-party Python libraries.
 import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -151,7 +152,7 @@ def parse(*texts: str, bijoy: bool = False, remap_words: bool = True) -> Union[s
 
     Parameters:
     - `*texts: str | Tuple[str]`: The text(s) to parse.
-    - `bijoy: bool = False`: Whether to return in the Bijoy Keyboard format (ASCII).
+    - `bijoy: bool = False`: Return result in the Bijoy Keyboard format (ASCII).
     - `remap_words: bool = True`: Whether to parse input text with remapped (exception) words.
 
     Usage:
@@ -231,6 +232,7 @@ def reverse(*texts: str, remap_words: bool = True) -> Union[str, List[str]]:
 
     Parameters:
     - `*texts: str | Tuple[str]`: The text(s) to reverse.
+    - `from_bijoy: bool = False`: Reverse text from Bijoy format (ASCII) directly.
     - `remap_words: bool = True`: Whether to reverse input text with remapped (exception) words.
 
     Usage:
