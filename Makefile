@@ -10,7 +10,7 @@ test:
 
 coverage:
 	@coverage run -m pytest .
-	@coverage report -m > coverage.txt
+	@coverage xml
 
 install:
 	@poetry install --sync --no-interaction
