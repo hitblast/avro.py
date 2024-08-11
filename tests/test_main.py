@@ -110,8 +110,8 @@ def test_patterns_with_rules_svaravarna() -> NoReturn:
 
 def test_non_ascii() -> NoReturn:
     """
-    Test parser response for non-ASCII characters.
-    Parser should return any non-ASCII characters that is passed to it.
+    Test processor response for non-ASCII characters.
+    Parse function should return any non-ASCII characters that is passed to it.
     """
 
     # Mixed strings.
@@ -124,6 +124,18 @@ def test_non_ascii() -> NoReturn:
 
     for key, value in non_ascii.items():
         assert key == avro.parse(value)
+
+
+def test_ascii() -> NoReturn:
+    """
+    Test processor response for ASCII characters.
+    Reverse function should return any ASCII characters that is passed to it.
+    """
+
+    assert "Avwg evsjvi gan MvB|" == avro.reverse("Avwg evsjvi গান MvB|")
+    assert "Avwg amar Avwg‡K wPiw`b GB banglay Lyu‡R cvB!" == avro.reverse(
+        "Avwg আমার Avwg‡K wPiw`b GB বাংলায় Lyu‡R cvB!"
+    )
 
 
 def test_words_with_punctuations() -> NoReturn:
@@ -199,6 +211,12 @@ def test_parse_sentences() -> NoReturn:
         "Avwg evsjvi Mvb MvB|",
         "Avwg Avgvi Avwg‡K wPiw`b GB evsjvq Lyu‡R cvB!",
     ] == avro.parse("ami banglar gan gai.", "ami amar amike cirodin ei banglay khu^je pai!", bijoy=True)
+
+
+def test_reverse_error() -> NoReturn:
+    """
+    Tests
+    """
 
 
 def test_reverse_sentences() -> NoReturn:
