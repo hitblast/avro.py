@@ -213,12 +213,6 @@ def test_parse_sentences() -> NoReturn:
     ] == avro.parse("ami banglar gan gai.", "ami amar amike cirodin ei banglay khu^je pai!", bijoy=True)
 
 
-def test_reverse_error() -> NoReturn:
-    """
-    Tests
-    """
-
-
 def test_reverse_sentences() -> NoReturn:
     """
     Test reversing of sentences (Unicode).
