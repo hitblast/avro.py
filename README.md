@@ -31,7 +31,7 @@ A modern Pythonic implementation of the popular Bengali phonetic-typing software
 
 ## ✨ Inspirations
 
-This package is inspired from Rifat Nabi's jsAvroPhonetic library and derives from Kaustav Das Modak's pyAvroPhonetic. 
+This package is inspired from Rifat Nabi's jsAvroPhonetic library and derives from Kaustav Das Modak's pyAvroPhonetic.
 
 <br>
 
@@ -48,7 +48,7 @@ $ pip install avro.py
 
 [**avnie**](https://github.com/hitblast/avnie) is a newly developed CLI tool that uses avro.py under the hood. You can install it using:
 
-```sh   
+```sh
 # Install / upgrade avnie.
 $ pip install avnie
 ```
@@ -60,6 +60,7 @@ $ pip install avnie
 This small tour guide will describe how you can use avro.py back and forth to operate (cutlery!) on Bengali text. You can also check the [examples](https://github.com/hitblast/avro.py/tree/main/examples) directory for checking [this whole snippet](https://github.com/hitblast/avro.py/blob/main/examples/simple.py) in action, as well as other use cases.
 
 #### 1. `parse()`
+
 Let's assume I want to parse some English text to Bengali, which is "ami banglay gan gai.", so in this case to convert it to Bengali, we can use this snippet:
 
 ```python
@@ -75,6 +76,7 @@ print(output)  # Output: আমি বাংলায় গান গাই।
 ```
 
 #### 2. `parse(bijoy=True)`
+
 Alternatively, I can also do it in Bijoy Keyboard format:
 
 ```python
@@ -83,6 +85,7 @@ bijoy_output = avro.parse(dummy, bijoy=True)  # Output: Avwg evsjvh় Mvb MvB�
 ```
 
 #### 3. `to_bijoy()`
+
 Or, we can take the previous `avro_output` and convert it to Bijoy if we want to, like this:
 
 ```python
@@ -91,6 +94,7 @@ bijoy_text = avro.to_bijoy(avro_output)  # Output: Avwg evsjvh় Mvb MvB।
 ```
 
 #### 4. `to_unicode()`
+
 Conversely, we can convert the Bijoy text we got just now and convert it back to Unicode Bengali:
 
 ```python
@@ -99,6 +103,7 @@ unicode_text = avro.to_unicode(bijoy_text)  # Output: আমি বাংলা�
 ```
 
 #### 4. `reverse()`
+
 Finally, we can just reverse back to the original text we passed as input in the first place:
 
 ```python
@@ -110,7 +115,7 @@ reversed_text = avro.reverse(uncode_text)  # Output: ami banglay gan gai.
 
 ## 🛠️ Contributing
 
-:octocat: *Fork -> Do your changes -> Send a Pull Request, it's that easy!* <br>
+:octocat: _Fork -> Do your changes -> Send a Pull Request, it's that easy!_ <br>
 
 ---
 
