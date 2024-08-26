@@ -130,7 +130,7 @@ In short, avro.py doesn't depend on any third-party libraries. However, if you'd
 $ python3 -m venv venv && source venv/bin/activate
 
 # Setup project using Poetry.
-$ make install  # same as `poetry install --sync`
+$ make install  # same as `poetry install --sync --no-interaction`
 
 # Perform updates on lockfile.
 $ poetry update
