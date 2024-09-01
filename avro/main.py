@@ -205,7 +205,7 @@ def to_bijoy(*texts: str) -> Union[str, List[str]]:
 
 # The to_unicode() function.
 # Used to parse from Bijoy Keyboard format to Bengali in Unicode.
-def to_unicode(*texts):
+def to_unicode(*texts: str) -> Union[str, List[str]]:
     """
     #### Converts input text (Bijoy Keyboard, ASCII) to Unicode (Avro Keyboard format).
 
