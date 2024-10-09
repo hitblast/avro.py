@@ -12,7 +12,7 @@ import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from functools import lru_cache
 from itertools import chain
-from typing import Callable, Generator, List, Tuple, Union
+from typing import Callable, Generator, Union
 
 # Import local modules.
 from .core import processor, validate
@@ -20,7 +20,7 @@ from .core.config import BIJOY_MAP, BIJOY_MAP_REVERSE
 
 
 # Concurrency helper function for handling multithreaded workloads.
-def _concurrency_helper(func: Callable, params: Tuple[str, ...]) -> List[str]:
+def _concurrency_helper(func: Callable, params: tuple[str, ...]) -> list[str]:
     output = []
 
     with ThreadPoolExecutor() as executor:
@@ -149,7 +149,7 @@ def _reverse_backend_ext(text: str, remap_words: bool) -> str:
 # Primary user-end functions.
 # The parse() function.
 # Used to parse from English Roman script to Bengali in Unicode.
-def parse(*texts: str, bijoy: bool = False, remap_words: bool = True) -> Union[str, List[str]]:
+def parse(*texts: str, bijoy: bool = False, remap_words: bool = True) -> Union[str, list[str]]:
     """
     #### Parses input text, matches and replaces using the Avro Dictionary.
 
@@ -181,7 +181,7 @@ def parse(*texts: str, bijoy: bool = False, remap_words: bool = True) -> Union[s
 
 # The to_bijoy() function.
 # Used to parse from Bengali in Unicode to Bijoy Keyboard format.
-def to_bijoy(*texts: str) -> Union[str, List[str]]:
+def to_bijoy(*texts: str) -> Union[str, list[str]]:
     """
     #### Converts input text (Avro, Unicode) to Bijoy Keyboard format (ASCII).
 
@@ -205,7 +205,7 @@ def to_bijoy(*texts: str) -> Union[str, List[str]]:
 
 # The to_unicode() function.
 # Used to parse from Bijoy Keyboard format to Bengali in Unicode.
-def to_unicode(*texts: str) -> Union[str, List[str]]:
+def to_unicode(*texts: str) -> Union[str, list[str]]:
     """
     #### Converts input text (Bijoy Keyboard, ASCII) to Unicode (Avro Keyboard format).
 
@@ -229,7 +229,7 @@ def to_unicode(*texts: str) -> Union[str, List[str]]:
 
 # The reverse() function.
 # Used to parse from Bengali in Unicode to English Roman script.
-def reverse(*texts: str, from_bijoy: bool = False, remap_words: bool = True) -> Union[str, List[str]]:
+def reverse(*texts: str, from_bijoy: bool = False, remap_words: bool = True) -> Union[str, list[str]]:
     """
     #### Reverses input text to Roman script typed in English.
 

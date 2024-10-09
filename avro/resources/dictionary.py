@@ -2,10 +2,10 @@
 
 
 # Import first-party Python modules.
-from typing import Any, Dict
+from typing import Any
 
 # The Avro Dictionary, implemented in Python.
-DICT: Dict[str, Any] = {
+DICT: dict[str, Any] = {
     # Metadata.
     "meta": {
         "file_name": "dictionary.py",

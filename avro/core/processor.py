@@ -4,7 +4,7 @@
 # Import first-party Python libraries.
 import contextlib
 from functools import lru_cache
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Optional
 
 # Import local modules.
 from . import config, validate
@@ -21,7 +21,7 @@ RULE_PATTERNS = [p for p in PATTERNS if "rules" in p]
 
 
 @lru_cache(maxsize=128)
-def find_in_remap(text: str, *, reversed: bool = False) -> Tuple[str, bool]:
+def find_in_remap(text: str, *, reversed: bool = False) -> tuple[str, bool]:
     """
     Finds and returns the remapped value for a given text.
 
@@ -47,7 +47,7 @@ def find_in_remap(text: str, *, reversed: bool = False) -> Tuple[str, bool]:
 
 def match_patterns(
     fixed_text: str, cur: int = 0, rule: bool = False, reversed: bool = False
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     """
     Matches given text at cursor position with rule / non rule patterns.
 
@@ -78,7 +78,7 @@ def match_patterns(
 
 def exact_find_in_pattern(
     fixed_text: str, reversed: bool, cur: int = 0, patterns: Any = PATTERNS
-) -> List[Dict[str, Any]]:
+) -> list[dict[str, Any]]:
     """
     Returns pattern items that match given text, cursor position and pattern.
     """
@@ -124,7 +124,7 @@ def reverse_with_rules(cursor: int, fixed_text: str, text_reversed: str) -> str:
     return text_reversed if not text_reversed else text_reversed + added_suffix
 
 
-def process_rules(rules: Dict[str, Any], fixed_text: str, cur: int = 0, cur_end: int = 1) -> Optional[str]:
+def process_rules(rules: dict[str, Any], fixed_text: str, cur: int = 0, cur_end: int = 1) -> Optional[str]:
     """
     Process rules matched in pattern and returns suitable replacement.
 
