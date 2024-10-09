@@ -27,7 +27,7 @@ A modern Pythonic implementation of the popular Bengali phonetic-typing software
 
 **avro.py** provides a fully fledged, batteries-included text parser which can parse, reverse and even convert English Roman script into its phonetic equivalent (unicode) of Bengali. At its core, it implements an extensively modified version of the **Avro Phonetic Dictionary Search Library** by [Mehdi Hasan Khan](https://github.com/mugli).
 
-> The original project ([pyAvroPhonetic](https://github.com/kaustavdm/pyAvroPhonetic)) can only be used on versions up to **Python 2.7** and doesn't contain proper support for Python's third major version AKA Python 3. It is noteworthy that Python 2 has officially been deprecated by the original maintainers and its usage is being discouraged overall. <br>
+> Update: As of October 2024, Python 3.8 has reached its EOL, so for keeping this project updated, the minimum required version will be Python 3.9 from now onwards. It is strongly suggested that you migrate your project for better compatibility. <br>
 
 ## ✨ Inspirations
 
@@ -37,7 +37,7 @@ This package is inspired from Rifat Nabi's jsAvroPhonetic library and derives fr
 
 ## 🔨 Installation
 
-This package requires **Python 3.8 or higher** to be used inside your development environment.
+This package requires **Python 3.9 or higher** to be used inside your development environment.
 
 ```sh
 # Install / upgrade.
