@@ -54,7 +54,7 @@ pdoc3 = ">=0.10,<0.12"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.0.1"
-ruff = ">=0.4.2,<0.7.0"
+ruff = ">=0.4.2,<0.8.0"
 
 [build-system]
 requires = ["poetry-core"]
