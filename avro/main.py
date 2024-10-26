@@ -157,7 +157,7 @@ def parse(*texts: str, bijoy: bool = False, remap_words: bool = True) -> Union[s
     If no replacement is found, then it instead returns the input text.
 
     Parameters:
-    - `*texts: str | Tuple[str]`: The text(s) to parse.
+    - `*texts: str | tuple[str]`: The text(s) to parse.
     - `bijoy: bool = False`: Return result in the Bijoy Keyboard format (ASCII).
     - `remap_words: bool = True`: Whether to parse input text with remapped (exception) words.
 
