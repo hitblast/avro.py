@@ -19,7 +19,7 @@ description = "A modern Pythonic implementation of Avro Phonetic."
 authors = ["HitBlast <hitblastlive@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-packages = [{include = "avro"}]
+packages = [{ include = "avro" }]
 homepage = "https://pypi.org/project/avro-py"
 repository = "https://github.com/hitblast/avro.py"
 documentation = "https://hitblast.github.io/avro.py"
@@ -33,7 +33,7 @@ keywords = [
     'bengali phonetics',
     'transliteration',
 ]
-classifiers=[
+classifiers = [
     'Intended Audience :: Developers',
     'License :: OSI Approved :: MIT License',
     'Operating System :: OS Independent',
