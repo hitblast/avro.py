@@ -1,0 +1,66 @@
+# SPDX-License-Identifier: MIT
+
+
+# uv-specific things
+[project]
+name = "avro-py"
+version = "2024.10.30"
+description = "A modern Pythonic implementation of Avro Phonetic."
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.9"
+authors = [{ name = "HitBlast", email = "hitblastlive@gmail.com" }]
+keywords = [
+    'python',
+    'phonetics',
+    'avro',
+    'avro phonetic',
+    'bangla',
+    'bengali',
+    'bengali phonetics',
+    'transliteration',
+]
+classifiers = [
+    'Intended Audience :: Developers',
+    'License :: OSI Approved :: MIT License',
+    'Operating System :: OS Independent',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
+    'Programming Language :: Python :: 3.13',
+    'Topic :: Software Development :: Libraries :: Python Modules',
+]
+
+
+# project links
+[project.urls]
+Homepage = "https://pypi.org/project/avro-py"
+Documentation = "https://hitblast.github.io/avro.py"
+Repository = "https://github.com/hitblast/avro.py"
+
+
+# optional dependencies
+[project.optional-dependencies]
+dev = ["pdoc3>=0.11.1", "pytest>=8.3.3"]
+docs = ["pdoc3>=0.11.1", "setuptools>=75.3.0"]
+
+
+# ruff-specific things
+[tool.ruff]
+target-version = "py39"
+line-length = 110
+exclude = ["venv"]
+
+[tool.ruff.lint.per-file-ignores]
+"avro/__init__.py" = ["F403"]
+"avro/resources/__init__.py" = ["F403"]
+"avro/resources/dictionary.py" = ["F601"]
+"avro/utils/processor.py" = ["E741"]
+"tests/test_main.py" = ["F601"]
+
+
+# build system specification
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
