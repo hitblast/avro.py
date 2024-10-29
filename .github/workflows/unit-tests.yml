@@ -13,24 +13,24 @@ on:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
- 
+
 jobs:
   build:
     name: pytest
     runs-on: ubuntu-latest
- 
+
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Install Poetry
-      uses: snok/install-poetry@v1
-      with:
-          virtualenvs-create: true
-          virtualenvs-in-project: true
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
 
-    - name: Install dependencies & setup project
-      run: make install
- 
-    - name: Run the tests
-      run: make test
+      - name: Setup Python
+        run: uv python install
+
+      - name: Install project
+        run: uv sync --all-extras --dev
+
+      - name: Run tests
+        run: uv run pytest .
