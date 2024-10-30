@@ -124,6 +124,10 @@ reversed_text = avro.reverse(uncode_text)  # Output: ami banglay gan gai.
 This project is based on the [uv](https://github.com/astral-sh/uv) package manager by Astral. In order to automatically update and set up the environment, you can run the following command:
 
 ```sh
+# Install recommended Python version: (also sets up the virtual environment)
+$ uv python install && uv venv
+$ source .venv/bin/activate
+
 # Install the project:
 $ uv sync --all-extras --dev
 
