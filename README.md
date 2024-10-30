@@ -121,30 +121,23 @@ reversed_text = avro.reverse(uncode_text)  # Output: ami banglay gan gai.
 
 **Additional Developer Notes**
 
-In short, avro.py doesn't depend on any third-party libraries. However, if you'd like to contribute to the project, you'll need a handful of such useful tools.
-
-**Poetry** has been used to manage the project's dependencies and virtual environment. You can install it by following [the instructions here](https://python-poetry.org/docs/). The dependencies have been configured using the `pyproject.toml` file and doesn't require manual installation. Simply set up your developer environment using the following commands: <br>
+This project is based on the [uv](https://github.com/astral-sh/uv) package manager by Astral. In order to automatically update and set up the environment, you can run the following command:
 
 ```sh
-# Set up virtual environment and activate it.
-$ python3 -m venv venv && source venv/bin/activate
+# Install the project:
+$ uv sync --all-extras --dev
 
-# Setup project using Poetry.
-$ make install  # same as `poetry install --sync --no-interaction`
-
-# Perform updates on lockfile.
-$ poetry update
+# Build the project:
+$ uv build --verbose
 ```
 
-Later, you can run the tests provided with the project using the following command. This option has already been configured in the "Testing" panel if you're using Visual Studio Code as your primary IDE.
+In order to run the tests, you can use the following command:
 
 ```sh
-# Run unit tests.
-$ make test  # same as `poetry run pytest .`
-
-# Build sdist and wheel packages for distributing the project.
-$ make build  # same as `poetry build --verbose --no-interaction`
+# Run unit tests:
+$ uv run pytest .
 ```
+
 
 <br>
 
