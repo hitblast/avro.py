@@ -2,6 +2,7 @@
 
 
 """
+The avro.py Python package.
 A modern Pythonic implementation of Avro Phonetic.
 
 Licensed under the terms of the MIT License.
