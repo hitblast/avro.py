@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 
 """
-Core backend functionality package for avro.py
+The core backend functionality module for the avro.py package.
 
 Licensed under the terms of the MIT License.
 """

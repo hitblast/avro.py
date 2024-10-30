@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 
 """
-Internal package serving the Avro Dictionary for avro.py
+The resources sub-module for the Avro Dictionary.
 
 Licensed under the terms of the MIT License.
 """
