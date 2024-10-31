@@ -2,7 +2,7 @@
 
 
 """
-Avro Keyboard for Pythoneers
+The primary module for the avro.py package.
 
 Licensed under the terms of the MIT License.
 """
