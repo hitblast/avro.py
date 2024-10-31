@@ -2,8 +2,10 @@
 
 
 """
-The avro.py Python package.
 A modern Pythonic implementation of Avro Phonetic.
+
+Please refer to the GitHub repository for examples on getting started:
+    https://github.com/hitblast/avro.py
 
 Licensed under the terms of the MIT License.
 """
