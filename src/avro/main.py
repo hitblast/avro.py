@@ -8,28 +8,28 @@ Licensed under the terms of the MIT License.
 """
 
 # Import first-party Python libraries.
+import asyncio
 import re
-from concurrent.futures import ThreadPoolExecutor, as_completed
 from functools import lru_cache
 from itertools import chain
 from typing import Callable, Generator, Union
+
+import uvloop
 
 # Import local modules.
 from .core import processor, validate
 from .core.config import BIJOY_MAP, BIJOY_MAP_REVERSE
 
+# Set uvloop as the default event loop policy.
+uvloop.install()
 
-# Concurrency helper function for handling multithreaded workloads.
-def _concurrency_helper(func: Callable, params: tuple[str, ...]) -> list[str]:
-    output = []
 
-    with ThreadPoolExecutor() as executor:
-        futures = {executor.submit(func, text): text for text in params}
-
-        for future in as_completed(futures):
-            output.append(future.result())
-
-    return output
+# Async concurrency helper function for handling multithreaded workloads.
+async def _async_concurrency_helper(func: Callable, params: tuple[str, ...]) -> list[str]:
+    loop = asyncio.get_event_loop()
+    tasks = [loop.run_in_executor(None, func, text) for text in params]
+    results = await asyncio.gather(*tasks)
+    return results
 
 
 # Compiled regular expression for UTF-8 validation.
@@ -149,7 +149,7 @@ def _reverse_backend_ext(text: str, remap_words: bool) -> str:
 # Primary user-end functions.
 # The parse() function.
 # Used to parse from English Roman script to Bengali in Unicode.
-def parse(*texts: str, bijoy: bool = False, remap_words: bool = True) -> Union[str, list[str]]:
+async def parse(*texts: str, bijoy: bool = False, remap_words: bool = True) -> Union[str, list[str]]:
     """
     #### Parses input text, matches and replaces using the Avro Dictionary.
 
@@ -165,23 +165,23 @@ def parse(*texts: str, bijoy: bool = False, remap_words: bool = True) -> Union[s
     ```python
     import avro
 
-    parsed = avro.parse('ami banglay gan gai')
+    parsed = await avro.parse('ami banglay gan gai')
     print(parsed)
     ```
     """
 
-    output = _concurrency_helper(lambda text: _parse_backend(text, remap_words), texts)
+    output = await _async_concurrency_helper(lambda text: _parse_backend(text, remap_words), texts)
 
     # If the `bijoy` parameter is set to `True`, then convert the output to Bijoy Keyboard format.
     if bijoy:
-        return to_bijoy(*output)
+        return await to_bijoy(*output)
     else:
         return output[0] if len(output) == 1 else output
 
 
 # The to_bijoy() function.
 # Used to parse from Bengali in Unicode to Bijoy Keyboard format.
-def to_bijoy(*texts: str) -> Union[str, list[str]]:
+async def to_bijoy(*texts: str) -> Union[str, list[str]]:
     """
     #### Converts input text (Avro, Unicode) to Bijoy Keyboard format (ASCII).
 
@@ -194,18 +194,18 @@ def to_bijoy(*texts: str) -> Union[str, list[str]]:
     ```python
     import avro
 
-    converted = avro.to_bijoy('আমার সোনার বাংলা')
+    converted = await avro.to_bijoy('আমার সোনার বাংলা')
     print(converted)
     ```
     """
 
-    output = _concurrency_helper(_convert_backend, texts)
+    output = await _async_concurrency_helper(_convert_backend, texts)
     return output[0] if len(output) == 1 else output
 
 
 # The to_unicode() function.
 # Used to parse from Bijoy Keyboard format to Bengali in Unicode.
-def to_unicode(*texts: str) -> Union[str, list[str]]:
+async def to_unicode(*texts: str) -> Union[str, list[str]]:
     """
     #### Converts input text (Bijoy Keyboard, ASCII) to Unicode (Avro Keyboard format).
 
@@ -218,18 +218,18 @@ def to_unicode(*texts: str) -> Union[str, list[str]]:
     ```python
     import avro
 
-    converted = avro.to_unicode('Avwg evsjvh় Mvb MvB;')
+    converted = await avro.to_unicode('Avwg evsjvh় Mvb MvB;')
     print(converted)
     ```
     """
 
-    output = _concurrency_helper(_convert_backend_unicode, texts)
+    output = await _async_concurrency_helper(_convert_backend_unicode, texts)
     return output[0] if len(output) == 1 else output
 
 
 # The reverse() function.
 # Used to parse from Bengali in Unicode to English Roman script.
-def reverse(*texts: str, from_bijoy: bool = False, remap_words: bool = True) -> Union[str, list[str]]:
+async def reverse(*texts: str, from_bijoy: bool = False, remap_words: bool = True) -> Union[str, list[str]]:
     """
     #### Reverses input text to Roman script typed in English.
 
@@ -245,16 +245,16 @@ def reverse(*texts: str, from_bijoy: bool = False, remap_words: bool = True) -> 
     ```python
     import avro
 
-    reversed = avro.reverse('আমার সোনার বাংলা')
+    reversed = await avro.reverse('আমার সোনার বাংলা')
     print(reversed)
     ```
     """
 
     # Convert from Bijoy to Unicode if from_bijoy is True
     if from_bijoy:
-        converted_texts = to_unicode(*texts)
+        converted_texts = await to_unicode(*texts)
         if isinstance(converted_texts, str):
             texts = (converted_texts,)
 
-    output = _concurrency_helper(lambda text: _reverse_backend_ext(text, remap_words), texts)
+    output = await _async_concurrency_helper(lambda text: _reverse_backend_ext(text, remap_words), texts)
     return output[0] if len(output) == 1 else output
