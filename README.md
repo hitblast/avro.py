@@ -61,27 +61,28 @@ This small tour guide will describe how you can use avro.py back and forth to op
 
 #### 1. `parse()`
 
-Let's assume I want to parse some English text to Bengali, which is "ami banglay gan gai.", so in this case to convert it to Bengali, we can use this snippet:
+Let's assume I want to parse some English text to Bengali, which is "ami banglay gan gai.", so in this case to convert it to Bengali, we can use this starter code and follow along with the other examples to add further features:
 
 ```python
-# Import the package.
+import asyncio
 import avro
 
-# Our dummy text.
-dummy = 'ami banglay gan gai.'
+async def main() -> None:
+    dummy = 'ami banglay gan gai.'
 
-# Parsing the text.
-avro_output = avro.parse(dummy)
-print(output)  # Output: আমি বাংলায় গান গাই।
+    avro_output = await avro.parse(dummy)
+    print(output)  # Output: আমি বাংলায় গান গাই।
+
+if __name__ == '__main__':
+    asyncio.run(main())
 ```
 
 #### 2. `parse(bijoy=True)`
 
-Alternatively, I can also do it in Bijoy Keyboard format:
+Alternatively, I can also do it in **Bijoy Keyboard format**:
 
 ```python
-# Parsing in Bijoy.
-bijoy_output = avro.parse(dummy, bijoy=True)  # Output: Avwg evsjvh় Mvb MvB।
+bijoy_output = await avro.parse(dummy, bijoy=True)  # Output: Avwg evsjvh় Mvb MvB।
 ```
 
 #### 3. `to_bijoy()`
@@ -89,8 +90,7 @@ bijoy_output = avro.parse(dummy, bijoy=True)  # Output: Avwg evsjvh় Mvb MvB�
 Or, we can take the previous `avro_output` and convert it to Bijoy if we want to, like this:
 
 ```python
-# Converting to Bijoy.
-bijoy_text = avro.to_bijoy(avro_output)  # Output: Avwg evsjvh় Mvb MvB।
+bijoy_text = await avro.to_bijoy(avro_output)  # Output: Avwg evsjvh় Mvb MvB।
 ```
 
 #### 4. `to_unicode()`
@@ -98,8 +98,7 @@ bijoy_text = avro.to_bijoy(avro_output)  # Output: Avwg evsjvh় Mvb MvB।
 Conversely, we can convert the Bijoy text we got just now and convert it back to Unicode Bengali:
 
 ```python
-# Converting back!
-unicode_text = avro.to_unicode(bijoy_text)  # Output: আমি বাংলায় গান গাই।
+unicode_text = await avro.to_unicode(bijoy_text)  # Output: আমি বাংলায় গান গাই।
 ```
 
 #### 4. `reverse()`
@@ -107,8 +106,7 @@ unicode_text = avro.to_unicode(bijoy_text)  # Output: আমি বাংলা�
 Finally, we can just reverse back to the original text we passed as input in the first place:
 
 ```python
-# Reversing back!
-reversed_text = avro.reverse(uncode_text)  # Output: ami banglay gan gai.
+reversed_text = await avro.reverse(uncode_text)  # Output: ami banglay gan gai.
 ```
 
 <br>

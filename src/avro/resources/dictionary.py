@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 
 
-# Import first-party Python modules.
+# Imports.
 from typing import Any
 
 # The Avro Dictionary, implemented in Python.
@@ -201,8 +201,16 @@ DICT: dict[str, Any] = {
                 "find": "OI",
                 "replace": "ৈ",
                 "rules": [
-                    {"matches": [{"type": "prefix", "scope": "!consonant"}], "replace": "ঐ"},
-                    {"matches": [{"type": "prefix", "scope": "punctuation"}], "replace": "ঐ"},
+                    {
+                        "matches": [{"type": "prefix", "scope": "!consonant"}],
+                        "replace": "ঐ",
+                    },
+                    {
+                        "matches": [
+                            {"type": "prefix", "scope": "punctuation"}
+                        ],
+                        "replace": "ঐ",
+                    },
                 ],
                 "reverse": "oi",
             },
@@ -210,8 +218,16 @@ DICT: dict[str, Any] = {
                 "find": "OU",
                 "replace": "ৌ",
                 "rules": [
-                    {"matches": [{"type": "prefix", "scope": "!consonant"}], "replace": "ঔ"},
-                    {"matches": [{"type": "prefix", "scope": "punctuation"}], "replace": "ঔ"},
+                    {
+                        "matches": [{"type": "prefix", "scope": "!consonant"}],
+                        "replace": "ঔ",
+                    },
+                    {
+                        "matches": [
+                            {"type": "prefix", "scope": "punctuation"}
+                        ],
+                        "replace": "ঔ",
+                    },
                 ],
                 "reverse": "ou",
             },
@@ -219,8 +235,16 @@ DICT: dict[str, Any] = {
                 "find": "O",
                 "replace": "ো",
                 "rules": [
-                    {"matches": [{"type": "prefix", "scope": "!consonant"}], "replace": "ও"},
-                    {"matches": [{"type": "prefix", "scope": "punctuation"}], "replace": "ও"},
+                    {
+                        "matches": [{"type": "prefix", "scope": "!consonant"}],
+                        "replace": "ও",
+                    },
+                    {
+                        "matches": [
+                            {"type": "prefix", "scope": "punctuation"}
+                        ],
+                        "replace": "ও",
+                    },
                 ],
                 "reverse": "o",
             },
@@ -240,8 +264,16 @@ DICT: dict[str, Any] = {
                 "find": "rri",
                 "replace": "ৃ",
                 "rules": [
-                    {"matches": [{"type": "prefix", "scope": "!consonant"}], "replace": "ঋ"},
-                    {"matches": [{"type": "prefix", "scope": "punctuation"}], "replace": "ঋ"},
+                    {
+                        "matches": [{"type": "prefix", "scope": "!consonant"}],
+                        "replace": "ঋ",
+                    },
+                    {
+                        "matches": [
+                            {"type": "prefix", "scope": "punctuation"}
+                        ],
+                        "replace": "ঋ",
+                    },
                 ],
                 "reverse": "ri",
             },
@@ -254,10 +286,26 @@ DICT: dict[str, Any] = {
                     {
                         "matches": [
                             {"type": "prefix", "scope": "consonant"},
-                            {"type": "prefix", "scope": "!exact", "value": "r"},
-                            {"type": "prefix", "scope": "!exact", "value": "y"},
-                            {"type": "prefix", "scope": "!exact", "value": "w"},
-                            {"type": "prefix", "scope": "!exact", "value": "x"},
+                            {
+                                "type": "prefix",
+                                "scope": "!exact",
+                                "value": "r",
+                            },
+                            {
+                                "type": "prefix",
+                                "scope": "!exact",
+                                "value": "y",
+                            },
+                            {
+                                "type": "prefix",
+                                "scope": "!exact",
+                                "value": "w",
+                            },
+                            {
+                                "type": "prefix",
+                                "scope": "!exact",
+                                "value": "x",
+                            },
                         ],
                         "replace": "্র্য",
                     }
@@ -270,10 +318,26 @@ DICT: dict[str, Any] = {
                     {
                         "matches": [
                             {"type": "prefix", "scope": "consonant"},
-                            {"type": "prefix", "scope": "!exact", "value": "r"},
-                            {"type": "prefix", "scope": "!exact", "value": "y"},
-                            {"type": "prefix", "scope": "!exact", "value": "w"},
-                            {"type": "prefix", "scope": "!exact", "value": "x"},
+                            {
+                                "type": "prefix",
+                                "scope": "!exact",
+                                "value": "r",
+                            },
+                            {
+                                "type": "prefix",
+                                "scope": "!exact",
+                                "value": "y",
+                            },
+                            {
+                                "type": "prefix",
+                                "scope": "!exact",
+                                "value": "w",
+                            },
+                            {
+                                "type": "prefix",
+                                "scope": "!exact",
+                                "value": "x",
+                            },
                         ],
                         "replace": "্র্য",
                     }
@@ -287,7 +351,11 @@ DICT: dict[str, Any] = {
                         "matches": [
                             {"type": "prefix", "scope": "!consonant"},
                             {"type": "suffix", "scope": "!vowel"},
-                            {"type": "suffix", "scope": "!exact", "value": "r"},
+                            {
+                                "type": "suffix",
+                                "scope": "!exact",
+                                "value": "r",
+                            },
                             {"type": "suffix", "scope": "!punctuation"},
                         ],
                         "replace": "র্",
@@ -295,7 +363,11 @@ DICT: dict[str, Any] = {
                     {
                         "matches": [
                             {"type": "prefix", "scope": "consonant"},
-                            {"type": "prefix", "scope": "!exact", "value": "r"},
+                            {
+                                "type": "prefix",
+                                "scope": "!exact",
+                                "value": "r",
+                            },
                         ],
                         "replace": "্রর",
                     },
@@ -311,11 +383,31 @@ DICT: dict[str, Any] = {
                     {
                         "matches": [
                             {"type": "prefix", "scope": "consonant"},
-                            {"type": "prefix", "scope": "!exact", "value": "r"},
-                            {"type": "prefix", "scope": "!exact", "value": "y"},
-                            {"type": "prefix", "scope": "!exact", "value": "w"},
-                            {"type": "prefix", "scope": "!exact", "value": "x"},
-                            {"type": "prefix", "scope": "!exact", "value": "Z"},
+                            {
+                                "type": "prefix",
+                                "scope": "!exact",
+                                "value": "r",
+                            },
+                            {
+                                "type": "prefix",
+                                "scope": "!exact",
+                                "value": "y",
+                            },
+                            {
+                                "type": "prefix",
+                                "scope": "!exact",
+                                "value": "w",
+                            },
+                            {
+                                "type": "prefix",
+                                "scope": "!exact",
+                                "value": "x",
+                            },
+                            {
+                                "type": "prefix",
+                                "scope": "!exact",
+                                "value": "Z",
+                            },
                         ],
                         "replace": "্র",
                     }
@@ -367,14 +459,22 @@ DICT: dict[str, Any] = {
                     {
                         "matches": [
                             {"type": "prefix", "scope": "!consonant"},
-                            {"type": "suffix", "scope": "!exact", "value": "`"},
+                            {
+                                "type": "suffix",
+                                "scope": "!exact",
+                                "value": "`",
+                            },
                         ],
                         "replace": "উ",
                     },
                     {
                         "matches": [
                             {"type": "prefix", "scope": "punctuation"},
-                            {"type": "suffix", "scope": "!exact", "value": "`"},
+                            {
+                                "type": "suffix",
+                                "scope": "!exact",
+                                "value": "`",
+                            },
                         ],
                         "replace": "উ",
                     },
@@ -393,7 +493,11 @@ DICT: dict[str, Any] = {
                     {
                         "matches": [
                             {"type": "prefix", "scope": "vowel"},
-                            {"type": "prefix", "scope": "!exact", "value": "o"},
+                            {
+                                "type": "prefix",
+                                "scope": "!exact",
+                                "value": "o",
+                            },
                         ],
                         "replace": "ও",
                     },
@@ -404,7 +508,12 @@ DICT: dict[str, Any] = {
                         ],
                         "replace": "অ",
                     },
-                    {"matches": [{"type": "prefix", "scope": "punctuation"}], "replace": "অ"},
+                    {
+                        "matches": [
+                            {"type": "prefix", "scope": "punctuation"}
+                        ],
+                        "replace": "অ",
+                    },
                 ],
             },
             {"find": "tth", "replace": "ত্থ"},
@@ -431,22 +540,38 @@ DICT: dict[str, Any] = {
                     {
                         "matches": [
                             {"type": "prefix", "scope": "punctuation"},
-                            {"type": "suffix", "scope": "!exact", "value": "`"},
+                            {
+                                "type": "suffix",
+                                "scope": "!exact",
+                                "value": "`",
+                            },
                         ],
                         "replace": "আ",
                     },
                     {
                         "matches": [
                             {"type": "prefix", "scope": "!consonant"},
-                            {"type": "prefix", "scope": "!exact", "value": "a"},
-                            {"type": "suffix", "scope": "!exact", "value": "`"},
+                            {
+                                "type": "prefix",
+                                "scope": "!exact",
+                                "value": "a",
+                            },
+                            {
+                                "type": "suffix",
+                                "scope": "!exact",
+                                "value": "`",
+                            },
                         ],
                         "replace": "য়া",
                     },
                     {
                         "matches": [
                             {"type": "prefix", "scope": "exact", "value": "a"},
-                            {"type": "suffix", "scope": "!exact", "value": "`"},
+                            {
+                                "type": "suffix",
+                                "scope": "!exact",
+                                "value": "`",
+                            },
                         ],
                         "replace": "আ",
                     },
@@ -462,14 +587,22 @@ DICT: dict[str, Any] = {
                     {
                         "matches": [
                             {"type": "prefix", "scope": "!consonant"},
-                            {"type": "suffix", "scope": "!exact", "value": "`"},
+                            {
+                                "type": "suffix",
+                                "scope": "!exact",
+                                "value": "`",
+                            },
                         ],
                         "replace": "ই",
                     },
                     {
                         "matches": [
                             {"type": "prefix", "scope": "punctuation"},
-                            {"type": "suffix", "scope": "!exact", "value": "`"},
+                            {
+                                "type": "suffix",
+                                "scope": "!exact",
+                                "value": "`",
+                            },
                         ],
                         "replace": "ই",
                     },
@@ -483,14 +616,22 @@ DICT: dict[str, Any] = {
                     {
                         "matches": [
                             {"type": "prefix", "scope": "!consonant"},
-                            {"type": "suffix", "scope": "!exact", "value": "`"},
+                            {
+                                "type": "suffix",
+                                "scope": "!exact",
+                                "value": "`",
+                            },
                         ],
                         "replace": "ঈ",
                     },
                     {
                         "matches": [
                             {"type": "prefix", "scope": "punctuation"},
-                            {"type": "suffix", "scope": "!exact", "value": "`"},
+                            {
+                                "type": "suffix",
+                                "scope": "!exact",
+                                "value": "`",
+                            },
                         ],
                         "replace": "ঈ",
                     },
@@ -506,14 +647,22 @@ DICT: dict[str, Any] = {
                     {
                         "matches": [
                             {"type": "prefix", "scope": "!consonant"},
-                            {"type": "suffix", "scope": "!exact", "value": "`"},
+                            {
+                                "type": "suffix",
+                                "scope": "!exact",
+                                "value": "`",
+                            },
                         ],
                         "replace": "উ",
                     },
                     {
                         "matches": [
                             {"type": "prefix", "scope": "punctuation"},
-                            {"type": "suffix", "scope": "!exact", "value": "`"},
+                            {
+                                "type": "suffix",
+                                "scope": "!exact",
+                                "value": "`",
+                            },
                         ],
                         "replace": "উ",
                     },
@@ -528,14 +677,22 @@ DICT: dict[str, Any] = {
                     {
                         "matches": [
                             {"type": "prefix", "scope": "!consonant"},
-                            {"type": "suffix", "scope": "!exact", "value": "`"},
+                            {
+                                "type": "suffix",
+                                "scope": "!exact",
+                                "value": "`",
+                            },
                         ],
                         "replace": "ঊ",
                     },
                     {
                         "matches": [
                             {"type": "prefix", "scope": "punctuation"},
-                            {"type": "suffix", "scope": "!exact", "value": "`"},
+                            {
+                                "type": "suffix",
+                                "scope": "!exact",
+                                "value": "`",
+                            },
                         ],
                         "replace": "ঊ",
                     },
@@ -550,14 +707,22 @@ DICT: dict[str, Any] = {
                     {
                         "matches": [
                             {"type": "prefix", "scope": "!consonant"},
-                            {"type": "suffix", "scope": "!exact", "value": "`"},
+                            {
+                                "type": "suffix",
+                                "scope": "!exact",
+                                "value": "`",
+                            },
                         ],
                         "replace": "ঈ",
                     },
                     {
                         "matches": [
                             {"type": "prefix", "scope": "punctuation"},
-                            {"type": "suffix", "scope": "!exact", "value": "`"},
+                            {
+                                "type": "suffix",
+                                "scope": "!exact",
+                                "value": "`",
+                            },
                         ],
                         "replace": "ঈ",
                     },
@@ -574,14 +739,22 @@ DICT: dict[str, Any] = {
                     {
                         "matches": [
                             {"type": "prefix", "scope": "!consonant"},
-                            {"type": "suffix", "scope": "!exact", "value": "`"},
+                            {
+                                "type": "suffix",
+                                "scope": "!exact",
+                                "value": "`",
+                            },
                         ],
                         "replace": "এ",
                     },
                     {
                         "matches": [
                             {"type": "prefix", "scope": "punctuation"},
-                            {"type": "suffix", "scope": "!exact", "value": "`"},
+                            {
+                                "type": "suffix",
+                                "scope": "!exact",
+                                "value": "`",
+                            },
                         ],
                         "replace": "এ",
                     },
@@ -601,7 +774,12 @@ DICT: dict[str, Any] = {
                         ],
                         "replace": "য়",
                     },
-                    {"matches": [{"type": "prefix", "scope": "punctuation"}], "replace": "ইয়"},
+                    {
+                        "matches": [
+                            {"type": "prefix", "scope": "punctuation"}
+                        ],
+                        "replace": "ইয়",
+                    },
                 ],
             },
             {"find": "Y", "replace": "য়", "reverse": "y"},
@@ -617,14 +795,24 @@ DICT: dict[str, Any] = {
                         ],
                         "replace": "ওয়",
                     },
-                    {"matches": [{"type": "prefix", "scope": "consonant"}], "replace": "্ব"},
+                    {
+                        "matches": [{"type": "prefix", "scope": "consonant"}],
+                        "replace": "্ব",
+                    },
                 ],
                 "reverse": "o",
             },
             {
                 "find": "x",
                 "replace": "ক্স",
-                "rules": [{"matches": [{"type": "prefix", "scope": "punctuation"}], "replace": "এক্স"}],
+                "rules": [
+                    {
+                        "matches": [
+                            {"type": "prefix", "scope": "punctuation"}
+                        ],
+                        "replace": "এক্স",
+                    }
+                ],
                 "reverse": "ks",
             },
             {"find": ":`", "replace": ":"},
