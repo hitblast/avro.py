@@ -198,24 +198,20 @@ async def to_bijoy(*texts: str) -> Union[str, list[str]]:
     return output[0] if len(output) == 1 else output
 
 
-# The to_unicode() function.
-# Used to parse from Bijoy Keyboard format to Bengali in Unicode.
 async def to_unicode(*texts: str) -> Union[str, list[str]]:
-    """
-    #### Converts input text (Bijoy Keyboard, ASCII) to Unicode (Avro Keyboard format).
-
-    If a valid conversion is found, then it returns the converted string.
+    """Converts input text (Bijoy Keyboard, ASCII) to Unicode (Avro Keyboard
+    format). If a valid conversion is found, then it returns the converted
+    string.
 
     Parameters:
-    - `*texts: str | Tuple[str]`: The text(s) to convert.
+    -----------
+    *texts: str | Tuple[str]
+        The text(s) to convert.
 
-    Usage:
-    ```python
-    import avro
-
-    converted = await avro.to_unicode('Avwg evsjvh় Mvb MvB;')
-    print(converted)
-    ```
+    Returns:
+    --------
+    str | list[str]
+        The converted text(s).
     """
 
     output = await _async_concurrency_helper(_convert_backend_unicode, texts)
