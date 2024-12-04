@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 
 
-# Import local modules.
+# Imports.
 from ..resources import DICT
 
 # Shortcuts to vowels, constants, case-sensitives and numbers.
