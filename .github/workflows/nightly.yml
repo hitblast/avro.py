@@ -24,7 +24,7 @@ jobs:
         uses: astral-sh/setup-uv@v4
 
       - name: Setup Python
-        run: uv python install
+        run: uv python install 3.9
 
       - name: Install project & build
         run: uv sync --all-extras && uv build
@@ -33,4 +33,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           path: dist/*
-          retention-days: 10
+          retention-days: 3
