@@ -7,7 +7,9 @@ import sys
 from typing import NoReturn
 
 # Add support layer for accessing the primary package.
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
+sys.path.append(
+    os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
+)
 
 # Import local modules.
 import pytest
@@ -142,8 +144,9 @@ async def test_ascii() -> NoReturn:
     """
 
     assert "Avwg evsjvi gan MvB|" == await avro.reverse("Avwg evsjvi গান MvB|")
-    assert "Avwg amar Avwg‡K wPiw`b GB banglay Lyu‡R cvB!" == await avro.reverse(
-        "Avwg আমার Avwg‡K wPiw`b GB বাংলায় Lyu‡R cvB!"
+    assert (
+        "Avwg amar Avwg‡K wPiw`b GB banglay Lyu‡R cvB!"
+        == await avro.reverse("Avwg আমার Avwg‡K wPiw`b GB বাংলায় Lyu‡R cvB!")
     )
 
 
@@ -171,8 +174,12 @@ async def test_exceptions() -> NoReturn:
     Test parsing and reversing of exceptions.
     """
 
-    assert "আমি উইকিপিডিয়া আর ফেসবুক চালাই।" == await avro.parse("ami Wikipedia ar Facebook calai.")
-    assert "ami Wikipedia ar Facebook chalai." == await avro.reverse("আমি উইকিপিডিয়া আর ফেসবুক চালাই।")
+    assert "আমি উইকিপিডিয়া আর ফেসবুক চালাই।" == await avro.parse(
+        "ami Wikipedia ar Facebook calai."
+    )
+    assert "ami Wikipedia ar Facebook chalai." == await avro.reverse(
+        "আমি উইকিপিডিয়া আর ফেসবুক চালাই।"
+    )
 
 
 @pytest.mark.asyncio
@@ -186,7 +193,9 @@ async def test_conversion_bijoy_func() -> NoReturn:
     assert [
         "Avwg evsjvi Mvb MvB|",
         "Avwg Avgvi Avwg‡K wPiw`b GB evsjvq Lyu‡R cvB!",
-    ] == await avro.to_bijoy("আমি বাংলার গান গাই।", "আমি আমার আমিকে চিরদিন এই বাংলায় খুঁজে পাই!")
+    ] == await avro.to_bijoy(
+        "আমি বাংলার গান গাই।", "আমি আমার আমিকে চিরদিন এই বাংলায় খুঁজে পাই!"
+    )
 
     # Fail-safe Conversion.
     assert "Hello, World!" == await avro.to_bijoy("Hello, World!")
@@ -203,7 +212,9 @@ async def test_conversion_unicode_func() -> NoReturn:
     assert [
         "আমি বাংলার গান গাই।",
         "আমি আমার আমিকে চিরদিন এই বাংলায় খুঁজে পাই!",
-    ] == await avro.to_unicode("Avwg evsjvi Mvb MvB|", "Avwg Avgvi Avwg‡K wPiw`b GB evsjvq Lyu‡R cvB!")
+    ] == await avro.to_unicode(
+        "Avwg evsjvi Mvb MvB|", "Avwg Avgvi Avwg‡K wPiw`b GB evsjvq Lyu‡R cvB!"
+    )
 
 
 @pytest.mark.asyncio
@@ -217,14 +228,22 @@ async def test_parse_sentences() -> NoReturn:
     assert [
         "আমি বাংলার গান গাই।",
         "আমি আমার আমিকে চিরদিন এই বাংলায় খুঁজে পাই।",
-    ] == await avro.parse("ami banglar gan gai.", "ami amar amike cirodin ei banglay khu^je pai.")
+    ] == await avro.parse(
+        "ami banglar gan gai.", "ami amar amike cirodin ei banglay khu^je pai."
+    )
 
     # Bijoy parsing.
-    assert "Avwg evsjvq Mvb MvB;" == await avro.parse("ami banglay gan gai;", bijoy=True)
+    assert "Avwg evsjvq Mvb MvB;" == await avro.parse(
+        "ami banglay gan gai;", bijoy=True
+    )
     assert [
         "Avwg evsjvi Mvb MvB|",
         "Avwg Avgvi Avwg‡K wPiw`b GB evsjvq Lyu‡R cvB!",
-    ] == await avro.parse("ami banglar gan gai.", "ami amar amike cirodin ei banglay khu^je pai!", bijoy=True)
+    ] == await avro.parse(
+        "ami banglar gan gai.",
+        "ami amar amike cirodin ei banglay khu^je pai!",
+        bijoy=True,
+    )
 
 
 @pytest.mark.asyncio
@@ -238,7 +257,11 @@ async def test_reverse_sentences() -> NoReturn:
     assert [
         "rohim, tomake korim dakche. ekhon ki rowna debe?",
         "rowna dile amake bole zew.",
-    ] == await avro.reverse("রহিম, তোমাকে করিম ডাকছে। এখন কি রওনা দেবে?", "রওনা দিলে আমাকে বলে যেও।")
+    ] == await avro.reverse(
+        "রহিম, তোমাকে করিম ডাকছে। এখন কি রওনা দেবে?", "রওনা দিলে আমাকে বলে যেও।"
+    )
 
     # Bijoy reversing.
-    assert "ami banglar gan gai." == await avro.reverse("Avwg evsjvi Mvb MvB|", from_bijoy=True)
+    assert "ami banglar gan gai." == await avro.reverse(
+        "Avwg evsjvi Mvb MvB|", from_bijoy=True
+    )
