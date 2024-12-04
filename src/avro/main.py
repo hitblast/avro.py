@@ -14,14 +14,9 @@ from functools import lru_cache
 from itertools import chain
 from typing import Callable, Generator, Union
 
-import uvloop
-
 # Import local modules.
 from .core import processor, validate
 from .core.config import BIJOY_MAP, BIJOY_MAP_REVERSE
-
-# Set uvloop as the default event loop policy.
-uvloop.install()
 
 
 # Async concurrency helper function for handling multithreaded workloads.

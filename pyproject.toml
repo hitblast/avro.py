@@ -31,9 +31,7 @@ classifiers = [
     'Programming Language :: Python :: 3.13',
     'Topic :: Software Development :: Libraries :: Python Modules',
 ]
-dependencies = [
-    "uvloop>=0.21.0",
-]
+dependencies = []
 
 
 # project links
