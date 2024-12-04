@@ -1,12 +1,11 @@
 # SPDX-License-Identifier: MIT
 
 
-# Import first-party Python libraries.
+# Imports.
 import contextlib
 from functools import lru_cache
 from typing import Any, Optional
 
-# Import local modules.
 from . import config, validate
 
 # Setup pattern variables for matching.
@@ -15,31 +14,56 @@ NON_RULE_PATTERNS = [p for p in PATTERNS if "rules" not in p]
 RULE_PATTERNS = [p for p in PATTERNS if "rules" in p]
 
 
+# ---
+
 # The following functions provide the functionality for the main "avro" package.
 # These include rule / non-rule based pattern matching, remapping, reversing and more.
 # Please do not modify these functions if you do not have the intentions to alter the core functionality of the module.
 
+# ---
+
 
 @lru_cache(maxsize=128)
 def find_in_remap(text: str, *, reversed: bool = False) -> tuple[str, bool]:
-    """
-    Finds and returns the remapped value for a given text.
+    """Finds and returns the remapped value for a given text.
 
-    Returns a tuple of two elements:
-    - (`str`): The remapped text.
-    - (`bool`) Whether manual intervention is required.
+    Parameters:
+    -----------
+
+    text: str
+        The text to be remapped.
+
+    reversed: bool
+        Whether to operate in reverse mode.
+
+    Returns:
+    --------
+
+    tuple[str, bool]
+        A tuple of two elements:
+        1. The remapped text.
+        2. Whether manual intervention is required.
     """
 
     previous_text = text
 
     for key, value in config.AVRO_EXCEPTIONS.items():
         if reversed:
-            text = text.replace(key, value) if key.lower() in text.lower() else text
+            text = (
+                text.replace(key, value)
+                if key.lower() in text.lower()
+                else text
+            )
         else:
-            text = text.replace(value, key) if (value := value.lower()) in text.lower() else text
+            text = (
+                text.replace(value, key)
+                if (value := value.lower()) in text.lower()
+                else text
+            )
 
     manual_required = any(
-        word == previous_word for word, previous_word in zip(text.split(), previous_text.split())
+        word == previous_word
+        for word, previous_word in zip(text.split(), previous_text.split())
     )
 
     return text, manual_required
@@ -48,10 +72,33 @@ def find_in_remap(text: str, *, reversed: bool = False) -> tuple[str, bool]:
 def match_patterns(
     fixed_text: str, cur: int = 0, rule: bool = False, reversed: bool = False
 ) -> dict[str, Any]:
-    """
-    Matches given text at cursor position with rule / non rule patterns.
+    """Matches given text at cursor position with rule / non rule patterns.
 
-    Returns a dictionary of three (upto four) elements.
+    Parameters:
+    -----------
+
+    fixed_text: str
+        The text to be matched.
+
+    cur: int
+        The cursor position.
+
+    rule: bool
+        Whether to match with rules.
+
+    reversed: bool
+        Whether to operate in reverse mode.
+
+    Returns:
+    --------
+
+    dict[str, Any]
+        A dictionary containing the following keys:
+        1. matched: bool
+        2. found: str
+        3. replaced: str
+        4. reversed: str
+        5. rules: dict[str, Any]
     """
 
     rule_type = NON_RULE_PATTERNS if not rule else RULE_PATTERNS
@@ -64,7 +111,9 @@ def match_patterns(
             "matched": True,
             "found": p.get("find"),
             "replaced": p.get("replace"),
-            "reversed": reverse_with_rules(cur, fixed_text, p.get("reverse")) if not rule else None,
+            "reversed": reverse_with_rules(cur, fixed_text, p.get("reverse"))
+            if not rule
+            else None,
             "rules": p.get("rules") if rule else None,
         }
 
@@ -79,8 +128,28 @@ def match_patterns(
 def exact_find_in_pattern(
     fixed_text: str, reversed: bool, cur: int = 0, patterns: Any = PATTERNS
 ) -> list[dict[str, Any]]:
-    """
-    Returns pattern items that match given text, cursor position and pattern.
+    """Returns pattern items that match given text, cursor position and pattern.
+
+    Parameters:
+    -----------
+
+    fixed_text: str
+        The text to be matched.
+
+    reversed: bool
+        Whether to operate in reverse mode.
+
+    cur: int = 0
+        The cursor position.
+
+    patterns: Any = PATTERNS
+        The patterns to be matched.
+
+    Returns:
+    --------
+
+    list[dict[str, Any]]
+        A list of dictionaries containing the matched patterns.
     """
 
     if reversed:
@@ -100,9 +169,28 @@ def exact_find_in_pattern(
     ]
 
 
-def reverse_with_rules(cursor: int, fixed_text: str, text_reversed: str) -> str:
-    """
-    Enhances the word with rules for reverse-parsing.
+def reverse_with_rules(
+    cursor: int, fixed_text: str, text_reversed: str
+) -> str:
+    """Enhances the word with rules for reverse-parsing.
+
+    Parameters:
+    -----------
+
+    cursor: int
+        The cursor position.
+
+    fixed_text: str
+        The fixed text.
+
+    text_reversed: str
+        The reversed text.
+
+    Returns:
+    --------
+
+    str
+        The enhanced word.
     """
 
     added_suffix = ""
@@ -124,12 +212,33 @@ def reverse_with_rules(cursor: int, fixed_text: str, text_reversed: str) -> str:
     return text_reversed if not text_reversed else text_reversed + added_suffix
 
 
-def process_rules(rules: dict[str, Any], fixed_text: str, cur: int = 0, cur_end: int = 1) -> Optional[str]:
-    """
-    Process rules matched in pattern and returns suitable replacement.
+def process_rules(
+    rules: dict[str, Any], fixed_text: str, cur: int = 0, cur_end: int = 1
+) -> Optional[str]:
+    """Process rules matched in pattern and returns suitable replacement.
 
-    If any rule's condition is satisfied, output the rules "replace",
-    else output None.
+    If any rule's condition is satisfied, output the rules "replace", else output None.
+
+    Parameters:
+    -----------
+
+    rules: dict[str, Any]
+        The rules to be processed.
+
+    fixed_text: str
+        The fixed text.
+
+    cur: int = 0
+        The cursor position.
+
+    cur_end: int = 1
+        The end cursor position.
+
+    Returns:
+    --------
+
+    Optional[str]
+        The replaced text if any rule's condition is satisfied, else None.
     """
 
     replaced = ""
@@ -152,8 +261,28 @@ def process_rules(rules: dict[str, Any], fixed_text: str, cur: int = 0, cur_end:
 
 
 def process_match(match: Any, fixed_text: str, cur: int, cur_end: int) -> bool:
-    """
-    Processes a single match in rules.
+    """Processes a single match in rules.
+
+    Parameters:
+    -----------
+
+    match: Any
+        The match to be processed.
+
+    fixed_text: str
+        The fixed text.
+
+    cur: int
+        The cursor position.
+
+    cur_end: int
+        The end cursor position.
+
+    Returns:
+    --------
+
+    bool
+        True if the match is successful, else False.
     """
 
     # Initial/default value for replace.
@@ -216,17 +345,28 @@ def process_match(match: Any, fixed_text: str, cur: int, cur_end: int) -> bool:
             exact_start = cur_end
             exact_end = cur_end + len(match["value"])
 
-        if not validate.is_exact(match["value"], fixed_text, exact_start, exact_end, negative):
+        if not validate.is_exact(
+            match["value"], fixed_text, exact_start, exact_end, negative
+        ):
             replace = False
 
     return replace
 
 
 def rearrange_unicode_text(text: str) -> str:
-    """
-    Rearranges Unicode (Avro) text to match conversion standards for ASCII.
+    """Rearranges Unicode (Avro) text to match conversion standards for ASCII.
 
-    Returns the rearranged string.
+    Parameters:
+    -----------
+
+    text: str
+        The text to be rearranged.
+
+    Returns:
+    --------
+
+    str
+        The rearranged text.
     """
 
     # Convert the string to a list of individual characters.
@@ -268,7 +408,12 @@ def rearrange_unicode_text(text: str) -> str:
                 else:
                     break
 
-            chars[i - 1], chars[i], chars[i + 1 : i + j + found_pre_kar + 1], chars[i + j + 1 :] = (
+            (
+                chars[i - 1],
+                chars[i],
+                chars[i + 1 : i + j + found_pre_kar + 1],
+                chars[i + j + 1 :],
+            ) = (
                 chars[i + j + 1],
                 chars[i + 1 : i + j + 1],
                 chars[i - 1],
@@ -282,20 +427,38 @@ def rearrange_unicode_text(text: str) -> str:
 
 
 def rearrange_bijoy_text(text: str) -> str:
-    """
-    Rearranges Bijoy Keyboard text to match conversion standards for Unicode.
+    """Rearranges Bijoy Keyboard text to match conversion standards for Unicode.
 
-    Returns the rearranged string.
+    Parameters:
+    -----------
+
+    text: str
+        The text to be rearranged.
+
+    Returns:
+    --------
+
+    str
+        The rearranged text.
     """
     i = 0
     while i < len(text):
         if (
             i > 0
             and text[i] == "\u09cd"
-            and (validate.is_bangla_kar(text[i - 1]) or validate.is_bangla_nukta(text[i - 1]))
+            and (
+                validate.is_bangla_kar(text[i - 1])
+                or validate.is_bangla_nukta(text[i - 1])
+            )
             and i < len(text) - 1
         ):
-            text = text[: i - 1] + text[i] + text[i + 1] + text[i - 1] + text[i + 2 :]
+            text = (
+                text[: i - 1]
+                + text[i]
+                + text[i + 1]
+                + text[i - 1]
+                + text[i + 2 :]
+            )
 
         if (
             0 < i < len(text) - 1
@@ -304,7 +467,13 @@ def rearrange_bijoy_text(text: str) -> str:
             and text[i - 2] != "\u09cd"
             and validate.is_bangla_kar(text[i + 1])
         ):
-            text = text[: i - 1] + text[i + 1] + text[i - 1] + text[i] + text[i + 2 :]
+            text = (
+                text[: i - 1]
+                + text[i + 1]
+                + text[i - 1]
+                + text[i]
+                + text[i + 2 :]
+            )
 
         if (
             i < len(text) - 1
@@ -316,17 +485,29 @@ def rearrange_bijoy_text(text: str) -> str:
             while True:
                 if i - j < 0:
                     break
-                if validate.is_bangla_banjonborno(text[i - j]) and validate.is_bangla_halant(text[i - j - 1]):
+                if validate.is_bangla_banjonborno(
+                    text[i - j]
+                ) and validate.is_bangla_halant(text[i - j - 1]):
                     j += 2
                 elif j == 1 and validate.is_bangla_kar(text[i - j]):
                     j += 1
                 else:
                     break
-            text = text[: i - j] + text[i] + text[i + 1] + text[i - j : i] + text[i + 2 :]
+            text = (
+                text[: i - j]
+                + text[i]
+                + text[i + 1]
+                + text[i - j : i]
+                + text[i + 2 :]
+            )
             i += 1
             continue
 
-        if i < len(text) - 1 and validate.is_bangla_prekar(text[i]) and text[i + 1] != " ":
+        if (
+            i < len(text) - 1
+            and validate.is_bangla_prekar(text[i])
+            and text[i + 1] != " "
+        ):
             j = 1
             while validate.is_bangla_banjonborno(text[i + j]):
                 if validate.is_bangla_halant((part := text[i + j + 1])):
@@ -347,7 +528,11 @@ def rearrange_bijoy_text(text: str) -> str:
             text = temp
             i += j
 
-        if i < len(text) - 1 and text[i] == "ঁ" and validate.is_bangla_postkar(text[i + 1]):
+        if (
+            i < len(text) - 1
+            and text[i] == "ঁ"
+            and validate.is_bangla_postkar(text[i + 1])
+        ):
             temp = text[:i] + text[i + 1] + text[i] + text[i + 2 :]
             text = temp
 
