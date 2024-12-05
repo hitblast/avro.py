@@ -441,6 +441,7 @@ def rearrange_bijoy_text(text: str) -> str:
     str
         The rearranged text.
     """
+
     i = 0
     while i < len(text):
         if (
