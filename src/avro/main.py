@@ -197,8 +197,7 @@ def _convert_backend_unicode(text: str) -> str:
 
 # This is a backend function and MUST NOT BE EXPORTED!
 def _reverse_output_generator(text: str) -> Generator[str, None, None]:
-    """
-    Generates the reversed output for the reverse() function.
+    """Generates the reversed output for the reverse() function.
 
     Parameters:
     -----------
@@ -229,8 +228,7 @@ def _reverse_output_generator(text: str) -> Generator[str, None, None]:
 # This is a backend function and MUST NOT BE EXPORTED!
 @lru_cache(maxsize=128)
 def _reverse_backend(text: str, remap_words: bool) -> str:
-    """
-    The working backend for the reverse() function.
+    """The working backend for the reverse() function.
 
     Parameters:
     -----------
@@ -261,8 +259,7 @@ def _reverse_backend(text: str, remap_words: bool) -> str:
 # This is a backend function and MUST NOT BE EXPORTED!
 @lru_cache(maxsize=128)
 def _reverse_backend_ext(text: str, remap_words: bool) -> str:
-    """
-    Backend extension for the reverse() function.
+    """Backend extension for the reverse() function.
 
     Parameters:
     -----------
