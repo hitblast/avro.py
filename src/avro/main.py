@@ -10,6 +10,7 @@ Licensed under the terms of the MIT License.
 # Imports.
 import asyncio
 import re
+from concurrent.futures import ThreadPoolExecutor
 from functools import lru_cache
 from itertools import chain
 from typing import Callable, Generator, Union
@@ -48,6 +49,33 @@ async def _async_concurrency_helper(
     loop = asyncio.get_event_loop()
     tasks = [loop.run_in_executor(None, func, text) for text in params]
     results = await asyncio.gather(*tasks)
+    return results
+
+
+# This is a backend function and MUST NOT BE EXPORTED!
+def _sync_concurrency_helper(
+    func: Callable, params: tuple[str, ...]
+) -> list[str]:
+    """Synchronous concurrency helper for the core functions of avro.py using multithreading.
+
+    Parameters:
+    -----------
+
+    func: Callable
+        The function to run concurrently.
+
+    params: tuple[str, ...]
+        The parameters to pass to the function.
+
+    Returns:
+    --------
+
+    list[str]
+        The results of the function run concurrently.
+
+    """
+    with ThreadPoolExecutor() as executor:
+        results = list(executor.map(func, params))
     return results
 
 
@@ -283,101 +311,6 @@ def _reverse_backend_ext(text: str, remap_words: bool) -> str:
     return "".join(text_segments)
 
 
-# This is a backend function and MUST NOT BE EXPORTED!
-def _reverse_output_generator(text: str) -> Generator[str, None, None]:
-    """The output generator for the reverse() function.
-
-    Parameters:
-    -----------
-
-    text: str
-        The text to reverse.
-
-    Yields:
-    -------
-
-    str
-        The reversed output.
-    """
-
-    for cur, i in enumerate(text):
-        try:
-            i.encode("utf-8")
-            match = processor.match_patterns(
-                text, cur, rule=False, reversed=True
-            )
-            yield (
-                (match["reversed"] or match["found"])
-                if match["matched"]
-                else i
-            )
-        except UnicodeDecodeError:
-            yield i
-
-
-# This is a backend function and MUST NOT BE EXPORTED!
-@lru_cache(maxsize=128)
-def _reverse_backend(text: str, remap_words: bool) -> str:
-    """The working backend for the reverse() function.
-
-    Parameters:
-    -----------
-
-    text: str
-        The text to reverse.
-
-    remap_words: bool
-        Whether to reverse input text with remapped (exception) words.
-
-    Returns:
-    --------
-
-    str
-        The reversed text.
-    """
-
-    manual_required = True  # Whether manual intervention is required.
-
-    # Replace predefined exceptions in the input text.
-    if remap_words:
-        text, manual_required = processor.find_in_remap(text, reversed=True)
-
-    return (
-        "".join(chain.from_iterable(_reverse_output_generator(text)))
-        if manual_required
-        else text
-    )
-
-
-# This is a backend function and MUST NOT BE EXPORTED!
-@lru_cache(maxsize=128)
-def _reverse_backend_ext(text: str, remap_words: bool) -> str:
-    """Backend extension for the reverse() function.
-
-    Parameters:
-    -----------
-
-    text: str
-        The text to reverse.
-
-    remap_words: bool
-        Whether to reverse input text with remapped (exception) words.
-
-    Returns:
-    --------
-
-    str
-        The reversed text.
-    """
-
-    separated_texts = REVERSE_REGEX.split(text)
-    text_segments = [
-        _reverse_backend(separated_text, remap_words)
-        for separated_text in separated_texts
-    ]
-    return "".join(text_segments)
-
-
 # ---
 
 # Primary user-end functions.
@@ -422,6 +355,39 @@ async def parse(
         return output[0] if len(output) == 1 else output
 
 
+def parse_sync(
+    *texts: str, bijoy: bool = False, remap_words: bool = True
+) -> Union[str, list[str]]:
+    """Synchronous version of parse() function using multithreading.
+
+    Parameters:
+    -----------
+    *texts: str
+        The text(s) to parse.
+
+    bijoy: bool = False
+        Whether to return result in the Bijoy Keyboard format (ASCII).
+
+    remap_words: bool = True
+        Whether to parse input text with remapped (exception) words.
+
+    Returns:
+    --------
+
+    str | list[str]
+        The parsed text(s).
+    """
+
+    output = _sync_concurrency_helper(
+        lambda text: _parse_backend(text, remap_words), texts
+    )
+
+    if bijoy:
+        return to_bijoy_sync(*output)
+    else:
+        return output[0] if len(output) == 1 else output
+
+
 async def to_bijoy(*texts: str) -> Union[str, list[str]]:
     """Converts input text (Avro, Unicode) to Bijoy Keyboard format (ASCII).
 
@@ -444,6 +410,26 @@ async def to_bijoy(*texts: str) -> Union[str, list[str]]:
     return output[0] if len(output) == 1 else output
 
 
+def to_bijoy_sync(*texts: str) -> Union[str, list[str]]:
+    """Synchronous version of to_bijoy() function using multithreading.
+
+    Parameters:
+    -----------
+
+    *texts: str
+        The text(s) to convert.
+
+    Returns:
+    --------
+
+    str | list[str]
+        The converted text(s).
+    """
+
+    output = _sync_concurrency_helper(_convert_backend, texts)
+    return output[0] if len(output) == 1 else output
+
+
 async def to_unicode(*texts: str) -> Union[str, list[str]]:
     """Converts input text (Bijoy Keyboard, ASCII) to Unicode (Avro Keyboard format).
 
@@ -461,6 +447,24 @@ async def to_unicode(*texts: str) -> Union[str, list[str]]:
     """
 
     output = await _async_concurrency_helper(_convert_backend_unicode, texts)
+    return output[0] if len(output) == 1 else output
+
+
+def to_unicode_sync(*texts: str) -> Union[str, list[str]]:
+    """Synchronous version of to_unicode() function using multithreading.
+
+    Parameters:
+    -----------
+    *texts: str
+        The text(s) to convert.
+
+    Returns:
+    --------
+    str | list[str]
+        The converted text(s).
+    """
+
+    output = _sync_concurrency_helper(_convert_backend_unicode, texts)
     return output[0] if len(output) == 1 else output
 
 
@@ -498,6 +502,42 @@ async def reverse(
             texts = (converted_texts,)
 
     output = await _async_concurrency_helper(
+        lambda text: _reverse_backend_ext(text, remap_words), texts
+    )
+    return output[0] if len(output) == 1 else output
+
+
+def reverse_sync(
+    *texts: str, from_bijoy: bool = False, remap_words: bool = True
+) -> Union[str, list[str]]:
+    """Synchronous version of reverse() function using multithreading.
+
+    Parameters:
+    -----------
+
+    *texts: str
+        The text(s) to reverse.
+
+    from_bijoy: bool = False
+        Whether to reverse input text from Bijoy Keyboard format (ASCII).
+
+    remap_words: bool = True
+        Whether to reverse input text with remapped (exception) words.
+
+    Returns:
+    --------
+
+    str | list[str]
+        The reversed text(s).
+    """
+
+    # Convert from Bijoy to Unicode if from_bijoy is True
+    if from_bijoy:
+        converted_texts = to_unicode_sync(*texts)
+        if isinstance(converted_texts, str):
+            texts = (converted_texts,)
+
+    output = _sync_concurrency_helper(
         lambda text: _reverse_backend_ext(text, remap_words), texts
     )
     return output[0] if len(output) == 1 else output
