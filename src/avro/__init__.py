@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 
 
-"""This is the official documentation for the avro.py Python package.
+"""avro.py: A modern Pythonic implementation of the popular Bangla typing software Avro Phonetic.
 
 Overview:
 ---------
