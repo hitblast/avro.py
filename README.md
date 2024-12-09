@@ -109,6 +109,37 @@ reversed_text = avro.reverse(uncode_text)  # Output: ami banglay gan gai.
 
 <br>
 
+## 🐍 A Note on `async`/`await` Support
+
+Since avro.py version 2024.12.5, now you can use asynchronous operations with this project because now it supports concurrency through the `asyncio` library as a built-in feature. Though support for more libraries such as `trio` might be added later, the following example will help you achieve the same result as the synchronous functions calls, just a lot sweeter with the new syntax and slight performance bumps:
+
+```python
+import asyncio
+import avro
+
+async def main():
+    # Our dummy text.
+    dummy = 'ami banglay gan gai.'
+
+    avro_output = await avro.parse_async(dummy)
+    print(output)  # Output: আমি বাংলায় গান গাই।
+
+    bijoy_output = await avro.parse_async(dummy, bijoy=True)
+    print(bijoy_output)  # Output: Avwg evsjvh় Mvb MvB।
+
+    bijoy_text = await avro.to_bijoy_async(avro_output)
+    print(bijoy_text)  # Output: Avwg evsjvh় Mvb MvB।
+
+    unicode_text = await avro.to_unicode_async(bijoy_text)
+    print(unicode_text)  # Output: আমি বাংলায় গান গাই।
+
+    reversed_text = await avro.reverse_async(uncode_text)
+    print(reversed_text)  # Output: ami banglay gan gai.
+
+# Running the event loop.
+asyncio.run(main())
+```
+
 ## 🛠️ Contributing
 
 :octocat: _Fork -> Do your changes -> Send a Pull Request, it's that easy!_ <br>
