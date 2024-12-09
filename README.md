@@ -120,8 +120,7 @@ Since version [2024.12.5](https://github.com/hitblast/avro.py/releases/tag/2024.
 > [!NOTE]
 > Unless you have a very specific use, the asynchronous functions only
 > provide slight performance improvements and are not necessary for most use
-> cases, the asynchronous functions only provide slight performance improvements
-> and are not necessary for most use cases.
+> cases, so their usage is optional.
 
 Here's a reiteration of the previous example using the new syntax:
 
