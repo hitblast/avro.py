@@ -318,10 +318,12 @@ def _reverse_backend_ext(text: str, remap_words: bool) -> str:
 # ---
 
 
-async def parse(
+async def parse_async(
     *texts: str, bijoy: bool = False, remap_words: bool = True
 ) -> Union[str, list[str]]:
-    """Parses input text, matches and replaces using the Avro Dictionary.
+    """Asynchronous version of parse() function.
+
+    Parses input text, matches and replaces using the Avro Dictionary.
 
     If a valid replacement is found, then it returns the replaced string.
     If no replacement is found, then it instead returns the input text.
@@ -350,15 +352,18 @@ async def parse(
 
     # If the `bijoy` parameter is set to `True`, then convert the output to Bijoy Keyboard format.
     if bijoy:
-        return await to_bijoy(*output)
+        return await to_bijoy_async(*output)
     else:
         return output[0] if len(output) == 1 else output
 
 
-def parse_sync(
+def parse(
     *texts: str, bijoy: bool = False, remap_words: bool = True
 ) -> Union[str, list[str]]:
-    """Synchronous version of parse() function using multithreading.
+    """Parses input text, matches and replaces using the Avro Dictionary.
+
+    If a valid replacement is found, then it returns the replaced string.
+    If no replacement is found, then it instead returns the input text.
 
     Parameters:
     -----------
@@ -383,13 +388,15 @@ def parse_sync(
     )
 
     if bijoy:
-        return to_bijoy_sync(*output)
+        return to_bijoy(*output)
     else:
         return output[0] if len(output) == 1 else output
 
 
-async def to_bijoy(*texts: str) -> Union[str, list[str]]:
-    """Converts input text (Avro, Unicode) to Bijoy Keyboard format (ASCII).
+async def to_bijoy_async(*texts: str) -> Union[str, list[str]]:
+    """Asynchronous version of to_bijoy() function.
+
+    Converts input text (Avro, Unicode) to Bijoy Keyboard format (ASCII).
 
     If a valid conversion is found, then it returns the converted string.
 
@@ -410,8 +417,10 @@ async def to_bijoy(*texts: str) -> Union[str, list[str]]:
     return output[0] if len(output) == 1 else output
 
 
-def to_bijoy_sync(*texts: str) -> Union[str, list[str]]:
-    """Synchronous version of to_bijoy() function using multithreading.
+def to_bijoy(*texts: str) -> Union[str, list[str]]:
+    """Converts input text (Avro, Unicode) to Bijoy Keyboard format (ASCII).
+
+    If a valid conversion is found, then it returns the converted string.
 
     Parameters:
     -----------
@@ -430,8 +439,10 @@ def to_bijoy_sync(*texts: str) -> Union[str, list[str]]:
     return output[0] if len(output) == 1 else output
 
 
-async def to_unicode(*texts: str) -> Union[str, list[str]]:
-    """Converts input text (Bijoy Keyboard, ASCII) to Unicode (Avro Keyboard format).
+async def to_unicode_async(*texts: str) -> Union[str, list[str]]:
+    """Asynchronous version of to_unicode() function.
+
+    Converts input text (Bijoy Keyboard, ASCII) to Unicode (Avro Keyboard format).
 
     If a valid conversion is found, then it returns the converted string.
 
@@ -450,8 +461,10 @@ async def to_unicode(*texts: str) -> Union[str, list[str]]:
     return output[0] if len(output) == 1 else output
 
 
-def to_unicode_sync(*texts: str) -> Union[str, list[str]]:
-    """Synchronous version of to_unicode() function using multithreading.
+def to_unicode(*texts: str) -> Union[str, list[str]]:
+    """Converts input text (Bijoy Keyboard, ASCII) to Unicode (Avro Keyboard format).
+
+    If a valid conversion is found, then it returns the converted string.
 
     Parameters:
     -----------
@@ -468,7 +481,48 @@ def to_unicode_sync(*texts: str) -> Union[str, list[str]]:
     return output[0] if len(output) == 1 else output
 
 
-async def reverse(
+async def reverse_async(
+    *texts: str, from_bijoy: bool = False, remap_words: bool = True
+) -> Union[str, list[str]]:
+    """Asynchronous version of reverse() function.
+
+    Reverses input text to Roman script typed in English.
+
+    If a valid replacement is found, then it returns the replaced string.
+    If no replacement is found, then it instead returns the input text.
+
+    Parameters:
+    -----------
+
+    *texts: str
+        The text(s) to reverse.
+
+    from_bijoy: bool = False
+        Whether to reverse input text from Bijoy Keyboard format (ASCII).
+
+    remap_words: bool = True
+        Whether to reverse input text with remapped (exception) words.
+
+    Returns:
+    --------
+
+    str | list[str]
+        The reversed text(s).
+    """
+
+    # Convert from Bijoy to Unicode if from_bijoy is True
+    if from_bijoy:
+        converted_texts = await to_unicode_async(*texts)
+        if isinstance(converted_texts, str):
+            texts = (converted_texts,)
+
+    output = await _async_concurrency_helper(
+        lambda text: _reverse_backend_ext(text, remap_words), texts
+    )
+    return output[0] if len(output) == 1 else output
+
+
+def reverse(
     *texts: str, from_bijoy: bool = False, remap_words: bool = True
 ) -> Union[str, list[str]]:
     """Reverses input text to Roman script typed in English.
@@ -497,43 +551,7 @@ async def reverse(
 
     # Convert from Bijoy to Unicode if from_bijoy is True
     if from_bijoy:
-        converted_texts = await to_unicode(*texts)
-        if isinstance(converted_texts, str):
-            texts = (converted_texts,)
-
-    output = await _async_concurrency_helper(
-        lambda text: _reverse_backend_ext(text, remap_words), texts
-    )
-    return output[0] if len(output) == 1 else output
-
-
-def reverse_sync(
-    *texts: str, from_bijoy: bool = False, remap_words: bool = True
-) -> Union[str, list[str]]:
-    """Synchronous version of reverse() function using multithreading.
-
-    Parameters:
-    -----------
-
-    *texts: str
-        The text(s) to reverse.
-
-    from_bijoy: bool = False
-        Whether to reverse input text from Bijoy Keyboard format (ASCII).
-
-    remap_words: bool = True
-        Whether to reverse input text with remapped (exception) words.
-
-    Returns:
-    --------
-
-    str | list[str]
-        The reversed text(s).
-    """
-
-    # Convert from Bijoy to Unicode if from_bijoy is True
-    if from_bijoy:
-        converted_texts = to_unicode_sync(*texts)
+        converted_texts = to_unicode(*texts)
         if isinstance(converted_texts, str):
             texts = (converted_texts,)
 

@@ -29,8 +29,8 @@ async def test_patterns_without_rules_from_config() -> NoReturn:
         if "rules" not in pattern and pattern.get("find", None):
             assert (
                 pattern["replace"]
-                == await avro.parse(pattern["find"])
-                == avro.parse_sync(pattern["find"])
+                == await avro.parse_async(pattern["find"])
+                == avro.parse(pattern["find"])
             )
 
 
@@ -41,7 +41,7 @@ async def test_patterns_without_rules_not_from_config() -> NoReturn:
 
     This test is done in addition to
     test_patterns_without_rules_from_config() to ensure that text
-    passed manually to avro.parse are properly parsed when they
+    passed manually to avro.parse_async are properly parsed when they
     don't exact match a pattern that has no rules specified.
     """
 
@@ -53,7 +53,7 @@ async def test_patterns_without_rules_not_from_config() -> NoReturn:
     }
 
     for key, value in conjunctions.items():
-        assert key == await avro.parse(value) == avro.parse_sync(value)
+        assert key == await avro.parse_async(value) == avro.parse(value)
 
 
 @pytest.mark.asyncio
@@ -77,7 +77,7 @@ async def test_patterns_numbers() -> NoReturn:
     }
 
     for key, value in numbers.items():
-        assert key == await avro.parse(value) == avro.parse_sync(value)
+        assert key == await avro.parse_async(value) == avro.parse(value)
 
 
 @pytest.mark.asyncio
@@ -93,8 +93,8 @@ async def test_patterns_punctuations() -> NoReturn:
     }
 
     for key, value in punctuations.items():
-        assert key == await avro.parse(value) == avro.parse_sync(value)
-        assert value == await avro.reverse(key) == avro.reverse_sync(key)
+        assert key == await avro.parse_async(value) == avro.parse(value)
+        assert value == await avro.reverse_async(key) == avro.reverse(key)
 
 
 @pytest.mark.asyncio
@@ -118,7 +118,7 @@ async def test_patterns_with_rules_svaravarna() -> NoReturn:
     }
 
     for key, value in svaravarna.items():
-        assert key == await avro.parse(value) == avro.parse_sync(value)
+        assert key == await avro.parse_async(value) == avro.parse(value)
 
 
 @pytest.mark.asyncio
@@ -137,7 +137,7 @@ async def test_non_ascii() -> NoReturn:
     }
 
     for key, value in non_ascii.items():
-        assert key == await avro.parse(value) == avro.parse_sync(value)
+        assert key == await avro.parse_async(value) == avro.parse(value)
 
 
 @pytest.mark.asyncio
@@ -149,13 +149,15 @@ async def test_ascii() -> NoReturn:
 
     assert (
         "Avwg evsjvi gan MvB|"
-        == await avro.reverse("Avwg evsjvi গান MvB|")
-        == avro.reverse_sync("Avwg evsjvi গান MvB|")
+        == await avro.reverse_async("Avwg evsjvi গান MvB|")
+        == avro.reverse("Avwg evsjvi গান MvB|")
     )
     assert (
         "Avwg amar Avwg‡K wPiw`b GB banglay Lyu‡R cvB!"
-        == await avro.reverse("Avwg আমার Avwg‡K wPiw`b GB বাংলায় Lyu‡R cvB!")
-        == avro.reverse_sync("Avwg আমার Avwg‡K wPiw`b GB বাংলায় Lyu‡R cvB!")
+        == await avro.reverse_async(
+            "Avwg আমার Avwg‡K wPiw`b GB বাংলায় Lyu‡R cvB!"
+        )
+        == avro.reverse("Avwg আমার Avwg‡K wPiw`b GB বাংলায় Lyu‡R cvB!")
     )
 
 
@@ -173,9 +175,9 @@ async def test_words_with_punctuations() -> NoReturn:
     }
 
     for key, value in test_words.items():
-        assert key == await avro.parse(value) == avro.parse_sync(value)
+        assert key == await avro.parse_async(value) == avro.parse(value)
         assert (
-            value.lower() == await avro.reverse(key) == avro.reverse_sync(key)
+            value.lower() == await avro.reverse_async(key) == avro.reverse(key)
         )
 
 
@@ -187,13 +189,13 @@ async def test_exceptions() -> NoReturn:
 
     assert (
         "আমি উইকিপিডিয়া আর ফেসবুক চালাই।"
-        == await avro.parse("ami Wikipedia ar Facebook calai.")
-        == avro.parse_sync("ami Wikipedia ar Facebook calai.")
+        == await avro.parse_async("ami Wikipedia ar Facebook calai.")
+        == avro.parse("ami Wikipedia ar Facebook calai.")
     )
     assert (
         "ami Wikipedia ar Facebook chalai."
-        == await avro.reverse("আমি উইকিপিডিয়া আর ফেসবুক চালাই।")
-        == avro.reverse_sync("আমি উইকিপিডিয়া আর ফেসবুক চালাই।")
+        == await avro.reverse_async("আমি উইকিপিডিয়া আর ফেসবুক চালাই।")
+        == avro.reverse("আমি উইকিপিডিয়া আর ফেসবুক চালাই।")
     )
 
 
@@ -206,18 +208,18 @@ async def test_conversion_bijoy_func() -> NoReturn:
     # Regular Conversion.
     assert (
         "Avwg evsjvq Mvb MvB;"
-        == await avro.to_bijoy("আমি বাংলায় গান গাই;")
-        == avro.to_bijoy_sync("আমি বাংলায় গান গাই;")
+        == await avro.to_bijoy_async("আমি বাংলায় গান গাই;")
+        == avro.to_bijoy("আমি বাংলায় গান গাই;")
     )
     assert (
         [
             "Avwg evsjvi Mvb MvB|",
             "Avwg Avgvi Avwg‡K wPiw`b GB evsjvq Lyu‡R cvB!",
         ]
-        == await avro.to_bijoy(
+        == await avro.to_bijoy_async(
             "আমি বাংলার গান গাই।", "আমি আমার আমিকে চিরদিন এই বাংলায় খুঁজে পাই!"
         )
-        == avro.to_bijoy_sync(
+        == avro.to_bijoy(
             "আমি বাংলার গান গাই।", "আমি আমার আমিকে চিরদিন এই বাংলায় খুঁজে পাই!"
         )
     )
@@ -225,8 +227,8 @@ async def test_conversion_bijoy_func() -> NoReturn:
     # Fail-safe Conversion.
     assert (
         "Hello, World!"
-        == await avro.to_bijoy("Hello, World!")
-        == avro.to_bijoy_sync("Hello, World!")
+        == await avro.to_bijoy_async("Hello, World!")
+        == avro.to_bijoy("Hello, World!")
     )
 
 
@@ -239,19 +241,19 @@ async def test_conversion_unicode_func() -> NoReturn:
     # Regular Conversion.
     assert (
         "আমি বাংলায় গান গাই;"
-        == await avro.to_unicode("Avwg evsjvh় Mvb MvB;")
-        == avro.to_unicode_sync("Avwg evsjvh় Mvb MvB;")
+        == await avro.to_unicode_async("Avwg evsjvh় Mvb MvB;")
+        == avro.to_unicode("Avwg evsjvh় Mvb MvB;")
     )
     assert (
         [
             "আমি বাংলার গান গাই।",
             "আমি আমার আমিকে চিরদিন এই বাংলায় খুঁজে পাই!",
         ]
-        == await avro.to_unicode(
+        == await avro.to_unicode_async(
             "Avwg evsjvi Mvb MvB|",
             "Avwg Avgvi Avwg‡K wPiw`b GB evsjvq Lyu‡R cvB!",
         )
-        == avro.to_unicode_sync(
+        == avro.to_unicode(
             "Avwg evsjvi Mvb MvB|",
             "Avwg Avgvi Avwg‡K wPiw`b GB evsjvq Lyu‡R cvB!",
         )
@@ -267,19 +269,19 @@ async def test_parse_sentences() -> NoReturn:
     # Default parsing.
     assert (
         "আমি বাংলায় গান গাই;"
-        == await avro.parse("ami banglay gan gai;")
-        == avro.parse_sync("ami banglay gan gai;")
+        == await avro.parse_async("ami banglay gan gai;")
+        == avro.parse("ami banglay gan gai;")
     )
     assert (
         [
             "আমি বাংলার গান গাই।",
             "আমি আমার আমিকে চিরদিন এই বাংলায় খুঁজে পাই।",
         ]
-        == await avro.parse(
+        == await avro.parse_async(
             "ami banglar gan gai.",
             "ami amar amike cirodin ei banglay khu^je pai.",
         )
-        == avro.parse_sync(
+        == avro.parse(
             "ami banglar gan gai.",
             "ami amar amike cirodin ei banglay khu^je pai.",
         )
@@ -288,20 +290,20 @@ async def test_parse_sentences() -> NoReturn:
     # Bijoy parsing.
     assert (
         "Avwg evsjvq Mvb MvB;"
-        == await avro.parse("ami banglay gan gai;", bijoy=True)
-        == avro.parse_sync("ami banglay gan gai;", bijoy=True)
+        == await avro.parse_async("ami banglay gan gai;", bijoy=True)
+        == avro.parse("ami banglay gan gai;", bijoy=True)
     )
     assert (
         [
             "Avwg evsjvi Mvb MvB|",
             "Avwg Avgvi Avwg‡K wPiw`b GB evsjvq Lyu‡R cvB!",
         ]
-        == await avro.parse(
+        == await avro.parse_async(
             "ami banglar gan gai.",
             "ami amar amike cirodin ei banglay khu^je pai!",
             bijoy=True,
         )
-        == avro.parse_sync(
+        == avro.parse(
             "ami banglar gan gai.",
             "ami amar amike cirodin ei banglay khu^je pai!",
             bijoy=True,
@@ -318,18 +320,18 @@ async def test_reverse_sentences() -> NoReturn:
     # Default reversing.
     assert (
         "ami banglay gan gai."
-        == await avro.reverse("আমি বাংলায় গান গাই।")
-        == avro.reverse_sync("আমি বাংলায় গান গাই।")
+        == await avro.reverse_async("আমি বাংলায় গান গাই।")
+        == avro.reverse("আমি বাংলায় গান গাই।")
     )
     assert (
         [
             "rohim, tomake korim dakche. ekhon ki rowna debe?",
             "rowna dile amake bole zew.",
         ]
-        == await avro.reverse(
+        == await avro.reverse_async(
             "রহিম, তোমাকে করিম ডাকছে। এখন কি রওনা দেবে?", "রওনা দিলে আমাকে বলে যেও।"
         )
-        == avro.reverse_sync(
+        == avro.reverse(
             "রহিম, তোমাকে করিম ডাকছে। এখন কি রওনা দেবে?", "রওনা দিলে আমাকে বলে যেও।"
         )
     )
@@ -337,6 +339,6 @@ async def test_reverse_sentences() -> NoReturn:
     # Bijoy reversing.
     assert (
         "ami banglar gan gai."
-        == await avro.reverse("Avwg evsjvi Mvb MvB|", from_bijoy=True)
-        == avro.reverse_sync("Avwg evsjvi Mvb MvB|", from_bijoy=True)
+        == await avro.reverse_async("Avwg evsjvi Mvb MvB|", from_bijoy=True)
+        == avro.reverse("Avwg evsjvi Mvb MvB|", from_bijoy=True)
     )
