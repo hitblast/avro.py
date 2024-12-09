@@ -27,7 +27,11 @@ A modern Pythonic implementation of the popular Bengali phonetic-typing software
 
 **avro.py** provides a fully fledged, batteries-included text parser which can parse, reverse and even convert English Roman script into its phonetic equivalent (unicode) of Bengali. At its core, it implements an extensively modified version of the **Avro Phonetic Dictionary Search Library** by [Mehdi Hasan Khan](https://github.com/mugli).
 
-> Update: As of October 2024, Python 3.8 has reached its EOL, so for keeping this project updated, the minimum required version will be Python 3.9 from now onwards. It is strongly suggested that you migrate your project for better compatibility. <br>
+> [!NOTE]
+> Update: As of October 2024, Python 3.8 has reached its EOL, so for keeping
+> this project updated, the minimum required version will be Python 3.9 from now
+> onwards. It is strongly suggested that you migrate your project for better
+> compatibility. <br>
 
 ## ✨ Inspirations
 
@@ -116,7 +120,7 @@ Since version [2024.12.5](https://github.com/hitblast/avro.py/releases/tag/2024.
 > [!NOTE]
 > Unless you have a very specific use, the asynchronous functions only
 > provide slight performance improvements and are not necessary for most use
-> cases.e, the asynchronous functions only provide slight performance improvements
+> cases, the asynchronous functions only provide slight performance improvements
 > and are not necessary for most use cases.
 
 Here's a reiteration of the previous example using the new syntax:
