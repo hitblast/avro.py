@@ -15,7 +15,7 @@ Features
 
 1. Simple-to-use syntax with functional approach.
 2. Easily convert/parse/reverse English Roman script to Bengali phonetic and vice versa.
-3. Fully asynchronous and `async`/`await` sugarcoated syntax compliant.
+3. Also asynchronous and `async`/`await` sugarcoated syntax compliant.
 4. Synchronous alternative functions available for applications requiring minimal overhead.
 5. Batteries included. Just write your text and let it do the rest.
 
