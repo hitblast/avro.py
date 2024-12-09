@@ -111,7 +111,11 @@ reversed_text = avro.reverse(uncode_text)  # Output: ami banglay gan gai.
 
 ## 🐍 A Note on `async`/`await` Support
 
-Since avro.py version 2024.12.5, now you can use asynchronous operations with this project because now it supports concurrency through the `asyncio` library as a built-in feature. Though support for more libraries such as `trio` might be added later, the following example will help you achieve the same result as the synchronous functions calls, just a lot sweeter with the new syntax and slight performance bumps:
+Since version [2024.12.5](https://github.com/hitblast/avro.py/releases/tag/2024.12.5), the package now supports `async`/`await` syntax for all the functions.
+
+**Note:** Unless you have a very specific use, the asynchronous functions only provide slight performance improvements and are not necessary for most use cases.e, the asynchronous functions only provide slight performance improvements and are not necessary for most use cases.
+
+Here's a reiteration of the previous example using `async`/`await` syntax:
 
 ```python
 import asyncio
