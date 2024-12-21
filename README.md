@@ -125,10 +125,12 @@ Since version [2024.12.5](https://github.com/hitblast/avro.py/releases/tag/2024.
 Here's a reiteration of the previous example using the new syntax:
 
 ```python
+# Imports.
 import asyncio
 import avro
 
-async def main():
+# Main coroutine.
+async def main() -> None:
     # Our dummy text.
     dummy = 'ami banglay gan gai.'
 
