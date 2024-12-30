@@ -111,7 +111,9 @@ def match_patterns(
             "matched": True,
             "found": p.get("find"),
             "replaced": p.get("replace"),
-            "reversed": reverse_with_rules(cur, fixed_text, p.get("reverse"))
+            "reversed": reverse_with_rules(
+                cur, fixed_text, p.get("reverse", None)
+            )
             if not rule
             else None,
             "rules": p.get("rules") if rule else None,
@@ -213,7 +215,7 @@ def reverse_with_rules(
 
 
 def process_rules(
-    rules: dict[str, Any], fixed_text: str, cur: int = 0, cur_end: int = 1
+    rules: Any, fixed_text: str, cur: int = 0, cur_end: int = 1
 ) -> Optional[str]:
     """Process rules matched in pattern and returns suitable replacement.
 
@@ -242,6 +244,7 @@ def process_rules(
     """
 
     replaced = ""
+    matched = False
 
     # Iterate through rules.
     for rule in rules:
@@ -408,17 +411,13 @@ def rearrange_unicode_text(text: str) -> str:
                 else:
                     break
 
-            (
-                chars[i - 1],
-                chars[i],
-                chars[i + 1 : i + j + found_pre_kar + 1],
-                chars[i + j + 1 :],
-            ) = (
-                chars[i + j + 1],
-                chars[i + 1 : i + j + 1],
-                chars[i - 1],
-                chars[i],
-                chars[i + j + found_pre_kar + 1 :],
+            chars = (
+                chars[: i - 1]
+                + [chars[i + j + 1]]
+                + chars[i + 1 : i + j + 1]
+                + [chars[i - 1]]
+                + [chars[i]]
+                + chars[i + j + found_pre_kar + 1 :]
             )
             i += j + found_pre_kar
             barrier = i + 1
@@ -510,6 +509,7 @@ def rearrange_bijoy_text(text: str) -> str:
             and text[i + 1] != " "
         ):
             j = 1
+            part = ""
             while validate.is_bangla_banjonborno(text[i + j]):
                 if validate.is_bangla_halant((part := text[i + j + 1])):
                     j += 2
