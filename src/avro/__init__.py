@@ -31,5 +31,5 @@ https://github.com/hitblast/avro.py/tree/main/examples
 from .main import *
 
 # Version information.
-__version_info__ = (2024, 12, 9)
+__version_info__ = (2024, 12, 30)
 __version__ = ".".join(map(str, __version_info__))
