@@ -130,7 +130,7 @@ reversed_text = avro.reverse(uncode_text)
 
 <br>
 
-## 🐍 A Note on `async`/`await` Support
+### 🐍 A note on `async`/`await` support:
 
 Since version
 [2024.12.5](https://github.com/hitblast/avro.py/releases/tag/2024.12.5), the
