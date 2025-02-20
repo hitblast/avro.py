@@ -97,7 +97,8 @@ print(output)  # Output: আমি বাংলায় গান গাই।
 Alternatively, I can also do it in Bijoy Keyboard format:
 
 ```python
-bijoy_output = avro.parse(dummy, bijoy=True)  # Output: Avwg evsjvh় Mvb MvB।
+bijoy_output = avro.parse(dummy, bijoy=True)
+# Output: Avwg evsjvh় Mvb MvB।
 ```
 
 3. `to_bijoy()`
@@ -105,7 +106,8 @@ bijoy_output = avro.parse(dummy, bijoy=True)  # Output: Avwg evsjvh় Mvb MvB�
 Or, we can take the previous `avro_output` and convert it to Bijoy if we want to, like this:
 
 ```python
-bijoy_text = avro.to_bijoy(avro_output)  # Output: Avwg evsjvh় Mvb MvB।
+bijoy_text = avro.to_bijoy(avro_output)
+# Output: Avwg evsjvh় Mvb MvB।
 ```
 
 4. `to_unicode()`
@@ -113,7 +115,8 @@ bijoy_text = avro.to_bijoy(avro_output)  # Output: Avwg evsjvh় Mvb MvB।
 Conversely, we can convert the Bijoy text we got just now and convert it back to Unicode Bengali:
 
 ```python
-unicode_text = avro.to_unicode(bijoy_text)  # Output: আমি বাংলায় গান গাই।
+unicode_text = avro.to_unicode(bijoy_text)
+# Output: আমি বাংলায় গান গাই।
 ```
 
 5. `reverse()`
@@ -121,7 +124,8 @@ unicode_text = avro.to_unicode(bijoy_text)  # Output: আমি বাংলা�
 Finally, we can just reverse back to the original text we passed as input in the first place:
 
 ```python
-reversed_text = avro.reverse(uncode_text)  # Output: ami banglay gan gai.
+reversed_text = avro.reverse(uncode_text)
+# Output: ami banglay gan gai.
 ```
 
 <br>
