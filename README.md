@@ -25,9 +25,13 @@ A modern Pythonic implementation of the popular Bengali phonetic-typing software
 
 ## ⚡ Overview
 
-**avro.py** provides a fully fledged, batteries-included text parser which can parse, reverse and even convert English Roman script into its phonetic equivalent (unicode) of Bengali. At its core, it implements an extensively modified version of the **Avro Phonetic Dictionary Search Library** by [Mehdi Hasan Khan](https://github.com/mugli).
+**avro.py** provides a fully fledged, batteries-included text parser which can
+parse, reverse and even convert English Roman script into its phonetic
+equivalent (unicode) of Bengali. At its core, it implements an extensively
+modified version of the **Avro Phonetic Dictionary Search Library** by [Mehdi
+Hasan Khan](https://github.com/mugli).
 
-> [!NOTE]
+> [!IMPORTANT]
 > Update: As of October 2024, Python 3.8 has reached its EOL, so for keeping
 > this project updated, the minimum required version will be Python 3.9 from now
 > onwards. It is strongly suggested that you migrate your project for better
@@ -50,7 +54,8 @@ $ pip install avro.py
 
 #### 📦 ...or you can try the CLI!
 
-[**avnie**](https://github.com/hitblast/avnie) is a newly developed CLI tool that uses avro.py under the hood. You can install it using:
+[**avnie**](https://github.com/hitblast/avnie) is a newly developed CLI tool
+that uses avro.py under the hood. You can install it using:
 
 ```sh
 # Install / upgrade avnie.
@@ -61,11 +66,19 @@ $ pip install avnie
 
 ## 🔖 Usage Guide
 
-This small tour guide will describe how you can use avro.py back and forth to operate (cutlery!) on Bengali text. You can also check the [examples](https://github.com/hitblast/avro.py/tree/main/examples) directory for checking [this whole snippet](https://github.com/hitblast/avro.py/blob/main/examples/simple.py) in action, as well as other use cases.
+This small tour guide will describe how you can use avro.py back and forth to
+operate (cutlery!) on Bengali text. You can also check the
+[examples](https://github.com/hitblast/avro.py/tree/main/examples) directory for
+checking [this whole
+snippet](https://github.com/hitblast/avro.py/blob/main/examples/simple.py) in
+action, as well as other use cases.
 
-#### 1. `parse()`
+- 1. `parse()`
 
-Let's assume I want to parse some English text to Bengali, which is "ami banglay gan gai.", so in this case to convert it to Bengali, we can use this snippet as a starter code and then extend upon it as our boilerplate for multiple operations later on:
+Let's assume I want to parse some English text to Bengali, which is "ami banglay
+gan gai.", so in this case to convert it to Bengali, we can use this snippet as
+a starter code and then extend upon it as our boilerplate for multiple
+operations later on:
 
 ```python
 # Import the package.
@@ -79,7 +92,7 @@ avro_output = avro.parse(dummy)
 print(output)  # Output: আমি বাংলায় গান গাই।
 ```
 
-#### 2. `parse(bijoy=True)`
+- 2. `parse(bijoy=True)`
 
 Alternatively, I can also do it in Bijoy Keyboard format:
 
@@ -87,7 +100,7 @@ Alternatively, I can also do it in Bijoy Keyboard format:
 bijoy_output = avro.parse(dummy, bijoy=True)  # Output: Avwg evsjvh় Mvb MvB।
 ```
 
-#### 3. `to_bijoy()`
+- 3. `to_bijoy()`
 
 Or, we can take the previous `avro_output` and convert it to Bijoy if we want to, like this:
 
@@ -95,7 +108,7 @@ Or, we can take the previous `avro_output` and convert it to Bijoy if we want to
 bijoy_text = avro.to_bijoy(avro_output)  # Output: Avwg evsjvh় Mvb MvB।
 ```
 
-#### 4. `to_unicode()`
+- 4. `to_unicode()`
 
 Conversely, we can convert the Bijoy text we got just now and convert it back to Unicode Bengali:
 
@@ -103,7 +116,7 @@ Conversely, we can convert the Bijoy text we got just now and convert it back to
 unicode_text = avro.to_unicode(bijoy_text)  # Output: আমি বাংলায় গান গাই।
 ```
 
-#### 4. `reverse()`
+- 5. `reverse()`
 
 Finally, we can just reverse back to the original text we passed as input in the first place:
 
@@ -115,43 +128,19 @@ reversed_text = avro.reverse(uncode_text)  # Output: ami banglay gan gai.
 
 ## 🐍 A Note on `async`/`await` Support
 
-Since version [2024.12.5](https://github.com/hitblast/avro.py/releases/tag/2024.12.5), the package now supports `async`/`await` syntax for all the functions.
+Since version
+[2024.12.5](https://github.com/hitblast/avro.py/releases/tag/2024.12.5), the
+package now supports `async`/`await` syntax for all the functions.
 
 > [!NOTE]
 > Unless you have a very specific use, the asynchronous functions only
 > provide slight performance improvements and are not necessary for most use
 > cases, so their usage is optional.
 
-Here's a reiteration of the previous example using the new syntax:
-
-```python
-# Imports.
-import asyncio
-import avro
-
-# Main coroutine.
-async def main() -> None:
-    # Our dummy text.
-    dummy = 'ami banglay gan gai.'
-
-    avro_output = await avro.parse_async(dummy)
-    print(output)  # Output: আমি বাংলায় গান গাই।
-
-    bijoy_output = await avro.parse_async(dummy, bijoy=True)
-    print(bijoy_output)  # Output: Avwg evsjvh় Mvb MvB।
-
-    bijoy_text = await avro.to_bijoy_async(avro_output)
-    print(bijoy_text)  # Output: Avwg evsjvh় Mvb MvB।
-
-    unicode_text = await avro.to_unicode_async(bijoy_text)
-    print(unicode_text)  # Output: আমি বাংলায় গান গাই।
-
-    reversed_text = await avro.reverse_async(uncode_text)
-    print(reversed_text)  # Output: ami banglay gan gai.
-
-# Running the event loop.
-asyncio.run(main())
-```
+Please have a look at the
+[examples](https://github.com/hitblast/avro.py/tree/main/examples) for a more
+thorough understanding of how to use the package in both synchronous and
+asynchronous contexts.
 
 <br>
 
@@ -163,7 +152,9 @@ asyncio.run(main())
 
 **Additional Developer Notes**
 
-This project is based on the [uv](https://github.com/astral-sh/uv) package manager by Astral. In order to automatically update and set up the environment, you can run the following command:
+This project is based on the [uv](https://github.com/astral-sh/uv) package
+manager by Astral. In order to automatically update and set up the environment,
+you can run the following command:
 
 ```sh
 # (Optional) Install recommended Python version: (also sets up the virtual environment)
@@ -189,7 +180,9 @@ $ uv run pytest .
 
 ### 🐛 We're looking for bug hunters, by the way!
 
-If you come across any kind of bug or wanna request a feature, please let us know by opening an issue [here](https://github.com/hitblast/avro.py/issues). We do need more ideas to keep the project alive and running, don't we? :P
+If you come across any kind of bug or wanna request a feature, please let us
+know by opening an issue [here](https://github.com/hitblast/avro.py/issues). We
+do need more ideas to keep the project alive and running, don't we? :P
 
 ---
 
