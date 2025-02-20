@@ -73,7 +73,7 @@ checking [this whole
 snippet](https://github.com/hitblast/avro.py/blob/main/examples/simple.py) in
 action, as well as other use cases.
 
-- 1. `parse()`
+1. `parse()`
 
 Let's assume I want to parse some English text to Bengali, which is "ami banglay
 gan gai.", so in this case to convert it to Bengali, we can use this snippet as
@@ -92,7 +92,7 @@ avro_output = avro.parse(dummy)
 print(output)  # Output: আমি বাংলায় গান গাই।
 ```
 
-- 2. `parse(bijoy=True)`
+2. `parse(bijoy=True)`
 
 Alternatively, I can also do it in Bijoy Keyboard format:
 
@@ -100,7 +100,7 @@ Alternatively, I can also do it in Bijoy Keyboard format:
 bijoy_output = avro.parse(dummy, bijoy=True)  # Output: Avwg evsjvh় Mvb MvB।
 ```
 
-- 3. `to_bijoy()`
+3. `to_bijoy()`
 
 Or, we can take the previous `avro_output` and convert it to Bijoy if we want to, like this:
 
@@ -108,7 +108,7 @@ Or, we can take the previous `avro_output` and convert it to Bijoy if we want to
 bijoy_text = avro.to_bijoy(avro_output)  # Output: Avwg evsjvh় Mvb MvB।
 ```
 
-- 4. `to_unicode()`
+4. `to_unicode()`
 
 Conversely, we can convert the Bijoy text we got just now and convert it back to Unicode Bengali:
 
@@ -116,7 +116,7 @@ Conversely, we can convert the Bijoy text we got just now and convert it back to
 unicode_text = avro.to_unicode(bijoy_text)  # Output: আমি বাংলায় গান গাই।
 ```
 
-- 5. `reverse()`
+5. `reverse()`
 
 Finally, we can just reverse back to the original text we passed as input in the first place:
 
