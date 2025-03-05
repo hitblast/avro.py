@@ -1,9 +1,10 @@
 version = 1
+revision = 1
 requires-python = ">=3.9"
 
 [[package]]
 name = "avro-py"
-version = "2024.12.9"
+version = "2025.3.6"
 source = { editable = "." }
 
 [package.dev-dependencies]

@@ -46,6 +46,7 @@ async def _async_concurrency_helper(
         The results of the function run concurrently.
 
     """
+
     loop = asyncio.get_event_loop()
     tasks = [loop.run_in_executor(None, func, text) for text in params]
     results = await asyncio.gather(*tasks)
@@ -60,7 +61,6 @@ def _sync_concurrency_helper(
 
     Parameters:
     -----------
-
     func: Callable
         The function to run concurrently.
 
@@ -69,14 +69,52 @@ def _sync_concurrency_helper(
 
     Returns:
     --------
-
     list[str]
         The results of the function run concurrently.
-
     """
+
     with ThreadPoolExecutor() as executor:
         results = list(executor.map(func, params))
     return results
+
+
+# Helper function to manage remapped markers in text.
+def _process_remapped(
+    text: str, manual_required: bool, process_func: Callable[[str], str]
+) -> str:
+    """Helper to process text segments with remapped markers.
+
+    If all segments have been replaced, it removes the markers.
+    Otherwise, it splits the text by marker and processes non-marked segments using process_func.
+
+    Parameters:
+    -----------
+    text : str
+        The text containing possible remapped segments.
+    manual_required : bool
+        Indicator if further manual processing is needed.
+    process_func : Callable[[str], str]
+        A function to process segments without markers.
+
+    Returns:
+    --------
+    str
+        The processed text.
+    """
+
+    if not manual_required:
+        return text.replace("<rm>", "").replace("</rm>", "")
+
+    segments = re.split(r"(<rm>.*?</rm>)", text)
+    processed_segments = []
+
+    for segment in segments:
+        if segment.startswith("<rm>") and segment.endswith("</rm>"):
+            processed_segments.append(segment[4:-5])
+        elif segment:
+            processed_segments.append(process_func(segment))
+
+    return "".join(processed_segments)
 
 
 # This is a backend function and MUST NOT BE EXPORTED!
@@ -87,16 +125,13 @@ def _parse_output_generator(
 
     Parameters:
     -----------
-
     fixed_text: str
         The fixed text to parse.
-
     cur_end: int
         The cursor end point.
 
     Yields:
     -------
-
     str
         The parsed output.
     """
@@ -139,35 +174,32 @@ def _parse_backend(text: str, remap_words: bool) -> str:
 
     Parameters:
     -----------
-
     text: str
         The text to parse.
-
     remap_words: bool
         Whether to parse input text with remapped (exception) words.
 
     Returns:
     --------
-
     str
         The parsed text.
     """
 
     fixed_text = validate.fix_string_case(text)
-    manual_required = True
-    cur_end = 0
 
-    # Replace predefined exceptions in the input text.
     if remap_words:
         fixed_text, manual_required = processor.find_in_remap(fixed_text)
-
-    return (
-        "".join(
-            chain.from_iterable(_parse_output_generator(fixed_text, cur_end))
+        return _process_remapped(
+            fixed_text,
+            manual_required,
+            lambda segment: "".join(
+                chain.from_iterable(_parse_output_generator(segment, 0))
+            ),
         )
-        if manual_required
-        else fixed_text
-    )
+    else:
+        return "".join(
+            chain.from_iterable(_parse_output_generator(fixed_text, 0))
+        )
 
 
 # This is a backend function and MUST NOT BE EXPORTED!
@@ -177,13 +209,11 @@ def _convert_backend(text: str) -> str:
 
     Parameters:
     -----------
-
     text: str
         The text to convert.
 
     Returns:
     --------
-
     str
         The converted text.
     """
@@ -205,13 +235,11 @@ def _convert_backend_unicode(text: str) -> str:
 
     Parameters:
     -----------
-
     text: str
         The text to convert.
 
     Returns:
     --------
-
     str
         The converted text.
     """
@@ -220,6 +248,7 @@ def _convert_backend_unicode(text: str) -> str:
         text = re.sub(re.escape(ascii_c), BIJOY_MAP_REVERSE[ascii_c], text)
 
     text = re.sub("অা", "আ", processor.rearrange_bijoy_text(text))
+
     return text.strip()
 
 
@@ -244,6 +273,7 @@ def _reverse_output_generator(text: str) -> Generator[str, None, None]:
             match = processor.match_patterns(
                 text, cur, rule=False, reversed=True
             )
+
             yield (
                 (match["reversed"] or match["found"])
                 if match["matched"]
@@ -262,7 +292,6 @@ def _reverse_backend(text: str, remap_words: bool) -> str:
     -----------
     text: str
         The text to reverse.
-
     remap_words: bool
         Whether to reverse input text with remapped (exception) words.
 
@@ -272,16 +301,17 @@ def _reverse_backend(text: str, remap_words: bool) -> str:
         The reversed text.
     """
 
-    manual_required = True
-
     if remap_words:
         text, manual_required = processor.find_in_remap(text, reversed=True)
-
-    return (
-        "".join(chain.from_iterable(_reverse_output_generator(text)))
-        if manual_required
-        else text
-    )
+        return _process_remapped(
+            text,
+            manual_required,
+            lambda segment: "".join(
+                chain.from_iterable(_reverse_output_generator(segment))
+            ),
+        )
+    else:
+        return "".join(chain.from_iterable(_reverse_output_generator(text)))
 
 
 # This is a backend function and MUST NOT BE EXPORTED!
@@ -293,7 +323,6 @@ def _reverse_backend_ext(text: str, remap_words: bool) -> str:
     -----------
     text: str
         The text to reverse.
-
     remap_words: bool
         Whether to reverse input text with remapped (exception) words.
 
@@ -314,7 +343,6 @@ def _reverse_backend_ext(text: str, remap_words: bool) -> str:
 # ---
 
 # Primary user-end functions.
-
 # ---
 
 
@@ -324,7 +352,6 @@ async def parse_async(
     """Asynchronous version of parse() function.
 
     Parses input text, matches and replaces using the Avro Dictionary.
-
     If a valid replacement is found, then it returns the replaced string.
     If no replacement is found, then it instead returns the input text.
 
@@ -332,16 +359,13 @@ async def parse_async(
     -----------
     *texts: str
         The text(s) to parse.
-
     bijoy: bool = False
         Whether to return result in the Bijoy Keyboard format (ASCII).
-
     remap_words: bool = True
         Whether to parse input text with remapped (exception) words.
 
     Returns:
     --------
-
     str | list[str]
         The parsed text(s).
     """
@@ -361,7 +385,6 @@ def parse(
     *texts: str, bijoy: bool = False, remap_words: bool = True
 ) -> Union[str, list[str]]:
     """Parses input text, matches and replaces using the Avro Dictionary.
-
     If a valid replacement is found, then it returns the replaced string.
     If no replacement is found, then it instead returns the input text.
 
@@ -369,16 +392,13 @@ def parse(
     -----------
     *texts: str
         The text(s) to parse.
-
     bijoy: bool = False
         Whether to return result in the Bijoy Keyboard format (ASCII).
-
     remap_words: bool = True
         Whether to parse input text with remapped (exception) words.
 
     Returns:
     --------
-
     str | list[str]
         The parsed text(s).
     """
@@ -397,18 +417,15 @@ async def to_bijoy_async(*texts: str) -> Union[str, list[str]]:
     """Asynchronous version of to_bijoy() function.
 
     Converts input text (Avro, Unicode) to Bijoy Keyboard format (ASCII).
-
     If a valid conversion is found, then it returns the converted string.
 
     Parameters:
     -----------
-
     *texts: str
         The text(s) to convert.
 
     Returns:
     --------
-
     str | list[str]
         The converted text(s).
     """
@@ -419,18 +436,15 @@ async def to_bijoy_async(*texts: str) -> Union[str, list[str]]:
 
 def to_bijoy(*texts: str) -> Union[str, list[str]]:
     """Converts input text (Avro, Unicode) to Bijoy Keyboard format (ASCII).
-
     If a valid conversion is found, then it returns the converted string.
 
     Parameters:
     -----------
-
     *texts: str
         The text(s) to convert.
 
     Returns:
     --------
-
     str | list[str]
         The converted text(s).
     """
@@ -443,7 +457,6 @@ async def to_unicode_async(*texts: str) -> Union[str, list[str]]:
     """Asynchronous version of to_unicode() function.
 
     Converts input text (Bijoy Keyboard, ASCII) to Unicode (Avro Keyboard format).
-
     If a valid conversion is found, then it returns the converted string.
 
     Parameters:
@@ -463,7 +476,6 @@ async def to_unicode_async(*texts: str) -> Union[str, list[str]]:
 
 def to_unicode(*texts: str) -> Union[str, list[str]]:
     """Converts input text (Bijoy Keyboard, ASCII) to Unicode (Avro Keyboard format).
-
     If a valid conversion is found, then it returns the converted string.
 
     Parameters:
@@ -487,25 +499,20 @@ async def reverse_async(
     """Asynchronous version of reverse() function.
 
     Reverses input text to Roman script typed in English.
-
     If a valid replacement is found, then it returns the replaced string.
     If no replacement is found, then it instead returns the input text.
 
     Parameters:
     -----------
-
     *texts: str
         The text(s) to reverse.
-
     from_bijoy: bool = False
         Whether to reverse input text from Bijoy Keyboard format (ASCII).
-
     remap_words: bool = True
         Whether to reverse input text with remapped (exception) words.
 
     Returns:
     --------
-
     str | list[str]
         The reversed text(s).
     """
@@ -519,6 +526,7 @@ async def reverse_async(
     output = await _async_concurrency_helper(
         lambda text: _reverse_backend_ext(text, remap_words), texts
     )
+
     return output[0] if len(output) == 1 else output
 
 
@@ -526,25 +534,20 @@ def reverse(
     *texts: str, from_bijoy: bool = False, remap_words: bool = True
 ) -> Union[str, list[str]]:
     """Reverses input text to Roman script typed in English.
-
     If a valid replacement is found, then it returns the replaced string.
     If no replacement is found, then it instead returns the input text.
 
     Parameters:
     -----------
-
     *texts: str
         The text(s) to reverse.
-
     from_bijoy: bool = False
         Whether to reverse input text from Bijoy Keyboard format (ASCII).
-
     remap_words: bool = True
         Whether to reverse input text with remapped (exception) words.
 
     Returns:
     --------
-
     str | list[str]
         The reversed text(s).
     """

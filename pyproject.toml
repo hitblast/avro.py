@@ -4,7 +4,7 @@
 # uv-specific things
 [project]
 name = "avro-py"
-version = "2025.2.21"
+version = "2025.3.6"
 description = "A modern Pythonic implementation of Avro Phonetic."
 readme = "README.md"
 license = { file = "LICENSE" }
