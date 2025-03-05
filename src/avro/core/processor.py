@@ -3,6 +3,7 @@
 
 # Imports.
 import contextlib
+import re
 from functools import lru_cache
 from typing import Any, Optional
 
@@ -29,43 +30,33 @@ def find_in_remap(text: str, *, reversed: bool = False) -> tuple[str, bool]:
 
     Parameters:
     -----------
-
     text: str
         The text to be remapped.
-
     reversed: bool
         Whether to operate in reverse mode.
 
     Returns:
-    --------
-
+    -----------
     tuple[str, bool]
         A tuple of two elements:
-        1. The remapped text.
+        1. The remapped text with markers.
         2. Whether manual intervention is required.
     """
 
-    previous_text = text
-
     for key, value in config.AVRO_EXCEPTIONS.items():
         if reversed:
-            text = (
-                text.replace(key, value)
-                if key.lower() in text.lower()
-                else text
-            )
+            pattern = re.compile(re.escape(key), re.IGNORECASE)
+            text = pattern.sub(lambda m: "<rm>" + value + "</rm>", text)
         else:
-            text = (
-                text.replace(value, key)
-                if (value := value.lower()) in text.lower()
-                else text
-            )
+            pattern = re.compile(re.escape(value.lower()), re.IGNORECASE)
+            text = pattern.sub(lambda m: "<rm>" + key + "</rm>", text)
 
+    segments = re.split(r"(<rm>.*?</rm>)", text)
     manual_required = any(
-        word == previous_word
-        for word, previous_word in zip(text.split(), previous_text.split())
+        segment
+        and not (segment.startswith("<rm>") and segment.endswith("</rm>"))
+        for segment in segments
     )
-
     return text, manual_required
 
 
