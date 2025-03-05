@@ -1,0 +1,15 @@
+// Static tasks configuration.
+//
+// Example:
+[
+  {
+    "label": "Run unit tests",
+    "command": "uv run pytest .",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+    "reveal": "always",
+    "reveal_target": "dock",
+    "hide": "never",
+    "shell": "system"
+  }
+]
