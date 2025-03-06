@@ -70,7 +70,7 @@ This small tour guide will describe how you can use avro.py back and forth to
 operate (cutlery!) on Bengali text. You can also check the
 [examples](https://github.com/hitblast/avro.py/tree/main/examples) directory for
 checking [this whole
-snippet](https://github.com/hitblast/avro.py/blob/main/examples/simple.py) in
+snippet](https://github.com/hitblast/avro.py/blob/main/examples/basic.py) in
 action, as well as other use cases.
 
 1. `parse()`
