@@ -124,7 +124,7 @@ unicode_text = avro.to_unicode(bijoy_text)
 Finally, we can just reverse back to the original text we passed as input in the first place:
 
 ```python
-reversed_text = avro.reverse(uncode_text)
+reversed_text = avro.reverse(unicode_text)
 # Output: ami banglay gan gai.
 ```
 
