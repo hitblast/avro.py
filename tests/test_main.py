@@ -215,12 +215,12 @@ async def test_conversion_bijoy_func() -> None:
             "Avwg evsjvi Mvb MvB|",
             "Avwg Avgvi Avwg‡K wPiw`b GB evsjvq Lyu‡R cvB!",
         ]
-        == await avro.to_bijoy_async_iter([
-            "আমি বাংলার গান গাই।", "আমি আমার আমিকে চিরদিন এই বাংলায় খুঁজে পাই!"
-        ])
-        == avro.to_bijoy_iter([
-            "আমি বাংলার গান গাই।", "আমি আমার আমিকে চিরদিন এই বাংলায় খুঁজে পাই!"
-        ])
+        == await avro.to_bijoy_async_iter(
+            ["আমি বাংলার গান গাই।", "আমি আমার আমিকে চিরদিন এই বাংলায় খুঁজে পাই!"]
+        )
+        == avro.to_bijoy_iter(
+            ["আমি বাংলার গান গাই।", "আমি আমার আমিকে চিরদিন এই বাংলায় খুঁজে পাই!"]
+        )
     )
 
     # Fail-safe Conversion.
@@ -248,12 +248,18 @@ async def test_conversion_unicode_func() -> None:
             "আমি বাংলার গান গাই।",
             "আমি আমার আমিকে চিরদিন এই বাংলায় খুঁজে পাই!",
         ]
-        == await avro.to_unicode_async_iter([
-            "Avwg evsjvi Mvb MvB|", "Avwg Avgvi Avwg‡K wPiw`b GB evsjvq Lyu‡R cvB!"
-        ])
-        == avro.to_unicode_iter([
-            "Avwg evsjvi Mvb MvB|", "Avwg Avgvi Avwg‡K wPiw`b GB evsjvq Lyu‡R cvB!"
-        ])
+        == await avro.to_unicode_async_iter(
+            [
+                "Avwg evsjvi Mvb MvB|",
+                "Avwg Avgvi Avwg‡K wPiw`b GB evsjvq Lyu‡R cvB!",
+            ]
+        )
+        == avro.to_unicode_iter(
+            [
+                "Avwg evsjvi Mvb MvB|",
+                "Avwg Avgvi Avwg‡K wPiw`b GB evsjvq Lyu‡R cvB!",
+            ]
+        )
     )
 
 
@@ -274,12 +280,18 @@ async def test_parse_sentences() -> None:
             "আমি বাংলার গান গাই।",
             "আমি আমার আমিকে চিরদিন এই বাংলায় খুঁজে পাই।",
         ]
-        == await avro.parse_async_iter([
-            "ami banglar gan gai.", "ami amar amike cirodin ei banglay khu^je pai."
-        ])
-        == avro.parse_iter([
-            "ami banglar gan gai.", "ami amar amike cirodin ei banglay khu^je pai."
-        ])
+        == await avro.parse_async_iter(
+            [
+                "ami banglar gan gai.",
+                "ami amar amike cirodin ei banglay khu^je pai.",
+            ]
+        )
+        == avro.parse_iter(
+            [
+                "ami banglar gan gai.",
+                "ami amar amike cirodin ei banglay khu^je pai.",
+            ]
+        )
     )
 
     # Bijoy parsing.
@@ -293,12 +305,20 @@ async def test_parse_sentences() -> None:
             "Avwg evsjvi Mvb MvB|",
             "Avwg Avgvi Avwg‡K wPiw`b GB evsjvq Lyu‡R cvB!",
         ]
-        == await avro.parse_async_iter([
-            "ami banglar gan gai.", "ami amar amike cirodin ei banglay khu^je pai!"
-        ], bijoy=True)
-        == avro.parse_iter([
-            "ami banglar gan gai.", "ami amar amike cirodin ei banglay khu^je pai!"
-        ], bijoy=True)
+        == await avro.parse_async_iter(
+            [
+                "ami banglar gan gai.",
+                "ami amar amike cirodin ei banglay khu^je pai!",
+            ],
+            bijoy=True,
+        )
+        == avro.parse_iter(
+            [
+                "ami banglar gan gai.",
+                "ami amar amike cirodin ei banglay khu^je pai!",
+            ],
+            bijoy=True,
+        )
     )
 
 
@@ -319,12 +339,18 @@ async def test_reverse_sentences() -> None:
             "rohim, tomake korim dakche. ekhon ki rowna debe?",
             "rowna dile amake bole zew.",
         ]
-        == await avro.reverse_async_iter([
-            "রহিম, তোমাকে করিম ডাকছে। এখন কি রওনা দেবে?", "রওনা দিলে আমাকে বলে যেও।"
-        ])
-        == avro.reverse_iter([
-            "রহিম, তোমাকে করিম ডাকছে। এখন কি রওনা দেবে?", "রওনা দিলে আমাকে বলে যেও।"
-        ])
+        == await avro.reverse_async_iter(
+            [
+                "রহিম, তোমাকে করিম ডাকছে। এখন কি রওনা দেবে?",
+                "রওনা দিলে আমাকে বলে যেও।",
+            ]
+        )
+        == avro.reverse_iter(
+            [
+                "রহিম, তোমাকে করিম ডাকছে। এখন কি রওনা দেবে?",
+                "রওনা দিলে আমাকে বলে যেও।",
+            ]
+        )
     )
 
     # Bijoy reversing.

@@ -346,7 +346,9 @@ def _reverse_backend_ext(text: str, remap_words: bool) -> str:
 # ---
 
 
-async def parse_async(text: str, bijoy: bool = False, remap_words: bool = True) -> str:
+async def parse_async(
+    text: str, bijoy: bool = False, remap_words: bool = True
+) -> str:
     """Asynchronous version of parse() function.
 
     Parses input text, matches and replaces using the Avro Dictionary.
@@ -376,10 +378,15 @@ async def parse_async(text: str, bijoy: bool = False, remap_words: bool = True) 
         return await to_bijoy_async(parsed)
     return parsed
 
-async def parse_async_iter(texts: Iterable[str], bijoy: bool = False, remap_words: bool = True) -> list[str]:
+
+async def parse_async_iter(
+    texts: Iterable[str], bijoy: bool = False, remap_words: bool = True
+) -> list[str]:
     """Asynchronous version of parse for multiple texts."""
     params = tuple(texts)
-    output = await _async_concurrency_helper(lambda text: _parse_backend(text, remap_words), params)
+    output = await _async_concurrency_helper(
+        lambda text: _parse_backend(text, remap_words), params
+    )
     if bijoy:
         return await to_bijoy_async_iter(output)
     return output
@@ -410,10 +417,15 @@ def parse(text: str, bijoy: bool = False, remap_words: bool = True) -> str:
         return to_bijoy(parsed)
     return parsed
 
-def parse_iter(texts: Iterable[str], bijoy: bool = False, remap_words: bool = True) -> list[str]:
+
+def parse_iter(
+    texts: Iterable[str], bijoy: bool = False, remap_words: bool = True
+) -> list[str]:
     """Parses multiple texts and returns list of parsed strings."""
     params = tuple(texts)
-    output = _sync_concurrency_helper(lambda text: _parse_backend(text, remap_words), params)
+    output = _sync_concurrency_helper(
+        lambda text: _parse_backend(text, remap_words), params
+    )
     if bijoy:
         return to_bijoy_iter(output)
     return output
@@ -439,36 +451,50 @@ async def to_bijoy_async(text: str) -> str:
     result = await _async_concurrency_helper(_convert_backend, (text,))
     return result[0]
 
-def reverse_iter(texts: Iterable[str], from_bijoy: bool = False, remap_words: bool = True) -> list[str]:
+
+def reverse_iter(
+    texts: Iterable[str], from_bijoy: bool = False, remap_words: bool = True
+) -> list[str]:
     """Reverses multiple texts to Roman script and returns list of strings."""
     params = tuple(texts)
     if from_bijoy:
         converted = to_unicode_iter(params)
         params = tuple(converted)
-    return _sync_concurrency_helper(lambda text: _reverse_backend_ext(text, remap_words), params)
+    return _sync_concurrency_helper(
+        lambda text: _reverse_backend_ext(text, remap_words), params
+    )
 
-async def reverse_async_iter(texts: Iterable[str], from_bijoy: bool = False, remap_words: bool = True) -> list[str]:
+
+async def reverse_async_iter(
+    texts: Iterable[str], from_bijoy: bool = False, remap_words: bool = True
+) -> list[str]:
     """Asynchronous version of reverse for multiple texts."""
     params = tuple(texts)
     if from_bijoy:
         converted = await to_unicode_async_iter(params)
         params = tuple(converted)
-    return await _async_concurrency_helper(lambda text: _reverse_backend_ext(text, remap_words), params)
+    return await _async_concurrency_helper(
+        lambda text: _reverse_backend_ext(text, remap_words), params
+    )
+
 
 def to_unicode_iter(texts: Iterable[str]) -> list[str]:
     """Converts multiple texts from Bijoy ASCII to Unicode and returns list of strings."""
     params = tuple(texts)
     return _sync_concurrency_helper(_convert_backend_unicode, params)
 
+
 async def to_unicode_async_iter(texts: Iterable[str]) -> list[str]:
     """Asynchronous version of to_unicode for multiple texts."""
     params = tuple(texts)
     return await _async_concurrency_helper(_convert_backend_unicode, params)
 
+
 def to_bijoy_iter(texts: Iterable[str]) -> list[str]:
     """Converts multiple texts to Bijoy ASCII and returns list of strings."""
     params = tuple(texts)
     return _sync_concurrency_helper(_convert_backend, params)
+
 
 async def to_bijoy_async_iter(texts: Iterable[str]) -> list[str]:
     """Asynchronous version of to_bijoy for multiple texts."""
@@ -535,7 +561,9 @@ def to_unicode(text: str) -> str:
     return result[0]
 
 
-async def reverse_async(text: str, from_bijoy: bool = False, remap_words: bool = True) -> str:
+async def reverse_async(
+    text: str, from_bijoy: bool = False, remap_words: bool = True
+) -> str:
     """Asynchronous version of reverse() function.
 
     Reverses input text to Roman script typed in English.
@@ -566,7 +594,9 @@ async def reverse_async(text: str, from_bijoy: bool = False, remap_words: bool =
     return result[0]
 
 
-def reverse(text: str, from_bijoy: bool = False, remap_words: bool = True) -> str:
+def reverse(
+    text: str, from_bijoy: bool = False, remap_words: bool = True
+) -> str:
     """Reverses input text to Roman script typed in English.
     If a valid replacement is found, then it returns the replaced string.
     If no replacement is found, then it instead returns the input text.
