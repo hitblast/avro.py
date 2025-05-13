@@ -4,7 +4,6 @@
 # Import first-party Python modules.
 import os
 import sys
-from typing import NoReturn
 
 # Add support layer for accessing the primary package.
 sys.path.append(
@@ -26,7 +25,7 @@ banjonborno = "কখগঘঙচছজঝঞটঠডঢণতথদধনপ�
 
 
 # Test functions for this file.
-def test_is_consonant() -> NoReturn:
+def test_is_consonant() -> None:
     """
     Test that consonants are correctly identified.
     """
@@ -38,7 +37,7 @@ def test_is_consonant() -> NoReturn:
         assert not validate.is_consonant(i)
 
 
-def test_is_number() -> NoReturn:
+def test_is_number() -> None:
     """
     Test that numbers are correctly identified.
     """
@@ -50,7 +49,7 @@ def test_is_number() -> NoReturn:
         assert not validate.is_number(i)
 
 
-def test_is_vowel() -> NoReturn:
+def test_is_vowel() -> None:
     """
     Test that vowels are correctly identified.
     """
@@ -62,7 +61,7 @@ def test_is_vowel() -> NoReturn:
         assert not validate.is_vowel(i)
 
 
-def test_is_punctuation() -> NoReturn:
+def test_is_punctuation() -> None:
     """
     Test that punctuations are correctly identified.
 
@@ -79,7 +78,7 @@ def test_is_punctuation() -> NoReturn:
         )
 
 
-def test_fix_string_case() -> NoReturn:
+def test_fix_string_case() -> None:
     """
     Test phonetic-compatible case-transformations of strings.
 
@@ -100,7 +99,7 @@ def test_fix_string_case() -> NoReturn:
         assert validate.fix_string_case(key) == value
 
 
-def test_is_exact() -> NoReturn:
+def test_is_exact() -> None:
     """
     Test exact search response of needle in haystack.
     """
@@ -114,7 +113,7 @@ def test_is_exact() -> NoReturn:
     assert validate.is_exact("a", "a", 1, 2, True)
 
 
-def test_is_kar() -> NoReturn:
+def test_is_kar() -> None:
     """
     Test if given string is a kar.
     """
@@ -125,7 +124,7 @@ def test_is_kar() -> NoReturn:
     assert not (validate.is_bangla_kar("a") and validate.is_bangla_kar("b"))
 
 
-def test_is_prekar() -> NoReturn:
+def test_is_prekar() -> None:
     """
     Test if given string is a prekar.
     """
@@ -137,7 +136,7 @@ def test_is_prekar() -> NoReturn:
         assert not validate.is_bangla_prekar(i)
 
 
-def test_is_postkar() -> NoReturn:
+def test_is_postkar() -> None:
     """
     Test if given string is a postkar.
     """
@@ -149,7 +148,7 @@ def test_is_postkar() -> NoReturn:
         assert not validate.is_bangla_postkar(i)
 
 
-def test_is_banjonborno() -> NoReturn:
+def test_is_banjonborno() -> None:
     """
     Test if given string is a banjonborno.
     """
@@ -165,7 +164,7 @@ def test_is_banjonborno() -> NoReturn:
     )
 
 
-def test_is_exception() -> NoReturn:
+def test_is_exception() -> None:
     """
     Test if given string is a conversion exception.
     """

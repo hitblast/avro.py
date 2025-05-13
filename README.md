@@ -75,10 +75,7 @@ action, as well as other use cases.
 
 1. `parse()`
 
-Let's assume I want to parse some English text to Bengali, which is "ami banglay
-gan gai.", so in this case to convert it to Bengali, we can use this snippet as
-a starter code and then extend upon it as our boilerplate for multiple
-operations later on:
+Let's assume you want to parse a single English string to Bengali, for example `"ami banglay gan gai."`. You can convert it like this:
 
 ```python
 # Import the package.
@@ -87,9 +84,19 @@ import avro
 # Our dummy text.
 dummy = 'ami banglay gan gai.'
 
-# Parsing the text.
-avro_output = avro.parse(dummy)
-print(output)  # Output: আমি বাংলায় গান গাই।
+# Parse a single string.
+parsed = avro.parse(dummy)
+print(parsed)  # Output: আমি বাংলায় গান গাই।
+```
+
+1.a `parse_iter()`
+
+If you have multiple strings, use `parse_iter()` to get a list of parsed results:
+
+```python
+texts = ['ami banglay gan gai.', 'tumi kothay jao?']
+parsed_list = avro.parse_iter(texts)
+print(parsed_list)  # Output: ['আমি বাংলায় গান গাই।', 'তুমি কোথায় যাও?']
 ```
 
 2. `parse(bijoy=True)`
@@ -103,29 +110,56 @@ bijoy_output = avro.parse(dummy, bijoy=True)
 
 3. `to_bijoy()`
 
-Or, we can take the previous `avro_output` and convert it to Bijoy if we want to, like this:
+To convert a single Bengali string (Avro/Unicode) to Bijoy ASCII format:
 
 ```python
-bijoy_text = avro.to_bijoy(avro_output)
-# Output: Avwg evsjvh় Mvb MvB।
+bijoy_text = avro.to_bijoy(parsed)
+print(bijoy_text)  # Output: Avwg evsjvh় Mvb MvB।
+```
+
+3.a `to_bijoy_iter()`
+
+To convert multiple strings at once, use `to_bijoy_iter()`:
+
+```python
+bijoy_list = avro.to_bijoy_iter(['আমি বাংলায় গান গাই।', 'তুমি কোথায় যাও?'])
+print(bijoy_list)  # Output: ['Avwg evsjvh় Mvb MvB।', 'tvmf wkrwb‡¶ jd?']
 ```
 
 4. `to_unicode()`
 
-Conversely, we can convert the Bijoy text we got just now and convert it back to Unicode Bengali:
+To convert a single Bijoy ASCII string back to Unicode Bengali:
 
 ```python
 unicode_text = avro.to_unicode(bijoy_text)
-# Output: আমি বাংলায় গান গাই।
+print(unicode_text)  # Output: আমি বাংলায় গান গাই।
+```
+
+4.a `to_unicode_iter()`
+
+For multiple strings, use `to_unicode_iter()`:
+
+```python
+unicode_list = avro.to_unicode_iter(['Avwg evsjvh় Mvb MvB।', 'tvmf wkrwb‡¶ jd?'])
+print(unicode_list)  # Output: ['আমি বাংলায় গান গাই।', 'তুমি কোথায় যাও?']
 ```
 
 5. `reverse()`
 
-Finally, we can just reverse back to the original text we passed as input in the first place:
+To reverse a single Unicode Bengali string back to Roman script:
 
 ```python
 reversed_text = avro.reverse(unicode_text)
-# Output: ami banglay gan gai.
+print(reversed_text)  # Output: ami banglay gan gai.
+```
+
+5.a `reverse_iter()`
+
+To reverse multiple strings at once, use `reverse_iter()`:
+
+```python
+rev_list = avro.reverse_iter(['আমি বাংলায় গান গাই।', 'তুমি কোথায় যাও?'])
+print(rev_list)  # Output: ['ami banglay gan gai.', 'tumi kothay jao?']
 ```
 
 <br>
@@ -150,11 +184,7 @@ asynchronous contexts.
 
 ## 🛠️ Contributing
 
-:octocat: _Fork -> Do your changes -> Send a Pull Request, it's that easy!_ <br>
-
----
-
-**Additional Developer Notes**
+:octocat: "_Fork -> Do your changes -> Send a Pull Request, it's that easy!_" <br>
 
 This project is based on the [uv](https://github.com/astral-sh/uv) package
 manager by Astral. In order to automatically update and set up the environment,
@@ -182,7 +212,7 @@ $ uv run pytest .
 
 <br>
 
-### 🐛 We're looking for bug hunters, by the way!
+### 🐛 Bug hunters wanted!
 
 If you come across any kind of bug or wanna request a feature, please let us
 know by opening an issue [here](https://github.com/hitblast/avro.py/issues). We
