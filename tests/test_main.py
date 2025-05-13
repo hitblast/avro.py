@@ -4,7 +4,6 @@
 # Import first-party Python modules.
 import os
 import sys
-from typing import NoReturn
 
 # Add support layer for accessing the primary package.
 sys.path.append(
@@ -20,7 +19,7 @@ from avro.core import config
 
 # Test functions for this file.
 @pytest.mark.asyncio
-async def test_patterns_without_rules_from_config() -> NoReturn:
+async def test_patterns_without_rules_from_config() -> None:
     """
     Tests all patterns from config that don't have rules.
     """
@@ -35,7 +34,7 @@ async def test_patterns_without_rules_from_config() -> NoReturn:
 
 
 @pytest.mark.asyncio
-async def test_patterns_without_rules_not_from_config() -> NoReturn:
+async def test_patterns_without_rules_not_from_config() -> None:
     """
     Tests all patterns not from config that don't have rules.
 
@@ -57,7 +56,7 @@ async def test_patterns_without_rules_not_from_config() -> NoReturn:
 
 
 @pytest.mark.asyncio
-async def test_patterns_numbers() -> NoReturn:
+async def test_patterns_numbers() -> None:
     """
     Test patterns - numbers
     """
@@ -81,7 +80,7 @@ async def test_patterns_numbers() -> NoReturn:
 
 
 @pytest.mark.asyncio
-async def test_patterns_punctuations() -> NoReturn:
+async def test_patterns_punctuations() -> None:
     """
     Tests patterns - punctuations
     """
@@ -98,7 +97,7 @@ async def test_patterns_punctuations() -> NoReturn:
 
 
 @pytest.mark.asyncio
-async def test_patterns_with_rules_svaravarna() -> NoReturn:
+async def test_patterns_with_rules_svaravarna() -> None:
     """
     Test patterns - with rules - svaravarna / shoroborno (derived from Bengali)
     """
@@ -122,7 +121,7 @@ async def test_patterns_with_rules_svaravarna() -> NoReturn:
 
 
 @pytest.mark.asyncio
-async def test_non_ascii() -> NoReturn:
+async def test_non_ascii() -> None:
     """
     Test processor response for non-ASCII characters.
     Parse function should return any non-ASCII characters that is passed to it.
@@ -141,7 +140,7 @@ async def test_non_ascii() -> NoReturn:
 
 
 @pytest.mark.asyncio
-async def test_ascii() -> NoReturn:
+async def test_ascii() -> None:
     """
     Test processor response for ASCII characters.
     Reverse function should return any ASCII characters that is passed to it.
@@ -162,7 +161,7 @@ async def test_ascii() -> NoReturn:
 
 
 @pytest.mark.asyncio
-async def test_words_with_punctuations() -> NoReturn:
+async def test_words_with_punctuations() -> None:
     """
     Test parsing and reversing of words with punctuations.
     """
@@ -182,7 +181,7 @@ async def test_words_with_punctuations() -> NoReturn:
 
 
 @pytest.mark.asyncio
-async def test_exceptions() -> NoReturn:
+async def test_exceptions() -> None:
     """
     Test parsing and reversing of exceptions.
     """
@@ -200,7 +199,7 @@ async def test_exceptions() -> NoReturn:
 
 
 @pytest.mark.asyncio
-async def test_conversion_bijoy_func() -> NoReturn:
+async def test_conversion_bijoy_func() -> None:
     """
     Test conversion to Bijoy directly.
     """
@@ -216,12 +215,12 @@ async def test_conversion_bijoy_func() -> NoReturn:
             "Avwg evsjvi Mvb MvB|",
             "Avwg Avgvi Avwg‡K wPiw`b GB evsjvq Lyu‡R cvB!",
         ]
-        == await avro.to_bijoy_async(
+        == await avro.to_bijoy_async_iter([
             "আমি বাংলার গান গাই।", "আমি আমার আমিকে চিরদিন এই বাংলায় খুঁজে পাই!"
-        )
-        == avro.to_bijoy(
+        ])
+        == avro.to_bijoy_iter([
             "আমি বাংলার গান গাই।", "আমি আমার আমিকে চিরদিন এই বাংলায় খুঁজে পাই!"
-        )
+        ])
     )
 
     # Fail-safe Conversion.
@@ -233,7 +232,7 @@ async def test_conversion_bijoy_func() -> NoReturn:
 
 
 @pytest.mark.asyncio
-async def test_conversion_unicode_func() -> NoReturn:
+async def test_conversion_unicode_func() -> None:
     """
     Test conversion to Unicode directly.
     """
@@ -249,19 +248,17 @@ async def test_conversion_unicode_func() -> NoReturn:
             "আমি বাংলার গান গাই।",
             "আমি আমার আমিকে চিরদিন এই বাংলায় খুঁজে পাই!",
         ]
-        == await avro.to_unicode_async(
-            "Avwg evsjvi Mvb MvB|",
-            "Avwg Avgvi Avwg‡K wPiw`b GB evsjvq Lyu‡R cvB!",
-        )
-        == avro.to_unicode(
-            "Avwg evsjvi Mvb MvB|",
-            "Avwg Avgvi Avwg‡K wPiw`b GB evsjvq Lyu‡R cvB!",
-        )
+        == await avro.to_unicode_async_iter([
+            "Avwg evsjvi Mvb MvB|", "Avwg Avgvi Avwg‡K wPiw`b GB evsjvq Lyu‡R cvB!"
+        ])
+        == avro.to_unicode_iter([
+            "Avwg evsjvi Mvb MvB|", "Avwg Avgvi Avwg‡K wPiw`b GB evsjvq Lyu‡R cvB!"
+        ])
     )
 
 
 @pytest.mark.asyncio
-async def test_parse_sentences() -> NoReturn:
+async def test_parse_sentences() -> None:
     """
     Test parsing of sentences (Unicode).
     """
@@ -277,14 +274,12 @@ async def test_parse_sentences() -> NoReturn:
             "আমি বাংলার গান গাই।",
             "আমি আমার আমিকে চিরদিন এই বাংলায় খুঁজে পাই।",
         ]
-        == await avro.parse_async(
-            "ami banglar gan gai.",
-            "ami amar amike cirodin ei banglay khu^je pai.",
-        )
-        == avro.parse(
-            "ami banglar gan gai.",
-            "ami amar amike cirodin ei banglay khu^je pai.",
-        )
+        == await avro.parse_async_iter([
+            "ami banglar gan gai.", "ami amar amike cirodin ei banglay khu^je pai."
+        ])
+        == avro.parse_iter([
+            "ami banglar gan gai.", "ami amar amike cirodin ei banglay khu^je pai."
+        ])
     )
 
     # Bijoy parsing.
@@ -298,21 +293,17 @@ async def test_parse_sentences() -> NoReturn:
             "Avwg evsjvi Mvb MvB|",
             "Avwg Avgvi Avwg‡K wPiw`b GB evsjvq Lyu‡R cvB!",
         ]
-        == await avro.parse_async(
-            "ami banglar gan gai.",
-            "ami amar amike cirodin ei banglay khu^je pai!",
-            bijoy=True,
-        )
-        == avro.parse(
-            "ami banglar gan gai.",
-            "ami amar amike cirodin ei banglay khu^je pai!",
-            bijoy=True,
-        )
+        == await avro.parse_async_iter([
+            "ami banglar gan gai.", "ami amar amike cirodin ei banglay khu^je pai!"
+        ], bijoy=True)
+        == avro.parse_iter([
+            "ami banglar gan gai.", "ami amar amike cirodin ei banglay khu^je pai!"
+        ], bijoy=True)
     )
 
 
 @pytest.mark.asyncio
-async def test_reverse_sentences() -> NoReturn:
+async def test_reverse_sentences() -> None:
     """
     Test reversing of sentences (Unicode).
     """
@@ -328,12 +319,12 @@ async def test_reverse_sentences() -> NoReturn:
             "rohim, tomake korim dakche. ekhon ki rowna debe?",
             "rowna dile amake bole zew.",
         ]
-        == await avro.reverse_async(
+        == await avro.reverse_async_iter([
             "রহিম, তোমাকে করিম ডাকছে। এখন কি রওনা দেবে?", "রওনা দিলে আমাকে বলে যেও।"
-        )
-        == avro.reverse(
+        ])
+        == avro.reverse_iter([
             "রহিম, তোমাকে করিম ডাকছে। এখন কি রওনা দেবে?", "রওনা দিলে আমাকে বলে যেও।"
-        )
+        ])
     )
 
     # Bijoy reversing.

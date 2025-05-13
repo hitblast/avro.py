@@ -4,7 +4,7 @@
 # uv-specific things
 [project]
 name = "avro-py"
-version = "2025.3.7"
+version = "2025.5.13"
 description = "A modern Pythonic implementation of Avro Phonetic."
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -43,10 +43,7 @@ Repository = "https://github.com/hitblast/avro.py"
 
 # dependency groups
 [dependency-groups]
-dev = [
-    "pytest-asyncio>=0.24.0",
-    "pytest>=8.3.3",
-]
+dev = ["pytest-asyncio>=0.24.0", "pytest>=8.3.3"]
 docs = ["pdoc3>=0.11.1", "setuptools>=75.3.0"]
 
 
@@ -54,7 +51,7 @@ docs = ["pdoc3>=0.11.1", "setuptools>=75.3.0"]
 [tool.ruff]
 target-version = "py39"
 line-length = 79
-exclude = ["venv"]
+exclude = [".venv"]
 
 [tool.ruff.lint.per-file-ignores]
 "src/avro/__init__.py" = ["F403"]

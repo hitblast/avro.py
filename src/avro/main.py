@@ -13,7 +13,7 @@ import re
 from concurrent.futures import ThreadPoolExecutor
 from functools import lru_cache
 from itertools import chain
-from typing import Callable, Generator, Union
+from typing import Callable, Generator, Iterable
 
 from .core import processor, validate
 from .core.config import BIJOY_MAP, BIJOY_MAP_REVERSE
@@ -346,9 +346,7 @@ def _reverse_backend_ext(text: str, remap_words: bool) -> str:
 # ---
 
 
-async def parse_async(
-    *texts: str, bijoy: bool = False, remap_words: bool = True
-) -> Union[str, list[str]]:
+async def parse_async(text: str, bijoy: bool = False, remap_words: bool = True) -> str:
     """Asynchronous version of parse() function.
 
     Parses input text, matches and replaces using the Avro Dictionary.
@@ -357,8 +355,8 @@ async def parse_async(
 
     Parameters:
     -----------
-    *texts: str
-        The text(s) to parse.
+    text: str
+        The text to parse.
     bijoy: bool = False
         Whether to return result in the Bijoy Keyboard format (ASCII).
     remap_words: bool = True
@@ -366,32 +364,36 @@ async def parse_async(
 
     Returns:
     --------
-    str | list[str]
-        The parsed text(s).
+    str
+        The parsed text.
     """
 
-    output = await _async_concurrency_helper(
-        lambda text: _parse_backend(text, remap_words), texts
+    result = await _async_concurrency_helper(
+        lambda t: _parse_backend(t, remap_words), (text,)
     )
-
-    # If the `bijoy` parameter is set to `True`, then convert the output to Bijoy Keyboard format.
+    parsed = result[0]
     if bijoy:
-        return await to_bijoy_async(*output)
-    else:
-        return output[0] if len(output) == 1 else output
+        return await to_bijoy_async(parsed)
+    return parsed
+
+async def parse_async_iter(texts: Iterable[str], bijoy: bool = False, remap_words: bool = True) -> list[str]:
+    """Asynchronous version of parse for multiple texts."""
+    params = tuple(texts)
+    output = await _async_concurrency_helper(lambda text: _parse_backend(text, remap_words), params)
+    if bijoy:
+        return await to_bijoy_async_iter(output)
+    return output
 
 
-def parse(
-    *texts: str, bijoy: bool = False, remap_words: bool = True
-) -> Union[str, list[str]]:
+def parse(text: str, bijoy: bool = False, remap_words: bool = True) -> str:
     """Parses input text, matches and replaces using the Avro Dictionary.
     If a valid replacement is found, then it returns the replaced string.
     If no replacement is found, then it instead returns the input text.
 
     Parameters:
     -----------
-    *texts: str
-        The text(s) to parse.
+    text: str
+        The text to parse.
     bijoy: bool = False
         Whether to return result in the Bijoy Keyboard format (ASCII).
     remap_words: bool = True
@@ -399,21 +401,25 @@ def parse(
 
     Returns:
     --------
-    str | list[str]
-        The parsed text(s).
+    str
+        The parsed text.
     """
 
-    output = _sync_concurrency_helper(
-        lambda text: _parse_backend(text, remap_words), texts
-    )
-
+    parsed = _parse_backend(text, remap_words)
     if bijoy:
-        return to_bijoy(*output)
-    else:
-        return output[0] if len(output) == 1 else output
+        return to_bijoy(parsed)
+    return parsed
+
+def parse_iter(texts: Iterable[str], bijoy: bool = False, remap_words: bool = True) -> list[str]:
+    """Parses multiple texts and returns list of parsed strings."""
+    params = tuple(texts)
+    output = _sync_concurrency_helper(lambda text: _parse_backend(text, remap_words), params)
+    if bijoy:
+        return to_bijoy_iter(output)
+    return output
 
 
-async def to_bijoy_async(*texts: str) -> Union[str, list[str]]:
+async def to_bijoy_async(text: str) -> str:
     """Asynchronous version of to_bijoy() function.
 
     Converts input text (Avro, Unicode) to Bijoy Keyboard format (ASCII).
@@ -421,39 +427,75 @@ async def to_bijoy_async(*texts: str) -> Union[str, list[str]]:
 
     Parameters:
     -----------
-    *texts: str
-        The text(s) to convert.
+    text: str
+        The text to convert.
 
     Returns:
     --------
-    str | list[str]
-        The converted text(s).
+    str
+        The converted text.
     """
 
-    output = await _async_concurrency_helper(_convert_backend, texts)
-    return output[0] if len(output) == 1 else output
+    result = await _async_concurrency_helper(_convert_backend, (text,))
+    return result[0]
+
+def reverse_iter(texts: Iterable[str], from_bijoy: bool = False, remap_words: bool = True) -> list[str]:
+    """Reverses multiple texts to Roman script and returns list of strings."""
+    params = tuple(texts)
+    if from_bijoy:
+        converted = to_unicode_iter(params)
+        params = tuple(converted)
+    return _sync_concurrency_helper(lambda text: _reverse_backend_ext(text, remap_words), params)
+
+async def reverse_async_iter(texts: Iterable[str], from_bijoy: bool = False, remap_words: bool = True) -> list[str]:
+    """Asynchronous version of reverse for multiple texts."""
+    params = tuple(texts)
+    if from_bijoy:
+        converted = await to_unicode_async_iter(params)
+        params = tuple(converted)
+    return await _async_concurrency_helper(lambda text: _reverse_backend_ext(text, remap_words), params)
+
+def to_unicode_iter(texts: Iterable[str]) -> list[str]:
+    """Converts multiple texts from Bijoy ASCII to Unicode and returns list of strings."""
+    params = tuple(texts)
+    return _sync_concurrency_helper(_convert_backend_unicode, params)
+
+async def to_unicode_async_iter(texts: Iterable[str]) -> list[str]:
+    """Asynchronous version of to_unicode for multiple texts."""
+    params = tuple(texts)
+    return await _async_concurrency_helper(_convert_backend_unicode, params)
+
+def to_bijoy_iter(texts: Iterable[str]) -> list[str]:
+    """Converts multiple texts to Bijoy ASCII and returns list of strings."""
+    params = tuple(texts)
+    return _sync_concurrency_helper(_convert_backend, params)
+
+async def to_bijoy_async_iter(texts: Iterable[str]) -> list[str]:
+    """Asynchronous version of to_bijoy for multiple texts."""
+    params = tuple(texts)
+    return await _async_concurrency_helper(_convert_backend, params)
 
 
-def to_bijoy(*texts: str) -> Union[str, list[str]]:
+def to_bijoy(text: str) -> str:
     """Converts input text (Avro, Unicode) to Bijoy Keyboard format (ASCII).
     If a valid conversion is found, then it returns the converted string.
 
     Parameters:
     -----------
-    *texts: str
-        The text(s) to convert.
+    text: str
+        The text to convert.
 
     Returns:
     --------
-    str | list[str]
-        The converted text(s).
+    str
+        The converted text.
     """
 
-    output = _sync_concurrency_helper(_convert_backend, texts)
-    return output[0] if len(output) == 1 else output
+    result = _sync_concurrency_helper(_convert_backend, (text,))
+    return result[0]
 
 
-async def to_unicode_async(*texts: str) -> Union[str, list[str]]:
+async def to_unicode_async(text: str) -> str:
     """Asynchronous version of to_unicode() function.
 
     Converts input text (Bijoy Keyboard, ASCII) to Unicode (Avro Keyboard format).
@@ -461,41 +503,39 @@ async def to_unicode_async(*texts: str) -> Union[str, list[str]]:
 
     Parameters:
     -----------
-    *texts: str
-        The text(s) to convert.
+    text: str
+        The text to convert.
 
     Returns:
     --------
-    str | list[str]
-        The converted text(s).
+    str
+        The converted text.
     """
 
-    output = await _async_concurrency_helper(_convert_backend_unicode, texts)
-    return output[0] if len(output) == 1 else output
+    result = await _async_concurrency_helper(_convert_backend_unicode, (text,))
+    return result[0]
 
 
-def to_unicode(*texts: str) -> Union[str, list[str]]:
+def to_unicode(text: str) -> str:
     """Converts input text (Bijoy Keyboard, ASCII) to Unicode (Avro Keyboard format).
     If a valid conversion is found, then it returns the converted string.
 
     Parameters:
     -----------
-    *texts: str
-        The text(s) to convert.
+    text: str
+        The text to convert.
 
     Returns:
     --------
-    str | list[str]
-        The converted text(s).
+    str
+        The converted text.
     """
 
-    output = _sync_concurrency_helper(_convert_backend_unicode, texts)
-    return output[0] if len(output) == 1 else output
+    result = _sync_concurrency_helper(_convert_backend_unicode, (text,))
+    return result[0]
 
 
-async def reverse_async(
-    *texts: str, from_bijoy: bool = False, remap_words: bool = True
-) -> Union[str, list[str]]:
+async def reverse_async(text: str, from_bijoy: bool = False, remap_words: bool = True) -> str:
     """Asynchronous version of reverse() function.
 
     Reverses input text to Roman script typed in English.
@@ -504,8 +544,8 @@ async def reverse_async(
 
     Parameters:
     -----------
-    *texts: str
-        The text(s) to reverse.
+    text: str
+        The text to reverse.
     from_bijoy: bool = False
         Whether to reverse input text from Bijoy Keyboard format (ASCII).
     remap_words: bool = True
@@ -513,34 +553,28 @@ async def reverse_async(
 
     Returns:
     --------
-    str | list[str]
-        The reversed text(s).
+    str
+        The reversed text.
     """
 
     # Convert from Bijoy to Unicode if from_bijoy is True
     if from_bijoy:
-        converted_texts = await to_unicode_async(*texts)
-        if isinstance(converted_texts, str):
-            texts = (converted_texts,)
-
-    output = await _async_concurrency_helper(
-        lambda text: _reverse_backend_ext(text, remap_words), texts
+        text = await to_unicode_async(text)
+    result = await _async_concurrency_helper(
+        lambda t: _reverse_backend_ext(t, remap_words), (text,)
     )
+    return result[0]
 
-    return output[0] if len(output) == 1 else output
 
-
-def reverse(
-    *texts: str, from_bijoy: bool = False, remap_words: bool = True
-) -> Union[str, list[str]]:
+def reverse(text: str, from_bijoy: bool = False, remap_words: bool = True) -> str:
     """Reverses input text to Roman script typed in English.
     If a valid replacement is found, then it returns the replaced string.
     If no replacement is found, then it instead returns the input text.
 
     Parameters:
     -----------
-    *texts: str
-        The text(s) to reverse.
+    text: str
+        The text to reverse.
     from_bijoy: bool = False
         Whether to reverse input text from Bijoy Keyboard format (ASCII).
     remap_words: bool = True
@@ -548,17 +582,14 @@ def reverse(
 
     Returns:
     --------
-    str | list[str]
-        The reversed text(s).
+    str
+        The reversed text.
     """
 
     # Convert from Bijoy to Unicode if from_bijoy is True
     if from_bijoy:
-        converted_texts = to_unicode(*texts)
-        if isinstance(converted_texts, str):
-            texts = (converted_texts,)
-
-    output = _sync_concurrency_helper(
-        lambda text: _reverse_backend_ext(text, remap_words), texts
+        text = to_unicode(text)
+    result = _sync_concurrency_helper(
+        lambda t: _reverse_backend_ext(t, remap_words), (text,)
     )
-    return output[0] if len(output) == 1 else output
+    return result[0]

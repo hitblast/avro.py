@@ -22,9 +22,6 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@v6
 
-      - name: Setup Python
-        run: uv python install 3.9
-
       - name: Install project & build
         run: uv sync --all-extras && uv build
 
