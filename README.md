@@ -202,7 +202,6 @@ In order to run the tests, you can use the following command:
 $ uv run pytest .
 ```
 
-
 <br>
 
 ### 🐛 Bug hunters wanted!
