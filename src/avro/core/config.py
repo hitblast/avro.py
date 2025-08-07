@@ -10,13 +10,14 @@ AVRO_CONSONANTS = set(DICT["avro"]["consonant"])
 AVRO_CASESENSITIVES = set(DICT["avro"]["casesensitive"])
 AVRO_NUMBERS = set(DICT["avro"]["number"])
 
-# Shortcuts to Bengali Svaravarna, Kar(s).
+# Shortcuts to Bengali stuff.
 AVRO_SHORBORNO = set(DICT["avro"]["shorborno"])
+AVRO_SHONGKHA = set(DICT["avro"]["shongkha"])
 AVRO_KAR = set(DICT["avro"]["kar"])
 AVRO_IGNORE = set(DICT["avro"]["ignore"])
 AVRO_EXCEPTIONS = DICT["avro"]["exceptions"]
 
-# Shortcuts for conversion to Bijoy Keyboard format (ASCII).
+# Shortcuts necessary for conversion to Bijoy Keyboard format (ASCII).
 BIJOY_MAP = DICT["bijoy"]["mappings"]
 BIJOY_PREKAR = set(DICT["bijoy"]["prekar"])
 BIJOY_POSTKAR = set(DICT["bijoy"]["postkar"])

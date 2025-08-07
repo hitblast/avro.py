@@ -861,6 +861,7 @@ DICT: dict[str, Any] = {
         "number": "0123456789",
         # For reverse parsing.
         "shorborno": "অআইঈউঊএঐওঔ",
+        "shongkha": "০১২৩৪৫৬৭৮৯",
         "kar": ["া", "ি", "ী", "ৗ", "ু", "ূ", "ৃ", "ে", "ৈ", "ো", "ৌ"],
         # Ignored symbols.
         "ignore": ["ঁ", "।", "?", ".", "-", ";"],
