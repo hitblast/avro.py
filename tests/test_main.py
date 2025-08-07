@@ -77,6 +77,7 @@ async def test_patterns_numbers() -> None:
 
     for key, value in numbers.items():
         assert key == await avro.parse_async(value) == avro.parse(value)
+        assert value == await avro.reverse_async(key) == avro.reverse(key)
 
 
 @pytest.mark.asyncio

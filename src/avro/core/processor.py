@@ -190,6 +190,7 @@ def reverse_with_rules(
 
     if not (
         fixed_text[cursor] in config.AVRO_KAR
+        or fixed_text[cursor] in config.AVRO_SHONGKHA
         or fixed_text[cursor] in config.AVRO_SHORBORNO
         or fixed_text[cursor] in config.AVRO_IGNORE
         or len(fixed_text) == cursor + 1
