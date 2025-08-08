@@ -27,6 +27,7 @@ REVERSE_REGEX = re.compile(r"(\s|\.|,|\?|।|-|;|')", re.UNICODE)
 _BIJOY_REGEX_PATTERN = None
 _BIJOY_REVERSE_REGEX_PATTERN = None
 
+
 def _get_bijoy_regex_pattern():
     """Get or create the compiled regex pattern for bijoy conversion."""
     global _BIJOY_REGEX_PATTERN
@@ -34,18 +35,21 @@ def _get_bijoy_regex_pattern():
         # Sort by length (descending) to match longer patterns first
         sorted_patterns = sorted(BIJOY_MAP.keys(), key=len, reverse=True)
         # Escape each pattern and join with |
-        pattern = '|'.join(re.escape(p) for p in sorted_patterns)
+        pattern = "|".join(re.escape(p) for p in sorted_patterns)
         _BIJOY_REGEX_PATTERN = re.compile(pattern)
     return _BIJOY_REGEX_PATTERN
+
 
 def _get_bijoy_reverse_regex_pattern():
     """Get or create the compiled regex pattern for reverse bijoy conversion."""
     global _BIJOY_REVERSE_REGEX_PATTERN
     if _BIJOY_REVERSE_REGEX_PATTERN is None:
         # Sort by length (descending) to match longer patterns first
-        sorted_patterns = sorted(BIJOY_MAP_REVERSE.keys(), key=len, reverse=True)
+        sorted_patterns = sorted(
+            BIJOY_MAP_REVERSE.keys(), key=len, reverse=True
+        )
         # Escape each pattern and join with |
-        pattern = '|'.join(re.escape(p) for p in sorted_patterns)
+        pattern = "|".join(re.escape(p) for p in sorted_patterns)
         _BIJOY_REVERSE_REGEX_PATTERN = re.compile(pattern)
     return _BIJOY_REVERSE_REGEX_PATTERN
 
@@ -252,7 +256,7 @@ def _convert_backend(text: str) -> str:
     # Use compiled regex with replacement function for better performance
     def replace_func(match):
         return BIJOY_MAP[match.group(0)]
-    
+
     pattern = _get_bijoy_regex_pattern()
     text = pattern.sub(replace_func, text)
 
@@ -278,7 +282,7 @@ def _convert_backend_unicode(text: str) -> str:
     # Use compiled regex with replacement function for better performance
     def replace_func(match):
         return BIJOY_MAP_REVERSE[match.group(0)]
-    
+
     pattern = _get_bijoy_reverse_regex_pattern()
     text = pattern.sub(replace_func, text)
 
