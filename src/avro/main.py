@@ -163,7 +163,8 @@ def _parse_output_generator(
     """
 
     for cur, i in enumerate(fixed_text):
-        uni_pass = UTF8_REGEX.match(i) is not None
+        # Optimized UTF-8 check - most ASCII chars are in range 0-127
+        uni_pass = ord(i) < 128
         if not uni_pass:
             cur_end = cur + 1
             yield i
