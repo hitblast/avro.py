@@ -23,6 +23,32 @@ from .core.config import BIJOY_MAP, BIJOY_MAP_REVERSE
 UTF8_REGEX = re.compile(r"\A[\x00-\x7F]*\Z", re.UNICODE)
 REVERSE_REGEX = re.compile(r"(\s|\.|,|\?|।|-|;|')", re.UNICODE)
 
+# Pre-compiled regex patterns for bijoy conversion optimization
+_BIJOY_REGEX_PATTERN = None
+_BIJOY_REVERSE_REGEX_PATTERN = None
+
+def _get_bijoy_regex_pattern():
+    """Get or create the compiled regex pattern for bijoy conversion."""
+    global _BIJOY_REGEX_PATTERN
+    if _BIJOY_REGEX_PATTERN is None:
+        # Sort by length (descending) to match longer patterns first
+        sorted_patterns = sorted(BIJOY_MAP.keys(), key=len, reverse=True)
+        # Escape each pattern and join with |
+        pattern = '|'.join(re.escape(p) for p in sorted_patterns)
+        _BIJOY_REGEX_PATTERN = re.compile(pattern)
+    return _BIJOY_REGEX_PATTERN
+
+def _get_bijoy_reverse_regex_pattern():
+    """Get or create the compiled regex pattern for reverse bijoy conversion."""
+    global _BIJOY_REVERSE_REGEX_PATTERN
+    if _BIJOY_REVERSE_REGEX_PATTERN is None:
+        # Sort by length (descending) to match longer patterns first
+        sorted_patterns = sorted(BIJOY_MAP_REVERSE.keys(), key=len, reverse=True)
+        # Escape each pattern and join with |
+        pattern = '|'.join(re.escape(p) for p in sorted_patterns)
+        _BIJOY_REVERSE_REGEX_PATTERN = re.compile(pattern)
+    return _BIJOY_REVERSE_REGEX_PATTERN
+
 
 # This is a backend function and MUST NOT BE EXPORTED!
 async def _async_concurrency_helper(
@@ -137,7 +163,8 @@ def _parse_output_generator(
     """
 
     for cur, i in enumerate(fixed_text):
-        uni_pass = UTF8_REGEX.match(i) is not None
+        # Optimized UTF-8 check - most ASCII chars are in range 0-127
+        uni_pass = ord(i) < 128
         if not uni_pass:
             cur_end = cur + 1
             yield i
@@ -222,8 +249,12 @@ def _convert_backend(text: str) -> str:
         re.sub("ৌ", "ৌ", re.sub("ো", "ো", text))
     )
 
-    for unic in BIJOY_MAP:
-        text = re.sub(unic, BIJOY_MAP[unic], text)
+    # Use compiled regex with replacement function for better performance
+    def replace_func(match):
+        return BIJOY_MAP[match.group(0)]
+    
+    pattern = _get_bijoy_regex_pattern()
+    text = pattern.sub(replace_func, text)
 
     return text.strip()
 
@@ -244,8 +275,12 @@ def _convert_backend_unicode(text: str) -> str:
         The converted text.
     """
 
-    for ascii_c in BIJOY_MAP_REVERSE:
-        text = re.sub(re.escape(ascii_c), BIJOY_MAP_REVERSE[ascii_c], text)
+    # Use compiled regex with replacement function for better performance
+    def replace_func(match):
+        return BIJOY_MAP_REVERSE[match.group(0)]
+    
+    pattern = _get_bijoy_reverse_regex_pattern()
+    text = pattern.sub(replace_func, text)
 
     text = re.sub("অা", "আ", processor.rearrange_bijoy_text(text))
 
@@ -517,8 +552,7 @@ def to_bijoy(text: str) -> str:
         The converted text.
     """
 
-    result = _sync_concurrency_helper(_convert_backend, (text,))
-    return result[0]
+    return _convert_backend(text)
 
 
 async def to_unicode_async(text: str) -> str:
@@ -557,8 +591,7 @@ def to_unicode(text: str) -> str:
         The converted text.
     """
 
-    result = _sync_concurrency_helper(_convert_backend_unicode, (text,))
-    return result[0]
+    return _convert_backend_unicode(text)
 
 
 async def reverse_async(
@@ -619,7 +652,4 @@ def reverse(
     # Convert from Bijoy to Unicode if from_bijoy is True
     if from_bijoy:
         text = to_unicode(text)
-    result = _sync_concurrency_helper(
-        lambda t: _reverse_backend_ext(t, remap_words), (text,)
-    )
-    return result[0]
+    return _reverse_backend_ext(text, remap_words)
