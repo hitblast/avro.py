@@ -24,12 +24,6 @@ equivalent (unicode) of Bengali. At its core, it implements an extensively
 modified version of the **Avro Phonetic Dictionary Search Library** by [Mehdi
 Hasan Khan](https://github.com/mugli).
 
-> [!IMPORTANT]
-> Update: As of October 2024, Python 3.8 has reached its EOL, so for keeping
-> this project updated, the minimum required version will be Python 3.9 from now
-> onwards. It is strongly suggested that you migrate your project for better
-> compatibility. <br>
-
 ## ✨ Inspirations
 
 This package is inspired from Rifat Nabi's jsAvroPhonetic library and derives from Kaustav Das Modak's pyAvroPhonetic.
@@ -41,8 +35,8 @@ This package is inspired from Rifat Nabi's jsAvroPhonetic library and derives fr
 This package requires **Python 3.9 or higher** to be used inside your development environment.
 
 ```sh
-# Install / upgrade.
-$ pip install avro.py
+# Install or upgrade.
+pip install -U avro.py
 ```
 
 <br>
