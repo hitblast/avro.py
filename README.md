@@ -130,6 +130,9 @@ reversed_text = avro.reverse(unicode_text)
 print(reversed_text)  # Output: ami banglay gan gai.
 ```
 
+> [!WARNING]
+> The reverse functions are by-nature lossy and might not output the correct replacement for some letters in favor of readability sometimes.
+
 5.a `reverse_iter()`
 
 To reverse multiple strings at once, use `reverse_iter()`:
