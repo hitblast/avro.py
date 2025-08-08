@@ -2,11 +2,13 @@
 
 
 # Import local modules.
+from functools import lru_cache
 from avro.core import config
 
 
 # Unicode-specific validation functions.
 # These are only used for converting to and from Unicode characters.
+@lru_cache(maxsize=256)
 def is_vowel(text: str) -> bool:
     """
     Check if given string is a vowel.
@@ -15,6 +17,7 @@ def is_vowel(text: str) -> bool:
     return text.lower() in config.AVRO_VOWELS
 
 
+@lru_cache(maxsize=256)
 def is_consonant(text: str) -> bool:
     """
     Check if given string is a consonant.
@@ -31,6 +34,7 @@ def is_number(text: str) -> bool:
     return text.lower() in config.AVRO_NUMBERS
 
 
+@lru_cache(maxsize=256)
 def is_punctuation(text: str) -> bool:
     """
     Check if given string is a punctuation.
@@ -42,6 +46,7 @@ def is_punctuation(text: str) -> bool:
     )
 
 
+@lru_cache(maxsize=256)
 def is_case_sensitive(text: str) -> bool:
     """
     Check if given string is case sensitive.
@@ -78,6 +83,7 @@ def fix_string_case(text: str) -> str:
 
 # Conversion-specific validation functions.
 # These are only used for converting to and from ASCII characters.
+@lru_cache(maxsize=256)
 def is_bangla_kar(char: str) -> bool:
     """
     Check if given character is a Bengali kar.
@@ -85,6 +91,7 @@ def is_bangla_kar(char: str) -> bool:
     return char in config.AVRO_KAR
 
 
+@lru_cache(maxsize=256)
 def is_bangla_prekar(char: str) -> bool:
     """
     Check if given character is a Bengali pre-kar.
@@ -93,6 +100,7 @@ def is_bangla_prekar(char: str) -> bool:
     return char in config.BIJOY_PREKAR
 
 
+@lru_cache(maxsize=256)
 def is_bangla_postkar(char: str) -> bool:
     """
     Check if given character is a Bengali post-kar.
@@ -100,6 +108,7 @@ def is_bangla_postkar(char: str) -> bool:
     return char in config.BIJOY_POSTKAR
 
 
+@lru_cache(maxsize=256)
 def is_bangla_banjonborno(char: str) -> bool:
     """
     Check if given character is a Bengali banjonborno.
@@ -108,6 +117,7 @@ def is_bangla_banjonborno(char: str) -> bool:
     return char in config.BIJOY_BANJONBORNO
 
 
+@lru_cache(maxsize=256)
 def is_bangla_halant(char: str) -> bool:
     """
     Check if given character is a Bengali halant.
@@ -116,6 +126,7 @@ def is_bangla_halant(char: str) -> bool:
     return char == config.BIJOY_EXCEPTIONS["halant"]
 
 
+@lru_cache(maxsize=256)
 def is_bangla_nukta(char: str) -> bool:
     """
     Check if given character is a Bengali nukta.
