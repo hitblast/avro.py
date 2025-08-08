@@ -144,21 +144,9 @@ print(rev_list)  # Output: ['ami banglay gan gai.', 'tumi kothay jao?']
 
 <br>
 
-### 🐍 A note on `async`/`await` support:
+## 🔖 Asynchronous Operations
 
-Since version
-[2024.12.5](https://github.com/hitblast/avro.py/releases/tag/2024.12.5), the
-package now supports `async`/`await` syntax for all the functions.
-
-> [!NOTE]
-> Unless you have a very specific use, the asynchronous functions only
-> provide slight performance improvements and are not necessary for most use
-> cases, so their usage is optional.
-
-Please have a look at the
-[examples](https://github.com/hitblast/avro.py/tree/main/examples) for a more
-thorough understanding of how to use the package in both synchronous and
-asynchronous contexts.
+All of the functions above, when suffixed with `_async`, provide their asynchronous counterparts which have a slight performance bump in certain use cases. Please see the [async examples](https://github.com/hitblast/avro.py/blob/main/examples/async.py) to find out more about their usage.
 
 <br>
 
