@@ -832,7 +832,7 @@ DICT: dict[str, Any] = {
             "বাংলাদেশ": "Bangladesh",
             "ইউএসএ": "USA",
             "ইউরোপ": "Europe",
-            "আস্ট্রেলিয়া": "Australia",
+            "অস্ট্রেলিয়া": "Australia",
             "ফেসবুক": "Facebook",
             "গুগল": "Google",
             "উইকিপিডিয়া": "Wikipedia",
