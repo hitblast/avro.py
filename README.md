@@ -178,12 +178,18 @@ $ uv run pytest .
 
 ## ❤️ Acknowledgements
 
-avro.py would not be possible without these awesome people:
+avro.py would not be possible without the awesome minds behind the original Avro Keyboard software:
 
 - [Mehdi Hasan Khan](https://github.com/mugli)
 - [Rifat Nabi](https://github.com/torifat)
 - [Sarim Khan](https://github.com/sarim)
 - [Kaustav Das Modak](https://github.com/kaustavdm)
+
+And, some awesome people:
+
+- [Saleh Sadiq Tanim](https://github.com/TanimSk)
+- [Isfer Hossain](https://github.com/furtidev)
+- [baseplate-admin](https://github.com/baseplate-admin)
 
 <br>
 
