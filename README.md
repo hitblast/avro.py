@@ -180,10 +180,10 @@ $ uv run pytest .
 
 avro.py would not be possible without these awesome people:
 
-- [Mehdi Hasan Khan](https://github.com/mugli).
-- [Rifat Nabi](https://github.com/torifat).
-- [Sarim Khan](https://github.com/sarim).
-- [Kaustav Das Modak](https://github.com/kaustavdm).
+- [Mehdi Hasan Khan](https://github.com/mugli)
+- [Rifat Nabi](https://github.com/torifat)
+- [Sarim Khan](https://github.com/sarim)
+- [Kaustav Das Modak](https://github.com/kaustavdm)
 
 <br>
 
