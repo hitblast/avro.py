@@ -189,6 +189,7 @@ And, some awesome people:
 
 - [Saleh Sadiq Tanim](https://github.com/TanimSk)
 - [Isfer Hossain](https://github.com/furtidev)
+- [Md. Abdullah Al Riyad](https://github.com/Itsmemonzu)
 - [baseplate-admin](https://github.com/baseplate-admin)
 
 <br>
