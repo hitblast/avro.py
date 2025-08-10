@@ -855,7 +855,7 @@ DICT: dict[str, Any] = {
             "ইজিপ্ট": "Egypt",
             "জর্ডান": "Jordan",
             "লেবানন": "Lebanon",
-            "আমেরিকা": "এমerica",
+            "আমেরিকা": "America",
             "কানাডা": "Canada",
             "মেক্সিকো": "Mexico",
             "ব্রাজিল": "Brazil",
