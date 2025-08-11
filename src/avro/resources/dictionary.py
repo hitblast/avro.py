@@ -1006,7 +1006,7 @@ DICT: dict[str, Any] = {
             "টিকিট": "Ticket",
             "ট্যাক্সি": "Taxi",
             "মোটরসাইকেল": "Motorcycle",
-            "সাইকেল": "Bicycle",
+            "সাইকেল": "Cycle",
             "হোটেল": "Hotel",
             "রেস্টুরেন্ট": "Restaurant",
             "ক্যাফে": "Cafe",
