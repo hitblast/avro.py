@@ -1012,7 +1012,7 @@ DICT: dict[str, Any] = {
             "ক্যাফে": "Cafe",
             "পার্ক": "Park",
             "বিচ": "Beach",
-            "মল": "Mall"
+            "মল": "Mall",
         },
         # Constant values.
         "vowel": "aeiou",
