@@ -187,6 +187,7 @@ avro.py would not be possible without the awesome minds behind the original Avro
 
 And, some awesome people:
 
+- [Arni Bhowmick]()
 - [Saleh Sadiq Tanim](https://github.com/TanimSk)
 - [Isfer Hossain](https://github.com/furtidev)
 - [Md. Abdullah Al Riyad](https://github.com/Itsmemonzu)
