@@ -1,5 +1,4 @@
 use crate::dictionary::DICTIONARY;
-use std::collections::HashMap;
 
 pub fn to_bijoy(text: &str) -> String {
     let mut result = text.to_string();

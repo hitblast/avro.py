@@ -1,17 +1,15 @@
 use pyo3::prelude::*;
-use std::collections::HashMap;
-use once_cell::sync::Lazy;
 
 mod dictionary;
 mod parser;
 mod bijoy;
 
-use dictionary::DICTIONARY;
 use parser::parse_text;
 use bijoy::{to_bijoy, to_unicode};
 
 /// Parses English text to Bengali using Avro phonetic rules
 #[pyfunction]
+#[pyo3(signature = (text, bijoy=None, remap_words=None))]
 fn parse(text: &str, bijoy: Option<bool>, remap_words: Option<bool>) -> PyResult<String> {
     let bijoy = bijoy.unwrap_or(false);
     let remap_words = remap_words.unwrap_or(true);
