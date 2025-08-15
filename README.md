@@ -156,7 +156,8 @@ manager by Astral. In order to automatically update and set up the environment,
 you can run the following command:
 
 ```sh
-# (Optional) Install recommended Python version: (also sets up the virtual environment)
+# (Optional) Install recommended Python version and
+# setup virtual environment for development.
 $ uv python install && uv venv
 $ source .venv/bin/activate
 
