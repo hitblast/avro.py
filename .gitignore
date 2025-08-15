@@ -160,3 +160,8 @@ cython_debug/
 
 # pdoc3
 html
+
+
+# Added by cargo
+
+/target

@@ -18,6 +18,13 @@ from typing import Callable, Generator, Iterable
 from .core import processor, validate
 from .core.config import BIJOY_MAP, BIJOY_MAP_REVERSE
 
+# Try to import Rust implementation for better performance
+try:
+    import avro_rs
+    _RUST_AVAILABLE = True
+except ImportError:
+    _RUST_AVAILABLE = False
+
 # Compiled regex patterns. These are primarily used in parse() and reverse()
 # function calls to validate input text and search for invalid UTF-8 characters.
 UTF8_REGEX = re.compile(r"\A[\x00-\x7F]*\Z", re.UNICODE)
@@ -451,6 +458,15 @@ def parse(text: str, bijoy: bool = False, remap_words: bool = True) -> str:
         The parsed text.
     """
 
+    # Use Rust implementation if available for better performance
+    if _RUST_AVAILABLE:
+        try:
+            return avro_rs.parse(text, bijoy, remap_words)
+        except Exception:
+            # Fallback to Python implementation if Rust fails
+            pass
+    
+    # Original Python implementation
     parsed = _parse_backend(text, remap_words)
     if bijoy:
         return to_bijoy(parsed)
@@ -556,6 +572,14 @@ def to_bijoy(text: str) -> str:
         The converted text.
     """
 
+    # Use Rust implementation if available for better performance
+    if _RUST_AVAILABLE:
+        try:
+            return avro_rs.to_bijoy_rs(text)
+        except Exception:
+            # Fallback to Python implementation if Rust fails
+            pass
+
     return _convert_backend(text)
 
 
@@ -594,6 +618,14 @@ def to_unicode(text: str) -> str:
     str
         The converted text.
     """
+
+    # Use Rust implementation if available for better performance
+    if _RUST_AVAILABLE:
+        try:
+            return avro_rs.to_unicode_rs(text)
+        except Exception:
+            # Fallback to Python implementation if Rust fails
+            pass
 
     return _convert_backend_unicode(text)
 
