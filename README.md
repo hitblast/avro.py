@@ -66,7 +66,7 @@ print(parsed)  # আমি বাংলায় গান গাই।
 If you have multiple strings, use `avro.parse_iter()` to get a list of parsed results:
 
 ```python
-texts = ['ami banglay gan gai.', 'tumi kothay jao?']
+texts = ['ami banglay gan gai.', 'tumi kOthay zao?']
 parsed_list = avro.parse_iter(texts)
 print(parsed_list)  # ['আমি বাংলায় গান গাই।', 'তুমি কোথায় যাও?']
 ```
@@ -124,7 +124,7 @@ To reverse multiple strings at once, use `avro.reverse_iter()`:
 
 ```python
 rev_list = avro.reverse_iter(['আমি বাংলায় গান গাই।', 'তুমি কোথায় যাও?'])
-print(rev_list)  # ['ami banglay gan gai.', 'tumi kothay jao?']
+print(rev_list)  # ['ami banglay gan gai.', 'tumi kothay zaw?']
 ```
 
 <br>
