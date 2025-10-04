@@ -36,7 +36,10 @@ This package requires **Python 3.9 or higher** to be used inside your developmen
 
 ```sh
 # Install or upgrade.
-pip install -U avro.py
+$ pip install -U avro.py
+
+# Or, add with the uv package manager.
+$ uv add avro.py
 ```
 
 <br>
