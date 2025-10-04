@@ -152,7 +152,7 @@ All of the functions above, when suffixed with `_async`, provide their asynchron
 
 ## 🛠️ Contributing
 
-:octocat: "_Fork -> Do your changes -> Send a Pull Request, it's that easy!_" <br>
+:octocat: **Fork -> Do your changes -> Send a Pull Request, it's that easy!** <br>
 
 This project is based on the [uv](https://github.com/astral-sh/uv) package
 manager by Astral. In order to automatically update and set up the environment,
