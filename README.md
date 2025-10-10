@@ -32,7 +32,7 @@ This package is inspired from Rifat Nabi's jsAvroPhonetic library and derives fr
 
 ## 🔨 Installation
 
-This package requires **Python 3.9 or higher** to be used inside your development environment.
+This package requires **Python 3.10 or higher** to be used inside your development environment.
 
 ```sh
 # Install or upgrade.
