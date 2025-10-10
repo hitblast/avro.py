@@ -14,7 +14,7 @@ sys.path.append(
 import pytest
 
 import avro
-from avro.core import config
+from avro.resources import DICT
 
 
 # Test functions for this file.
@@ -24,13 +24,22 @@ async def test_patterns_without_rules_from_config() -> None:
     Tests all patterns from config that don't have rules.
     """
 
-    for pattern in config.DICT["avro"]["patterns"]:
-        if "rules" not in pattern and pattern.get("find", None):
-            assert (
-                pattern["replace"]
-                == await avro.parse_async(pattern["find"])
-                == avro.parse(pattern["find"])
-            )
+    # Use config.DICT instead of config.get_dict() to avoid attribute error.
+    patterns = DICT["avro"]["patterns"]
+
+    # Ensure patterns is a list of dicts.
+    assert isinstance(patterns, list)
+    for pattern in patterns:
+        assert isinstance(pattern, dict)
+        find = pattern.get("find")
+        replace = pattern.get("replace")
+
+        if (
+            "rules" not in pattern
+            and isinstance(find, str)
+            and isinstance(replace, str)
+        ):
+            assert replace == await avro.parse_async(find) == avro.parse(find)
 
 
 @pytest.mark.asyncio

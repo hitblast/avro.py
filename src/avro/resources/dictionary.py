@@ -2,21 +2,55 @@
 
 
 # Imports.
-from typing import Any
+from typing import TypedDict
+
+
+class PatternRuleMatch(TypedDict, total=False):
+    type: str
+    scope: str
+    value: str | None
+
+
+class PatternRule(TypedDict):
+    matches: list[PatternRuleMatch]
+    replace: str
+
+
+class PatternDict(TypedDict, total=False):
+    find: str
+    replace: str
+    reverse: str | None
+    rules: list[PatternRule] | None
+
+
+class AvroDict(TypedDict):
+    patterns: list[PatternDict]
+    exceptions: dict[str, str]
+    vowel: str
+    consonant: str
+    casesensitive: str
+    number: str
+    shorborno: str
+    shongkha: str
+    kar: list[str]
+    ignore: list[str]
+
+
+class BijoyDict(TypedDict):
+    mappings: dict[str, str]
+    prekar: list[str]
+    postkar: list[str]
+    banjonborno: str
+    exceptions: dict[str, str | list[str]]
+
+
+class MainDict(TypedDict):
+    avro: AvroDict
+    bijoy: BijoyDict
+
 
 # The Avro Dictionary, implemented in Python.
-DICT: dict[str, Any] = {
-    # Metadata.
-    "meta": {
-        "file_name": "dictionary.py",
-        "file_description": "Provides Avro Dictionary in native Python.",
-        "package": "avro.py",
-        "license": "MIT License",
-        "source": "https://github.com/hitblast/avro.py/blob/main/avro/resources/dictionary.py",
-        "adapted_by": "HitBlast",
-        "encoding": "utf-8",
-    },
-    # Avro Keyboard mappings.
+DICT: MainDict = {
     "avro": {
         "patterns": [
             {"find": "bhl", "replace": "ভ্ল"},
