@@ -5,12 +5,25 @@
 import contextlib
 import re
 from functools import lru_cache
-from typing import Any, Optional
 
-from . import config, validate
+from . import validate
+from .config import (
+    AVRO_EXCEPTIONS,
+    AVRO_IGNORE,
+    AVRO_KAR,
+    AVRO_SHONGKHA,
+    AVRO_SHORBORNO,
+)
+from ..resources import DICT
+from ..resources.dictionary import (
+    PatternDict,
+    PatternRule,
+    PatternRuleMatch,
+)
+
 
 # Setup pattern variables for matching.
-PATTERNS = config.DICT["avro"]["patterns"]
+PATTERNS = DICT["avro"]["patterns"]
 NON_RULE_PATTERNS = [p for p in PATTERNS if "rules" not in p]
 RULE_PATTERNS = [p for p in PATTERNS if "rules" in p]
 
@@ -43,7 +56,7 @@ def find_in_remap(text: str, *, reversed: bool = False) -> tuple[str, bool]:
         2. Whether manual intervention is required.
     """
 
-    for key, value in config.AVRO_EXCEPTIONS.items():
+    for key, value in AVRO_EXCEPTIONS.items():
         if reversed:
             pattern = re.compile(re.escape(key), re.IGNORECASE)
             text = pattern.sub(lambda m: "<rm>" + value + "</rm>", text)
@@ -62,7 +75,7 @@ def find_in_remap(text: str, *, reversed: bool = False) -> tuple[str, bool]:
 
 def match_patterns(
     fixed_text: str, cur: int = 0, rule: bool = False, reversed: bool = False
-) -> dict[str, Any]:
+) -> dict[str, str | bool | list[PatternRule] | None]:
     """Matches given text at cursor position with rule / non rule patterns.
 
     Parameters:
@@ -119,8 +132,11 @@ def match_patterns(
 
 
 def exact_find_in_pattern(
-    fixed_text: str, reversed: bool, cur: int = 0, patterns: Any = PATTERNS
-) -> list[dict[str, Any]]:
+    fixed_text: str,
+    reversed: bool,
+    cur: int = 0,
+    patterns: list[PatternDict] = PATTERNS,
+) -> list[PatternDict]:
     """Returns pattern items that match given text, cursor position and pattern.
 
     Parameters:
@@ -149,22 +165,28 @@ def exact_find_in_pattern(
         return [
             x
             for x in patterns
-            if (cur + len(x["replace"]) <= len(fixed_text))
-            and x["replace"] == fixed_text[cur : (cur + len(x["replace"]))]
+            if (
+                "replace" in x
+                and (cur + len(x["replace"]) <= len(fixed_text))
+                and x["replace"] == fixed_text[cur : (cur + len(x["replace"]))]
+            )
         ]
 
     return [
         x
         for x in patterns
-        if x.get("find", None)
-        and (cur + len(x["find"]) <= len(fixed_text))
-        and x["find"] == fixed_text[cur : (cur + len(x["find"]))]
+        if (
+            "find" in x
+            and x.get("find") is not None
+            and (cur + len(x["find"]) <= len(fixed_text))
+            and x["find"] == fixed_text[cur : (cur + len(x["find"]))]
+        )
     ]
 
 
 def reverse_with_rules(
-    cursor: int, fixed_text: str, text_reversed: str
-) -> str:
+    cursor: int, fixed_text: str, text_reversed: str | None
+) -> str | None:
     """Enhances the word with rules for reverse-parsing.
 
     Parameters:
@@ -189,17 +211,17 @@ def reverse_with_rules(
     added_suffix = ""
 
     if not (
-        fixed_text[cursor] in config.AVRO_KAR
-        or fixed_text[cursor] in config.AVRO_SHONGKHA
-        or fixed_text[cursor] in config.AVRO_SHORBORNO
-        or fixed_text[cursor] in config.AVRO_IGNORE
+        fixed_text[cursor] in AVRO_KAR
+        or fixed_text[cursor] in AVRO_SHONGKHA
+        or fixed_text[cursor] in AVRO_SHORBORNO
+        or fixed_text[cursor] in AVRO_IGNORE
         or len(fixed_text) == cursor + 1
     ):
         added_suffix = "o"
 
     with contextlib.suppress(IndexError):
-        if (fixed_text[cursor + 1] in config.AVRO_KAR) or (
-            fixed_text[cursor + 2] in config.AVRO_KAR and not cursor == 0
+        if (fixed_text[cursor + 1] in AVRO_KAR) or (
+            fixed_text[cursor + 2] in AVRO_KAR and not cursor == 0
         ):
             added_suffix = ""
 
@@ -207,8 +229,8 @@ def reverse_with_rules(
 
 
 def process_rules(
-    rules: Any, fixed_text: str, cur: int = 0, cur_end: int = 1
-) -> Optional[str]:
+    rules: list[PatternRule], fixed_text: str, cur: int = 0, cur_end: int = 1
+) -> str | None:
     """Process rules matched in pattern and returns suitable replacement.
 
     If any rule's condition is satisfied, output the rules "replace", else output None.
@@ -255,7 +277,9 @@ def process_rules(
     return replaced if matched else None
 
 
-def process_match(match: Any, fixed_text: str, cur: int, cur_end: int) -> bool:
+def process_match(
+    match: PatternRuleMatch, fixed_text: str, cur: int, cur_end: int
+) -> bool:
     """Processes a single match in rules.
 
     Parameters:
@@ -283,23 +307,32 @@ def process_match(match: Any, fixed_text: str, cur: int, cur_end: int) -> bool:
     # Initial/default value for replace.
     replace = True
 
+    # Defensive access for optional keys in PatternRuleMatch
+    match_type = match.get("type")
+    match_scope = match.get("scope")
+    match_value = match.get("value")
+
+    # If required keys are missing, fail the match
+    if match_type is None or match_scope is None:
+        return False
+
     # Set check cursor depending on match['type']
-    chk = cur - 1 if match["type"] == "prefix" else cur_end
+    chk = cur - 1 if match_type == "prefix" else cur_end
 
     # Set scope based on whether scope is negative.
-    if match["scope"].startswith("!"):
-        scope = match["scope"][1:]
+    if match_scope.startswith("!"):
+        scope = match_scope[1:]
         negative = True
     else:
-        scope = match["scope"]
+        scope = match_scope
         negative = False
 
     # Let the matching begin!
     if scope == "punctuation":
         if (
             not (
-                (chk < 0 and match["type"] == "prefix")
-                or (chk >= len(fixed_text) and match["type"] == "suffix")
+                (chk < 0 and match_type == "prefix")
+                or (chk >= len(fixed_text) and match_type == "suffix")
                 or validate.is_punctuation(fixed_text[chk])
             )
             != negative
@@ -310,8 +343,8 @@ def process_match(match: Any, fixed_text: str, cur: int, cur_end: int) -> bool:
         if (
             not (
                 (
-                    (chk >= 0 and match["type"] == "prefix")
-                    or (chk < len(fixed_text) and match["type"] == "suffix")
+                    (chk >= 0 and match_type == "prefix")
+                    or (chk < len(fixed_text) and match_type == "suffix")
                 )
                 and validate.is_vowel(fixed_text[chk])
             )
@@ -323,8 +356,8 @@ def process_match(match: Any, fixed_text: str, cur: int, cur_end: int) -> bool:
         if (
             not (
                 (
-                    (chk >= 0 and match["type"] == "prefix")
-                    or (chk < len(fixed_text) and match["type"] == "suffix")
+                    (chk >= 0 and match_type == "prefix")
+                    or (chk < len(fixed_text) and match_type == "suffix")
                 )
                 and validate.is_consonant(fixed_text[chk])
             )
@@ -333,15 +366,18 @@ def process_match(match: Any, fixed_text: str, cur: int, cur_end: int) -> bool:
             replace = False
 
     elif scope == "exact":
-        if match["type"] == "prefix":
-            exact_start = cur - len(match["value"])
+        # Defensive: match_value must be a string
+        if not isinstance(match_value, str):
+            return False
+        if match_type == "prefix":
+            exact_start = cur - len(match_value)
             exact_end = cur
         else:
             exact_start = cur_end
-            exact_end = cur_end + len(match["value"])
+            exact_end = cur_end + len(match_value)
 
         if not validate.is_exact(
-            match["value"], fixed_text, exact_start, exact_end, negative
+            match_value, fixed_text, exact_start, exact_end, negative
         ):
             replace = False
 

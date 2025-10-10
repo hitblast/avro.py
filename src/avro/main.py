@@ -13,7 +13,8 @@ import re
 from concurrent.futures import ThreadPoolExecutor
 from functools import lru_cache
 from itertools import chain
-from typing import Callable, Generator, Iterable
+from typing import Callable
+from collections.abc import Generator, Iterable
 
 from .core import processor, validate
 from .core.config import BIJOY_MAP, BIJOY_MAP_REVERSE
@@ -24,25 +25,28 @@ UTF8_REGEX = re.compile(r"\A[\x00-\x7F]*\Z", re.UNICODE)
 REVERSE_REGEX = re.compile(r"(\s|\.|,|\?|।|-|;|')", re.UNICODE)
 
 # Pre-compiled regex patterns for bijoy conversion optimization
-_BIJOY_REGEX_PATTERN = None
-_BIJOY_REVERSE_REGEX_PATTERN = None
+_BIJOY_REGEX_PATTERN: re.Pattern[str] | None = None
+_BIJOY_REVERSE_REGEX_PATTERN: re.Pattern[str] | None = None
 
 
 def _get_bijoy_regex_pattern():
     """Get or create the compiled regex pattern for bijoy conversion."""
     global _BIJOY_REGEX_PATTERN
+
     if _BIJOY_REGEX_PATTERN is None:
         # Sort by length (descending) to match longer patterns first
         sorted_patterns = sorted(BIJOY_MAP.keys(), key=len, reverse=True)
         # Escape each pattern and join with |
         pattern = "|".join(re.escape(p) for p in sorted_patterns)
-        _BIJOY_REGEX_PATTERN = re.compile(pattern)
+        _BIJOY_REGEX_PATTERN = re.compile(pattern)  # pyright: ignore[reportConstantRedefinition]
+
     return _BIJOY_REGEX_PATTERN
 
 
 def _get_bijoy_reverse_regex_pattern():
     """Get or create the compiled regex pattern for reverse bijoy conversion."""
     global _BIJOY_REVERSE_REGEX_PATTERN
+
     if _BIJOY_REVERSE_REGEX_PATTERN is None:
         # Sort by length (descending) to match longer patterns first
         sorted_patterns = sorted(
@@ -50,20 +54,21 @@ def _get_bijoy_reverse_regex_pattern():
         )
         # Escape each pattern and join with |
         pattern = "|".join(re.escape(p) for p in sorted_patterns)
-        _BIJOY_REVERSE_REGEX_PATTERN = re.compile(pattern)
+        _BIJOY_REVERSE_REGEX_PATTERN = re.compile(pattern)  # pyright: ignore[reportConstantRedefinition]
+
     return _BIJOY_REVERSE_REGEX_PATTERN
 
 
 # This is a backend function and MUST NOT BE EXPORTED!
 async def _async_concurrency_helper(
-    func: Callable, params: tuple[str, ...]
+    func: Callable[[str], str], params: tuple[str, ...]
 ) -> list[str]:
     """Concurrency helper for the core functions of avro.py.
 
     Parameters:
     -----------
 
-    func: Callable
+    func: Callable[[str], str]
         The function to run concurrently.
 
     params: tuple[str, ...]
@@ -79,19 +84,19 @@ async def _async_concurrency_helper(
 
     loop = asyncio.get_event_loop()
     tasks = [loop.run_in_executor(None, func, text) for text in params]
-    results = await asyncio.gather(*tasks)
+    results: list[str] = await asyncio.gather(*tasks)
     return results
 
 
 # This is a backend function and MUST NOT BE EXPORTED!
 def _sync_concurrency_helper(
-    func: Callable, params: tuple[str, ...]
+    func: Callable[[str], str], params: tuple[str, ...]
 ) -> list[str]:
     """Synchronous concurrency helper for the core functions of avro.py using multithreading.
 
     Parameters:
     -----------
-    func: Callable
+    func: Callable[[str], str]
         The function to run concurrently.
 
     params: tuple[str, ...]
@@ -135,8 +140,8 @@ def _process_remapped(
     if not manual_required:
         return text.replace("<rm>", "").replace("</rm>", "")
 
-    segments = re.split(r"(<rm>.*?</rm>)", text)
-    processed_segments = []
+    segments: list[str] = re.split(r"(<rm>.*?</rm>)", text)
+    processed_segments: list[str] = []
 
     for segment in segments:
         if segment.startswith("<rm>") and segment.endswith("</rm>"):
@@ -174,28 +179,46 @@ def _parse_output_generator(
             yield i
         elif cur >= cur_end and uni_pass:
             match = processor.match_patterns(fixed_text, cur, rule=False)
-            matched = match["matched"]
-            if matched:
-                yield match["replaced"]
-                cur_end = cur + len(match["found"])
+            matched = bool(match.get("matched"))
+            replaced = match.get("replaced")
+            found = match.get("found")
+
+            if (
+                matched
+                and isinstance(replaced, str)
+                and isinstance(found, str)
+            ):
+                yield replaced
+                cur_end = cur + len(found)
             else:
-                match = processor.match_patterns(fixed_text, cur, rule=True)
-                matched = match["matched"]
-                if matched:
-                    cur_end = cur + len(match["found"])
-                    replaced = processor.process_rules(
-                        rules=match["rules"],
+                match_rule = processor.match_patterns(
+                    fixed_text, cur, rule=True
+                )
+                matched_rule = bool(match_rule.get("matched"))
+                found_rule = match_rule.get("found")
+                rules = match_rule.get("rules")
+                replaced_rule = match_rule.get("replaced")
+
+                if (
+                    matched_rule
+                    and isinstance(found_rule, str)
+                    and isinstance(rules, list)
+                ):
+                    cur_end = cur + len(found_rule)
+                    replaced_val = processor.process_rules(
+                        rules=rules,
                         fixed_text=fixed_text,
                         cur=cur,
                         cur_end=cur_end,
                     )
-                    if replaced:
-                        yield replaced
-                    else:
-                        yield match["replaced"]
-            if not matched:
-                cur_end = cur + 1
-                yield i
+                    if isinstance(replaced_val, str) and replaced_val:
+                        yield replaced_val
+                    elif isinstance(replaced_rule, str):
+                        yield replaced_rule
+
+                else:
+                    cur_end = cur + 1
+                    yield i
 
 
 # This is a backend function and MUST NOT BE EXPORTED!
@@ -254,7 +277,7 @@ def _convert_backend(text: str) -> str:
     )
 
     # Use compiled regex with replacement function for better performance
-    def replace_func(match):
+    def replace_func(match: re.Match[str]) -> str:
         return BIJOY_MAP[match.group(0)]
 
     pattern = _get_bijoy_regex_pattern()
@@ -280,7 +303,7 @@ def _convert_backend_unicode(text: str) -> str:
     """
 
     # Use compiled regex with replacement function for better performance
-    def replace_func(match):
+    def replace_func(match: re.Match[str]):
         return BIJOY_MAP_REVERSE[match.group(0)]
 
     pattern = _get_bijoy_reverse_regex_pattern()
@@ -308,16 +331,23 @@ def _reverse_output_generator(text: str) -> Generator[str, None, None]:
 
     for cur, i in enumerate(text):
         try:
-            i.encode("utf-8")
+            _ = i.encode("utf-8")
             match = processor.match_patterns(
                 text, cur, rule=False, reversed=True
             )
 
-            yield (
-                (match["reversed"] or match["found"])
-                if match["matched"]
-                else i
-            )
+            if match["matched"]:
+                # Ensure only str is yielded
+                reversed_val = match.get("reversed")
+                found_val = match.get("found")
+                if isinstance(reversed_val, str):
+                    yield reversed_val
+                elif isinstance(found_val, str):
+                    yield found_val
+                else:
+                    yield i
+            else:
+                yield i
         except UnicodeDecodeError:
             yield i
 
