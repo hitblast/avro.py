@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: Apache-2.0
 
 
 """A modern Pythonic implementation of the popular Bangla typing software Avro Phonetic.
