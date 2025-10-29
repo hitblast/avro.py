@@ -1,10 +1,10 @@
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: Apache-2.0
 
 
 """The core module for the avro.py package.
 
 avro.py
-Licensed under the terms of the MIT License.
+Licensed under the terms of the Apache-2.0 License.
 """
 
 # Imports.
