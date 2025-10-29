@@ -1,6 +1,6 @@
 [project]
 name = "avro-py"
-version = "2025.10.10"
+version = "2025.10.29"
 description = "A modern Pythonic implementation of Avro Phonetic."
 readme = "README.md"
 license = { file = "LICENSE" }
