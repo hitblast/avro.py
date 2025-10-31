@@ -200,3 +200,5 @@ And, some awesome people:
 ## License
 
 This project has been licensed under the [Apache 2.0 License](https://github.com/hitblast/avro.py/blob/main/LICENSE).
+
+For enterprise or commercial usage, a separate commercial license is available. Please refer to [COMMERCIAL_LICENSE.md](./COMMERCIAL_LICENSE.md).
