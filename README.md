@@ -199,4 +199,4 @@ And, some awesome people:
 
 ## License
 
-This project has been licensed under the [Apache 2.0 License](https://github.com/hitblast/avro.py/blob/main/LICENSE).
+This project has been licensed under the [Apache Software License 2.0](https://github.com/hitblast/avro.py/blob/main/LICENSE).
