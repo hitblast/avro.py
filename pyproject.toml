@@ -18,6 +18,8 @@ keywords = [
 ]
 classifiers = [
     'Intended Audience :: Developers',
+    'Development Status :: 5 - Production/Stable',
+    'License :: Free for non-commercial use',
     'License :: OSI Approved :: Apache Software License',
     'Operating System :: OS Independent',
     'Programming Language :: Python :: 3.10',
