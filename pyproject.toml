@@ -1,6 +1,6 @@
 [project]
 name = "avro-py"
-version = "2025.11.1"
+version = "2025.11.2"
 description = "A modern Pythonic implementation of Avro Phonetic."
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -19,7 +19,6 @@ keywords = [
 classifiers = [
     'Intended Audience :: Developers',
     'Development Status :: 5 - Production/Stable',
-    'License :: Free for non-commercial use',
     'License :: OSI Approved :: Apache Software License',
     'Operating System :: OS Independent',
     'Programming Language :: Python :: 3.10',
