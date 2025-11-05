@@ -3,7 +3,7 @@ name = "avro-py"
 version = "2025.11.3"
 description = "A modern Pythonic implementation of Avro Phonetic."
 readme = "README.md"
-license = { file = "LICENSE" }
+license = "MIT OR Apache-2.0"
 requires-python = ">=3.10"
 authors = [{ name = "Anindya Shiddhartha", email = "hitblastlive@gmail.com" }]
 keywords = [
