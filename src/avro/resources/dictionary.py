@@ -32,14 +32,14 @@ class AvroDict(TypedDict):
     number: str
     shorborno: str
     shongkha: str
-    kar: list[str]
-    ignore: list[str]
+    kar: set[str]
+    ignore: set[str]
 
 
 class BijoyDict(TypedDict):
     mappings: dict[str, str]
-    prekar: list[str]
-    postkar: list[str]
+    prekar: set[str]
+    postkar: set[str]
     banjonborno: str
     exceptions: dict[str, str | list[str]]
 
@@ -1056,9 +1056,9 @@ DICT: MainDict = {
         # For reverse parsing.
         "shorborno": "অআইঈউঊএঐওঔ",
         "shongkha": "০১২৩৪৫৬৭৮৯",
-        "kar": ["া", "ি", "ী", "ৗ", "ু", "ূ", "ৃ", "ে", "ৈ", "ো", "ৌ"],
+        "kar": {"া", "ি", "ী", "ৗ", "ু", "ূ", "ৃ", "ে", "ৈ", "ো", "ৌ"},
         # Ignored symbols.
-        "ignore": ["ঁ", "।", "?", ".", "-", ";"],
+        "ignore": {"ঁ", "।", "?", ".", "-", ";"},
     },
     # Bijoy Keyboard mappings.
     "bijoy": {
@@ -1284,8 +1284,8 @@ DICT: MainDict = {
             "ঃ": "t",
             "ঁ": "u",
         },
-        "prekar": ["ি", "ৈ", "ে"],
-        "postkar": ["া", "ো", "ৌ", "ৗ", "ু", "ূ", "ী", "ৃ"],
+        "prekar": {"ি", "ৈ", "ে"},
+        "postkar": {"া", "ো", "ৌ", "ৗ", "ু", "ূ", "ী", "ৃ"},
         "banjonborno": "কখগঘঙচছজঝঞটঠডঢণতথদধনপফবভমশষসহযরলয়ংঃঁৎ",
         "exceptions": {
             "halant": "্",
