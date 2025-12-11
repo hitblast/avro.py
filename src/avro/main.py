@@ -10,11 +10,11 @@ Licensed under the terms of the MIT OR Apache-2.0 License.
 # Imports.
 import asyncio
 import re
+from collections.abc import Generator, Iterable
 from concurrent.futures import ThreadPoolExecutor
 from functools import lru_cache
 from itertools import chain
 from typing import Callable
-from collections.abc import Generator, Iterable
 
 from .core import processor, validate
 from .core.config import BIJOY_MAP, BIJOY_MAP_REVERSE
@@ -24,7 +24,7 @@ from .core.config import BIJOY_MAP, BIJOY_MAP_REVERSE
 UTF8_REGEX = re.compile(r"\A[\x00-\x7F]*\Z", re.UNICODE)
 REVERSE_REGEX = re.compile(r"(\s|\.|,|\?|।|-|;|')", re.UNICODE)
 
-# Pre-compiled regex patterns for bijoy conversion optimization
+# Pre-compiled regex patterns for bijoy conversion optimization.
 _BIJOY_REGEX_PATTERN: re.Pattern[str] | None = None
 _BIJOY_REVERSE_REGEX_PATTERN: re.Pattern[str] | None = None
 
