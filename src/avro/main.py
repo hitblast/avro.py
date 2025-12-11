@@ -38,7 +38,7 @@ def _get_bijoy_regex_pattern():
         sorted_patterns = sorted(BIJOY_MAP.keys(), key=len, reverse=True)
         # Escape each pattern and join with |
         pattern = "|".join(re.escape(p) for p in sorted_patterns)
-        _BIJOY_REGEX_PATTERN = re.compile(pattern)  # pyright: ignore[reportConstantRedefinition]
+        _BIJOY_REGEX_PATTERN = re.compile(pattern)
 
     return _BIJOY_REGEX_PATTERN
 
@@ -54,7 +54,7 @@ def _get_bijoy_reverse_regex_pattern():
         )
         # Escape each pattern and join with |
         pattern = "|".join(re.escape(p) for p in sorted_patterns)
-        _BIJOY_REVERSE_REGEX_PATTERN = re.compile(pattern)  # pyright: ignore[reportConstantRedefinition]
+        _BIJOY_REVERSE_REGEX_PATTERN = re.compile(pattern)
 
     return _BIJOY_REVERSE_REGEX_PATTERN
 
