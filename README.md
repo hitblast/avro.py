@@ -199,4 +199,4 @@ And, some awesome people:
 
 ## License
 
-[MIT or Apache-2.0](https://github.com/hitblast/avro.py/blob/main/LICENSE) (your choice).
+[MIT](https://github.com/hitblast/avro.py/blob/main/LICENSE-MIT) or [Apache-2.0](https://github.com/hitblast/avro.py/blob/main/LICENSE-Apache) (your choice).
