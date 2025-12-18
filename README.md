@@ -40,6 +40,11 @@ $ pip install -U avro.py
 $ uv add avro.py
 ```
 
+### S.N.: Check out `avnie`!
+
+If you are a tinkerer and you find Python libraries intriguing at first, [avnie](https://github.com/hitblast/avnie) is a terminal interface for this project. You can check out its [installation guide](https://github.com/hitblast/avnie#-installation) to get going.
+
+
 <br>
 
 ## Usage Guide
